@@ -4,8 +4,8 @@
 
 ## 🚀 Setting Guide
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/TriNguyenGlobee/samsonite-playwright.git
+cd samsonite-playwright
 npm install
 npx playwright install
 ```

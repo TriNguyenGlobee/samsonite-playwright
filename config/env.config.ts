@@ -24,9 +24,9 @@ const environments: Record<EnvironmentName, EnvironmentConfig> = {
         },
     },
     dev: {
-        baseURL: 'https://dev.saucedemo.com/',
+        baseURL: 'https://www.saucedemo.com/',
         credentials: {
-            username: process.env.DEV_USERNAME || 'dev_user',
+            username: process.env.DEV_USERNAME || 'standard_user',
             password: process.env.DEV_PASSWORD || 'secret_sauce',
         },
     },
