@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "types": ["@playwright/test"]
   },
-  "include": ["tests", "pages", "utils"]
+  "include": ["tests", "src/pages", "utils", ".test-runner/test-env.ts"]
 }

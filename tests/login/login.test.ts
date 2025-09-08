@@ -1,6 +1,6 @@
-import { test, expect } from "../../fixtures/test-fixture";
-import { LoginPage } from "../../pages/login/login.page";
-import { DashboardPage } from "../../pages/dashboard/dashboard.page";
+import { test, expect } from "../../src/fixtures/test-fixture";
+import { LoginPage } from "../../src/pages/login/login.page";
+import { DashboardPage } from "../../src/pages/dashboard/dashboard.page";
 import { Config } from "../../config/env.config";
 import { step } from "allure-js-commons";
 

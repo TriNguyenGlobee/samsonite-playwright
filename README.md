@@ -32,22 +32,25 @@ npm run test
 npm run test:login
  
 ## Chrome 
-- Run test with Chrome (ENV=qa) - default:
+- Run test with Chrome (ENV=dev) - default:
 npm run test:chrome
 
-- Run test with Chrome (ENV=dev):
+- Run test with Chrome (ENV=stg):
 npm run test:dev-chrome
 
 ## Firefox
-- Run test with Firefox (ENV=qa) - default:
+- Run test with Firefox (ENV=dev) - default:
 npm run test:firefox
 
-- Run test with Firefox (ENV=dev):
+- Run test with Firefox (ENV=stg):
 npm run test:dev-firefox
 
 ## Webkit
-- Run test with Webkit (ENV=qa) - default:
+- Run test with Webkit (ENV=dev) - default:
 npm run test:webkit
 
-- Run test with Webkit (ENV=dev):
+- Run test with Webkit (ENV=stg):
 npm run test:dev-webkit
+
+## Run test-env.ts
+- npx ts-node test-env.ts

@@ -56,7 +56,7 @@ export class BasePage {
     // ✅ Assertions
     // =========================
     async assertVisible(locator: Locator, description?: string) {
-        await step(description || "Xác minh locator hiển thị", async () => {
+        await step(description || "Assert element visible", async () => {
             await expect(locator).toBeVisible();
         });
     }
