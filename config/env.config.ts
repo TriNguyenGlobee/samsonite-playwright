@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 // Environment name
-export type EnvironmentName = 'dev' | 'staging' | 'prod';
+export type EnvironmentName = 'dev' | 'stg' | 'prod';
 export type Locale = 'en' | 'ja';
 
 interface Credentials {
@@ -40,7 +40,7 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
         }
 
     },
-    staging: {
+    stg: {
         en: {
             baseURL: 'https://sssg.stg.samsonite-asia.com/',
             credentials: {

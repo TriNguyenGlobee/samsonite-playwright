@@ -8,20 +8,20 @@ test.describe("Login Tests", () => {
     test("login page is displayed", async ({ page }) => {
         const loginPage = new LoginPage(page);
 
-        await step("Đi tới trang login", async () => {
+        await step("Go to login page", async () => {
             await loginPage.goto(Config.baseURL);
         });
 
-        await step("Xác minh login page hiển thị", async () => {
-            await loginPage.assertVisible(loginPage.pageTitle, "Xác minh tiêu đề trang hiển thị");
+        await step("Assert Login page displayed", async () => {
+            await loginPage.assertVisible(loginPage.pageTitle, "Assert page title displayed");
         });
     });
 
     test("login successfully with fixture", async ({ loggedInPage }) => {
         const dashboardPage = new DashboardPage(loggedInPage);
 
-        await step("Xác minh đã vào trang dashboard", async () => {
-            await dashboardPage.assertUrl(/.*inventory/, "Xác minh regex URL trang dashboard");
+        await step("Assert that you have entered the dashboard", async () => {
+            await dashboardPage.assertUrl(/.*inventory/, "Assert dashboard page regex URL");
         });
     });
 });
