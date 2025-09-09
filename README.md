@@ -4,8 +4,8 @@
 
 ## 🚀 Setting Guide
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/TriNguyenGlobee/samsonite-playwright.git
+cd samsonite-playwright
 npm install
 npx playwright install
 ```
@@ -32,22 +32,25 @@ npm run test
 npm run test:login
  
 ## Chrome 
-- Run test with Chrome (ENV=qa) - default:
+- Run test with Chrome (ENV=dev) - default:
 npm run test:chrome
 
-- Run test with Chrome (ENV=dev):
-npm run test:dev-chrome
+- Run test with Chrome (ENV=stg):
+npm run test:stg-chrome
 
 ## Firefox
-- Run test with Firefox (ENV=qa) - default:
+- Run test with Firefox (ENV=dev) - default:
 npm run test:firefox
 
-- Run test with Firefox (ENV=dev):
-npm run test:dev-firefox
+- Run test with Firefox (ENV=stg):
+npm run test:stg-firefox
 
 ## Webkit
-- Run test with Webkit (ENV=qa) - default:
+- Run test with Webkit (ENV=dev) - default:
 npm run test:webkit
 
-- Run test with Webkit (ENV=dev):
-npm run test:dev-webkit
+- Run test with Webkit (ENV=stg):
+npm run test:stg-webkit
+
+## Run test-env.ts
+- npx ts-node test-env.ts
