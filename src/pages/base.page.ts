@@ -1,13 +1,49 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
+import { I18n, Translations } from "../../config/i18n.config";
+import { t } from "../../utils/helpers";
 
 export class BasePage {
     protected readonly page: Page;
     readonly shoppingCartButton: Locator;
+    readonly headerNavBar: Locator;
+    readonly newArrivalsMenuItem: Locator;
+    readonly luggageMenuItem: Locator;
+    readonly backPacksMenuItem: Locator;
+    readonly bagsMenuItem: Locator;
+    readonly labelsMenuItem: Locator;
+    readonly offersMenuItem: Locator;
+    readonly discoverMenuItem: Locator;
+    readonly friendsOfSamsoniteMenuItem: Locator;
+    readonly saleMenuItem: Locator;
+    readonly rightNavbar: Locator;
+    readonly searchIcon: Locator;
+    readonly wishlistIcon: Locator;
+    readonly loginIcon: Locator;
+    readonly locationIcon: Locator;
+    readonly cartIcon: Locator;
+    readonly newsIcon: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.shoppingCartButton = page.locator('//div[@id="shopping_cart_container"]');
+        this.headerNavBar = page.locator('//div[contains(@class,"header-content")]//ul[@class="nav navbar-nav"]');
+        this.newArrivalsMenuItem = this.headerNavBar.locator(`.//a[normalize-space(text())="${t.menuItem('newArrivals')}"]`);
+        this.luggageMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Luggages"]');
+        this.backPacksMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Backpacks"]');
+        this.bagsMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Bags"]');
+        this.labelsMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Labels"]');
+        this.offersMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="OFFERS"]');
+        this.discoverMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Discover"]');
+        this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="FRIENDS OF SAMSONITE"]');
+        this.saleMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="セール"]');
+        this.rightNavbar = page.locator('//div[contains(@class,"right navbar-header")]');
+        this.searchIcon = this.rightNavbar.locator('.//button[i[contains(@class,"search")]]');
+        this.wishlistIcon = this.rightNavbar.locator('.//a[i[contains(@class,"heart")]]');
+        this.loginIcon = this.rightNavbar.locator('.//a[span[contains(text(),"Login/Register")]]');
+        this.locationIcon = this.rightNavbar.locator('.//a[i[contains(@class,"location")]]');
+        this.cartIcon = this.rightNavbar.locator('.//a[contains(@class,"minicart")]');
+        this.newsIcon = this.rightNavbar.locator('.//a[@class="news-icon"]');
     }
 
     // =========================
@@ -29,6 +65,18 @@ export class BasePage {
         await step(description || `Type text: ${text}`, async () => {
             await locator.fill(text);
         });
+    }
+
+    async clickMenuItem(menuItemKey: keyof Translations['menuItem'], description?: string): Promise<void> {
+        const menuItemText = t.menuItem(menuItemKey);
+        const menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);
+
+        if (description) {
+            console.log(`Click menu: ${description} (${menuItemText})`);
+        }
+
+        await menuItemLocator.scrollIntoViewIfNeeded();
+        await menuItemLocator.click();
     }
 
     // =========================
@@ -72,18 +120,26 @@ export class BasePage {
         });
     }
 
-    async assertShoppingCartBadgeValue(expectedValue: string) {
-        await step(`Assert shopping cart badge value: ${expectedValue}`, async () => {
+    async assertShoppingCartBadgeValue(expectedValue: string, description?: string) {
+        await step(description || `Assert shopping cart badge value: ${expectedValue}`, async () => {
             const badge = this.shoppingCartButton.locator('xpath=.//span[@class="shopping_cart_badge"]');
             const badgeValue = await badge.textContent();
             expect(badgeValue).toBe(expectedValue);
         });
     }
 
-    async assertShoppingCartBadgeRemoved() {
-        await step("Assert Shopping Cart Badge Removed", async () => {
+    async assertShoppingCartBadgeRemoved(description?: string) {
+        await step(description || "Assert Shopping Cart Badge Removed", async () => {
             const badge = this.shoppingCartButton.locator('xpath=.//span[@class="shopping_cart_badge"]');
             await expect(badge).toHaveCount(0);
         });
+    }
+
+    async assertPageTitle(expectedTitle: string, description?: string) {
+        await step(description || "Assert Page Title", async () => {
+            const title = await this.page.title();
+            await expect(this.page).toHaveTitle(expectedTitle);
+            await expect(title).toBe(expectedTitle);
+        })
     }
 }

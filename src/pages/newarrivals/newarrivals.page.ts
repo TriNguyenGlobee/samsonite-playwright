@@ -3,14 +3,12 @@ import { BasePage } from "../base.page";
 import { t } from "../../../utils/helpers";
 import { Config } from "../../../config/env.config";
 
-export class HomePage extends BasePage {
+export class NewArrivalsPage extends BasePage {
     readonly logoImg: Locator;
-    readonly centerBanner: Locator;
 
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
-        this.centerBanner = page.locator('//div[@class="category-banner"]//img');
     }
 
     // =========================
@@ -21,7 +19,7 @@ export class HomePage extends BasePage {
     // =========================
     // 📦 Helpers
     // =========================
-    async isHomepageDisplayed(): Promise<boolean> {
+    async isNewArrivalspageDisplayed(): Promise<boolean> {
         try {
             const title = await this.page.title();
             if (!title.includes(t.homepage('title'))) {
@@ -29,7 +27,7 @@ export class HomePage extends BasePage {
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL;
+            const expectedUrl = Config.baseURL + "new-arrivals/";
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             return true;

@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { I18n, Translations } from "../config/i18n.config";
 
 /**
  * **************************************************************************
@@ -113,6 +114,11 @@ export function getRandomArrayElement<T>(arr: T[]): T {
     return arr[randomIndex];
 }
 
+export const t = {
+    homepage: (key: keyof Translations['homepage']) => I18n.translations.homepage[key],
+    menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
+};
+
 /**
  * **************************************************************************
  * **************************************************************************
@@ -180,4 +186,16 @@ export async function selectComboboxOption(page: Page, comboboxName: string, opt
 
     // Select the option need to select
     await profileValueOption.click();
+}
+
+export async function closeModalIfPresent(page: Page): Promise<void> {
+  const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]'); 
+
+  if (await modalCloseBtn.first().isVisible().catch(() => false)) {
+    console.log('Modal detected → Closing it...');
+    await modalCloseBtn.first().click();
+    await modalCloseBtn.first().waitFor({ state: 'detached', timeout: 5000 }).catch(() => {});
+  } else {
+    console.log('No modal found.');
+  }
 }
