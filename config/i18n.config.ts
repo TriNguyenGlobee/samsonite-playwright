@@ -1,30 +1,28 @@
 import fs from 'fs';
 import path from 'path';
+import en from '../locales/en.json';
 
 export type Locale = 'en' | 'ja';
-
 const defaultLocale: Locale = 'en';
-
-// Get LOCALE from terminal (defautl: en)
 const currentLocale: Locale = (process.env.LOCALE as Locale) || defaultLocale;
 
-// locales folder path
 const localesDir = path.join(__dirname, '..', 'locales');
 
-// Read JSON
-let translations: any = {};
+export type Translations = typeof en;
 
-try {
-  const filePath = path.join(localesDir, `${currentLocale}.json`);
-  const rawData = fs.readFileSync(filePath, 'utf-8');
-  translations = JSON.parse(rawData);
-} catch (error) {
-  console.warn(`Cannot load JSON file [${currentLocale}]. Using fallback: ${defaultLocale}`);
-  const fallbackData = fs.readFileSync(path.join(localesDir, `${defaultLocale}.json`), 'utf-8');
-  translations = JSON.parse(fallbackData);
+function loadTranslations(locale: Locale): Translations {
+  try {
+    const filePath = path.join(localesDir, `${locale}.json`);
+    const rawData = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(rawData);
+  } catch (error) {
+    console.warn(`Cannot load JSON file [${locale}]. Using fallback: ${defaultLocale}`);
+    const fallbackData = fs.readFileSync(path.join(localesDir, `${defaultLocale}.json`), 'utf-8');
+    return JSON.parse(fallbackData);
+  }
 }
 
 export const I18n = {
   locale: currentLocale,
-  translations,
+  translations: loadTranslations(currentLocale),
 };

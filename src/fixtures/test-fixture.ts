@@ -3,6 +3,7 @@ import { LoginPage } from "../pages/login/login.page";
 import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { I18n } from "../../config/i18n.config";
+import { closeModalIfPresent } from "../../utils/helpers";
 
 type MyFixtures = {
     user: { username: string; password: string };
@@ -32,7 +33,7 @@ export const test = base.extend<MyFixtures>({
         await step("Go to base URL with Basic Auth only", async () => {
             await page.goto(Config.baseURL);
         });
-
+        await closeModalIfPresent(page);
         await use(page);
 
         await page.close();
@@ -57,6 +58,7 @@ export const test = base.extend<MyFixtures>({
         await step("Go to Login Page", async () => {
             await loginPage.goto(Config.baseURL);
         });
+        await closeModalIfPresent(page);
 
         await step(`Login with valid account: ${user.username}`, async () => {
             await loginPage.login(user.username, user.password);

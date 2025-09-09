@@ -1,6 +1,11 @@
 {
   "homepage": {
-    "title": "ようこそ",
-    "subtitle": "私たちの製品を探検する"
+    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア"
+  },
+  "newarrivalspage": {
+    "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "menuItem": {
+    "newArrivals": "新作"
   }
 }
