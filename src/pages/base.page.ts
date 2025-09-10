@@ -3,6 +3,8 @@ import { step } from "allure-js-commons";
 import { I18n, Translations } from "../../config/i18n.config";
 import { t } from "../../utils/helpers";
 
+type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
+
 export class BasePage {
     protected readonly page: Page;
     readonly shoppingCartButton: Locator;
@@ -28,22 +30,22 @@ export class BasePage {
         this.page = page;
         this.shoppingCartButton = page.locator('//div[@id="shopping_cart_container"]');
         this.headerNavBar = page.locator('//div[contains(@class,"header-content")]//ul[@class="nav navbar-nav"]');
-        this.newArrivalsMenuItem = this.headerNavBar.locator(`.//a[normalize-space(text())="${t.menuItem('newArrivals')}"]`);
-        this.luggageMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Luggages"]');
-        this.backPacksMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Backpacks"]');
-        this.bagsMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Bags"]');
-        this.labelsMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Labels"]');
-        this.offersMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="OFFERS"]');
-        this.discoverMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="Discover"]');
+        this.newArrivalsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('newArrivals')}"]`);
+        this.luggageMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="Luggages"]');
+        this.backPacksMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="Backpacks"]');
+        this.bagsMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="Bags"]');
+        this.labelsMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="Labels"]');
+        this.offersMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="OFFERS"]');
+        this.discoverMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="Discover"]');
         this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="FRIENDS OF SAMSONITE"]');
         this.saleMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="セール"]');
         this.rightNavbar = page.locator('//div[contains(@class,"right navbar-header")]');
-        this.searchIcon = this.rightNavbar.locator('.//button[i[contains(@class,"search")]]');
-        this.wishlistIcon = this.rightNavbar.locator('.//a[i[contains(@class,"heart")]]');
-        this.loginIcon = this.rightNavbar.locator('.//a[span[contains(text(),"Login/Register")]]');
-        this.locationIcon = this.rightNavbar.locator('.//a[i[contains(@class,"location")]]');
-        this.cartIcon = this.rightNavbar.locator('.//a[contains(@class,"minicart")]');
-        this.newsIcon = this.rightNavbar.locator('.//a[@class="news-icon"]');
+        this.searchIcon = this.rightNavbar.locator('xpath=.//button[i[contains(@class,"search")]]');
+        this.wishlistIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"heart")]]');
+        this.loginIcon = this.rightNavbar.locator(`xpath=.//a[span[contains(text(),"${t.homepage('loginRegister')}")]]`);
+        this.locationIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"location")]]');
+        this.cartIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"minicart")]');
+        this.newsIcon = this.rightNavbar.locator('xpath=.//a[@class="news-icon"]');
     }
 
     // =========================
@@ -67,6 +69,12 @@ export class BasePage {
         });
     }
 
+    async goBack(pageName: string) {
+        await step(`Goback to ${pageName} page`, async () => {
+            await this.page.goBack();
+        });
+    }
+
     async clickMenuItem(menuItemKey: keyof Translations['menuItem'], description?: string): Promise<void> {
         const menuItemText = t.menuItem(menuItemKey);
         const menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);
@@ -77,6 +85,58 @@ export class BasePage {
 
         await menuItemLocator.scrollIntoViewIfNeeded();
         await menuItemLocator.click();
+    }
+
+    async clickRightNavbarItem(item: RightNavbarItem, description?: string): Promise<void> {
+        const itemMap: Record<RightNavbarItem, Locator> = {
+            search: this.searchIcon,
+            wishlist: this.wishlistIcon,
+            login: this.loginIcon,
+            location: this.locationIcon,
+            cart: this.cartIcon,
+            news: this.newsIcon,
+        };
+
+        const target = itemMap[item];
+
+        await step(description || `Click right navbar item: ${item}`, async () => {
+            await target.scrollIntoViewIfNeeded();
+            await target.click();
+        });
+    }
+
+    async goToTrackOrderPage(): Promise<void> {
+        await step("Go to Track Order Page", async () => {
+            const trackOrderLink = this.page.locator(
+                `//div[contains(@class,"right navbar-header")]//a[normalize-space(text())="${t.homepage('trackOder')}"]`
+            );
+
+            await step("Hover over Login/Register icon", async () => {
+                await this.loginIcon.hover();
+            });
+
+            await step("Click on 'Track Order' link", async () => {
+                await trackOrderLink.waitFor({ state: 'visible' });
+                await trackOrderLink.click();
+            });
+        });
+    }
+
+    async goToLoginRegisterPage(): Promise<void> {
+        await step("Go to Login/Register Page", async () => {
+            const loginRegisterLink = this.page.locator(
+                `//div[contains(@class,"right navbar-header")]//a[normalize-space(text())="${t.homepage('loginRegister')}"]`
+            );
+
+            await step("Hover over Login/Register icon", async () => {
+                await this.loginIcon.hover();
+            });
+
+            await step("Click on 'Login/Register' link", async () => {
+                await loginRegisterLink.waitFor({ state: 'visible' });
+                await loginRegisterLink.click();
+            });
+        });
     }
 
     // =========================

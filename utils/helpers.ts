@@ -114,8 +114,15 @@ export function getRandomArrayElement<T>(arr: T[]): T {
     return arr[randomIndex];
 }
 
+/**
+ * type-safe type for key
+ */
 export const t = {
     homepage: (key: keyof Translations['homepage']) => I18n.translations.homepage[key],
+    loginpage: (key: keyof Translations['loginpage']) => I18n.translations.loginpage[key],
+    forgotpasswordpage: (key: keyof Translations['forgotpasswordpage']) => I18n.translations.forgotpasswordpage[key],
+    registerpage: (key: keyof Translations['registerpage']) => I18n.translations.registerpage[key],
+    newarrivalspage: (key: keyof Translations['newarrivalspage']) => I18n.translations.newarrivalspage[key],
     menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
 };
 

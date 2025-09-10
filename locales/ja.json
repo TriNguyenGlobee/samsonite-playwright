@@ -1,6 +1,41 @@
 {
   "homepage": {
-    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア"
+    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
+    "trackOder": "ご注文状況を確認する",
+    "loginRegister": "マイアカウント"
+  },
+  "loginpage": {
+    "title": "サインイン｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
+    "singinTitle": "サインイン",
+    "loginmsg": "会員登録済のお客様",
+    "usernamelabel": "メールアドレス",
+    "pwlabel": "パスワード",
+    "signinbtn": "サインイン",
+    "forgotPW": "パスワードをお忘れですか?",
+    "signinwithemail": "メールリンクでサインイン",
+    "signinwithgoogle": "Googleでログイン",
+    "orsigninlabel": "または",
+    "newcustomerlabel": "新規会員登録",
+    "emailsignup": "新規会員登録"
+  },
+  "forgotpasswordpage": {
+    "title": "パスワードの再発行｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
+    "pageTitle": "パスワードをお忘れですか？",
+    "instructionMsg": "下記にご登録時のメールアドレスを入力してください。安全にパスワード再設定するためのメールを送ります。",
+    "emailTextbox": "メールアドレス",
+    "submitbutton": "送信"
+  },
+  "registerpage": {
+    "pageTitle": "新規会員登録",
+    "customerdetailslabel": "お客様情報",
+    "lastname": "姓",
+    "firstname": "名",
+    "phonenumber": "電話番号（半角、ハイフンなし）",
+    "dateofbirth": "生年月日",
+    "email": "メールアドレス",
+    "password": "パスワード（※パスワードは8文字以上）",
+    "confirmpassword": "もう一度パスワードを入力してください",
+    "getnewsrequest": "会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"
   },
   "newarrivalspage": {
     "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"

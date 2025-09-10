@@ -1,9 +1,9 @@
-import { test, expect } from "../../src/fixtures/test-fixture";
-import { DashboardPage } from "../../src/pages/dashboard/dashboard.page";
-import { CartPage } from "../../src/pages/cart/cart.page";
-import { Config } from "../../config/env.config";
+import { test, expect } from "../../../src/fixtures/test-fixture";
+import { DashboardPage } from "../../../src/pages/implementing/dashboard/dashboard.page";
+import { CartPage } from "../../../src/pages/implementing/cart/cart.page";
+import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { getRandomArrayElement } from "../../utils/helpers";
+import { getRandomArrayElement } from "../../../utils/helpers";
 
 test.describe("Remove from cart", () => {
     let firstProductName: string | null;

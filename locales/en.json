@@ -1,6 +1,41 @@
 {
   "homepage": {
-    "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
+    "trackOder": "Track Order",
+    "loginRegister": "Login/Register"
+  },
+  "loginpage": {
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "singinTitle": "Sign in",
+    "loginmsg": "Existing customer or House of Samsonite user",
+    "usernamelabel": "Email / Username",
+    "pwlabel": "Password",
+    "signinbtn": "Sign in",
+    "forgotPW": "forgot password?",
+    "signinwithemail": "SIGN IN WITH EMAIL LINK",
+    "signinwithgoogle": "SIGN IN WITH GOOGLE",
+    "orsigninlabel": "Or",
+    "newcustomerlabel": "New Customer",
+    "emailsignup": "Email sign up"
+  },
+  "forgotpasswordpage": {
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "pageTitle": "Forgot your password?",
+    "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
+    "emailTextbox": "Email",
+    "submitbutton": "Submit"
+  },
+  "registerpage": {
+    "pageTitle": "Create Account",
+    "customerdetailslabel": "Customer details",
+    "lastname": "Last Name",
+    "firstname": "First Name",
+    "phonenumber": "Phone Number",
+    "dateofbirth": "Date of Birth",
+    "email": "Email",
+    "password": "Password (at least 8 characters)",
+    "confirmpassword": "Confirm Password",
+    "getnewsrequest": "Please add me to Samsonite's mailing list."
   },
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"

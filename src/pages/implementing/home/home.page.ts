@@ -1,14 +1,16 @@
 import { Page, Locator } from "@playwright/test";
-import { BasePage } from "../base.page";
-import { t } from "../../../utils/helpers";
-import { Config } from "../../../config/env.config";
+import { BasePage } from "../../base.page";
+import { t } from "../../../../utils/helpers";
+import { Config } from "../../../../config/env.config";
 
-export class NewArrivalsPage extends BasePage {
+export class HomePage extends BasePage {
     readonly logoImg: Locator;
+    readonly centerBanner: Locator;
 
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
+        this.centerBanner = page.locator('//div[@class="category-banner"]//img');
     }
 
     // =========================
@@ -19,7 +21,7 @@ export class NewArrivalsPage extends BasePage {
     // =========================
     // 📦 Helpers
     // =========================
-    async isNewArrivalspageDisplayed(): Promise<boolean> {
+    async isHomepageDisplayed(): Promise<boolean> {
         try {
             const title = await this.page.title();
             if (!title.includes(t.homepage('title'))) {
@@ -27,7 +29,7 @@ export class NewArrivalsPage extends BasePage {
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "new-arrivals/";
+            const expectedUrl = Config.baseURL;
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             return true;
