@@ -26,6 +26,7 @@
     "submitbutton": "Submit"
   },
   "registerpage": {
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
     "pageTitle": "Create Account",
     "customerdetailslabel": "Customer details",
     "lastname": "Last Name",
@@ -36,6 +37,9 @@
     "password": "Password (at least 8 characters)",
     "confirmpassword": "Confirm Password",
     "getnewsrequest": "Please add me to Samsonite's mailing list."
+  },
+  "membershippage": {
+    "title": ""
   },
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"

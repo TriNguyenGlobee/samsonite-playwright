@@ -75,6 +75,12 @@ export class BasePage {
         });
     }
 
+    async pause() {
+        await step("Pause", async () => {
+            await this.page.pause();
+        });
+    }
+
     async clickMenuItem(menuItemKey: keyof Translations['menuItem'], description?: string): Promise<void> {
         const menuItemText = t.menuItem(menuItemKey);
         const menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);

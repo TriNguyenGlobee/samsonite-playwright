@@ -18,6 +18,7 @@ export class LoginPage extends BasePage {
     readonly newCustomerLabel: Locator;
     readonly emailSignUpButton: Locator;
     readonly memberNotifyMsg: Locator;
+    readonly memberLink: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -34,6 +35,7 @@ export class LoginPage extends BasePage {
         this.newCustomerLabel = page.locator(`//form[@class="login-oauth"][p[normalize-space(text())="${t.loginpage('newcustomerlabel')}"]]`);
         this.emailSignUpButton = page.locator(`//div[contains(@class,"email-login")][a[normalize-space(text())="${t.loginpage('emailsignup')}"]]`);
         this.memberNotifyMsg = page.locator(`//div[@class="member-notify-message" and contains(., "新規会員登録し") and contains(., "サムソナイト") and contains(., "エクスプローラープログラム") and contains(., "のメンバーになると送料無料")]`);
+        this.memberLink = page.locator(`//u[contains(text(),"サムソナイト") and contains(text(),"エクスプローラープログラム")]/parent::a`);
     }
 
     // =========================
@@ -55,6 +57,21 @@ export class LoginPage extends BasePage {
 
     async goToForgotPasswordPage(): Promise<void> {
         await this.click(this.forgotPWLink, "Click forgot password link");
+    }
+    /*
+    async goToRegisterPage(): Promise<void> {
+        await this.click(this.emailSignUpButton, "Click email sign up button");
+    }*/
+
+    async goToRegisterPage(): Promise<void> {
+        await Promise.all([
+            this.page.waitForURL('**/register'),
+            this.click(this.emailSignUpButton, "Click email sign up button"),
+        ]);
+    }
+
+    async goToMembershipPage(): Promise<void> {
+        await this.click(this.memberLink, "Click membership link");
     }
 
     // =========================

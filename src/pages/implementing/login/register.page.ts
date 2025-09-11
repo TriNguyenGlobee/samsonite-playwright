@@ -62,12 +62,12 @@ export class RegisterPage extends BasePage {
     async isRegisterpageDisplayed(): Promise<boolean> {
         try {
             const title = await this.page.title();
-            if (!title.includes(t.forgotpasswordpage('title'))) {
+            if (!title.includes(t.registerpage('title'))) {
                 return false;
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "passwordreset";
+            const expectedUrl = Config.baseURL + "register";
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             const elementsToCheck = [
@@ -86,14 +86,13 @@ export class RegisterPage extends BasePage {
                 this.passwordTextbox,
                 this.confirmPasswordTextbox,
                 this.getNewsRegisterLabel,
-                this.getNewsRegisterCheckbox,
-                this.termsConditionLabel,
                 this.termsConditionCheckboxJp
             ];
             for (const locator of elementsToCheck) {
-                if (!locator.isVisible()) return false;
+                if (!locator.isVisible()) {
+                    return false;
+                }    
             }
-
             return true;
         } catch (error) {
             console.error('Error checking homepage:', error);

@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { I18n, Translations } from "../config/i18n.config";
+import { test, expect } from '@playwright/test';
 
 /**
  * **************************************************************************
@@ -104,6 +105,14 @@ export function isSorted(arr: number[] | string[], order: "asc" | "desc" = "asc"
     return order === "asc" ? isSortedAsc(arr) : isSortedDesc(arr);
 }
 
+export async function checkElementsVisible(elements: { name: string; locator: Locator }[]) {
+    for (const { name, locator } of elements) {
+        await test.step(`Check visibility of ${name}`, async () => {
+            await expect(locator, `Element "${name}" is not visible`).toBeVisible({ timeout: 5000 });
+        });
+    }
+}
+
 /**
  * Get a random element from an array
  * @param arr The array to select from
@@ -122,6 +131,7 @@ export const t = {
     loginpage: (key: keyof Translations['loginpage']) => I18n.translations.loginpage[key],
     forgotpasswordpage: (key: keyof Translations['forgotpasswordpage']) => I18n.translations.forgotpasswordpage[key],
     registerpage: (key: keyof Translations['registerpage']) => I18n.translations.registerpage[key],
+    membershippage: (key: keyof Translations['membershippage']) => I18n.translations.membershippage[key],
     newarrivalspage: (key: keyof Translations['newarrivalspage']) => I18n.translations.newarrivalspage[key],
     menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
 };

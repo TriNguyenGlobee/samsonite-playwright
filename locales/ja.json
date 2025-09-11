@@ -26,6 +26,7 @@
     "submitbutton": "送信"
   },
   "registerpage": {
+    "title": "新規会員登録｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
     "pageTitle": "新規会員登録",
     "customerdetailslabel": "お客様情報",
     "lastname": "姓",
@@ -36,6 +37,9 @@
     "password": "パスワード（※パスワードは8文字以上）",
     "confirmpassword": "もう一度パスワードを入力してください",
     "getnewsrequest": "会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"
+  },
+  "membershippage": {
+    "title": "エクスプローラープログラム｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"
   },
   "newarrivalspage": {
     "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
