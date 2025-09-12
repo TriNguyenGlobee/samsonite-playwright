@@ -2,7 +2,9 @@
   "homepage": {
     "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
     "trackOder": "ご注文状況を確認する",
-    "loginRegister": "マイアカウント"
+    "loginRegister": "マイアカウント",
+    "myaccount": "マイアカウント",
+    "logout": "ログアウト"
   },
   "loginpage": {
     "title": "サインイン｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
@@ -16,7 +18,17 @@
     "signinwithgoogle": "Googleでログイン",
     "orsigninlabel": "または",
     "newcustomerlabel": "新規会員登録",
-    "emailsignup": "新規会員登録"
+    "emailsignup": "新規会員登録",
+    "invalidEmailMsg": "有効なメールアドレスを入力してください",
+    "alertMsg": "ログインまたはパスワードが無効です。パスワードでは大文字と小文字が区別されます。もう一度やり直してください.",
+    "requireemailmsg": "この項目を入力してください。",
+    "requirepwmsg": "この項目を入力してください。",
+    "popuptitle": "メールリンクでサインイン",
+    "popupemailLabel": "ログインリンクを受け取るメールアドレスを入力してください。",
+    "popupsendemailbtn": "ログインリンクを送信",
+    "popupRequireEmailMsg": "この欄にご記入ください。",
+    "popupInvalidEmailMsg": "有効なメールアドレス形式は「xxx@email.com」です。もう一度お試しください。",
+    "popupRequireCaptchaMsg": "Google reCAPTCHAのリクエストが無効または正しくありません。"
   },
   "forgotpasswordpage": {
     "title": "パスワードの再発行｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
@@ -43,6 +55,18 @@
   },
   "newarrivalspage": {
     "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "mypage": {
+    "title": "マイアカウント｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
+    "pageTitle": "マイアカウント",
+    "myOrders": "注文履歴",
+    "membership": "メンバーシップ",
+    "mycoupons": "マイクーポン",
+    "myprofile": "プロフィール",
+    "myaddress": "アドレス帳",
+    "payment": "クレジットカード情報",
+    "wishlist": "ウィッシュリスト",
+    "emailhelp": "お問い合わせ"
   },
   "menuItem": {
     "newArrivals": "新作"

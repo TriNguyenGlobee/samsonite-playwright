@@ -2,6 +2,7 @@ import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { t } from "../../../../utils/helpers";
 import { Config } from "../../../../config/env.config";
+import { step } from "allure-js-commons";
 
 export class RegisterPage extends BasePage {
     readonly logoImg: Locator;
@@ -90,12 +91,15 @@ export class RegisterPage extends BasePage {
             ];
             for (const locator of elementsToCheck) {
                 if (!locator.isVisible()) {
+                    await step(`Check visibility of element: ${locator.toString()}`, async () => {
+                        console.log(`Element not visible: ${locator.toString()}`);
+                    });
                     return false;
-                }    
+                }
             }
             return true;
         } catch (error) {
-            console.error('Error checking homepage:', error);
+            console.error('Error checking register page:', error);
             return false;
         }
     }

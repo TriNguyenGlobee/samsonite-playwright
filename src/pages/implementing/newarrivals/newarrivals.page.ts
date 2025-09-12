@@ -32,7 +32,7 @@ export class NewArrivalsPage extends BasePage {
 
             return true;
         } catch (error) {
-            console.error('Error checking homepage:', error);
+            console.error('Error checking new arrivals page:', error);
             return false;
         }
     }

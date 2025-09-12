@@ -2,7 +2,9 @@
   "homepage": {
     "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
     "trackOder": "Track Order",
-    "loginRegister": "Login/Register"
+    "loginRegister": "Login/Register",
+    "myaccount": "My account",
+    "logout": "Logout"
   },
   "loginpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
@@ -16,7 +18,17 @@
     "signinwithgoogle": "SIGN IN WITH GOOGLE",
     "orsigninlabel": "Or",
     "newcustomerlabel": "New Customer",
-    "emailsignup": "Email sign up"
+    "emailsignup": "Email sign up",
+    "invalidEmailMsg": "Please enter a valid email address",
+    "alertMsg": "Invalid login or password. Remember that password is case-sensitive. Please try again.",
+    "requireemailmsg": "Please fill out this field.",
+    "requirepwmsg": "Please fill out this field.",
+    "popuptitle": "SIGN IN WITH EMAIL LINK",
+    "popupemailLabel": "Enter your email to receive login link",
+    "popupsendemailbtn": "SEND LOGIN LINK",
+    "popupRequireEmailMsg": "Please complete this field.",
+    "popupInvalidEmailMsg": "The valid email format is \"xxx@email.com\". Please try again.",
+    "popupRequireCaptchaMsg": "Google recaptcha request is invalid or malformed."
   },
   "forgotpasswordpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
@@ -43,6 +55,18 @@
   },
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "mypage": {
+    "title": "My Account | Samsonite Singapore",
+    "pageTitle": "Your Account",
+    "myOrders": "My Orders",
+    "membership": "My Membership",
+    "mycoupons": "My coupon",
+    "myprofile": "My profile",
+    "myaddress": "My address book",
+    "payment": "My payment",
+    "wishlist": "Wishlist",
+    "emailhelp": "Email"
   },
   "menuItem": {
     "newArrivals": "New Arrivals"

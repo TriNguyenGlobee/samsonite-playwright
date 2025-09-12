@@ -14,6 +14,23 @@ import { test, expect } from '@playwright/test';
  */
 
 /**
+ * Wait for page load complete
+ */
+async function waitForPageLoadComplete(page: Page, timeout: number = 10000): Promise<void> {
+    await page.waitForLoadState('load', { timeout });
+    await page.waitForLoadState('networkidle', { timeout });
+}
+
+async function waitForDomAvailable(page: Page, timeout: number = 10000): Promise<void> {
+    await page.waitForLoadState('domcontentloaded', { timeout });
+}
+
+export const PageUtils = {
+    waitForPageLoadComplete,
+    waitForDomAvailable,
+};
+
+/**
  * Waits for an element to exist in the DOM.
  */
 async function waitForElement(locator: Locator, timeout: number = 5000): Promise<void> {
@@ -133,6 +150,7 @@ export const t = {
     registerpage: (key: keyof Translations['registerpage']) => I18n.translations.registerpage[key],
     membershippage: (key: keyof Translations['membershippage']) => I18n.translations.membershippage[key],
     newarrivalspage: (key: keyof Translations['newarrivalspage']) => I18n.translations.newarrivalspage[key],
+    mypage: (key: keyof Translations['mypage']) => I18n.translations.mypage[key],
     menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
 };
 

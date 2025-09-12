@@ -145,6 +145,39 @@ export class BasePage {
         });
     }
 
+    async goToMyAccountPage(): Promise<void> {
+        await step("Go to My Account Page", async () => {
+            const myAccountLink = this.page.locator(
+                `//div[contains(@class,"right navbar-header")]//a[normalize-space(text())="${t.homepage('myaccount')}"]`
+            );
+
+            await step("Hover over Login/Register icon", async () => {
+                await this.loginIcon.hover();
+            });
+
+            await step("Click on 'My Account' link", async () => {
+                await myAccountLink.waitFor({ state: 'visible' });
+                await myAccountLink.click();
+            });
+        });
+    }
+
+    async logout(): Promise<void> {
+        await step("Logout", async () => {
+            const logoutLink = this.page.locator(
+                `//div[contains(@class,"right navbar-header")]//a[normalize-space(text())="${t.homepage('logout')}"]`
+            );
+            await step("Hover over Login/Register icon", async () => {
+                await this.loginIcon.hover();
+            });
+
+            await step("Click on 'Logout' link", async () => {
+                await logoutLink.waitFor({ state: 'visible' });
+                await logoutLink.click();
+            });
+        });
+    }
+
     // =========================
     // 📦 Helpers
     // =========================
