@@ -56,9 +56,14 @@ export const test = base.extend<MyFixtures>({
         const loginPage = new LoginPage(page);
 
         await step("Go to Login Page", async () => {
-            await loginPage.goto(Config.baseURL);
+            await page.goto(Config.baseURL);
         });
+
         await closeModalIfPresent(page);
+
+        await step("Go to login page", async () => {
+            await loginPage.goToLoginRegisterPage();
+        });
 
         await step(`Login with valid account: ${user.username}`, async () => {
             await loginPage.login(user.username, user.password);

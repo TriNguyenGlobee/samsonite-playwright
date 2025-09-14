@@ -25,6 +25,7 @@ export class BasePage {
     readonly locationIcon: Locator;
     readonly cartIcon: Locator;
     readonly newsIcon: Locator;
+    readonly usericon: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -46,6 +47,7 @@ export class BasePage {
         this.locationIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"location")]]');
         this.cartIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"minicart")]');
         this.newsIcon = this.rightNavbar.locator('xpath=.//a[@class="news-icon"]');
+        this.usericon = this.rightNavbar.locator('xpath=.//div[@class="user"]');
     }
 
     // =========================
@@ -168,7 +170,7 @@ export class BasePage {
                 `//div[contains(@class,"right navbar-header")]//a[normalize-space(text())="${t.homepage('logout')}"]`
             );
             await step("Hover over Login/Register icon", async () => {
-                await this.loginIcon.hover();
+                await this.usericon.hover();
             });
 
             await step("Click on 'Logout' link", async () => {

@@ -32,10 +32,6 @@ export class LoginPage extends BasePage {
     readonly popupRequireEmailMsg: Locator;
     readonly popupInvalidEmailMsg: Locator;
     readonly popupRequireCaptchaMsg: Locator;
-    readonly gogleEmailTextbox: Locator;
-    readonly gogleNextButton: Locator;
-    readonly goglePasswordTextbox: Locator;
-    readonly goglePasswordNextButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -65,10 +61,6 @@ export class LoginPage extends BasePage {
         this.popupRequireEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback" and normalize-space(text())="${t.loginpage('popupRequireEmailMsg')}"]`);
         this.popupInvalidEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback" and text()="${t.loginpage('popupInvalidEmailMsg')}"]`);
         this.popupRequireCaptchaMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="recaptcha-section"]//p[text()="${t.loginpage('popupRequireCaptchaMsg')}"]`);
-        this.gogleEmailTextbox = page.locator('//input[@type="email" and @aria-label="Email or phone"]');
-        this.gogleNextButton = page.locator('//div[@id="identifierNext"]//button');
-        this.goglePasswordTextbox = page.locator('//input[@type="password" and @aria-label="Enter your password"]');
-        this.goglePasswordNextButton = page.locator('//div[@id="passwordNext"]//button');
     }
 
     // =========================
@@ -97,22 +89,27 @@ export class LoginPage extends BasePage {
         ]);
         await googlePage.waitForLoadState();
 
+        const googleEmailTextbox = googlePage.locator('//input[@type="email" and @aria-label="Email or phone"]');
+        const gogleNextButton = googlePage.locator('//div[@id="identifierNext"]//button');
+        const goglePasswordTextbox = googlePage.locator('//input[@type="password" and @aria-label="Enter your password"]');
+        const goglePasswordNextButton = googlePage.locator('//div[@id="passwordNext"]//button');
+
         await step(`Type google username: ${googleUsername}`, async () => {
-            await this.type(this.gogleEmailTextbox, googleUsername, "Type google username");
+            await googleEmailTextbox.fill(googleUsername);
         });
 
         await step("Click google next button after input email", async () => {
-            await this.click(this.gogleNextButton, "Click google next button after input email");
+            await gogleNextButton.click();
         });
 
         await googlePage.waitForLoadState();
 
         await step(`Type google password: ${'*'.repeat(googlePassword.length)}`, async () => {
-            await this.type(this.goglePasswordTextbox, googlePassword, "Type google password");
+            await goglePasswordTextbox.fill(googlePassword);
         });
 
         await step("Click google next button after input password", async () => {
-            await this.click(this.goglePasswordNextButton, "Click google next button after input password");
+            await goglePasswordNextButton.click();
         });
 
         await googlePage.waitForLoadState();
@@ -123,10 +120,6 @@ export class LoginPage extends BasePage {
     async goToForgotPasswordPage(): Promise<void> {
         await this.click(this.forgotPWLink, "Click forgot password link");
     }
-    /*
-    async goToRegisterPage(): Promise<void> {
-        await this.click(this.emailSignUpButton, "Click email sign up button");
-    }*/
 
     async goToRegisterPage(): Promise<void> {
         await Promise.all([

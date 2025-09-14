@@ -46,7 +46,7 @@ export class MyPage extends BasePage {
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "account?registration=false";
+            const expectedUrl = Config.baseURL + "account";
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             const elementsToCheck = [
