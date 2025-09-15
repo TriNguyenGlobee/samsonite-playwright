@@ -1,7 +1,7 @@
-import { test, expect } from "../../src/fixtures/test-fixture";
-import { DashboardPage } from "../../src/pages/dashboard/dashboard.page";
+import { test, expect } from "../../../src/fixtures/test-fixture";
+import { DashboardPage } from "../../../src/pages/implementing/dashboard/dashboard.page";
 import { step } from "allure-js-commons";
-import { getRandomArrayElement } from "../../utils/helpers";
+import { getRandomArrayElement } from "../../../utils/helpers";
 
 test.describe("Add to Cart", () => {
     let productName: string | null;

@@ -14,11 +14,11 @@ function loadTranslations(locale: Locale): Translations {
   try {
     const filePath = path.join(localesDir, `${locale}.json`);
     const rawData = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(rawData);
+    return JSON.parse(rawData) as Translations;
   } catch (error) {
     console.warn(`Cannot load JSON file [${locale}]. Using fallback: ${defaultLocale}`);
     const fallbackData = fs.readFileSync(path.join(localesDir, `${defaultLocale}.json`), 'utf-8');
-    return JSON.parse(fallbackData);
+    return JSON.parse(fallbackData) as Translations;
   }
 }
 

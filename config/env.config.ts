@@ -8,6 +8,8 @@ export type Locale = 'en' | 'ja';
 interface Credentials {
     username: string;
     password: string;
+    gg_username: string;
+    gg_password: string;
 }
 
 interface EnvironmentConfig {
@@ -25,6 +27,8 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             credentials: {
                 username: process.env.DEV_USERNAME as string,
                 password: process.env.DEV_PASSWORD as string,
+                gg_username: process.env.DEV_GG_USERNAME as string,
+                gg_password: process.env.DEV_GG_PASSWORD as string
             },
             basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
             basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
@@ -34,6 +38,8 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             credentials: {
                 username: process.env.DEV_USERNAME as string,
                 password: process.env.DEV_PASSWORD as string,
+                gg_username: process.env.DEV_GG_USERNAME as string,
+                gg_password: process.env.DEV_GG_PASSWORD as string
             },
             basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
             basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
@@ -44,8 +50,10 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
         en: {
             baseURL: 'https://sssg.stg.samsonite-asia.com/',
             credentials: {
-                username: process.env.STG_USERNAME as string,
-                password: process.env.STG_PASSWORD as string,
+                username: process.env.STG_USERNAME_SG as string,
+                password: process.env.STG_PASSWORD_SG as string,
+                gg_username: process.env.STG_GG_USERNAME as string,
+                gg_password: process.env.STG_GG_PASSWORD as string
             },
             basicAuthUser: process.env.STG_BASIC_AUTH_USER,
             basicAuthPass: process.env.STG_BASIC_AUTH_PASS,
@@ -53,8 +61,10 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
         ja: {
             baseURL: 'https://ssjp.stg.samsonite-asia.com/',
             credentials: {
-                username: process.env.STG_USERNAME as string,
-                password: process.env.STG_PASSWORD as string,
+                username: process.env.STG_USERNAME_JP as string,
+                password: process.env.STG_PASSWORD_JP as string,
+                gg_username: process.env.STG_GG_USERNAME_JP as string,
+                gg_password: process.env.STG_GG_PASSWORD_JP as string
             },
             basicAuthUser: process.env.STG_BASIC_AUTH_USER,
             basicAuthPass: process.env.STG_BASIC_AUTH_PASS,
@@ -66,6 +76,8 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             credentials: {
                 username: process.env.PROD_USERNAME as string,
                 password: process.env.PROD_PASSWORD as string,
+                gg_username: process.env.PROD_GG_USERNAME as string,
+                gg_password: process.env.PROD_GG_PASSWORD as string
             },
         },
         ja: {
@@ -73,6 +85,8 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             credentials: {
                 username: process.env.PROD_USERNAME as string,
                 password: process.env.PROD_PASSWORD as string,
+                gg_username: process.env.PROD_GG_USERNAME as string,
+                gg_password: process.env.PROD_GG_PASSWORD as string
             },
         }
     }
