@@ -28,9 +28,17 @@ export class HomePage extends BasePage {
                 return false;
             }
 
-            const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL;
-            if (!currentUrl.startsWith(expectedUrl)) return false;
+            const currentUrl = new URL(await this.page.url());
+            const baseUrl = new URL(Config.baseURL);
+
+            if (currentUrl.origin !== baseUrl.origin) {
+                return false;
+            }
+
+            const path = currentUrl.pathname.replace(/\/+$/, '');
+            if (path !== '' && path !== '/home') {
+                return false;
+            }
 
             return true;
         } catch (error) {
@@ -38,6 +46,7 @@ export class HomePage extends BasePage {
             return false;
         }
     }
+
 
     // =========================
     // ✅ Assertions

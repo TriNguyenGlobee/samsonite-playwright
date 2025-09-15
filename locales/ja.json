@@ -28,7 +28,9 @@
     "popupsendemailbtn": "ログインリンクを送信",
     "popupRequireEmailMsg": "この欄にご記入ください。",
     "popupInvalidEmailMsg": "有効なメールアドレス形式は「xxx@email.com」です。もう一度お試しください。",
-    "popupRequireCaptchaMsg": "Google reCAPTCHAのリクエストが無効または正しくありません。"
+    "popupRequireCaptchaMsg": "Google reCAPTCHAのリクエストが無効または正しくありません。",
+    "popupSentEmailTitle": "メールをご確認ください。",
+    "popupSentEmailContent": "にログインリンクを送信しました。"
   },
   "forgotpasswordpage": {
     "title": "パスワードの再発行｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
@@ -56,6 +58,21 @@
   "newarrivalspage": {
     "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
+  "luggagepage": {
+    "title": "スーツケース｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "backpackspage": {
+    "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "bagspage": {
+    "title": "バッグ｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "brandpage": {
+    "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "ourbrandstorypage": {
+    "title": "Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
   "mypage": {
     "title": "マイアカウント｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
     "pageTitle": "マイアカウント",
@@ -69,6 +86,13 @@
     "emailhelp": "お問い合わせ"
   },
   "menuItem": {
-    "newArrivals": "新作"
+    "newArrivals": "新作",
+    "luggage": "スーツケース",
+    "backpacks": "バックパック",
+    "bags": "バッグ",
+    "label": "ブランド",
+    "discover": "特集",
+    "offers": "セール",
+    "friendofsamsonite": "メンバーシップ"
   }
 }

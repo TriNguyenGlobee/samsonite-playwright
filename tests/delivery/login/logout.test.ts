@@ -1,8 +1,8 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { LoginPage } from "../../../src/pages/implementing/login/login.page";
-import { ForgotPasswordPage } from "../../../src/pages/implementing/login/forgot-password.page";
-import { RegisterPage } from "../../../src/pages/implementing/login/register.page";
-import { MembershipPage } from "../../../src/pages/implementing/login/membership.page";
+import { LoginPage } from "../../../src/pages/delivery/login/login.page";
+import { ForgotPasswordPage } from "../../../src/pages/delivery/login/forgot-password.page";
+import { RegisterPage } from "../../../src/pages/delivery/login/register.page";
+import { MembershipPage } from "../../../src/pages/delivery/login/membership.page";
 import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
 import { HomePage } from "../../../src/pages/implementing/home/home.page";
 import { Config } from "../../../config/env.config";

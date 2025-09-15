@@ -1,9 +1,9 @@
 import { Page, Locator } from "@playwright/test";
-import { BasePage } from "../../base.page";
-import { t } from "../../../../utils/helpers";
-import { Config } from "../../../../config/env.config";
+import { BasePage } from "../../../base.page";
+import { t } from "../../../../../utils/helpers";
+import { Config } from "../../../../../config/env.config";
 
-export class NewArrivalsPage extends BasePage {
+export class LuggagePage extends BasePage {
     readonly logoImg: Locator;
 
     constructor(page: Page) {
@@ -19,20 +19,20 @@ export class NewArrivalsPage extends BasePage {
     // =========================
     // 📦 Helpers
     // =========================
-    async isNewArrivalspageDisplayed(): Promise<boolean> {
+    async isLuggagePageDisplayed(): Promise<boolean> {
         try {
             const title = await this.page.title();
-            if (!title.includes(t.newarrivalspage('title'))) {
+            if (!title.includes(t.luggagepage('title'))) {
                 return false;
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "new-arrivals/";
+            const expectedUrl = Config.baseURL + "luggage/";
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             return true;
         } catch (error) {
-            console.error('Error checking new arrivals page:', error);
+            console.error('Error checking luggage page:', error);
             return false;
         }
     }

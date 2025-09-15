@@ -28,7 +28,9 @@
     "popupsendemailbtn": "SEND LOGIN LINK",
     "popupRequireEmailMsg": "Please complete this field.",
     "popupInvalidEmailMsg": "The valid email format is \"xxx@email.com\". Please try again.",
-    "popupRequireCaptchaMsg": "Google recaptcha request is invalid or malformed."
+    "popupRequireCaptchaMsg": "Google recaptcha request is invalid or malformed.",
+    "popupSentEmailTitle": "Please check your email.",
+    "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
@@ -56,6 +58,21 @@
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
+  "luggagepage": {
+    "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "backpackspage": {
+    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "bagspage": {
+    "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "brandpage": {
+    "title": "Brand | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "ourbrandstorypage": {
+    "title": "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
   "mypage": {
     "title": "My Account | Samsonite Singapore",
     "pageTitle": "Your Account",
@@ -69,6 +86,13 @@
     "emailhelp": "Email"
   },
   "menuItem": {
-    "newArrivals": "New Arrivals"
+    "newArrivals": "New Arrivals",
+    "luggage": "Luggage",
+    "backpacks": "Backpacks",
+    "bags": "Bags",
+    "label": "Labels",
+    "discover": "Discover",
+    "offers": "Offers",
+    "friendofsamsonite": "FRIENDS OF SAMSONITE"
   }
 }

@@ -1,5 +1,5 @@
 import { test as base, Page, BrowserContext } from "@playwright/test";
-import { LoginPage } from "../pages/implementing/login/login.page";
+import { LoginPage } from "../pages/delivery/login/login.page";
 import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { I18n } from "../../config/i18n.config";

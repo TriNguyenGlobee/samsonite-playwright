@@ -150,9 +150,29 @@ export const t = {
     registerpage: (key: keyof Translations['registerpage']) => I18n.translations.registerpage[key],
     membershippage: (key: keyof Translations['membershippage']) => I18n.translations.membershippage[key],
     newarrivalspage: (key: keyof Translations['newarrivalspage']) => I18n.translations.newarrivalspage[key],
+    luggagepage: (key: keyof Translations['luggagepage']) => I18n.translations.luggagepage[key],
+    backpackspage: (key: keyof Translations['backpackspage']) => I18n.translations.backpackspage[key],
+    bagspage: (key: keyof Translations['bagspage']) => I18n.translations.bagspage[key],
+    brandpage: (key: keyof Translations['brandpage']) => I18n.translations.brandpage[key],
+    ourbrandstorypage: (key: keyof Translations['ourbrandstorypage']) => I18n.translations.ourbrandstorypage[key],
     mypage: (key: keyof Translations['mypage']) => I18n.translations.mypage[key],
     menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
 };
+
+/**
+ * Mask email address for privacy
+ * @param email Email đầy đủ
+ * @returns Masked email
+ */
+export function maskEmail(email: string): string {
+  const [username, domain] = email.split('@');
+
+  if (username.length < 3) {
+    throw new Error('email username must be at least 3 characters long');
+  }
+
+  return username.slice(0, 3) + '*****' + '@' + domain;
+}
 
 /**
  * **************************************************************************
@@ -224,13 +244,37 @@ export async function selectComboboxOption(page: Page, comboboxName: string, opt
 }
 
 export async function closeModalIfPresent(page: Page): Promise<void> {
-  const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]'); 
+  const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
+  const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
+  const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
 
-  if (await modalCloseBtn.first().isVisible().catch(() => false)) {
-    console.log('Modal detected → Closing it...');
-    await modalCloseBtn.first().click();
-    await modalCloseBtn.first().waitFor({ state: 'detached', timeout: 5000 }).catch(() => {});
-  } else {
-    console.log('No modal found.');
+  const modalsToCheck = [
+    {
+      name: 'Signup Modal',
+      locator: modalCloseBtn.first(),
+    },
+    {
+      name: 'Intent Cart Modal',
+      locator: intentCartCloseBtn.first(),
+    },
+    {
+      name: 'Popup Container',
+      locator: popupContainerBtn.first(),
+    },
+  ];
+
+  for (const modal of modalsToCheck) {
+    const isVisible = await modal.locator.isVisible().catch(() => false);
+    if (isVisible) {
+      console.log(`${modal.name} detected → Closing it...`);
+      await modal.locator.click().catch((e) => {
+        console.warn(`Failed to click close for ${modal.name}:`, e);
+      });
+      await modal.locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
+        console.warn(`${modal.name} did not detach in time`);
+      });
+    } else {
+      console.log(`${modal.name} not found.`);
+    }
   }
 }

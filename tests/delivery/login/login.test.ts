@@ -1,13 +1,13 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { LoginPage } from "../../../src/pages/implementing/login/login.page";
-import { ForgotPasswordPage } from "../../../src/pages/implementing/login/forgot-password.page";
-import { RegisterPage } from "../../../src/pages/implementing/login/register.page";
-import { MembershipPage } from "../../../src/pages/implementing/login/membership.page";
+import { LoginPage } from "../../../src/pages/delivery/login/login.page";
+import { ForgotPasswordPage } from "../../../src/pages/delivery/login/forgot-password.page";
+import { RegisterPage } from "../../../src/pages/delivery/login/register.page";
+import { MembershipPage } from "../../../src/pages/delivery/login/membership.page";
 import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
 import { HomePage } from "../../../src/pages/implementing/home/home.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t } from "../../../utils/helpers";
+import { t, PageUtils } from "../../../utils/helpers";
 
 test.describe("Login Screen", () => {
     test(`
@@ -154,7 +154,7 @@ test.describe("Login with email link", () => {
         4. Clicking Send Login Link button without checking captcha
         `, async ({ basicAuthPage }) => {
         const loginPage = new LoginPage(basicAuthPage);
-        
+
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
         });
@@ -186,7 +186,7 @@ test.describe("Login with email link", () => {
         await step("Assert invalid email message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.popupInvalidEmailMsg, "Invalid email message is displayed"));
         });
-
+        
         await step("Input valid email and click send login link button", async () => {
             await loginPage.popupEmailTextbox.fill(Config.credentials.username);
             await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
@@ -194,6 +194,36 @@ test.describe("Login with email link", () => {
 
         await step("Assert require captcha message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.popupRequireCaptchaMsg, "Require captcha message is displayed"));
+        });
+    });
+    test(`
+        5. Clicking Send Login Link button with valid email
+        6. The pop-up is closed
+        7. Login request email is sent
+        8. Login success with login link
+        `, async ({ basicAuthPage }) => {
+        const loginPage = new LoginPage(basicAuthPage);
+
+        await step("Go to login page", async () => {
+            await loginPage.goToLoginRegisterPage();
+        });
+
+        await step("Click on SIGN IN WITH EMAIL LINK button", async () => {
+            await loginPage.click(loginPage.signinWithEmailButton, "Click on SIGN IN WITH EMAIL LINK button");
+        });
+
+        await step("Input valid email and click send login link button", async () => {
+            await loginPage.popupEmailTextbox.fill(Config.credentials.username);
+        });
+
+        await step("Check the reCAPTCHA checkbox", async () => {
+            await loginPage.clickOnRecaptchaCheckbox();
+            await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
+            await PageUtils.waitForPageLoadComplete(basicAuthPage);
+        });
+
+        await step("Assert Sent Email popup is displayed", async () => {
+            expect(await loginPage.isSentEmailPopupDisplayed(Config.credentials.username)).toBe(true);
         });
     });
 });
@@ -205,7 +235,7 @@ test.describe("Login by Google login", () => {
         `, async ({ basicAuthPage }) => {
         const loginPage = new LoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
-        
+
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
         });

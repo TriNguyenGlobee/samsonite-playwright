@@ -2,7 +2,7 @@ import { test, expect } from "../../../src/fixtures/test-fixture";
 import { HomePage } from "../../../src/pages/implementing/home/home.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { NewArrivalsPage } from "../../../src/pages/implementing/newarrivals/newarrivals.page";
+import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals/newarrivals.page";
 
 test.describe("Home Tests", () => {
     test("home page is displayed", async ({ basicAuthPage }) => {

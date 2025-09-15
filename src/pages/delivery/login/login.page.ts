@@ -3,7 +3,7 @@ import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
 import { t } from "../../../../utils/helpers";
 import { Config } from "../../../../config/env.config";
-import { PageUtils } from "../../../../utils/helpers";
+import { PageUtils, maskEmail } from "../../../../utils/helpers";
 
 export class LoginPage extends BasePage {
     readonly signinTitle: Locator;
@@ -32,6 +32,7 @@ export class LoginPage extends BasePage {
     readonly popupRequireEmailMsg: Locator;
     readonly popupInvalidEmailMsg: Locator;
     readonly popupRequireCaptchaMsg: Locator;
+    readonly popupSentEmailTitle: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -61,6 +62,7 @@ export class LoginPage extends BasePage {
         this.popupRequireEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback" and normalize-space(text())="${t.loginpage('popupRequireEmailMsg')}"]`);
         this.popupInvalidEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback" and text()="${t.loginpage('popupInvalidEmailMsg')}"]`);
         this.popupRequireCaptchaMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="recaptcha-section"]//p[text()="${t.loginpage('popupRequireCaptchaMsg')}"]`);
+        this.popupSentEmailTitle = this.signInByEmailLinkPopup.locator(`xpath=.//h2[text()="${t.loginpage('popupSentEmailTitle')}"]`);
     }
 
     // =========================
@@ -115,7 +117,7 @@ export class LoginPage extends BasePage {
         await googlePage.waitForLoadState();
         await PageUtils.waitForPageLoadComplete(this.page);
         await googlePage.close();
-    }    
+    }
 
     async goToForgotPasswordPage(): Promise<void> {
         await this.click(this.forgotPWLink, "Click forgot password link");
@@ -132,6 +134,22 @@ export class LoginPage extends BasePage {
         await this.click(this.memberLink, "Click membership link");
     }
 
+    async clickOnRecaptchaCheckbox(): Promise<void> {
+        const iframeElementHandle = await this.signInByEmailLinkPopup.locator('iframe[title="reCAPTCHA"]').elementHandle();
+
+        if (!iframeElementHandle) {
+            throw new Error('Do not found reCAPTCHA iframe');
+        }
+
+        const frame = await iframeElementHandle.contentFrame();
+
+        if (!frame) {
+            throw new Error('Do not found frame in reCAPTCHA iframe');
+        }
+
+        const checkbox = await frame.locator('//div[@class="recaptcha-checkbox-border"]');
+        await checkbox.click();
+    }
     // =========================
     // 📦 Helpers
     // =========================
@@ -199,6 +217,32 @@ export class LoginPage extends BasePage {
             return false;
         }
     }
+
+    async isSentEmailPopupDisplayed(email: string): Promise<boolean> {
+        const maskedEmail = maskEmail(email);
+        const emailLocator = this.page.locator(`//p[contains(text(),"${maskedEmail}") and contains(text(),"${t.loginpage('popupSentEmailContent')}")]`);
+
+        try {
+            const elementsToCheck = [
+                this.popupSentEmailTitle,
+                emailLocator,
+                this.popupCloseButton
+            ];
+            for (const locator of elementsToCheck) {
+                if (!await locator.isVisible()) {
+                    await step(`Check visibility of element: ${locator.toString()}`, async () => {
+                        console.log(`Element not visible: ${locator.toString()}`);
+                    });
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error checking sent email popup:', error);
+            return false;
+        }
+    };
 
     // =========================
     // ✅ Assertions
