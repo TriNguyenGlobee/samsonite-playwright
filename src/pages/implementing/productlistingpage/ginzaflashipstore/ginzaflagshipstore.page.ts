@@ -2,9 +2,8 @@ import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../../base.page";
 import { t } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
-import { step } from "allure-js-commons";
 
-export class BrandPage extends BasePage {
+export class GinzaFlagshipStorePage extends BasePage {
     readonly logoImg: Locator;
 
     constructor(page: Page) {
@@ -20,27 +19,20 @@ export class BrandPage extends BasePage {
     // =========================
     // 📦 Helpers
     // =========================
-    async isBrandPageDisplayed(): Promise<boolean> {
+    async isGinzaFlagshipStorePageDisplayed(): Promise<boolean> {
         try {
             const title = await this.page.title();
-            if (!title.includes(t.brandpage('title'))) {
-                await step(`Check title: ${title}`, async () => {
-                    console.log(`Element not visible: ${title}`);
-                });
+            if (!title.includes(t.ginzaflagshipstore('title'))) {
                 return false;
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "brand/";
-            if (!currentUrl.startsWith(expectedUrl)) {
-                await step(`Current URL: ${currentUrl}`, async () => {
-                    console.log(`Current: ${currentUrl}` + ` Expected: ${expectedUrl}`);
-                });
-                return false;
-            }
+            const expectedUrl = Config.baseURL + "ginza-flagship-store/";
+            if (!currentUrl.startsWith(expectedUrl)) return false;
+
             return true;
         } catch (error) {
-            console.error('Error checking brand page:', error);
+            console.error('Error checking ginza-flagship-store page:', error);
             return false;
         }
     }

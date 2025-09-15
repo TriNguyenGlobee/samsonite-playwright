@@ -32,7 +32,7 @@ export class BasePage {
         this.page = page;
         this.shoppingCartButton = page.locator('//div[@id="shopping_cart_container"]');
         this.headerNavBar = page.locator('//div[contains(@class,"header-content")]//ul[@class="nav navbar-nav"]');
-        this.newArrivalsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('newArrivals')}"]`);
+        this.newArrivalsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('newarrivals')}"]`);
         this.luggageMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('luggage')}"]`);
         this.backPacksMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('backpacks')}"]`);
         this.bagsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('bags')}"]`);
@@ -40,8 +40,8 @@ export class BasePage {
         this.offersMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('offers')}"]`);
         this.discoverMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('discover')}"]`);
         this.ginzaFlagshipStore = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="銀座 旗艦店"]`);
-        this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator(`.//a[normalize-space(text())="${t.menuItem('friendofsamsonite')}"]`);
-        this.saleMenuItem = this.headerNavBar.locator('.//a[normalize-space(text())="セール"]');
+        this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('friendofsamsonite')}"]`);
+        this.saleMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="セール"]');
         this.rightNavbar = page.locator('//div[contains(@class,"right navbar-header")]');
         this.searchIcon = this.rightNavbar.locator('xpath=.//button[i[contains(@class,"search")]]');
         this.wishlistIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"heart")]]');
