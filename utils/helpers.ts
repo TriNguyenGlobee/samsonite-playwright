@@ -156,6 +156,7 @@ export const t = {
     brandpage: (key: keyof Translations['brandpage']) => I18n.translations.brandpage[key],
     ourbrandstorypage: (key: keyof Translations['ourbrandstorypage']) => I18n.translations.ourbrandstorypage[key],
     ginzaflagshipstore: (key: keyof Translations['ginzaflagshipstore']) => I18n.translations.ginzaflagshipstore[key],
+    sale: (key: keyof Translations['sale']) => I18n.translations.sale[key],
     mypage: (key: keyof Translations['mypage']) => I18n.translations.mypage[key],
     menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
 };

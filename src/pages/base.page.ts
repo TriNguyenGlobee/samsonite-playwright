@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { I18n, Translations } from "../../config/i18n.config";
-import { t } from "../../utils/helpers";
+import { t, PageUtils } from "../../utils/helpers";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
@@ -36,7 +36,7 @@ export class BasePage {
         this.luggageMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('luggage')}"]`);
         this.backPacksMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('backpacks')}"]`);
         this.bagsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('bags')}"]`);
-        this.labelsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('label')}"]`);
+        this.labelsMenuItem = this.headerNavBar.locator(`xpath=.//a[@class="nav-link dropdown-toggle" and normalize-space(text())="${t.menuItem('label')}"]`);
         this.offersMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('offers')}"]`);
         this.discoverMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('discover')}"]`);
         this.ginzaFlagshipStore = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="銀座 旗艦店"]`);
@@ -48,8 +48,8 @@ export class BasePage {
         this.loginIcon = this.rightNavbar.locator(`xpath=.//a[span[contains(text(),"${t.homepage('loginRegister')}")]]`);
         this.locationIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"location")]]');
         this.cartIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"minicart")]');
-        this.newsIcon = this.rightNavbar.locator('xpath=.//a[@class="news-icon"]');
-        this.usericon = this.rightNavbar.locator('xpath=.//div[@class="user"]');
+        this.newsIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"news-icon")]');
+        this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
     }
 
     // =========================
@@ -70,6 +70,12 @@ export class BasePage {
     async type(locator: Locator, text: string, description?: string) {
         await step(description || `Type text: ${text}`, async () => {
             await locator.fill(text);
+        });
+    }
+
+    async hover(locator: Locator, description?: string) {
+        await step(description || "Hover on locator", async () => {
+            await locator.hover();
         });
     }
 
@@ -244,5 +250,55 @@ export class BasePage {
             await expect(this.page).toHaveTitle(expectedTitle);
             await expect(title).toBe(expectedTitle);
         })
+    }
+
+    /**
+     * Check list items for category menu
+     */
+    async checkListItemsForCategoryMenu(
+        baseLocator: ReturnType<Page['locator']>,
+        ulClass: string | undefined,
+        items: { text: string; href: string }[],
+        options?: {
+            twoLinksPerLi?: boolean;
+            lastItemIsTextOnly?: boolean;
+            checkPictureTag?: boolean;
+        }
+    ) {
+        const { twoLinksPerLi = true, lastItemIsTextOnly = false, checkPictureTag = true } = options ?? {};
+
+        const ul = ulClass
+            ? baseLocator.locator(`xpath=.//ul[contains(@class,"${ulClass}") and @role="menu"]`)
+            : baseLocator;
+
+        const lis = ul.locator('xpath=.//li');
+        await expect(lis, `<ul> ${ulClass ?? 'root'} should have ${items.length} <li>`).toHaveCount(items.length);
+
+        for (let i = 0; i < items.length; i++) {
+            const li = lis.nth(i);
+            const links = li.locator('xpath=.//a');
+            const expected = items[i];
+
+            const isTextOnly = !twoLinksPerLi || (lastItemIsTextOnly && i === items.length - 1);
+
+            if (isTextOnly) {
+                await expect(links).toHaveCount(1);
+                const a = links.first();
+                await expect(a).toHaveAttribute('href', expected.href);
+                await expect(a).toContainText(expected.text);
+            } else {
+                await expect(links).toHaveCount(2);
+                const picA = links.nth(0);
+                const textA = links.nth(1);
+
+                await expect(picA).toHaveAttribute('href', expected.href);
+                await expect(textA).toHaveAttribute('href', expected.href);
+                await expect(textA).toContainText(expected.text);
+
+                if (checkPictureTag) {
+                    await expect(picA.locator('picture')).toHaveCount(1);
+                }
+            }
+        }
     }
 }
