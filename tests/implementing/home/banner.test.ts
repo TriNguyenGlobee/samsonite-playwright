@@ -22,7 +22,7 @@ test.describe("Banner Activity", () => {
 
     });
 
-    test(`Click dot button to navigate banner`, async ({ basicAuthPage }) => {
+    test(`4. Click dot button to navigate banner`, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const carousel = basicAuthPage.locator('//div[contains(@class,"homepage-banner-carouselregion")]');
 
@@ -31,7 +31,7 @@ test.describe("Banner Activity", () => {
         });
     });
 
-    test(`Click banner to navigate to correct URL`, async ({ basicAuthPage }) => {
+    test(`5. Click banner to navigate to correct URL`, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const carousel = '//div[contains(@class,"homepage-banner-carouselregion")]';
 

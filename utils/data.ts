@@ -10,3 +10,10 @@ export const hightlightCategoryItems = [
     { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, enText: 'BACKPACKS', jaText: 'バックパックを見る' },
     { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, enText: 'BAGS', jaText: 'バッグを見る' },
 ];
+
+export const recommendedProductItems = [
+    { buttonText: 'おすすめ', divClass: 'product-pills-1' },
+    { buttonText: '新着', divClass: 'product-pills-2' },
+    { buttonText: 'For Her', divClass: 'product-pills-3' },
+    { buttonText: 'For Him', divClass: 'product-pills-4' }
+];

@@ -176,6 +176,11 @@ export function maskEmail(email: string): string {
   return username.slice(0, 3) + '*****' + '@' + domain;
 }
 
+export function getRandomInt(min: number = 1, max: number = 10): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 /**
  * **************************************************************************
  * **************************************************************************
@@ -279,4 +284,25 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
       console.log(`${modal.name} not found.`);
     }
   }
+}
+
+export async function scrollToBottom(page: Page, distance: number = 100, delay: number = 100): Promise<void> {
+  await page.evaluate(
+    async ({ scrollDistance, scrollDelay }: { scrollDistance: number; scrollDelay: number }) => {
+      await new Promise<void>((resolve) => {
+        let totalHeight = 0;
+        const timer = setInterval(() => {
+          const scrollHeight = document.body.scrollHeight;
+          window.scrollBy(0, scrollDistance);
+          totalHeight += scrollDistance;
+
+          if (totalHeight >= scrollHeight) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, scrollDelay);
+      });
+    },
+    { scrollDistance: distance, scrollDelay: delay }
+  );
 }

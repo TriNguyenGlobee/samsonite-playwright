@@ -254,6 +254,13 @@ export class BasePage {
 
     /**
      * Check list items for category menu
+     * @param baseLocator The base locator containing the <ul>
+     * @param ulClass The class of the <ul> to locate (if undefined, use baseLocator directly)
+     * @param items The expected items with text and href
+     * @param options Additional options:
+     *   - twoLinksPerLi: whether each <li> has two <a> tags (default: true)
+     *   - lastItemIsTextOnly: whether the last item is text only (default: false)
+     *   - checkPictureTag: whether to check for <picture> tag in the first <a> (default: true)
      */
     async checkListItemsForCategoryMenu(
         baseLocator: ReturnType<Page['locator']>,
@@ -301,4 +308,48 @@ export class BasePage {
             }
         }
     }
+
+    async assertLocatorInside(locate: Locator, data: LocatorInside) {
+        const link = locate.locator('xpath=.//a');
+        await expect(link).toHaveAttribute('href', data.href)
+
+        if (data.hasImage) {
+            const img = locate.locator('xpath=.//img');
+            await expect(img).toHaveCount(1)
+            const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');
+            expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp)/);
+        }
+
+        if (data.text) {
+            await expect(locate).toContainText(data.text);
+        }
+    }
+
+    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string) {
+        let link = locate.locator('xpath=.//a');
+
+        const isVisible = await link.isVisible()
+
+        if(!isVisible){
+            link = locate
+        }
+
+        const [newPage] = await Promise.all([
+            page.context().waitForEvent('page'),
+            link.click({ button: 'middle' }),
+        ]);
+
+        await newPage.waitForLoadState('domcontentloaded');
+        const currentUrl = newPage.url()
+
+        await expect(currentUrl).toContain(url);
+
+        await newPage.close();
+    }
+}
+
+interface LocatorInside {
+    href: string;
+    hasImage?: boolean;
+    text?: string;
 }

@@ -1,16 +1,17 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t, PageUtils } from "../../../../utils/helpers";
+import { t, PageUtils, getRandomInt } from "../../../../utils/helpers";
 import { step } from "allure-js-commons";
 import { Config } from "../../../../config/env.config";
 import { test } from "../../../fixtures/test-fixture";
-import { assert } from "console";
 
 export class HomePage extends BasePage {
     readonly logoImg: Locator;
     readonly centerBanner: Locator;
     readonly highlightSection: Locator;
     readonly recommendedSection: Locator;
+    readonly campaignUnderwaysection: Locator;
+    readonly productReviewSection: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -18,6 +19,8 @@ export class HomePage extends BasePage {
         this.centerBanner = page.locator('//div[contains(@class,"homepage-banner-carouselregion")]');
         this.highlightSection = page.locator('//div[@class="container category-highlight"]');
         this.recommendedSection = page.locator('//div[contains(@class,"category-product initialized-component")]');
+        this.campaignUnderwaysection = page.locator('//div[contains(@class,"magazine-carousel-column-desktop")]');
+        this.productReviewSection = page.locator(`//div[contains(@class,"AddProductReviews")]`);
     }
 
     // =========================
@@ -88,6 +91,27 @@ export class HomePage extends BasePage {
         }
     }
 
+    async getReviewedProductURL(page: Page): Promise<ReviewedItem> { 
+        const reviewedProduct = this.productReviewSection.locator(`xpath=.//div[contains(@class,"swiper-slide")]`)
+        const numberOfProduct = await reviewedProduct.count()
+        const rdIndex = getRandomInt(1, numberOfProduct)
+
+        const nextButton = this.productReviewSection.locator('xpath=.//div[@role="button" and contains(@class,"swiper-button-next")]');
+        const desProduct = this.productReviewSection.locator(`xpath=.//div[contains(@class,"swiper-slide")][${rdIndex}]`)
+        const productLink = desProduct.locator(`xpath=.//picture//a`)
+
+        for (let i = 1; i < rdIndex; i++) {
+            await nextButton.click();
+            await page.waitForTimeout(300);
+        }
+
+        const productURL = await productLink.getAttribute('href') ?? '';
+
+        return {
+            url: productURL,
+            index: rdIndex
+        };
+    }
 
     // =========================
     // ✅ Assertions
@@ -261,14 +285,126 @@ export class HomePage extends BasePage {
             await page.goto(baseUrl);
 
             const card = page.locator('//div[contains(@class,"category-hightlight-column")]').nth(i);
-            const link = card.locator('a.card-link');
+            const link = card.locator('xpath=.//a[@class="card-link"]');
 
             await Promise.all([
                 page.waitForURL(data[i].href, { timeout: 10000 }),
-                link.click(),
+                link.click()
             ]);
 
             expect(page.url()).toBe(data[i].href);
+        }
+    }
+
+    // Recommended products section
+    // Click each side button to navigate and verify the active state
+    async checkRecommendSectionActivity(page: Page, expectedItems: RecommendedProductItem[]) {
+        for (const { buttonText, divClass } of expectedItems) {
+            const button = page.locator(`//button[normalize-space(text())="${buttonText}"]`);
+            await button.click();
+
+            const activeDiv = page.locator(`//div[contains(@class,"${divClass}") and contains(@class,"active") and contains(@class,"show")]`);
+            await expect(activeDiv).toBeVisible();
+
+            await expect(button).toHaveClass(/nav-link\s+active(\s+show)?/);
+
+            for (const other of expectedItems) {
+                if (other.buttonText === buttonText) continue;
+                const otherButton = page.locator(`//button[normalize-space(text())="${other.buttonText}"]`);
+                await expect(otherButton).not.toHaveClass(/nav-link\s+active/);
+
+                const otherDiv = page.locator(`//div[contains(@class,"${other.divClass}")]`);
+                await expect(otherDiv).not.toHaveClass(/active/);
+                await expect(otherDiv).not.toHaveClass(/show/);
+            }
+        }
+    }
+
+    // Right side of campaign underway section
+    // Check nextButton Until nextButton Disabled
+    // Click prevButton Until prevButton Disabled
+    async assertRightSideColumnActivity(page: Page) {
+        await PageUtils.waitForDomAvailable(page, 20000)
+        const title = page.locator('//div[@class="magazine-title"]');
+        const itemList = page.locator(`//div[@class="magazine-title"]/following-sibling::div[@class="swiper-wrapper"]`)
+
+        const prevButton = title.locator('xpath=./following-sibling::div[contains(@class,"swiper-button-prev")]');
+        const nextButton = title.locator('xpath=./following-sibling::div[contains(@class,"swiper-button-next")]');
+        const getActiveItem = () => itemList.locator('xpath=.//div[contains(@class,"swiper-slide swiper-slide-active")]');
+
+        await expect(prevButton).toHaveClass(/swiper-button-disabled/);
+        await expect(nextButton).not.toHaveClass(/swiper-button-disabled/);
+
+        while (true) {
+            await nextButton.click();
+            await page.waitForTimeout(300);
+
+            const nextClass = await nextButton.getAttribute('class');
+            if (nextClass?.includes('swiper-button-disabled')) {
+                break;
+            }
+        }
+        const currentActive = getActiveItem();
+        const currentLabel = await currentActive.getAttribute('aria-label');
+        expect(currentLabel).not.toBe('1 / 8');
+
+        const item1 = page.locator('//div[@class="tile-item swiper-slide" and @aria-label="1 / 8"]');
+        await expect(item1).not.toHaveClass(/swiper-slide-active/);
+
+        while (true) {
+            await prevButton.click();
+            await page.waitForTimeout(300);
+
+            const prevClass = await prevButton.getAttribute('class');
+            if (prevClass?.includes('swiper-button-disabled')) {
+                const activeItem = getActiveItem();
+                const ariaLabel = await activeItem.getAttribute('aria-label');
+                expect(ariaLabel).toBe('1 / 8');
+                break;
+            }
+        }
+    }
+
+    // Product Review section
+    // Check nextButton Until nextButton Disabled
+    // Click prevButton Until prevButton Disabled
+    async assertProductReviewActivity(page: Page) {
+        await PageUtils.waitForDomAvailable(page, 20000)
+
+        const prevButton = this.productReviewSection.locator('xpath=.//div[@role="button" and contains(@class,"swiper-button-prev")]');
+        const nextButton = this.productReviewSection.locator('xpath=.//div[@role="button" and contains(@class,"swiper-button-next")]');
+        const getActiveItem = () => this.productReviewSection.locator('xpath=.//div[contains(@class,"swiper-slide") and contains(@class,"slide-active")]');
+
+        await expect(prevButton).toHaveClass(/swiper-button-disabled/);
+        await expect(nextButton).not.toHaveClass(/swiper-button-disabled/);
+
+        while (true) {
+            await nextButton.click();
+            await page.waitForTimeout(300);
+
+            const nextClass = await nextButton.getAttribute('class');
+            if (nextClass?.includes('swiper-button-disabled')) {
+                break;
+            }
+        }
+        const currentActive = getActiveItem();
+        const currentLabel = await currentActive.getAttribute('aria-label');
+        expect(currentLabel).not.toBe('1 / 10');
+
+        const item1 = page.locator('//div[contains(@class,"AddProductReviews")]//div[contains(@class,"swiper-slide") and @aria-label="1 / 10"]');
+        await expect(item1).not.toHaveClass(/slide-active/);
+
+        while (true) {
+            await prevButton.click();
+            await page.waitForTimeout(300);
+
+            const prevClass = await prevButton.getAttribute('class');
+            if (prevClass?.includes('swiper-button-disabled')) {
+                const activeItem = getActiveItem();
+                const ariaLabel = await activeItem.getAttribute('aria-label');
+                expect(ariaLabel).toBe('1 / 10');
+                break;
+            }
         }
     }
 }
@@ -284,4 +420,14 @@ interface HighlightCategoryItem {
     hasImage: boolean;
     enText: string;
     jaText: string;
+}
+
+interface RecommendedProductItem {
+    buttonText: string;
+    divClass: string;
+}
+
+interface ReviewedItem {
+    url: string;
+    index: number;
 }

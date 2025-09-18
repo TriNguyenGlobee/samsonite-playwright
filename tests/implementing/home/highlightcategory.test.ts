@@ -4,19 +4,19 @@ import { step } from "allure-js-commons";
 import { hightlightCategoryItems } from "../../../utils/data";
 
 test.describe("Highlight category", () => {
-    test(`Highlight category section is displayed with full information`, async ({ basicAuthPage }) => {
+    test(`1. Highlight category section is displayed with full information`, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
 
         await step("Scroll to highlight section", async () => {
             await homePage.highlightSection.scrollIntoViewIfNeeded();
         });
 
-        await step("Verify highlight category items", async () => {
+        await step("Verify highlight category items displayed correctly", async () => {
             await homePage.assertHighlightCategoryItems(basicAuthPage, hightlightCategoryItems);
         });
     });
 
-    test(`Click highlight category item to navigate to correct URL`, async ({ basicAuthPage }) => {
+    test(`2. Click highlight category item to navigate to correct URL`, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const baseUrl = basicAuthPage.url();
 
