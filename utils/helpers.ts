@@ -155,6 +155,8 @@ export const t = {
     bagspage: (key: keyof Translations['bagspage']) => I18n.translations.bagspage[key],
     brandpage: (key: keyof Translations['brandpage']) => I18n.translations.brandpage[key],
     ourbrandstorypage: (key: keyof Translations['ourbrandstorypage']) => I18n.translations.ourbrandstorypage[key],
+    ginzaflagshipstore: (key: keyof Translations['ginzaflagshipstore']) => I18n.translations.ginzaflagshipstore[key],
+    sale: (key: keyof Translations['sale']) => I18n.translations.sale[key],
     mypage: (key: keyof Translations['mypage']) => I18n.translations.mypage[key],
     menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
 };
@@ -173,6 +175,11 @@ export function maskEmail(email: string): string {
 
   return username.slice(0, 3) + '*****' + '@' + domain;
 }
+
+export function getRandomInt(min: number = 1, max: number = 10): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 /**
  * **************************************************************************
@@ -277,4 +284,25 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
       console.log(`${modal.name} not found.`);
     }
   }
+}
+
+export async function scrollToBottom(page: Page, distance: number = 100, delay: number = 100): Promise<void> {
+  await page.evaluate(
+    async ({ scrollDistance, scrollDelay }: { scrollDistance: number; scrollDelay: number }) => {
+      await new Promise<void>((resolve) => {
+        let totalHeight = 0;
+        const timer = setInterval(() => {
+          const scrollHeight = document.body.scrollHeight;
+          window.scrollBy(0, scrollDistance);
+          totalHeight += scrollDistance;
+
+          if (totalHeight >= scrollHeight) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, scrollDelay);
+      });
+    },
+    { scrollDistance: distance, scrollDelay: delay }
+  );
 }

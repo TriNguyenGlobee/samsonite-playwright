@@ -73,6 +73,12 @@
   "ourbrandstorypage": {
     "title": "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
+  "ginzaflagshipstore": {
+    "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "sale": {
+    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
   "mypage": {
     "title": "My Account | Samsonite Singapore",
     "pageTitle": "Your Account",
@@ -86,13 +92,14 @@
     "emailhelp": "Email"
   },
   "menuItem": {
-    "newArrivals": "New Arrivals",
+    "newarrivals": "New Arrivals",
     "luggage": "Luggage",
     "backpacks": "Backpacks",
     "bags": "Bags",
     "label": "Labels",
     "discover": "Discover",
     "offers": "Offers",
-    "friendofsamsonite": "FRIENDS OF SAMSONITE"
+    "friendofsamsonite": "FRIENDS OF SAMSONITE",
+    "ginzaflagshipstore": "銀座 旗艦店"
   }
 }

@@ -1,6 +1,6 @@
 {
   "homepage": {
-    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
+    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0",
     "trackOder": "ご注文状況を確認する",
     "loginRegister": "マイアカウント",
     "myaccount": "マイアカウント",
@@ -73,6 +73,12 @@
   "ourbrandstorypage": {
     "title": "Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
+  "ginzaflagshipstore": {
+    "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "sale": {
+    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
   "mypage": {
     "title": "マイアカウント｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
     "pageTitle": "マイアカウント",
@@ -86,13 +92,14 @@
     "emailhelp": "お問い合わせ"
   },
   "menuItem": {
-    "newArrivals": "新作",
+    "newarrivals": "新作",
     "luggage": "スーツケース",
     "backpacks": "バックパック",
     "bags": "バッグ",
     "label": "ブランド",
     "discover": "特集",
     "offers": "セール",
-    "friendofsamsonite": "メンバーシップ"
+    "friendofsamsonite": "メンバーシップ",
+    "ginzaflagshipstore": "銀座 旗艦店"
   }
 }
