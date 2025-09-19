@@ -69,7 +69,7 @@ export class OurBrandStoryPage extends BasePage {
             { text: '最新おすすめビジネスバッグ', href: 'https://ssjp.stg.samsonite-asia.com/category-landing/business-bags/' },
             { text: '人生を豊かにする旅のスタイル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-unpack-your-world_mcguffin/unpack-your-world.html' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'dropdown-discover-articles', articleItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'dropdown-discover-articles', articleItems);
 
         // --- discover-about-Samsonite ---
         const aboutSamsoniteItems = [
@@ -77,6 +77,6 @@ export class OurBrandStoryPage extends BasePage {
             { text: 'ハートマンブランドストーリー', href: 'https://ssjp.stg.samsonite-asia.com/about-hartmann.html' },
             { text: 'Our Responsible Journey', href: 'https://ssjp.stg.samsonite-asia.com/sustainability.html' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'dropdown-discover-about-samsonite', aboutSamsoniteItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'dropdown-discover-about-samsonite', aboutSamsoniteItems);
     }
 }

@@ -18,7 +18,7 @@ test.describe("Logout Completion Screen", () => {
             await myPage.logout();
         });
 
-        await step("Assert Logout success", async () => {
+        await step("Verify Logout success", async () => {
             expect(await loginPage.isLoginPageDisplayed()).toBe(true);
         });
     });

@@ -77,7 +77,7 @@ export class BackpacksPage extends BasePage {
             { text: 'ポリエステル', href: '/backpack/type/polyester/' },
             { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'backpack-type', typeItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-type', typeItems, {
             lastItemIsTextOnly: true
         });
 
@@ -87,13 +87,13 @@ export class BackpacksPage extends BasePage {
             { text: 'クールトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/グリーン_ネイビー_パープル_ブルー' },
             { text: 'ウォームトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/オレンジ_ピンク' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'backpack-color', colorItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-color', colorItems);
 
         // --- backpack-smart-function ---
         const smartFunctionItems = [
             { text: 'USBポート', href: '/backpack/smart-function/usb-port/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'backpack-smart-function', smartFunctionItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-smart-function', smartFunctionItems);
 
         // --- backpack-brand ---
         const brandItems = [
@@ -102,7 +102,7 @@ export class BackpacksPage extends BasePage {
             { text: 'サムソナイト・レッドのバックパック', href: '/backpack/brand/samsonite-red/' },
             { text: 'ハートマンのバックパック', href: '/backpack/brand/hartmann/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'backpack-brand', brandItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-brand', brandItems);
 
         // --- backpack-laptop ---
         const laptopItems = [
@@ -110,7 +110,7 @@ export class BackpacksPage extends BasePage {
             { text: 'Fit up to 15" laptop', href: '/backpacks/fit-up-to-15-laptop/' },
             { text: 'Fit up to 17" laptop', href: '/backpacks/fit-up-to-17-laptop/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'backpack-laptop', laptopItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-laptop', laptopItems);
 
         // --- backpack-collection ---
         const collectionItems = [
@@ -120,7 +120,7 @@ export class BackpacksPage extends BasePage {
             { text: 'オードリナ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=オードリナ&start=0&sz=18&useNewPLP=true' },
             { text: 'ゼットジップ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=ゼットジップ&start=0&sz=18&useNewPLP=true' },
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItems, {
             twoLinksPerLi: false
         });
     }

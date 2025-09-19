@@ -23,7 +23,7 @@ test.describe("Login Screen", () => {
             await loginPage.goToLoginRegisterPage();
         });
 
-        await step("Assert Login page displayed", async () => {
+        await step("Verify Login page displayed", async () => {
             expect(await loginPage.isLoginPageDisplayed()).toBe(true);
         });
 
@@ -31,7 +31,7 @@ test.describe("Login Screen", () => {
             await loginPage.goToForgotPasswordPage();
         });
 
-        await step("Assert Forgot Password page displayed", async () => {
+        await step("Verify Forgot Password page displayed", async () => {
             expect(await forgotPasswordPage.isForgotPasswordpageDisplayed()).toBe(true);
         });
 
@@ -43,7 +43,7 @@ test.describe("Login Screen", () => {
             await loginPage.goToRegisterPage();
         });
 
-        await step("Assert Register page displayed", async () => {
+        await step("Verify Register page displayed", async () => {
             expect(await registerPage.isRegisterpageDisplayed()).toBe(true);
         });
     });
@@ -60,7 +60,7 @@ test.describe("Login Screen", () => {
             await loginPage.goToMembershipPage();
         });
 
-        await step("Assert transition to  Membership Privilege Page - URL", async () => {
+        await step("Verify transition to  Membership Privilege Page - URL", async () => {
             expect(await membershipPage.isMembershippageDisplayed()).toBe(true);
         });
     });
@@ -80,7 +80,7 @@ test.describe('Login by normal email', () => {
             await loginPage.login(Config.credentials.username, Config.credentials.password);
         });
 
-        await step("Assert login success by checking mypage displayed", async () => {
+        await step("Verify login success by checking mypage displayed", async () => {
             expect(await myPage.isMyPageDisplayed()).toBe(true);
         });
     });
@@ -101,11 +101,11 @@ test.describe('Login by normal email', () => {
             await loginPage.login("stgglobeetestssjp1009", "Globee@12345");
         });
 
-        await step("Assert login failure by checking login page is still displayed", async () => {
+        await step("Verify login failure by checking login page is still displayed", async () => {
             expect(await loginPage.isLoginPageDisplayed()).toBe(true);
         });
 
-        await step("Assert error message is displayed", async () => {
+        await step("Verify error message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.invalidEmailMsg, "Invalid email message is displayed"));
         });
 
@@ -118,11 +118,11 @@ test.describe('Login by normal email', () => {
             await loginPage.login("stgglobeetestssjp1009@yopmail.com", "Globee@1234578");
         });
 
-        await step("Assert login failure by checking login page is still displayed", async () => {
+        await step("Verify login failure by checking login page is still displayed", async () => {
             expect(await loginPage.isLoginPageDisplayed()).toBe(true);
         });
 
-        await step("Assert error message is displayed", async () => {
+        await step("Verify error message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.alertMsg, "Alert message is displayed"));
         });
 
@@ -135,11 +135,11 @@ test.describe('Login by normal email', () => {
             await loginPage.login("", "");
         });
 
-        await step("Assert login failure by checking login page is still displayed", async () => {
+        await step("Verify login failure by checking login page is still displayed", async () => {
             expect(await loginPage.isLoginPageDisplayed()).toBe(true);
         });
 
-        await step("Assert error message is displayed", async () => {
+        await step("Verify error message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.requireemailmsg, "Email is required message is displayed"));
             expect(await loginPage.assertVisible(loginPage.requirepwmsg, "Password is required message is displayed"));
         });
@@ -163,7 +163,7 @@ test.describe("Login with email link", () => {
             await loginPage.click(loginPage.signinWithEmailButton, "Click on SIGN IN WITH EMAIL LINK button");
         });
 
-        await step("Assert SIGN IN WITH EMAIL LINK Popup is displayed", async () => {
+        await step("Verify SIGN IN WITH EMAIL LINK Popup is displayed", async () => {
             expect(await loginPage.isSignInWithEmailLinkPopupDisplayed()).toBe(true);
             await step("Popup is displayed", async () => {
                 console.log("SIGN IN WITH EMAIL LINK Popup is displayed");
@@ -174,7 +174,7 @@ test.describe("Login with email link", () => {
             await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
         });
 
-        await step("Assert require email message is displayed", async () => {
+        await step("Verify require email message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.popupRequireEmailMsg, "Require email message is displayed"));
         });
 
@@ -183,7 +183,7 @@ test.describe("Login with email link", () => {
             await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
         });
 
-        await step("Assert invalid email message is displayed", async () => {
+        await step("Verify invalid email message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.popupInvalidEmailMsg, "Invalid email message is displayed"));
         });
         
@@ -192,7 +192,7 @@ test.describe("Login with email link", () => {
             await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
         });
 
-        await step("Assert require captcha message is displayed", async () => {
+        await step("Verify require captcha message is displayed", async () => {
             expect(await loginPage.assertVisible(loginPage.popupRequireCaptchaMsg, "Require captcha message is displayed"));
         });
     });
@@ -222,7 +222,7 @@ test.describe("Login with email link", () => {
             await PageUtils.waitForPageLoadComplete(basicAuthPage);
         });
 
-        await step("Assert Sent Email popup is displayed", async () => {
+        await step("Verify Sent Email popup is displayed", async () => {
             expect(await loginPage.isSentEmailPopupDisplayed(Config.credentials.username)).toBe(true);
         });
     });
@@ -240,11 +240,11 @@ test.describe("Login by Google login", () => {
             await loginPage.goToLoginRegisterPage();
         });
 
-        await step("Click on SIGN IN WITH GOOGLE button", async () => {
+        await step("Login By Google account", async () => {
             await loginPage.loginByGoogleAccount(Config.credentials.gg_username, Config.credentials.gg_password);
         });
 
-        await step("Assert login success by checking mypage displayed", async () => {
+        await step("Verify login success by GG", async () => {
             expect(await myPage.isMyPageDisplayed()).toBe(true);
         });
     });

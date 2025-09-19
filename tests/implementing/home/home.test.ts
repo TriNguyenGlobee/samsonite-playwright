@@ -11,6 +11,7 @@ import { OurBrandStoryPage } from "../../../src/pages/implementing/productlistin
 import { GinzaFlagshipStorePage } from "../../../src/pages/implementing/productlistingpage/ginzaflashipstore/ginzaflagshipstore.page";
 import { SalePage } from "../../../src/pages/implementing/productlistingpage/sale/sale.page";
 import { MembershipPage } from "../../../src/pages/implementing/home/membership.page";
+import { scrollToBottom } from "../../../utils/helpers";
 
 test.describe("Home Tests", () => {
     test("Home page is displayed", async ({ basicAuthPage }) => {
@@ -131,4 +132,46 @@ test.describe("Home Tests", () => {
             expect(await membershippage.isMembershipPageDisplayed()).toBe(true);
         });
     });
+
+    test(`10. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+
+        await scrollToBottom(basicAuthPage);
+
+        await step("Scroll to Why Shop With Us section", async () => {
+            await homePage.whyShopWithUsSection.scrollIntoViewIfNeeded();
+        });
+
+        await step(`Verify the Why Shop With Us title displayed`, async () => {
+            await homePage.assertVisible(homePage.withUsTitle)
+        })
+
+        await step(`Verify that the Offical Site section is displayed correctly`, async () => {
+            await homePage.assertLocatorInside(homePage.withUsOfficalSite, {
+                hasImage: true,
+                text: "新作、キャンペーン情報を随時発信しています。公式サイトからメンバープログラムにも登録いただけます。"
+            })
+        })
+
+        await step(`Verify that the Safe Shopping section is displayed correctly`, async () => {
+            await homePage.assertLocatorInside(homePage.withUsSafeShopping, {
+                hasImage: true,
+                text: "ショッピングを安心してお楽しみ頂けるようセキュリティに配慮しています。"
+            })
+        })
+
+        await step(`Verify that the Gift section is displayed correctly`, async () => {
+            await homePage.assertLocatorInside(homePage.withUsGift, {
+                hasImage: true,
+                text: "公式サイトでは大切な方への贈り物にギフトラッピングを承っています。"
+            })
+        })
+
+        await step(`Verify that the Warranty section is displayed correctly`, async () => {
+            await homePage.assertLocatorInside(homePage.withUsWarranty, {
+                hasImage: true,
+                text: "公式サイトからお求めいただいた製品には、サムソナイトの保証規定が適用されます。"
+            })
+        })
+    })
 });
