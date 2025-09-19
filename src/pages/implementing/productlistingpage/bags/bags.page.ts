@@ -77,7 +77,7 @@ export class BagsPage extends BasePage {
             { text: 'ダッフル', href: '/bags/type/duffles/' },
             { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/bags/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'bag-type', typeItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'bag-type', typeItems, {
             lastItemIsTextOnly: true
         });
 
@@ -88,7 +88,7 @@ export class BagsPage extends BasePage {
             { text: 'ウォームトーン', href: 'https://ssjp.stg.samsonite-asia.com/bags/オレンジ_ピンク_レッド' },
             { text: 'すべて見る', href: '/bags/color/all/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'bag-color', colorItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'bag-color', colorItems, {
             lastItemIsTextOnly: true
         });
 
@@ -99,7 +99,7 @@ export class BagsPage extends BasePage {
             { text: 'サムソナイト・レッドのバッグ', href: '/bags/brand/samsonite-red/' },
             { text: 'ハートマンのバッグ', href: '/bags/brand/hartmann/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'bag-brand', brandItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'bag-brand', brandItems);
 
         // --- bag-laptop ---
         const laptopItems = [
@@ -107,7 +107,7 @@ export class BagsPage extends BasePage {
             { text: 'Fit up to 15" laptop', href: '/bags/fit-up-to-15-laptop/' },
             { text: 'Fit up to 17" laptop', href: '/bags/fit-up-to-17-laptop/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'bag-laptop', laptopItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'bag-laptop', laptopItems);
 
         // --- bag-collection ---
         const collectionItems = [
@@ -117,7 +117,7 @@ export class BagsPage extends BasePage {
             { text: 'ホクストン', href: 'https://ssjp.stg.samsonite-asia.com/bags/?cgid=bag&expandable=false&instock=false&page=1&prefn1=collection&prefv1=ホクストン&start=0&sz=18&useNewPLP=true' },
             { text: 'グレンデール', href: '/bags/collection/glendale/' },
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'bag-collection', collectionItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'bag-collection', collectionItems, {
             twoLinksPerLi: false
         });
     }

@@ -26,7 +26,7 @@ test.describe("Banner Activity", () => {
         const homePage = new HomePage(basicAuthPage);
         const carousel = basicAuthPage.locator('//div[contains(@class,"homepage-banner-carouselregion")]');
 
-        await step("Assert banner active state after clicking dot", async () => {
+        await step("Verify banner active state after clicking dot", async () => {
             await homePage.assertBannerNavigationByDots(basicAuthPage, carousel);
         });
     });
@@ -35,7 +35,7 @@ test.describe("Banner Activity", () => {
         const homePage = new HomePage(basicAuthPage);
         const carousel = '//div[contains(@class,"homepage-banner-carouselregion")]';
 
-        await step("Assert banner navigate to correct URL", async () => {
+        await step("Verify banner navigate to correct URL", async () => {
             await homePage.assertBannerNavigation(basicAuthPage, carousel);
         });
     });

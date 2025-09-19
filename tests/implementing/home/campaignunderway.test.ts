@@ -12,10 +12,12 @@ test.describe("Campaign Underway Section", () => {
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const leftSideColumn = basicAuthPage.locator('//div[contains(@class,"magazine-carousel-column-desktop")]//div[contains(@class,"magazine-main-image placeholder-glow")]')
-        const href = "/newsdetail?id=news-samsonite-jp-2025-08-13-evoaz-campaign"
-        const hasImage = true
-        const rightSideTitleText = "EVOA Zキャンペーン開催中。限定色と新モデルが登場"
         const rightSideTitle = basicAuthPage.locator(`//div[@class="magazine-title"]`)
+        const campaignData = {
+            href: "/newsdetail?id=news-samsonite-jp-2025-08-13-evoaz-campaign",
+            rightSideTitleText: "EVOA Zキャンペーン開催中。限定色と新モデルが登場",
+            hasImage: true
+        }
 
         await scrollToBottom(basicAuthPage);
 
@@ -24,18 +26,18 @@ test.describe("Campaign Underway Section", () => {
         });
 
         await step("Verify Left Side Column Info", async () => {
-            await homePage.assertLocatorInside(leftSideColumn, { href, hasImage })
+            await homePage.assertLocatorInside(leftSideColumn, { href: campaignData.href, hasImage: campaignData.hasImage })
         });
 
-        await step("Assert banner navigate to correct URL", async () => {
-            await homePage.assertNavigatedURLByClickLocator(basicAuthPage, leftSideColumn, href)
+        await step("Verify banner navigate to correct URL", async () => {
+            await homePage.assertNavigatedURLByClickLocator(basicAuthPage, leftSideColumn, campaignData.href)
         })
 
-        await step(`Assert right side title`, async () => {
-            await expect(rightSideTitle).toHaveText(rightSideTitleText)
+        await step(`Verify right side title`, async () => {
+            await expect(rightSideTitle).toHaveText(campaignData.rightSideTitleText)
         })
 
-        await step(`Assert right side swiper activity`, async()=>{
+        await step(`Verify right side swiper activity`, async () => {
             await homePage.assertRightSideColumnActivity(basicAuthPage)
         })
     });

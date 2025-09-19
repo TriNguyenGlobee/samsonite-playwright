@@ -19,15 +19,15 @@ test.describe("Product Review Section", () => {
             await homePage.productReviewSection.scrollIntoViewIfNeeded();
         });
 
-        await step("Assert Product Review swiper activity", async () => {
+        await step("Verify Product Review swiper activity", async () => {
             await homePage.assertProductReviewActivity(basicAuthPage)
         })
 
-        await step("Get product URL", async()=>{
-            const proURL = (await homePage.getReviewedProductURL(basicAuthPage)).url
+        await step("Verify navigate to correct URL when clicking on product", async()=>{
+            const prodURL = (await homePage.getReviewedProductURL(basicAuthPage)).url
 
-            await homePage.assertNavigatedURLByClickLocator(basicAuthPage, prodImg, proURL)
-            await homePage.assertNavigatedURLByClickLocator(basicAuthPage, prodViewButton, proURL)
+            await homePage.assertNavigatedURLByClickLocator(basicAuthPage, prodImg, prodURL)
+            await homePage.assertNavigatedURLByClickLocator(basicAuthPage, prodViewButton, prodURL)
         })
     });
 });

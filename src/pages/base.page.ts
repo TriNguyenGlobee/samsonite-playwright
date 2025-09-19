@@ -209,6 +209,17 @@ export class BasePage {
         });
     }
 
+    async getLocatorURL(locate: Locator, description?: string): Promise<string | null> {
+        return await step(description || "Get Locator URL", async () => {
+            let link = locate.locator(`xpath=.//a`).first()
+            const isVisible = await link.isVisible()
+            if (!isVisible) {
+                link = locate.locator(`xpath=./parent::a`)
+            }
+            return link.getAttribute('href')
+        })
+    }
+
     // =========================
     // ✅ Assertions
     // =========================
@@ -253,7 +264,7 @@ export class BasePage {
     }
 
     /**
-     * Check list items for category menu
+     * Check items list for category menu
      * @param baseLocator The base locator containing the <ul>
      * @param ulClass The class of the <ul> to locate (if undefined, use baseLocator directly)
      * @param items The expected items with text and href
@@ -262,7 +273,7 @@ export class BasePage {
      *   - lastItemIsTextOnly: whether the last item is text only (default: false)
      *   - checkPictureTag: whether to check for <picture> tag in the first <a> (default: true)
      */
-    async checkListItemsForCategoryMenu(
+    async assertItemsListForCategoryMenu(
         baseLocator: ReturnType<Page['locator']>,
         ulClass: string | undefined,
         items: { text: string; href: string }[],
@@ -310,14 +321,16 @@ export class BasePage {
     }
 
     async assertLocatorInside(locate: Locator, data: LocatorInside) {
-        const link = locate.locator('xpath=.//a');
-        await expect(link).toHaveAttribute('href', data.href)
+        if (data.href) {
+            const link = locate.locator('xpath=.//a');
+            await expect(link).toHaveAttribute('href', data.href)
+        }
 
         if (data.hasImage) {
             const img = locate.locator('xpath=.//img');
             await expect(img).toHaveCount(1)
             const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');
-            expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp)/);
+            expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp|svg)/);
         }
 
         if (data.text) {
@@ -330,7 +343,7 @@ export class BasePage {
 
         const isVisible = await link.isVisible()
 
-        if(!isVisible){
+        if (!isVisible) {
             link = locate
         }
 
@@ -349,7 +362,7 @@ export class BasePage {
 }
 
 interface LocatorInside {
-    href: string;
+    href?: string;
     hasImage?: boolean;
     text?: string;
 }

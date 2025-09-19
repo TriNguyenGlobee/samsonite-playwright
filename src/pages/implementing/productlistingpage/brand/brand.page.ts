@@ -59,7 +59,7 @@ export class BrandPage extends BasePage {
             { text: 'サムソナイト・レッド商品一覧', href: '/brand/samsonite-red/' },
             { text: 'ハートマン商品一覧', href: '/brand/hartmann/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, undefined, brandItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, undefined, brandItems);
     }
 
 }

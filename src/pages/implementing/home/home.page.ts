@@ -12,6 +12,15 @@ export class HomePage extends BasePage {
     readonly recommendedSection: Locator;
     readonly campaignUnderwaysection: Locator;
     readonly productReviewSection: Locator;
+    readonly journalsSection: Locator;
+    readonly journalsNextbutton: Locator;
+    readonly journalsPreviousButton: Locator;
+    readonly whyShopWithUsSection: Locator;
+    readonly withUsTitle: Locator;
+    readonly withUsOfficalSite: Locator;
+    readonly withUsSafeShopping: Locator;
+    readonly withUsGift: Locator;
+    readonly withUsWarranty: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -21,6 +30,15 @@ export class HomePage extends BasePage {
         this.recommendedSection = page.locator('//div[contains(@class,"category-product initialized-component")]');
         this.campaignUnderwaysection = page.locator('//div[contains(@class,"magazine-carousel-column-desktop")]');
         this.productReviewSection = page.locator(`//div[contains(@class,"AddProductReviews")]`);
+        this.journalsSection = page.locator(`//div[contains(@class,"journals-articles")]//div[@class="owl-stage"]`);
+        this.journalsNextbutton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Next"]]`);
+        this.journalsPreviousButton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Previous"]]`);
+        this.whyShopWithUsSection = page.locator(`//div[@class="home-why-shop-with-us"]//div[@class="content"]`);
+        this.withUsTitle = this.whyShopWithUsSection.locator(`xpath=.//h2[normalize-space(text())="Why shop with us?"]`);
+        this.withUsOfficalSite = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="公式サイト"]]`);
+        this.withUsSafeShopping = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="安全なショッピング"]]`);
+        this.withUsGift = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="ギフト"]]`);
+        this.withUsWarranty = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="製品保証"]]`);
     }
 
     // =========================
@@ -91,7 +109,8 @@ export class HomePage extends BasePage {
         }
     }
 
-    async getReviewedProductURL(page: Page): Promise<ReviewedItem> { 
+    // Get a random product URL and index
+    async getReviewedProductURL(page: Page): Promise<ReviewedItem> {
         const reviewedProduct = this.productReviewSection.locator(`xpath=.//div[contains(@class,"swiper-slide")]`)
         const numberOfProduct = await reviewedProduct.count()
         const rdIndex = getRandomInt(1, numberOfProduct)
@@ -111,6 +130,22 @@ export class HomePage extends BasePage {
             url: productURL,
             index: rdIndex
         };
+    }
+
+    async getJournalsActiveItemIndexes(): Promise<number[]> {
+        const items = this.journalsSection.locator(`xpath=.//div[contains(@class,"owl-item") and not(contains(@class,"cloned"))]`);
+        const count = await items.count();
+        const activeIndexes: number[] = [];
+
+        for (let i = 0; i < count; i++) {
+            const item = items.nth(i);
+            const className = await item.getAttribute('class');
+
+            if (className?.includes('active')) {
+                activeIndexes.push(i);
+            }
+        }
+        return activeIndexes;
     }
 
     // =========================

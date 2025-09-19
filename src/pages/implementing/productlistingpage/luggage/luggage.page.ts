@@ -82,7 +82,7 @@ export class LuggagePage extends BasePage {
             { text: 'トランク', href: '/luggage/type/trunk/' },
             { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/luggage/' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-type', typeItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-type', typeItems, {
             twoLinksPerLi: true,
             lastItemIsTextOnly: true,
             checkPictureTag: true
@@ -94,7 +94,7 @@ export class LuggagePage extends BasePage {
             { text: 'ミディアム（中型）4〜6泊', href: 'https://ssjp.stg.samsonite-asia.com/luggage/ミディアム' },
             { text: 'ラージ（大型）1週間以上', href: 'https://ssjp.stg.samsonite-asia.com/luggage/ラージ' }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-size', sizeItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-size', sizeItems, {
             twoLinksPerLi: true,
             lastItemIsTextOnly: false,
             checkPictureTag: true
@@ -119,7 +119,7 @@ export class LuggagePage extends BasePage {
                 href: '/%E3%82%B9%E3%83%BC%E3%83%84%E3%82%B1%E3%83%BC%E3%82%B9/%E3%82%AB%E3%83%A9%E3%83%BC/special/'
             }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-color', colorItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-color', colorItems);
 
         // --- luggage-smart-feature ---
         const smartFeatureItems = [
@@ -140,7 +140,7 @@ export class LuggagePage extends BasePage {
                 href: '/luggage/smart-feature/usb-port/'
             }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-smart-feature', smartFeatureItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-smart-feature', smartFeatureItems);
 
         // --- luggage-brand ---
         const brandItems = [
@@ -161,7 +161,7 @@ export class LuggagePage extends BasePage {
                 href: '/luggage/brand/hartmann/'
             }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-brand', brandItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-brand', brandItems);
 
         // --- luggage-destination ---
         const destinationItems = [
@@ -182,7 +182,7 @@ export class LuggagePage extends BasePage {
                 href: '/luggage/destination/business/'
             }
         ];
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-destination', destinationItems);
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-destination', destinationItems);
 
         // --- luggage-collection ---
         const collectionItems = [
@@ -212,7 +212,7 @@ export class LuggagePage extends BasePage {
             }
         ];
 
-        await this.checkListItemsForCategoryMenu(this.baseLocator, 'luggage-collection', collectionItems, {
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'luggage-collection', collectionItems, {
             twoLinksPerLi: false
         });
     }
