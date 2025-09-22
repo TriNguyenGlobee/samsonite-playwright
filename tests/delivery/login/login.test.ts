@@ -4,7 +4,7 @@ import { ForgotPasswordPage } from "../../../src/pages/delivery/login/forgot-pas
 import { RegisterPage } from "../../../src/pages/delivery/login/register.page";
 import { MembershipPage } from "../../../src/pages/delivery/login/membership.page";
 import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
-import { HomePage } from "../../../src/pages/implementing/home/home.page";
+import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { t, PageUtils } from "../../../utils/helpers";
