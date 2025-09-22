@@ -27,6 +27,8 @@ export class BasePage {
     readonly newsIcon: Locator;
     readonly usericon: Locator;
     readonly ginzaFlagshipStore: Locator;
+    readonly cartBadge: Locator;
+    readonly viewCartButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -50,6 +52,8 @@ export class BasePage {
         this.cartIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"minicart")]');
         this.newsIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"news-icon")]');
         this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
+        this.cartBadge = this.cartIcon.locator('xpath=.//span[@class="minicart-quantity"]');
+        this.viewCartButton = page.locator(`//div[@id="miniCartModal"]//a[contains(text(),"View Cart")]`)
     }
 
     // =========================
@@ -169,6 +173,14 @@ export class BasePage {
                 await myAccountLink.waitFor({ state: 'visible' });
                 await myAccountLink.click();
             });
+        });
+    }
+
+    async goToCartPage(): Promise<void> {
+        await step("Go to Cart Page", async () => {
+            await this.click(this.cartIcon, `Click on Cart Icon`)
+            await this.viewCartButton.waitFor({ state: 'visible' });
+            await this.click(this.viewCartButton, `Click on Viewcart button`)
         });
     }
 
