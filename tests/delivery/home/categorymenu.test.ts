@@ -1,5 +1,5 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/implementing/home/home.page";
+import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
 import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals/newarrivals.page";
 import { LuggagePage } from "../../../src/pages/implementing/productlistingpage/luggage/luggage.page";

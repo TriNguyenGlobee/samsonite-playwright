@@ -1,5 +1,5 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/implementing/home/home.page";
+import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals/newarrivals.page";
@@ -10,7 +10,7 @@ import { BrandPage } from "../../../src/pages/implementing/productlistingpage/br
 import { OurBrandStoryPage } from "../../../src/pages/implementing/productlistingpage/ourbrandstory/ourbrandstory.page";
 import { GinzaFlagshipStorePage } from "../../../src/pages/implementing/productlistingpage/ginzaflashipstore/ginzaflagshipstore.page";
 import { SalePage } from "../../../src/pages/implementing/productlistingpage/sale/sale.page";
-import { MembershipPage } from "../../../src/pages/implementing/home/membership.page";
+import { MembershipPage } from "../../../src/pages/delivery/home/membership.page";
 import { scrollToBottom } from "../../../utils/helpers";
 
 test.describe("Home Tests", () => {

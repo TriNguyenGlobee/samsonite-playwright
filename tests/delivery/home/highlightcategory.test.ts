@@ -1,5 +1,5 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/implementing/home/home.page";
+import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
 import { hightlightCategoryItems } from "../../../utils/data";
 
