@@ -1,11 +1,105 @@
 {
   "homepage": {
-    "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
+    "trackOder": "Track Order",
+    "loginRegister": "Login/Register",
+    "myaccount": "My account",
+    "logout": "Logout"
+  },
+  "loginpage": {
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "singinTitle": "Sign in",
+    "loginmsg": "Existing customer or House of Samsonite user",
+    "usernamelabel": "Email / Username",
+    "pwlabel": "Password",
+    "signinbtn": "Sign in",
+    "forgotPW": "forgot password?",
+    "signinwithemail": "SIGN IN WITH EMAIL LINK",
+    "signinwithgoogle": "SIGN IN WITH GOOGLE",
+    "orsigninlabel": "Or",
+    "newcustomerlabel": "New Customer",
+    "emailsignup": "Email sign up",
+    "invalidEmailMsg": "Please enter a valid email address",
+    "alertMsg": "Invalid login or password. Remember that password is case-sensitive. Please try again.",
+    "requireemailmsg": "Please fill out this field.",
+    "requirepwmsg": "Please fill out this field.",
+    "popuptitle": "SIGN IN WITH EMAIL LINK",
+    "popupemailLabel": "Enter your email to receive login link",
+    "popupsendemailbtn": "SEND LOGIN LINK",
+    "popupRequireEmailMsg": "Please complete this field.",
+    "popupInvalidEmailMsg": "The valid email format is \"xxx@email.com\". Please try again.",
+    "popupRequireCaptchaMsg": "Google recaptcha request is invalid or malformed.",
+    "popupSentEmailTitle": "Please check your email.",
+    "popupSentEmailContent": "A login link has been sent to your email."
+  },
+  "forgotpasswordpage": {
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "pageTitle": "Forgot your password?",
+    "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
+    "emailTextbox": "Email",
+    "submitbutton": "Submit"
+  },
+  "registerpage": {
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "pageTitle": "Create Account",
+    "customerdetailslabel": "Customer details",
+    "lastname": "Last Name",
+    "firstname": "First Name",
+    "phonenumber": "Phone Number",
+    "dateofbirth": "Date of Birth",
+    "email": "Email",
+    "password": "Password (at least 8 characters)",
+    "confirmpassword": "Confirm Password",
+    "getnewsrequest": "Please add me to Samsonite's mailing list."
+  },
+  "membershippage": {
+    "title": ""
   },
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
+  "luggagepage": {
+    "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "backpackspage": {
+    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "bagspage": {
+    "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "brandpage": {
+    "title": "Brand | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "ourbrandstorypage": {
+    "title": "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "ginzaflagshipstore": {
+    "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "sale": {
+    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "mypage": {
+    "title": "My Account | Samsonite Singapore",
+    "pageTitle": "Your Account",
+    "myOrders": "My Orders",
+    "membership": "My Membership",
+    "mycoupons": "My coupon",
+    "myprofile": "My profile",
+    "myaddress": "My address book",
+    "payment": "My payment",
+    "wishlist": "Wishlist",
+    "emailhelp": "Email"
+  },
   "menuItem": {
-    "newArrivals": "New Arrivals"
+    "newarrivals": "New Arrivals",
+    "luggage": "Luggage",
+    "backpacks": "Backpacks",
+    "bags": "Bags",
+    "label": "Labels",
+    "discover": "Discover",
+    "offers": "Offers",
+    "friendofsamsonite": "FRIENDS OF SAMSONITE",
+    "ginzaflagshipstore": "銀座 旗艦店"
   }
 }

@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { BasePage } from "../base.page";
+import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { isSorted } from "../../../utils/helpers";
+import { isSorted } from "../../../../utils/helpers";
 
 export class DashboardPage extends BasePage {
     readonly pageTitle: Locator;
