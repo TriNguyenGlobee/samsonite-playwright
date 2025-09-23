@@ -9,7 +9,7 @@ import { BrandPage } from "../../../src/pages/delivery/productlistingpage/brand/
 import { OurBrandStoryPage } from "../../../src/pages/delivery/productlistingpage/ourbrandstory/ourbrandstory.page";
 
 test.describe("Category Menu", () => {
-    test("All level 2 categories are displayed", async ({ basicAuthPage }) => {
+    test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const newarrivalspage = new NewArrivalsPage(basicAuthPage);
         const luggagepage = new LuggagePage(basicAuthPage);

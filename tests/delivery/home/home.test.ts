@@ -14,7 +14,7 @@ import { MembershipPage } from "../../../src/pages/delivery/home/membership.page
 import { scrollToBottom } from "../../../utils/helpers";
 
 test.describe("Home Tests", () => {
-    test("Home page is displayed", async ({ basicAuthPage }) => {
+    test("1. Home page is displayed", async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
 
         await step("Verify that the Home page is displayed", async () => {
@@ -23,8 +23,8 @@ test.describe("Home Tests", () => {
     });
 
     test(`
-        1. Go to New Arrivals Page
-        2. Go to Luggage Page
+        2. Go to New Arrivals Page
+        3. Go to Luggage Page
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const newArrivalsPage = new NewArrivalsPage(basicAuthPage);
@@ -49,8 +49,8 @@ test.describe("Home Tests", () => {
     });
 
     test(`
-        3. Go to Back Packs Page
-        4. Go to Bags Page
+        4. Go to Back Packs Page
+        5. Go to Bags Page
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const backpacks = new BackpacksPage(basicAuthPage);
@@ -74,8 +74,8 @@ test.describe("Home Tests", () => {
     });
 
     test(`
-        5. Go to Brand Page
-        6. Go to Our Brand Story Page
+        6. Go to Brand Page
+        7. Go to Our Brand Story Page
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const brandpage = new BrandPage(basicAuthPage);
@@ -99,9 +99,9 @@ test.describe("Home Tests", () => {
     });
 
     test(`
-        7. Go to Ginza Flagship Store Page
-        8. Go to Sale Page
-        9. Go to membership page
+        8. Go to Ginza Flagship Store Page
+        9. Go to Sale Page
+        10. Go to membership page
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const ginzaflagshipstorepage = new GinzaFlagshipStorePage(basicAuthPage);
@@ -133,7 +133,7 @@ test.describe("Home Tests", () => {
         });
     });
 
-    test(`10. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
+    test(`11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
 
         await scrollToBottom(basicAuthPage);
