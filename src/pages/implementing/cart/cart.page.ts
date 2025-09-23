@@ -1,14 +1,18 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
+import { t, PageUtils } from "../../../../utils/helpers";
 
 export class CartPage extends BasePage {
     readonly removeProductButton: Locator;
+    readonly pageTitle: Locator;
+    readonly emptymsg: Locator;
 
     constructor(page: Page) {
         super(page);
         this.removeProductButton = page.locator(`//div[contains(@class,"cart-page")]//div[@class="line-item-header"]//div[not(contains(@class,"hidden"))]//button[span]`)
-
+        this.pageTitle = page.locator('//div[contains(@class,"title")]//h1');
+        this.emptymsg = page.locator('//div[contains(@class,"cart-empty")]//h2')
     }
 
     // =========================
@@ -33,9 +37,13 @@ export class CartPage extends BasePage {
     /**
      * Add product to cart by index
      */
-    async addProductToCartByIndex(index: number | 1) {
-        const addButton = this.page.locator(`(//button[normalize-space(text())="Add to Cart"])[${index}]`);
-        await this.click(addButton, `Add product at index ${index} to cart`);
+    async addProductToCartByIndex(index: number | number[]) {
+        const indices = Array.isArray(index) ? index : [index];
+
+        for (const i of indices) {
+            const addButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${i}]`);
+            await this.click(addButton, `Add product at index ${i} to cart`);
+        }
     }
 
     async removeAllProducts() {
@@ -45,10 +53,37 @@ export class CartPage extends BasePage {
             await this.removeProductButton.nth(0).click();
         }
     }
-    
+
     // =========================
     // 📦 Helpers
     // =========================
+    async isCartPageDisplayed(): Promise<boolean> {
+        try {
+            const title = await this.page.title();
+            if (!title.includes(t.cartpage('title'))) {
+                return false;
+            }
+
+            const elementsToCheck = [
+                this.pageTitle,
+                this.emptymsg,
+            ];
+            for (const locator of elementsToCheck) {
+                if (!locator.isVisible()) {
+                    await step(`Check visibility of element: ${locator.toString()}`, async () => {
+                        console.log(`Element not visible: ${locator.toString()}`);
+                    });
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error checking login page:', error);
+            return false;
+        }
+    }
+
     async getCartBadgeValue() {
         if (!(await this.cartBadge.isVisible())) return 0;
 
