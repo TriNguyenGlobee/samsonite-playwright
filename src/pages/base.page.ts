@@ -244,12 +244,24 @@ export class BasePage {
         return (await prod.innerText()).trim()
     }
 
+    async getProdPrice(index: number): Promise<string> {
+        const prod = this.page.locator(`(//div[@class="product"])[${index}]//span[@class="value"]`)
+
+        return (await prod.innerText()).trim()
+    }
+
     // =========================
     // ✅ Assertions
     // =========================
     async assertVisible(locator: Locator, description?: string) {
         await step(description || "Assert element visible", async () => {
             await expect(locator).toBeVisible();
+        });
+    }
+
+    async assertHidden(locator: Locator, description?: string) {
+        await step(description || "Assert element hidden", async () => {
+            await expect(locator).toBeHidden();
         });
     }
 

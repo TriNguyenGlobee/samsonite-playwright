@@ -3,7 +3,7 @@ import { CartPage } from "../../../src/pages/implementing/cart/cart.page";
 import { MinicartPage } from "../../../src/pages/implementing/cart/minicart.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { getRandomArrayElement, t, clickUntil } from "../../../utils/helpers";
+import { getRandomArrayElement, t, clickUntil, extractNumber } from "../../../utils/helpers";
 import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { Locator } from "@playwright/test";
 
@@ -154,6 +154,9 @@ test.describe("Add products to cart without login", () => {
         8. Add multiple products to cart
         9. Verify the number of products in the minicart
         10. Verify the total amount payable is correct
+        11. Remove product modal is displayed when remmoving a product in the minicart
+        12. Remove product modal can be closed by close button and cancel button
+        13. Remove all products in the cart
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const minicart = new MinicartPage(basicAuthPage)
@@ -171,6 +174,68 @@ test.describe("Add products to cart without login", () => {
 
         await step('Assert number of products in the minicart', async () => {
             expect(await minicart.getNumberOfProducts()).toBe(3)
+        })
+
+        const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
+        const secorndProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
+        const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
+        const firstMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[0]));
+        const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
+        const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
+        const shippingCost = await extractNumber(await minicart.getShippingCost());
+        const totalPrice = await extractNumber(await minicart.getTotalPrice());
+
+        await step('Assert total amount payable is correct', async () => {
+            expect(firstProductPrice).toBe(firstMinicartProductPrice)
+            expect(secorndProductPrice).toBe(secondMinicartProductPrice)
+            expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
+            expect(totalPrice).toBe(firstProductPrice + secorndProductPrice + thirdProductPrice + shippingCost)
+        })
+
+        await step('Verify remove product modal is displayed when removing a product in the minicart', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 300,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicart.click(minicart.minicartRemoveProdButton, 'Click remove product button in the minicart')
+
+            await minicart.assertVisible(minicart.removeProductModal, 'Assert remove product modal is displayed')
+        })
+
+        await step('Verify remove product modal can be closed by close button and cancel button', async () => {
+            await minicart.click(minicart.removeProdModalCloseButton, 'Close remove product modal')
+
+            await minicart.assertHidden(minicart.removeProductModal, 'Assert remove product modal is closed')
+
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 300,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicart.click(minicart.minicartRemoveProdButton, 'Click remove product button in the minicart')
+
+            await minicart.click(minicart.removeProdModalCancelButton, 'Cancel remove product')
+
+            await minicart.assertHidden(minicart.removeProductModal, 'Assert remove product modal is closed')
+        })
+
+        await step('Remove all products in minicart', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 300,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicart.removeAllProducts()
+
+            await minicart.assertHidden(minicart.minicartRender, 'Assert minicart is closed after removing all products')
+
+            const numberOfProd = await minicart.getNumberOfProducts()
+
+            expect(numberOfProd).toBe(0)
         })
     })
 });
