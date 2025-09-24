@@ -9,6 +9,9 @@ export class MinicartPage extends BasePage {
     readonly exploreByCategoryText: Locator;
     readonly footerCategoryItem: Locator;
     readonly minicartRender: Locator;
+    readonly viewCartButton: Locator;
+    readonly checkoutButton: Locator;
+    readonly amazonePayButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -18,6 +21,9 @@ export class MinicartPage extends BasePage {
         this.exploreByCategoryText = this.minicartModal.locator(`xpath=.//span[@class="minicart-empty-footer-title"]`)
         this.footerCategoryItem = this.minicartModal.locator(`xpath=.//li[@class="minicart-empty-footer-item"]`)
         this.minicartRender = page.locator('//div[@class="minicart-container minicart-slide-down"]')
+        this.viewCartButton = page.locator(`//div[@class="minicart-footer"]//a[normalize-space(text())="カートを見る"]`)
+        this.checkoutButton = page.locator(`//div[@class="minicart-footer"]//a[normalize-space(text())="注文手続きへ"]`)
+        this.amazonePayButton = page.locator('div.amazon-pay-onetime-button').locator('div.amazonpay-button-view1');
     }
 
     // =========================
@@ -28,23 +34,28 @@ export class MinicartPage extends BasePage {
     // =========================
     // 📦 Helpers
     // =========================
-    async isMinicartShown(): Promise<boolean>{
+    async isMinicartShown(): Promise<boolean> {
         const classAtt = await this.minicartModal.getAttribute('class')
         return classAtt?.includes('slide-down') ?? false
     }
 
-    async getMinicartProdCollection (index: number): Promise<string>{
+    async getMinicartProdCollection(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[contains(@class,"card product-info")])[${index}]//p[contains(@class,"collection-name")]`)
 
         return (await prod.innerText()).trim()
     }
 
-    async getMinicartProdName (index: number): Promise<string>{
+    async getMinicartProdName(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[contains(@class,"card product-info")])[${index}]//p[contains(@class,"product-name")]`)
 
         return (await prod.innerText()).trim()
     }
 
+    async getNumberOfProducts(): Promise<number> {
+        const prod = this.page.locator(`(//div[contains(@class,"card product-info")])`)
+
+        return (await prod.count())
+    }
     // =========================
     // ✅ Assertions
     // =========================

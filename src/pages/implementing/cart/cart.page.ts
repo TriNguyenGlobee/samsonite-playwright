@@ -1,18 +1,20 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t, PageUtils } from "../../../../utils/helpers";
+import { t, PageUtils, delay } from "../../../../utils/helpers";
 
 export class CartPage extends BasePage {
     readonly removeProductButton: Locator;
     readonly pageTitle: Locator;
     readonly emptymsg: Locator;
+    readonly minicartRender: Locator;
 
     constructor(page: Page) {
         super(page);
         this.removeProductButton = page.locator(`//div[contains(@class,"cart-page")]//div[@class="line-item-header"]//div[not(contains(@class,"hidden"))]//button[span]`)
         this.pageTitle = page.locator('//div[contains(@class,"title")]//h1');
         this.emptymsg = page.locator('//div[contains(@class,"cart-empty")]//h2')
+        this.minicartRender = page.locator('//div[@class="minicart-container minicart-slide-down"]')
     }
 
     // =========================
@@ -42,7 +44,13 @@ export class CartPage extends BasePage {
 
         for (const i of indices) {
             const addButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${i}]`);
-            await this.click(addButton, `Add product at index ${i} to cart`);
+
+            await this.click(addButton, `Add product at index ${i} to cart`)
+            //await delay(5000)
+
+            await this.waitFor(this.minicartRender)
+
+            await expect(this.minicartRender).toBeHidden();
         }
     }
 

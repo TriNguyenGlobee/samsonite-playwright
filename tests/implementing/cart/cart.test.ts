@@ -69,13 +69,18 @@ test.describe("Add products to cart without login", () => {
     test(`
         1. Minicart is displayed after adding product to cart
         2. Prodcollection and prodname are displayed correctly in the minicart
+        3. Viewcart button and Checkout button are displayed in the minicart
+        4. Amazon pay button is displayed in the minicart
+        5. Cart page is displayed when clicking on view car button
+        6. Checkout login page is displayed when clicking on checkout button
+        7. Amazone pay page is displayed when clicking on Amanazon pay button
         `, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const minicart = new MinicartPage(basicAuthPage)
         const cartpage = new CartPage(basicAuthPage)
 
         const prodIndex = 1;
-        let prodCollection: string, prodName : string
+        let prodCollection: string, prodName: string
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
@@ -97,6 +102,75 @@ test.describe("Add products to cart without login", () => {
 
             expect(minicartProdCollection).toBe(prodCollection)
             expect(minicartProdName).toBe(prodName)
+        })
+
+        await step('Verify view cart button and checkout button are displayed', async () => {
+            await minicart.assertVisible(minicart.viewCartButton)
+            await minicart.assertVisible(minicart.checkoutButton)
+        })
+
+        await step('Verify amazone pay button is displayed', async () => {
+            await minicart.assertVisible(minicart.amazonePayButton)
+        })
+
+        await step('Verify the cart page is displayed when clicking on view cart button', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 500,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.viewCartButton, `${Config.baseURL}cart`,
+                "Click on View Cart button and check Cart page is displayed"
+            )
+        })
+
+        await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 500,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.checkoutButton, `${Config.baseURL}checkoutlogin`,
+                "Click on Checkout button and check Checkout Login page is displayed"
+            )
+        })
+
+        await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 500,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await homePage.click(minicart.amazonePayButton, "Click on Amazone pay button")
+
+            await homePage.assertUrl("https://www.amazon.co.jp/")
+        })
+    })
+
+    test(`
+        8. Add multiple products to cart
+        9. Verify the number of products in the minicart
+        10. Verify the total amount payable is correct
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const minicart = new MinicartPage(basicAuthPage)
+        const cartpage = new CartPage(basicAuthPage)
+
+        const prodIndexes = [1, 2, 3];
+
+        await step('Go to New Arrivals', async () => {
+            await homePage.clickMenuItem('newarrivals')
+        })
+
+        await step('Add a product to cart', async () => {
+            await cartpage.addProductToCartByIndex(prodIndexes)
+        })
+
+        await step('Assert number of products in the minicart', async () => {
+            expect(await minicart.getNumberOfProducts()).toBe(3)
         })
     })
 });
