@@ -8,7 +8,7 @@
     "addtocart": "Add to Cart"
   },
   "loginpage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Sign In To Your Account | Samsonite Singapore",
     "singinTitle": "Sign in",
     "loginmsg": "Existing customer or House of Samsonite user",
     "usernamelabel": "Email / Username",
@@ -20,7 +20,7 @@
     "orsigninlabel": "Or",
     "newcustomerlabel": "New Customer",
     "emailsignup": "Email sign up",
-    "invalidEmailMsg": "Please enter a valid email address",
+    "invalidEmailMsg": "Please include an '@' in the email address.",
     "alertMsg": "Invalid login or password. Remember that password is case-sensitive. Please try again.",
     "requireemailmsg": "Please fill out this field.",
     "requirepwmsg": "Please fill out this field.",
@@ -34,7 +34,7 @@
     "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Singapore",
     "pageTitle": "Forgot your password?",
     "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
     "emailTextbox": "Email",

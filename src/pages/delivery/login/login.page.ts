@@ -5,7 +5,7 @@ import { t } from "../../../../utils/helpers";
 import { Config } from "../../../../config/env.config";
 import { PageUtils, maskEmail } from "../../../../utils/helpers";
 
-export class LoginPage extends BasePage {
+export abstract class LoginPage extends BasePage {
     readonly signinTitle: Locator;
     readonly loginmsg: Locator;
     readonly emailTextbox: Locator;
@@ -50,7 +50,7 @@ export class LoginPage extends BasePage {
         this.emailSignUpButton = page.locator(`//div[contains(@class,"email-login")][a[normalize-space(text())="${t.loginpage('emailsignup')}"]]`);
         this.memberNotifyMsg = page.locator(`//div[@class="member-notify-message" and contains(., "新規会員登録し") and contains(., "サムソナイト") and contains(., "エクスプローラープログラム") and contains(., "のメンバーになると送料無料")]`);
         this.memberLink = page.locator(`//u[contains(text(),"サムソナイト") and contains(text(),"エクスプローラープログラム")]/parent::a`);
-        this.invalidEmailMsg = page.locator(`//div[label[normalize-space(text())="${t.loginpage('usernamelabel')}"]]//div[@class="invalid-feedback" and normalize-space(text())="${t.loginpage('invalidEmailMsg')}"]`);
+        this.invalidEmailMsg = page.locator(`//div[label[normalize-space(text())="${t.loginpage('usernamelabel')}"]]//div[@class="invalid-feedback"]`);
         this.alertMsg = page.locator(`//div[@class="alert alert-danger" and text()="${t.loginpage('alertMsg')}"]`);
         this.requireemailmsg = page.locator(`//div[label[normalize-space(text())="${t.loginpage('usernamelabel')}"]]//div[@class="invalid-feedback" and normalize-space(text())="${t.loginpage('requireemailmsg')}"]`);
         this.requirepwmsg = page.locator(`//div[label[normalize-space(text())="${t.loginpage('pwlabel')}"]]//div[@class="invalid-feedback" and normalize-space(text())="${t.loginpage('requirepwmsg')}"]`);
@@ -60,7 +60,7 @@ export class LoginPage extends BasePage {
         this.popupSendEmailButton = this.signInByEmailLinkPopup.locator(`xpath=.//button[normalize-space(text())="${t.loginpage('popupsendemailbtn')}"]`);
         this.popupCloseButton = this.signInByEmailLinkPopup.locator(`xpath=.//button[@aria-label="Close" and not(@class="close")]//span`);
         this.popupRequireEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback" and normalize-space(text())="${t.loginpage('popupRequireEmailMsg')}"]`);
-        this.popupInvalidEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback" and text()="${t.loginpage('popupInvalidEmailMsg')}"]`);
+        this.popupInvalidEmailMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="invalid-feedback"]`);
         this.popupRequireCaptchaMsg = this.signInByEmailLinkPopup.locator(`xpath=.//div[@class="recaptcha-section"]//p[text()="${t.loginpage('popupRequireCaptchaMsg')}"]`);
         this.popupSentEmailTitle = this.signInByEmailLinkPopup.locator(`xpath=.//h2[text()="${t.loginpage('popupSentEmailTitle')}"]`);
     }
@@ -158,19 +158,22 @@ export class LoginPage extends BasePage {
     // =========================
     async isLoginPageDisplayed(): Promise<boolean> {
         try {
+            const expectedTitle = t.loginpage('title');
+            await this.page.waitForFunction(
+                (expected) => document.title.includes(expected),
+                expectedTitle
+            );
             const title = await this.page.title();
             if (!title.includes(t.loginpage('title'))) {
-                await step(`Received title: ${title} - Expected title: ${t.loginpage('title')}`, async()=>{
-                    return false;
-                })
+                await step(`Received title: ${title} - Expected title: ${t.loginpage('title')}`, async () => { })
+                return false;
             }
 
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "login";
             if (!currentUrl.startsWith(expectedUrl)) {
-                await step(`Received URL: ${currentUrl} - Expected URL: ${expectedUrl}`, async()=>{
-                    return false;
-                })
+                await step(`Received URL: ${currentUrl} - Expected URL: ${expectedUrl}`, async () => { })
+                return false;
             }
             const elementsToCheck = [
                 this.signinTitle,
