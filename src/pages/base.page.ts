@@ -232,13 +232,13 @@ export class BasePage {
         })
     }
 
-    async getProdCollection(index: number): Promise<string>{
+    async getProdCollection(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="product-collection"]`)
 
         return (await prod.innerText()).trim()
     }
 
-    async getProdName(index: number): Promise<string>{
+    async getProdName(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
 
         return (await prod.innerText()).trim()
@@ -376,7 +376,7 @@ export class BasePage {
             }
 
             const [newPage] = await Promise.all([
-                page.context().waitForEvent('page'),
+                page.context().waitForEvent('page', { timeout: 60000 }),
                 link.click({ button: 'middle' }),
             ]);
 

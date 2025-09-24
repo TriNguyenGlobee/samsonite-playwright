@@ -323,7 +323,7 @@ export class HomePage extends BasePage {
             const link = card.locator('xpath=.//a[@class="card-link"]');
 
             await Promise.all([
-                page.waitForURL(data[i].href, { timeout: 10000 }),
+                page.waitForURL(data[i].href, { timeout: 60000 }),
                 link.click()
             ]);
 

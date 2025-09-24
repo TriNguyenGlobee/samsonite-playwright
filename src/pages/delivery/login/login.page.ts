@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
 import { t } from "../../../../utils/helpers";
@@ -89,6 +89,9 @@ export class LoginPage extends BasePage {
             this.page.context().waitForEvent('page'),
             this.signinWithGGButton.click(),
         ]);
+        expect(googlePage).toBeDefined();
+        await expect(googlePage).toHaveURL(/accounts\.google\.com/);
+
         await googlePage.waitForLoadState();
 
         const googleEmailTextbox = googlePage.locator('//input[@type="email" and @aria-label="Email or phone"]');

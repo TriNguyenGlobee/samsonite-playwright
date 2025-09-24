@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import en from '../locales/en.json';
+import sg from '../locales/sg.json';
 
-export type Locale = 'en' | 'ja';
-const defaultLocale: Locale = 'en';
+export type Locale = 'sg' | 'jp';
+const defaultLocale: Locale = 'jp';
 const currentLocale: Locale = (process.env.LOCALE as Locale) || defaultLocale;
 
 const localesDir = path.join(__dirname, '..', 'locales');
 
-export type Translations = typeof en;
+export type Translations = typeof sg;
 
 function loadTranslations(locale: Locale): Translations {
   try {
