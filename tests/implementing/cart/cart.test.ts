@@ -1,113 +1,102 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { DashboardPage } from "../../../src/pages/implementing/dashboard/dashboard.page";
 import { CartPage } from "../../../src/pages/implementing/cart/cart.page";
+import { MinicartPage } from "../../../src/pages/implementing/cart/minicart.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { getRandomArrayElement } from "../../../utils/helpers";
+import { getRandomArrayElement, t, clickUntil } from "../../../utils/helpers";
+import { HomePage } from "../../../src/pages/delivery/home/home.page";
+import { Locator } from "@playwright/test";
 
-test.describe("Remove from cart", () => {
-    let firstProductName: string | null;
-    let secondProductName: string | null;
-    let thirdProductName: string | null;
+test.describe("Empty cart without login", () => {
+    test(`
+        1. Minicart is displayed correctly
+        2. Click shopping cart button to close minicart
+        3. Explore by category
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const minicartPage = new MinicartPage(basicAuthPage)
 
-    test("remove if cart have a product", async ({ loggedInPage }) => {
-        const dashboardPage = new DashboardPage(loggedInPage);
-        const cartPage = new CartPage(loggedInPage);
-        const productName = getRandomArrayElement(await dashboardPage.getProductNames());
+        await step("Click on Cart icon", async () => {
+            await homePage.click(homePage.cartIcon)
+        })
 
-        await step("Select a product to add to cart", async () => {
-            const productNames = await dashboardPage.getProductNames();
-            if (productNames.length > 0) {
-                await dashboardPage.addToCart(productName!);
-            } else {
-                throw new Error("No products found to add to cart");
-            }
-        });
+        await step("Verify that minicart is displayed", async () => {
+            expect(await minicartPage.isMinicartShown()).toBe(true)
+            expect(minicartPage.emptyCartMsg).toHaveText(t.minicart('emptymsg'))
+            expect(minicartPage.startShoppingButton).toBeVisible()
+            expect(minicartPage.exploreByCategoryText).toBeVisible()
+            expect(await minicartPage.footerCategoryItem.count()).toBe(3)
+        })
 
-        await step("Go to cart", async () => {
-            await dashboardPage.goToCart();
-        });
+        await step("Click Shopping Cart button", async () => {
+            await minicartPage.click(minicartPage.startShoppingButton)
+        })
 
-        await step(`Remove product "${productName}" from cart`, async () => {
-            await cartPage.removeFromCart(productName!);
-        });
+        await step("Verify that Minicart is closed", async () => {
+            expect(await minicartPage.isMinicartShown()).toBe(false)
+        })
 
-        await step(`Verify product "${productName}" is removed from cart`, async () => {
-            await cartPage.assertProductRemoved(productName!);
-            await cartPage.assertShoppingCartBadgeRemoved();
-        });
-    });
+        await step("Explore by footer category", async () => {
+            const expectedURL = await homePage.getLocatorURL(minicartPage.footerCategoryItem.nth(1))
 
-    test("remove if cart have multiple products", async ({ loggedInPage }) => {
-        const dashboardPage = new DashboardPage(loggedInPage);
-        const cartPage = new CartPage(loggedInPage);
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicartPage.minicartRender, 'visible', {
+                delayMs: 500,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
 
-        const productNames = await dashboardPage.getProductNames();
-        if (productNames.length < 2) {
-            throw new Error("Not enough products to test removing multiple items from cart");
-        }
+            await minicartPage.assertNavigatedURLByClickLocator(basicAuthPage, minicartPage.footerCategoryItem.nth(1), expectedURL!)
+        })
+    })
 
-        firstProductName = getRandomArrayElement(productNames);
-        secondProductName = getRandomArrayElement(productNames.filter(name => name !== firstProductName));
-        thirdProductName = getRandomArrayElement(productNames.filter(name => name !== firstProductName && name !== secondProductName));
+    test(`4. Cart page is displayed`, async ({ basicAuthPage }) => {
+        const cartpage = new CartPage(basicAuthPage)
 
-        await step(`Add products "${firstProductName}", "${secondProductName}" and "${thirdProductName}" to cart`, async () => {
-            await dashboardPage.addToCart(firstProductName!);
-            await dashboardPage.addToCart(secondProductName!);
-            await dashboardPage.addToCart(thirdProductName!);
-        });
+        await step('Go to Cart page by URL', async () => {
+            await basicAuthPage.goto(`${Config.baseURL}cart`)
+        })
 
-        await step("Go to cart", async () => {
-            await dashboardPage.goToCart();
-        });
+        await step('Verify that the cart page is displayed', async () => {
+            await cartpage.isCartPageDisplayed()
 
-        await step(`Remove product "${firstProductName}" from cart`, async () => {
-            await cartPage.removeFromCart(firstProductName!);
-        });
+            expect(cartpage.pageTitle).toHaveText(t.cartpage('pageTitle'))
+            expect(cartpage.emptymsg).toHaveText(t.cartpage('emptymsg'))
+        })
+    })
+});
 
-        await step(`Verify product "${firstProductName}" is removed from cart`, async () => {
-            await cartPage.assertProductRemoved(firstProductName!);
-            await cartPage.assertProductExists(secondProductName!);
-            await cartPage.assertProductExists(thirdProductName!);
-            await cartPage.assertShoppingCartBadgeValue("2");
-        });
-    });
+test.describe("Add products to cart without login", () => {
+    test(`
+        1. Minicart is displayed after adding product to cart
+        2. Prodcollection and prodname are displayed correctly in the minicart
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const minicart = new MinicartPage(basicAuthPage)
+        const cartpage = new CartPage(basicAuthPage)
 
-    test("remove all products from cart", async ({ loggedInPage }) => {
-        const dashboardPage = new DashboardPage(loggedInPage);
-        const cartPage = new CartPage(loggedInPage);
+        const prodIndex = 1;
+        let prodCollection: string, prodName : string
 
-        const productNames = await dashboardPage.getProductNames();
-        if (productNames.length < 2) {
-            throw new Error("Not enough products to test removing multiple items from cart");
-        }
+        await step('Go to New Arrivals', async () => {
+            await homePage.clickMenuItem('newarrivals')
+            prodCollection = await cartpage.getProdCollection(prodIndex)
+            prodName = await cartpage.getProdName(prodIndex)
+        })
 
-        firstProductName = getRandomArrayElement(productNames);
-        secondProductName = getRandomArrayElement(productNames.filter(name => name !== firstProductName));
-        thirdProductName = getRandomArrayElement(productNames.filter(name => name !== firstProductName && name !== secondProductName));
+        await step('Add a product to cart', async () => {
+            await cartpage.addProductToCartByIndex(prodIndex)
+        })
 
-        await step(`Add products "${firstProductName}", "${secondProductName}" and "${thirdProductName}" to cart`, async () => {
-            await dashboardPage.addToCart(firstProductName!);
-            await dashboardPage.addToCart(secondProductName!);
-            await dashboardPage.addToCart(thirdProductName!);
-        });
+        await step('Verify the minicart is displayed', async () => {
+            await minicart.assertVisible(minicart.minicartRender)
+        })
 
-        await step("Go to cart", async () => {
-            await dashboardPage.goToCart();
-        });
+        await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
+            const minicartProdName = await minicart.getMinicartProdName(prodIndex)
+            const minicartProdCollection = await minicart.getMinicartProdCollection(prodIndex)
 
-        await step(`Remove all products from cart`, async () => {
-            await cartPage.removeFromCart(firstProductName!);
-            await cartPage.removeFromCart(secondProductName!);
-            await cartPage.removeFromCart(thirdProductName!);
-        });
-
-        await step("Verify all products are removed from cart", async () => {
-            await cartPage.assertProductRemoved(firstProductName!);
-            await cartPage.assertProductRemoved(secondProductName!);
-            await cartPage.assertProductRemoved(thirdProductName!);
-            await cartPage.assertShoppingCartBadgeRemoved();
-        });
-    });
-
+            expect(minicartProdCollection).toBe(prodCollection)
+            expect(minicartProdName).toBe(prodName)
+        })
+    })
 });

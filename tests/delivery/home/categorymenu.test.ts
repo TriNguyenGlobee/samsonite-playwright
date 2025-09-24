@@ -1,15 +1,15 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
 import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
-import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals/newarrivals.page";
-import { LuggagePage } from "../../../src/pages/implementing/productlistingpage/luggage/luggage.page";
-import { BackpacksPage } from "../../../src/pages/implementing/productlistingpage/backpacks/backpacks.page";
-import { BagsPage } from "../../../src/pages/implementing/productlistingpage/bags/bags.page";
-import { BrandPage } from "../../../src/pages/implementing/productlistingpage/brand/brand.page";
-import { OurBrandStoryPage } from "../../../src/pages/implementing/productlistingpage/ourbrandstory/ourbrandstory.page";
+import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
+import { LuggagePage } from "../../../src/pages/delivery/productlistingpage/luggage/luggage.page";
+import { BackpacksPage } from "../../../src/pages/delivery/productlistingpage/backpacks/backpacks.page";
+import { BagsPage } from "../../../src/pages/delivery/productlistingpage/bags/bags.page";
+import { BrandPage } from "../../../src/pages/delivery/productlistingpage/brand/brand.page";
+import { OurBrandStoryPage } from "../../../src/pages/delivery/productlistingpage/ourbrandstory/ourbrandstory.page";
 
 test.describe("Category Menu", () => {
-    test("All level 2 categories are displayed", async ({ basicAuthPage }) => {
+    test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
         const newarrivalspage = new NewArrivalsPage(basicAuthPage);
         const luggagepage = new LuggagePage(basicAuthPage);

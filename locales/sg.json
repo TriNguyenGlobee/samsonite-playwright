@@ -4,7 +4,8 @@
     "trackOder": "Track Order",
     "loginRegister": "Login/Register",
     "myaccount": "My account",
-    "logout": "Logout"
+    "logout": "Logout",
+    "addtocart": "Add to Cart"
   },
   "loginpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
@@ -101,5 +102,13 @@
     "offers": "Offers",
     "friendofsamsonite": "FRIENDS OF SAMSONITE",
     "ginzaflagshipstore": "銀座 旗艦店"
+  },
+  "minicart": {
+    "emptymsg": "Your Cart is Empty"
+  },
+  "cartpage": {
+    "title": "Shopping Cart | Samsonite Singapore",
+    "pageTitle": "Your Cart",
+    "emptymsg": "Your Shopping Cart is Empty"
   }
 }

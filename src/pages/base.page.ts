@@ -27,6 +27,8 @@ export class BasePage {
     readonly newsIcon: Locator;
     readonly usericon: Locator;
     readonly ginzaFlagshipStore: Locator;
+    readonly cartBadge: Locator;
+    readonly viewCartButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -50,6 +52,8 @@ export class BasePage {
         this.cartIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"minicart")]');
         this.newsIcon = this.rightNavbar.locator('xpath=.//a[contains(@class,"news-icon")]');
         this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
+        this.cartBadge = this.cartIcon.locator('xpath=.//span[@class="minicart-quantity"]');
+        this.viewCartButton = page.locator(`//div[@id="miniCartModal"]//a[contains(text(),"View Cart")]`)
     }
 
     // =========================
@@ -172,6 +176,14 @@ export class BasePage {
         });
     }
 
+    async goToCartPage(): Promise<void> {
+        await step("Go to Cart Page", async () => {
+            await this.click(this.cartIcon, `Click on Cart Icon`)
+            await this.viewCartButton.waitFor({ state: 'visible' });
+            await this.click(this.viewCartButton, `Click on Viewcart button`)
+        });
+    }
+
     async logout(): Promise<void> {
         await step("Logout", async () => {
             const logoutLink = this.page.locator(
@@ -218,6 +230,18 @@ export class BasePage {
             }
             return link.getAttribute('href')
         })
+    }
+
+    async getProdCollection(index: number): Promise<string> {
+        const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="product-collection"]`)
+
+        return (await prod.innerText()).trim()
+    }
+
+    async getProdName(index: number): Promise<string> {
+        const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
+
+        return (await prod.innerText()).trim()
     }
 
     // =========================
@@ -320,6 +344,9 @@ export class BasePage {
         }
     }
 
+    // Check Locator Inside
+    // Assert correct href, text
+    // check image? exist
     async assertLocatorInside(locate: Locator, data: LocatorInside) {
         if (data.href) {
             const link = locate.locator('xpath=.//a');
@@ -338,26 +365,28 @@ export class BasePage {
         }
     }
 
-    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string) {
-        let link = locate.locator('xpath=.//a');
+    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string, description?: string) {
+        await step(description || `Assert expected URL is: ${url}`, async () => {
+            let link = locate.locator('xpath=.//a');
 
-        const isVisible = await link.isVisible()
+            const isVisible = await link.isVisible()
 
-        if (!isVisible) {
-            link = locate
-        }
+            if (!isVisible) {
+                link = locate
+            }
 
-        const [newPage] = await Promise.all([
-            page.context().waitForEvent('page'),
-            link.click({ button: 'middle' }),
-        ]);
+            const [newPage] = await Promise.all([
+                page.context().waitForEvent('page', { timeout: 60000 }),
+                link.click({ button: 'middle' }),
+            ]);
 
-        await newPage.waitForLoadState('domcontentloaded');
-        const currentUrl = newPage.url()
+            await newPage.waitForLoadState('domcontentloaded');
+            const currentUrl = newPage.url()
 
-        await expect(currentUrl).toContain(url);
+            await expect(currentUrl).toContain(url);
 
-        await newPage.close();
+            await newPage.close();
+        })
     }
 }
 
