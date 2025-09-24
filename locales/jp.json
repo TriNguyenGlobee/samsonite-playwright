@@ -4,7 +4,8 @@
     "trackOder": "ご注文状況を確認する",
     "loginRegister": "マイアカウント",
     "myaccount": "マイアカウント",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "addtocart": "カートに入れる"
   },
   "loginpage": {
     "title": "サインイン｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
@@ -101,5 +102,13 @@
     "offers": "セール",
     "friendofsamsonite": "メンバーシップ",
     "ginzaflagshipstore": "銀座 旗艦店"
+  },
+  "minicart": {
+    "emptymsg": "カートは空です。"
+  },
+  "cartpage": {
+    "title": "ショッピングカート｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
+    "pageTitle": "カート",
+    "emptymsg": "カートは空です"
   }
 }
