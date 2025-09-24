@@ -160,13 +160,18 @@ export class LoginPage extends BasePage {
         try {
             const title = await this.page.title();
             if (!title.includes(t.loginpage('title'))) {
-                return false;
+                await step(`Received title: ${title} - Expected title: ${t.loginpage('title')}`, async()=>{
+                    return false;
+                })
             }
 
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "login";
-            if (!currentUrl.startsWith(expectedUrl)) return false;
-
+            if (!currentUrl.startsWith(expectedUrl)) {
+                await step(`Received URL: ${currentUrl} - Expected URL: ${expectedUrl}`, async()=>{
+                    return false;
+                })
+            }
             const elementsToCheck = [
                 this.signinTitle,
                 this.loginmsg,
