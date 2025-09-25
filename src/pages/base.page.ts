@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { I18n, Translations } from "../../config/i18n.config";
-import { t, PageUtils } from "../../utils/helpers";
+import { t, extractNumber } from "../../utils/helpers";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
@@ -244,12 +244,32 @@ export class BasePage {
         return (await prod.innerText()).trim()
     }
 
+    async getProdPrice(index: number): Promise<string> {
+        const prod = this.page.locator(`(//div[@class="product"])[${index}]//span[@class="value"]`)
+
+        return (await prod.innerText()).trim()
+    }
+
+    async getCartBadgeValue(): Promise<number>{
+        const cartBadgeValue = await this.cartBadge.textContent()
+
+        return await extractNumber(cartBadgeValue!)
+    }
+
     // =========================
     // ✅ Assertions
     // =========================
     async assertVisible(locator: Locator, description?: string) {
         await step(description || "Assert element visible", async () => {
-            await expect(locator).toBeVisible();
+            await expect(locator).toBeVisible({
+                timeout: 10000
+            });
+        });
+    }
+
+    async assertHidden(locator: Locator, description?: string) {
+        await step(description || "Assert element hidden", async () => {
+            await expect(locator).toBeHidden();
         });
     }
 

@@ -140,6 +140,15 @@ export function getRandomArrayElement<T>(arr: T[]): T {
   return arr[randomIndex];
 }
 
+export function extractNumber(priceText: string): number {
+  const cleaned = priceText.replace(/[^0-9.,]/g, "");
+  const normalized = cleaned.replace(/,/g, "");
+  const value = parseFloat(normalized);
+  
+  return isNaN(value) ? 0 : value;
+}
+
+
 /**
  * type-safe type for key
  */
@@ -338,7 +347,7 @@ export async function clickUntil(
         await conditionTarget.waitFor({ state: 'hidden', timeout: timeoutMs });
         return;
       }
-    } catch (e) {}
+    } catch (e) { }
 
     await page.waitForTimeout(delayMs);
   }

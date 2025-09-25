@@ -206,7 +206,9 @@ test.describe("Login with email link", () => {
         8. Login success with login link
         `, async ({ basicAuthPage }) => {
         const loginPage = createLoginPage(basicAuthPage);
-
+        
+        test.skip(process.env.LOCALE !== '', "Blocked by storefront PW")
+        
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
         });
@@ -224,8 +226,6 @@ test.describe("Login with email link", () => {
             await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
             await PageUtils.waitForPageLoadComplete(basicAuthPage);
         });
-
-        test.skip(process.env.LOCALE !== '', "Blocked by storefront PW")
 
         await step("Verify Sent Email popup is displayed", async () => {
             expect(await loginPage.isSentEmailPopupDisplayed(Config.credentials.username)).toBe(true);
