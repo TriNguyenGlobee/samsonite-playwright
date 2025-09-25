@@ -71,6 +71,7 @@ export const test = base.extend<MyFixtures>({
         });
 
         await use(page);
+        await context.close();
     },
 });
 
