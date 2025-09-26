@@ -30,14 +30,23 @@ export class ForgotPasswordPage extends BasePage {
     // =========================
     async isForgotPasswordpageDisplayed(): Promise<boolean> {
         try {
+            const expectedTitle = t.forgotpasswordpage('title');
+            await this.page.waitForFunction(
+                (expected) => document.title.includes(expected),
+                expectedTitle
+            );
             const title = await this.page.title();
             if (!title.includes(t.forgotpasswordpage('title'))) {
+                await step(`Received title: ${title} - Expected title: ${t.forgotpasswordpage('title')}`, async () => {}); 
                 return false;
             }
 
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "passwordreset";
-            if (!currentUrl.startsWith(expectedUrl)) return false;
+            if (!currentUrl.startsWith(expectedUrl)) {
+                await step(`Received URL: ${currentUrl} - Expected URL: ${expectedUrl}`, async () => {}); 
+                return false;
+            }
 
             const elementsToCheck = [
                 this.pageTitle,

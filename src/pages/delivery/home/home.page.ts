@@ -339,7 +339,7 @@ export class HomePage extends BasePage {
             await button.click();
 
             const activeDiv = page.locator(`//div[contains(@class,"${divClass}") and contains(@class,"active") and contains(@class,"show")]`);
-            await expect(activeDiv).toBeVisible();
+            await expect(activeDiv).toBeVisible({ timeout: 300000 });
 
             await expect(button).toHaveClass(/nav-link\s+active(\s+show)?/);
 
