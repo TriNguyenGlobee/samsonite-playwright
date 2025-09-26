@@ -8,11 +8,12 @@ import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { t } from "../../../utils/helpers";
+import { createLoginPage } from "../../../src/factories/login.factory";
 
 test.describe("Logout Completion Screen", () => {
     test(`1. Logout success`, async ({ loggedInPage }) => {
         const myPage = new MyPage(loggedInPage);
-        const loginPage = new LoginPage(loggedInPage);
+        const loginPage = createLoginPage(loggedInPage)
 
         await step("Logout", async () => {
             await myPage.logout();

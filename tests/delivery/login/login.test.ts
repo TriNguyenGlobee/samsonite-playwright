@@ -8,6 +8,7 @@ import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { t, PageUtils } from "../../../utils/helpers";
+import { createLoginPage } from "../../../src/factories/login.factory";
 
 test.describe("Login Screen", () => {
     test(`
@@ -15,7 +16,7 @@ test.describe("Login Screen", () => {
         2. Passwordreset screen is displayed
         3. Register page is displayed
         `, async ({ basicAuthPage }) => {
-        const loginPage = new LoginPage(basicAuthPage);
+        const loginPage = createLoginPage(basicAuthPage);
         const forgotPasswordPage = new ForgotPasswordPage(basicAuthPage);
         const registerPage = new RegisterPage(basicAuthPage);
 
@@ -49,7 +50,9 @@ test.describe("Login Screen", () => {
     });
 
     test(`4. Membership page is displayed`, async ({ basicAuthPage }) => {
-        const loginPage = new LoginPage(basicAuthPage);
+        test.skip(process.env.LOCALE !== 'jp', "Membership page for Japan only");
+
+        const loginPage = createLoginPage(basicAuthPage);
         const membershipPage = new MembershipPage(basicAuthPage);
 
         await step("Go to login page", async () => {
@@ -69,7 +72,7 @@ test.describe("Login Screen", () => {
 test.describe('Login by normal email', () => {
     test(`1. Login success`, async ({ basicAuthPage }) => {
         const homePage = new HomePage(basicAuthPage);
-        const loginPage = new LoginPage(basicAuthPage);
+        const loginPage = createLoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
 
         await step("Go to login page", async () => {
@@ -90,7 +93,7 @@ test.describe('Login by normal email', () => {
         3. Login with wrong account
         4. Login with empty email and password
         `, async ({ basicAuthPage }) => {
-        const loginPage = new LoginPage(basicAuthPage);
+        const loginPage = createLoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
 
         await step("Go to login page", async () => {
@@ -106,7 +109,7 @@ test.describe('Login by normal email', () => {
         });
 
         await step("Verify error message is displayed", async () => {
-            expect(await loginPage.assertVisible(loginPage.invalidEmailMsg, "Invalid email message is displayed"));
+            expect(await loginPage.invalidEmailMsg).toContainText(t.loginpage('invalidEmailMsg'))
         });
 
         await step("Reset username and password fields", async () => {
@@ -153,7 +156,7 @@ test.describe("Login with email link", () => {
         3. Clicking Send Login Link button with invalid email
         4. Clicking Send Login Link button without checking captcha
         `, async ({ basicAuthPage }) => {
-        const loginPage = new LoginPage(basicAuthPage);
+        const loginPage = createLoginPage(basicAuthPage);
 
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
@@ -184,9 +187,9 @@ test.describe("Login with email link", () => {
         });
 
         await step("Verify invalid email message is displayed", async () => {
-            expect(await loginPage.assertVisible(loginPage.popupInvalidEmailMsg, "Invalid email message is displayed"));
+            expect(await loginPage.popupInvalidEmailMsg).toContainText(t.loginpage('popupInvalidEmailMsg'))
         });
-        
+
         await step("Input valid email and click send login link button", async () => {
             await loginPage.popupEmailTextbox.fill(Config.credentials.username);
             await loginPage.click(loginPage.popupSendEmailButton, "Click send login link button");
@@ -202,8 +205,10 @@ test.describe("Login with email link", () => {
         7. Login request email is sent
         8. Login success with login link
         `, async ({ basicAuthPage }) => {
-        const loginPage = new LoginPage(basicAuthPage);
-
+        const loginPage = createLoginPage(basicAuthPage);
+        
+        test.skip(process.env.LOCALE !== '', "Blocked by storefront PW")
+        
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
         });
@@ -233,7 +238,10 @@ test.describe("Login by Google login", () => {
         1. SIGN IN WITH GOOGLE Popup is displayed
         2. Login success by Google account
         `, async ({ basicAuthPage }) => {
-        const loginPage = new LoginPage(basicAuthPage);
+
+        test.skip(process.env.LOCALE !== '', "Blocked by google");
+
+        const loginPage = createLoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
 
         await step("Go to login page", async () => {

@@ -4,6 +4,7 @@ import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { I18n } from "../../config/i18n.config";
 import { closeModalIfPresent } from "../../utils/helpers";
+import { createLoginPage } from '../factories/login.factory'
 
 type MyFixtures = {
     user: { username: string; password: string };
@@ -53,9 +54,9 @@ export const test = base.extend<MyFixtures>({
         });
 
         const page = await context.newPage();
-        const loginPage = new LoginPage(page);
+        const loginPage = createLoginPage(page);
 
-        await step("Go to Login Page", async () => {
+        await step("Go to Main Page", async () => {
             await page.goto(Config.baseURL);
         });
 
@@ -70,6 +71,7 @@ export const test = base.extend<MyFixtures>({
         });
 
         await use(page);
+        await context.close();
     },
 });
 
