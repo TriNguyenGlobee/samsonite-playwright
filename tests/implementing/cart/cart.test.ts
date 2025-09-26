@@ -88,12 +88,11 @@ test.describe("Add products to cart without login", () => {
             prodName = await cartpage.getProdName(prodIndex)
         })
 
-        await step('Add a product to cart', async () => {
-            await cartpage.addProductToCartByIndex(prodIndex)
-        })
-
-        await step('Verify the minicart is displayed', async () => {
-            await minicart.assertVisible(minicart.minicartRender)
+        await step('Verify the minicart is displayed after adding product to cart', async () => {
+            await Promise.all([
+                await expect(minicart.minicartRender).toBeVisible({ timeout: 5000 }),
+                await cartpage.addProductToCartByIndex(prodIndex)
+            ]);
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
@@ -244,7 +243,7 @@ test.describe("Add products to cart without login", () => {
         15. Verify the number of products in the Cart page
         16. Verify the total amount payable is correct
         17. Checkout login page is displayed when clicking on checkout button
-        18. Amazone pay page is displayed when clicking on Amanazon pay butto
+        18. Amazone pay page is displayed when clicking on Amanazon pay button
         19. Remove product modal is displayed when remmoving a product in Cart page
         20. Remove product modal can be closed by close button and cancel button
         21. Remove all products in the Cart page
