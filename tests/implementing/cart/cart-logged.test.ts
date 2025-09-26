@@ -132,7 +132,7 @@ test.describe("Add products to cart after login", () => {
 
         await step('Verify the minicart is displayed after adding product to cart', async () => {
             await Promise.all([
-                expect(minicart.minicartRender).toBeVisible({ timeout: 5000 }),
+                await expect(minicart.minicartRender).toBeVisible({ timeout: 5000 }),
                 await cartpage.addProductToCartByIndex(prodIndex)
             ]);
         })
@@ -285,7 +285,7 @@ test.describe("Add products to cart after login", () => {
         15. Verify the number of products in the Cart page
         16. Verify the total amount payable is correct
         17. Checkout page is displayed when clicking on checkout button
-        18. Amazone pay page is displayed when clicking on Amanazon pay butto
+        18. Amazone pay page is displayed when clicking on Amanazon pay button
         19. Remove product modal is displayed when remmoving a product in Cart page
         20. Remove product modal can be closed by close button and cancel button
         21. Remove all products in the Cart page

@@ -15,6 +15,10 @@ export class CartPage extends BasePage {
     readonly checkoutButton: Locator;
     readonly amazonePayButton: Locator;
     readonly prodRow: Locator;
+    readonly giftserviceButton: Locator;
+    readonly giftPopup: Locator;
+    readonly giftCheckbox: Locator;
+    readonly addGiftButton: Locator; 
 
     constructor(page: Page) {
         super(page);
@@ -28,7 +32,11 @@ export class CartPage extends BasePage {
         this.removeProdModalCancelButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="キャンセル"]`)
         this.checkoutButton = page.locator(`//div[contains(@class,"cart-page")]//a[normalize-space(text())="注文手続きへ"]`)
         this.amazonePayButton = page.locator(`//div[contains(@class,"cart-page")]//div[contains(@class,"amazon-pay-onetime-button")]`).locator('div.amazonpay-button-view1');
-        this.prodRow = page.locator(`(//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")])`)
+        this.prodRow = page.locator(`//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")]`)
+        this.giftserviceButton = this.prodRow.locator(`xpath=.//button[contains(@class,"gift")]`)
+        this.giftPopup = page.locator(`//nav[@class="gift-popup active"]//div[@class="popup-content"]`)
+        this.giftCheckbox = this.giftPopup.locator(`xpath=.//input[@type="checkbox" and @id="isGift"]`)
+        this.addGiftButton = this.giftPopup.locator(`xpath=.//button[contains(@class,"add-gift")]`)
     }
 
     // =========================
@@ -48,6 +56,15 @@ export class CartPage extends BasePage {
 
             await this.click(addButton, `Add product: ${collect} - ${name} to cart`);
         }
+    }
+
+    async addGiftService(index: number) {
+        await this.click(this.giftserviceButton.nth(index), `Click gift service button at index ${index}`)
+        await this.giftPopup.waitFor({ state: 'visible' })
+        await this.giftCheckbox.check()
+        await this.click(this.addGiftButton)
+
+        await PageUtils.waitForDomAvailable(this.page)
     }
 
     /**
@@ -79,11 +96,15 @@ export class CartPage extends BasePage {
                     timeoutMs: 3000
                 })
                 await this.click(this.removeProdModalConfirmButton, 'Confirm remove product')
-                await this.waitFor(this.removeProductModal, 'hidden')
+                await this.removeProductModal.waitFor({ state: 'hidden' })
 
                 await PageUtils.waitForDomAvailable(this.page, 6000)
 
-                await expect(this.removeProductButton).toHaveCount(count-(i+1))
+                if (count - (i + 1) == 0) {
+                    await this.removeProductButton.waitFor({ state: "hidden", timeout: 10000 })
+                }
+
+                await expect(this.removeProductButton).toHaveCount(count - (i + 1))
             })
         }
     }
