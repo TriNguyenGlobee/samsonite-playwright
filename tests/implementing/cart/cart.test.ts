@@ -89,9 +89,9 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify the minicart is displayed after adding product to cart', async () => {
-            await Promise.all([
-                await expect(minicart.minicartRender).toBeVisible({ timeout: 5000 }),
-                await cartpage.addProductToCartByIndex(prodIndex)
+            await Promise.all([       
+                cartpage.addProductToCartByIndex(prodIndex),
+                expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
         })
 

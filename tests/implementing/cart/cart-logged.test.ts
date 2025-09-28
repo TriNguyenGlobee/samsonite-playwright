@@ -128,12 +128,14 @@ test.describe("Add products to cart after login", () => {
             await homePage.clickMenuItem('newarrivals')
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
+            console.log(`Product collection: ${prodCollection}, Product name: ${prodName}, On new arrivals page`);
         })
 
         await step('Verify the minicart is displayed after adding product to cart', async () => {
+            console.log('Preparing to add product to cart - step 1');
             await Promise.all([
-                await expect(minicart.minicartRender).toBeVisible({ timeout: 5000 }),
-                await cartpage.addProductToCartByIndex(prodIndex)
+                cartpage.addProductToCartByIndex(prodIndex),
+                expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
         })
 

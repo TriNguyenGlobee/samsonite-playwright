@@ -25,9 +25,14 @@ async function waitForDomAvailable(page: Page, timeout: number = 10000): Promise
   await page.waitForLoadState('domcontentloaded', { timeout });
 }
 
+async function waitForPageLoad(page: Page, timeout: number = 10000): Promise<void> {
+  await page.waitForLoadState('load', { timeout });
+}
+
 export const PageUtils = {
   waitForPageLoadComplete,
   waitForDomAvailable,
+  waitForPageLoad
 };
 
 /**
@@ -318,7 +323,7 @@ export async function scrollToBottom(page: Page, distance: number = 100, delay: 
   );
 }
 
-// Click a locator until another locator visible|invisible
+// Click a locator until another locator visible|hidden
 export async function clickUntil(
   page: Page,
   clickTarget: Locator,
