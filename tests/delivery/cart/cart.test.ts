@@ -1,41 +1,20 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { CartPage } from "../../../src/pages/implementing/cart/cart.page";
-import { MinicartPage } from "../../../src/pages/implementing/cart/minicart.page";
+import { CartPage } from "../../../src/pages/delivery/cart/cart.page";
+import { MinicartPage } from "../../../src/pages/delivery/cart/minicart.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { getRandomArrayElement, t, clickUntil, extractNumber } from "../../../utils/helpers";
 import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { Locator } from "@playwright/test";
 
-test.describe("Empty cart after login", () => {
-    let initialCartBadge = 0
-
-    test.beforeAll(async ({ loggedInPage }) => {
-        const homepage = new HomePage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
-
-        initialCartBadge = await homepage.getCartBadgeValue()
-
-        if (initialCartBadge > 0) {
-            await step('Verify that all products in minicart are removed', async () => {
-                await loggedInPage.goto(`${Config.baseURL}cart`)
-
-                await cartpage.removeAllProducts()
-
-                const numberOfProd = await cartpage.getNumberOfProducts()
-
-                expect(numberOfProd).toBe(0)
-            })
-        }
-    });
-
+test.describe("Empty cart without login", () => {
     test(`
         1. Minicart is displayed correctly
         2. Click shopping cart button to close minicart
         3. Explore by category
-        `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
-        const minicartPage = new MinicartPage(loggedInPage)
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const minicartPage = new MinicartPage(basicAuthPage)
 
         await step("Click on Cart icon", async () => {
             await homePage.click(homePage.cartIcon)
@@ -60,66 +39,45 @@ test.describe("Empty cart after login", () => {
         await step("Explore by footer category", async () => {
             const expectedURL = await homePage.getLocatorURL(minicartPage.footerCategoryItem.nth(1))
 
-            await clickUntil(loggedInPage, homePage.cartIcon, minicartPage.minicartRender, 'visible', {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicartPage.minicartRender, 'visible', {
                 delayMs: 500,
                 maxTries: 3,
                 timeoutMs: 3000
             })
 
-            await minicartPage.assertNavigatedURLByClickLocator(loggedInPage, minicartPage.footerCategoryItem.nth(1), expectedURL!)
+            await minicartPage.assertNavigatedURLByClickLocator(basicAuthPage, minicartPage.footerCategoryItem.nth(1), expectedURL!)
         })
     })
 
-    test(`4. Cart page is displayed`, async ({ loggedInPage }) => {
-        const cartpage = new CartPage(loggedInPage)
+    test(`4. Cart page is displayed`, async ({ basicAuthPage }) => {
+        const cartpage = new CartPage(basicAuthPage)
 
         await step('Go to Cart page by URL', async () => {
-            await loggedInPage.goto(`${Config.baseURL}cart`)
+            await basicAuthPage.goto(`${Config.baseURL}cart`)
         })
 
         await step('Verify that the cart page is displayed', async () => {
             await cartpage.isCartPageDisplayed()
 
-            expect(cartpage.pageTitle).toHaveText(t.cartpage('pageTitle'))
-            expect(cartpage.emptymsg).toHaveText(t.cartpage('emptymsg'))
+            await expect(cartpage.pageTitle).toHaveText(t.cartpage('pageTitle'))
+            await expect(cartpage.emptymsg).toHaveText(t.cartpage('emptymsg'))
         })
     })
 });
 
-test.describe("Add products to cart after login", () => {
-    let initialCartBadge = 0
-
-    test.beforeEach(async ({ loggedInPage }) => {
-        const homepage = new HomePage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
-
-        initialCartBadge = await homepage.getCartBadgeValue()
-
-        if (initialCartBadge > 0) {
-            await step('Verify that all products in minicart are removed', async () => {
-                await loggedInPage.goto(`${Config.baseURL}cart`)
-
-                await cartpage.removeAllProducts()
-
-                const numberOfProd = await cartpage.getNumberOfProducts()
-
-                expect(numberOfProd).toBe(0)
-            })
-        }
-    });
-
+test.describe("Add products to cart without login", () => {
     test(`
         1. Minicart is displayed after adding product to cart
         2. Prodcollection and prodname are displayed correctly in the minicart
         3. Viewcart button and Checkout button are displayed in the minicart
         4. Amazon pay button is displayed in the minicart
         5. Cart page is displayed when clicking on view cart button
-        6. Checkout page is displayed when clicking on checkout button
+        6. Checkout login page is displayed when clicking on checkout button
         7. Amazone pay page is displayed when clicking on Amanazon pay button
-        `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
-        const minicart = new MinicartPage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const minicart = new MinicartPage(basicAuthPage)
+        const cartpage = new CartPage(basicAuthPage)
 
         const prodIndex = 1;
         let prodCollection: string, prodName: string
@@ -132,8 +90,8 @@ test.describe("Add products to cart after login", () => {
 
         await step('Verify the minicart is displayed after adding product to cart', async () => {
             await Promise.all([
-                await expect(minicart.minicartRender).toBeVisible({ timeout: 5000 }),
-                await cartpage.addProductToCartByIndex(prodIndex)
+                cartpage.addProductToCartByIndex(prodIndex),
+                expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
         })
 
@@ -155,31 +113,31 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Verify the cart page is displayed when clicking on view cart button', async () => {
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
                 delayMs: 500,
                 maxTries: 3,
                 timeoutMs: 3000
             })
 
-            await minicart.assertNavigatedURLByClickLocator(loggedInPage, minicart.viewCartButton, `${Config.baseURL}cart`,
+            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.viewCartButton, `${Config.baseURL}cart`,
                 "Click on View Cart button and check Cart page is displayed"
             )
         })
 
-        await step('Verify the checkout page is displayed when clicking on checkout button', async () => {
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+        await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
                 delayMs: 500,
                 maxTries: 3,
                 timeoutMs: 3000
             })
 
-            await minicart.assertNavigatedURLByClickLocator(loggedInPage, minicart.checkoutButton, `${Config.baseURL}checkout`,
+            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.checkoutButton, `${Config.baseURL}checkoutlogin`,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
         })
 
         await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
                 delayMs: 500,
                 maxTries: 3,
                 timeoutMs: 3000
@@ -198,10 +156,10 @@ test.describe("Add products to cart after login", () => {
         11. Remove product modal is displayed when remmoving a product in the minicart
         12. Remove product modal can be closed by close button and cancel button
         13. Remove all products in the cart
-        `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
-        const minicart = new MinicartPage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const minicart = new MinicartPage(basicAuthPage)
+        const cartpage = new CartPage(basicAuthPage)
 
         const prodIndexes = [1, 2, 3];
 
@@ -234,7 +192,7 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Verify remove product modal is displayed when removing a product in the minicart', async () => {
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
                 delayMs: 300,
                 maxTries: 3,
                 timeoutMs: 3000
@@ -250,7 +208,7 @@ test.describe("Add products to cart after login", () => {
 
             await minicart.assertHidden(minicart.removeProductModal, 'Assert remove product modal is closed')
 
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
                 delayMs: 300,
                 maxTries: 3,
                 timeoutMs: 3000
@@ -264,7 +222,7 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Verify that all products in minicart are removed', async () => {
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
                 delayMs: 300,
                 maxTries: 3,
                 timeoutMs: 3000
@@ -283,15 +241,15 @@ test.describe("Add products to cart after login", () => {
     test(`
         14. Prodcollection and prodname are displayed correctly in Cart page
         15. Verify the number of products in the Cart page
-        16. Verify the total amount payable is correct
-        17. Checkout page is displayed when clicking on checkout button
-        18. Amazone pay page is displayed when clicking on Amanazon pay button
+        16. Checkout login page is displayed when clicking on checkout button
+        17. Amazone pay page is displayed when clicking on Amanazon pay button
+        18. Verify the total amount payable is correct
         19. Remove product modal is displayed when remmoving a product in Cart page
         20. Remove product modal can be closed by close button and cancel button
         21. Remove all products in the Cart page
-        `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
-        const cartpage = new CartPage(loggedInPage)
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const cartpage = new CartPage(basicAuthPage)
 
         const prodIndexes = [1, 2, 3];
         const prodIndex = 1;
@@ -312,7 +270,7 @@ test.describe("Add products to cart after login", () => {
         const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
         await step('Go to Cart page by URL', async () => {
-            await loggedInPage.goto(`${Config.baseURL}cart`)
+            await basicAuthPage.goto(`${Config.baseURL}cart`)
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
@@ -328,7 +286,7 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
-            await cartpage.assertNavigatedURLByClickLocator(loggedInPage, cartpage.checkoutButton, `${Config.baseURL}checkout`,
+            await cartpage.assertNavigatedURLByClickLocator(basicAuthPage, cartpage.checkoutButton, `${Config.baseURL}checkoutlogin`,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
         })
@@ -340,7 +298,7 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Go to Cart page by URL', async () => {
-            await loggedInPage.goto(`${Config.baseURL}cart`)
+            await basicAuthPage.goto(`${Config.baseURL}cart`)
         })
 
         const firstMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[0]));
@@ -380,6 +338,44 @@ test.describe("Add products to cart after login", () => {
             const numberOfProd = await cartpage.getNumberOfProducts()
 
             expect(numberOfProd).toBe(0)
+        })
+    })
+
+    test(`
+        22. Add gift service
+        23. Remove gift service
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const cartpage = new CartPage(basicAuthPage)
+
+        const prodIndex = 1;
+
+        await step('Go to New Arrivals', async () => {
+            await homePage.clickMenuItem('newarrivals')
+        })
+
+        await step('Add a product to cart', async () => {
+            await cartpage.addProductToCartByIndex(prodIndex)
+        })
+
+        await step('Go to Cart page by URL', async () => {
+            await basicAuthPage.goto(`${Config.baseURL}cart`)
+        })
+
+        await step('Add a gift service', async () => {
+            await cartpage.addGiftService(prodIndex)
+        })
+
+        await step('Verify that gift service is added', async () => {
+            await expect(cartpage.prodGiftRow).toBeVisible()
+        })
+
+        await step('Remove a gift service', async () => {
+            await cartpage.click(cartpage.removeGiftServiceButton, "Click gift service button")
+        })
+
+        await step('Verify that gift service is removed', async () => {
+            await expect(cartpage.prodGiftRow).not.toBeVisible()
         })
     })
 });
