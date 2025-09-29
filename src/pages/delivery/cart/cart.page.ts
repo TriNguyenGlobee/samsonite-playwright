@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t, PageUtils, clickUntil } from "../../../../utils/helpers";
+import { t, PageUtils, clickUntil, delay } from "../../../../utils/helpers";
 
 export class CartPage extends BasePage {
     readonly removeProductButton: Locator;
@@ -16,9 +16,11 @@ export class CartPage extends BasePage {
     readonly amazonePayButton: Locator;
     readonly prodRow: Locator;
     readonly giftserviceButton: Locator;
+    readonly prodGiftRow: Locator;
     readonly giftPopup: Locator;
     readonly giftCheckbox: Locator;
-    readonly addGiftButton: Locator; 
+    readonly addGiftButton: Locator;
+    readonly removeGiftServiceButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -33,10 +35,12 @@ export class CartPage extends BasePage {
         this.checkoutButton = page.locator(`//div[contains(@class,"cart-page")]//a[normalize-space(text())="注文手続きへ"]`)
         this.amazonePayButton = page.locator(`//div[contains(@class,"cart-page")]//div[contains(@class,"amazon-pay-onetime-button")]`).locator('div.amazonpay-button-view1');
         this.prodRow = page.locator(`//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")]`)
-        this.giftserviceButton = this.prodRow.locator(`xpath=.//button[contains(@class,"gift")]`)
+        this.giftserviceButton = this.prodRow.locator(`xpath=.//button[contains(@class,"add-gift")]`)
+        this.prodGiftRow = this.prodRow.locator(`xpath=.//div[contains(@class,"row product-gift-card")]`)
         this.giftPopup = page.locator(`//nav[@class="gift-popup active"]//div[@class="popup-content"]`)
-        this.giftCheckbox = this.giftPopup.locator(`xpath=.//input[@type="checkbox" and @id="isGift"]`)
+        this.giftCheckbox = this.giftPopup.locator(`xpath=.//label[@for="isGift"]`)
         this.addGiftButton = this.giftPopup.locator(`xpath=.//button[contains(@class,"add-gift")]`)
+        this.removeGiftServiceButton = this.prodGiftRow.locator(`xpath=.//button[contains(@class,"remove-gift")]`)
     }
 
     // =========================
@@ -59,11 +63,21 @@ export class CartPage extends BasePage {
     }
 
     async addGiftService(index: number) {
-        await this.click(this.giftserviceButton.nth(index), `Click gift service button at index ${index}`)
+        await this.click(this.giftserviceButton.nth(index - 1), `Click gift service button at index ${index}`)
         await this.giftPopup.waitFor({ state: 'visible' })
-        await this.giftCheckbox.check()
-        await this.click(this.addGiftButton)
 
+        await this.giftCheckbox.click();
+        await expect(this.giftCheckbox).toBeChecked();
+
+        await this.click(this.addGiftButton)
+        await PageUtils.waitForDomAvailable(this.page)
+    }
+
+    async removeGiftService(index: number) {
+        await PageUtils.waitForDomAvailable(this.page)
+        await this.removeGiftServiceButton.scrollIntoViewIfNeeded()
+
+        await this.click(this.removeGiftServiceButton.nth(index - 1), `Click remove gift service button at index ${index}`)
         await PageUtils.waitForDomAvailable(this.page)
     }
 
@@ -76,10 +90,14 @@ export class CartPage extends BasePage {
         for (const i of indices) {
             const addButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${i}]`);
 
-            await this.click(addButton, `Add product at index ${i} to cart`)
-            //await delay(5000)
+            await addButton.scrollIntoViewIfNeeded()
 
-            await this.waitFor(this.minicartRender)
+            await delay(300)
+
+            await Promise.all([
+                await this.click(addButton, `Add product at index ${i} to cart`),
+                expect(this.minicartRender).toBeVisible({ timeout: 5000 })
+            ]);
 
             await expect(this.minicartRender).toBeHidden();
         }

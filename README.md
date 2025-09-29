@@ -30,6 +30,12 @@ npm run test
 
 - Run a single test login.test.ts:
 npm run test:login
+
+- Run test with specified options: (example)
+CMD: run-tests.bat jp stg tests/delivery
+Powershell: .\run-tests.bat jp stg tests/delivery
+OR:
+npx cross-env ENV=stg LOCALE=jp npx playwright test --project=chromium tests/delivery/login 
  
 ## Chrome 
 - Run test with Chrome (ENV=dev) - default:
