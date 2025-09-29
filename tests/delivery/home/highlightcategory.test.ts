@@ -1,7 +1,7 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
 import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
-import { hightlightCategoryItems } from "../../../utils/data";
+import { hightlightCategoryItems } from "../../../utils/data/stg/jp/data";
 
 test.describe("Highlight category", () => {
     test(`1. Highlight category section is displayed with full information`, async ({ basicAuthPage }) => {

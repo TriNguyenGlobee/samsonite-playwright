@@ -1,9 +1,11 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
 import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
-import { carouselItems } from "../../../utils/data";
+import { loadTestData } from "../../../utils/data";
 
 test.describe("Banner Activity", () => {
+    const { carouselItems } = loadTestData();
+
     test(`
         1. The number of banners is correct
         2. There is 1 active banner

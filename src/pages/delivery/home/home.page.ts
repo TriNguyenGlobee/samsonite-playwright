@@ -362,10 +362,12 @@ export class HomePage extends BasePage {
         await PageUtils.waitForDomAvailable(page, 20000)
         const title = page.locator('//div[@class="magazine-title"]');
         const itemList = page.locator(`//div[@class="magazine-title"]/following-sibling::div[@class="swiper-wrapper"]`)
+        const itemRow = page.locator(`//div[@class="magazine-title"]/following-sibling::div[@class="swiper-wrapper"]//div[contains(@class,"swiper-slide")]`)
 
         const prevButton = title.locator('xpath=./following-sibling::div[contains(@class,"swiper-button-prev")]');
         const nextButton = title.locator('xpath=./following-sibling::div[contains(@class,"swiper-button-next")]');
         const getActiveItem = () => itemList.locator('xpath=.//div[contains(@class,"swiper-slide swiper-slide-active")]');
+        const items = await itemRow.count()
 
         await expect(prevButton).toHaveClass(/swiper-button-disabled/);
         await expect(nextButton).not.toHaveClass(/swiper-button-disabled/);
@@ -381,9 +383,9 @@ export class HomePage extends BasePage {
         }
         const currentActive = getActiveItem();
         const currentLabel = await currentActive.getAttribute('aria-label');
-        expect(currentLabel).not.toBe('1 / 8');
+        expect(currentLabel).not.toBe(`1 / ${items}`);
 
-        const item1 = page.locator('//div[@class="tile-item swiper-slide" and @aria-label="1 / 8"]');
+        const item1 = page.locator(`//div[@class="tile-item swiper-slide" and @aria-label="1 / ${items}"]`);
         await expect(item1).not.toHaveClass(/swiper-slide-active/);
 
         while (true) {
@@ -394,7 +396,7 @@ export class HomePage extends BasePage {
             if (prevClass?.includes('swiper-button-disabled')) {
                 const activeItem = getActiveItem();
                 const ariaLabel = await activeItem.getAttribute('aria-label');
-                expect(ariaLabel).toBe('1 / 8');
+                expect(ariaLabel).toBe(`1 / ${items}`);
                 break;
             }
         }

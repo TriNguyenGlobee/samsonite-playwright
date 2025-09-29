@@ -4,7 +4,7 @@ import { t, delay } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { step } from "allure-js-commons";
 
-export class BrandPage extends BasePage {
+export abstract class BrandPage extends BasePage {
     readonly logoImg: Locator;
     readonly baseLocator: Locator;
 
@@ -50,16 +50,6 @@ export class BrandPage extends BasePage {
     // =========================
     // ✅ Assertions
     // =========================
-    async assertBrandItems(page: Page): Promise<void> {
-        await delay(3000);
-
-        const brandItems = [
-            { text: 'サムソナイト商品一覧', href: '/brand/samsonite/' },
-            { text: 'サムソナイト・ブラックレーベル商品一覧', href: '/brand/samsonite-black/' },
-            { text: 'サムソナイト・レッド商品一覧', href: '/brand/samsonite-red/' },
-            { text: 'ハートマン商品一覧', href: '/brand/hartmann/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, undefined, brandItems);
-    }
+    abstract assertBrandItems(page: Page): Promise<void>;
 
 }

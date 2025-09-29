@@ -1,7 +1,7 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
 import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
-import { recommendedProductItems } from "../../../utils/data";
+import { recommendedProductItems } from "../../../utils/data/stg/jp/data";
 import { scrollToBottom } from "../../../utils/helpers";
 
 test.describe("Recommended Products Section", () => {

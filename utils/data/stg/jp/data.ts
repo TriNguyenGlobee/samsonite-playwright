@@ -17,3 +17,11 @@ export const recommendedProductItems = [
     { buttonText: 'For Her', divClass: 'product-pills-3' },
     { buttonText: 'For Him', divClass: 'product-pills-4' }
 ];
+
+export const campaignData = [
+    {
+        href: "/newsdetail?id=news-samsonite-jp-2025-08-13-evoaz-campaign",
+        rightSideTitleText: "EVOA Zキャンペーン開催中。限定色と新モデルが登場",
+        hasImage: true
+    }
+]
