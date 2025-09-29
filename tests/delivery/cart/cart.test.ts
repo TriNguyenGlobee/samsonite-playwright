@@ -1,6 +1,6 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { CartPage } from "../../../src/pages/implementing/cart/cart.page";
-import { MinicartPage } from "../../../src/pages/implementing/cart/minicart.page";
+import { CartPage } from "../../../src/pages/delivery/cart/cart.page";
+import { MinicartPage } from "../../../src/pages/delivery/cart/minicart.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { getRandomArrayElement, t, clickUntil, extractNumber } from "../../../utils/helpers";
@@ -89,7 +89,7 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify the minicart is displayed after adding product to cart', async () => {
-            await Promise.all([       
+            await Promise.all([
                 cartpage.addProductToCartByIndex(prodIndex),
                 expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
@@ -241,9 +241,9 @@ test.describe("Add products to cart without login", () => {
     test(`
         14. Prodcollection and prodname are displayed correctly in Cart page
         15. Verify the number of products in the Cart page
-        16. Verify the total amount payable is correct
-        17. Checkout login page is displayed when clicking on checkout button
-        18. Amazone pay page is displayed when clicking on Amanazon pay button
+        16. Checkout login page is displayed when clicking on checkout button
+        17. Amazone pay page is displayed when clicking on Amanazon pay button
+        18. Verify the total amount payable is correct
         19. Remove product modal is displayed when remmoving a product in Cart page
         20. Remove product modal can be closed by close button and cancel button
         21. Remove all products in the Cart page
@@ -284,7 +284,7 @@ test.describe("Add products to cart without login", () => {
         await step('Verify number of products in Cart page', async () => {
             expect(await cartpage.getNumberOfProducts()).toBe(3)
         })
-        
+
         await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
             await cartpage.assertNavigatedURLByClickLocator(basicAuthPage, cartpage.checkoutButton, `${Config.baseURL}checkoutlogin`,
                 "Click on Checkout button and check Checkout Login page is displayed"
@@ -338,6 +338,44 @@ test.describe("Add products to cart without login", () => {
             const numberOfProd = await cartpage.getNumberOfProducts()
 
             expect(numberOfProd).toBe(0)
+        })
+    })
+
+    test(`
+        22. Add gift service
+        23. Remove gift service
+        `, async ({ basicAuthPage }) => {
+        const homePage = new HomePage(basicAuthPage);
+        const cartpage = new CartPage(basicAuthPage)
+
+        const prodIndex = 1;
+
+        await step('Go to New Arrivals', async () => {
+            await homePage.clickMenuItem('newarrivals')
+        })
+
+        await step('Add a product to cart', async () => {
+            await cartpage.addProductToCartByIndex(prodIndex)
+        })
+
+        await step('Go to Cart page by URL', async () => {
+            await basicAuthPage.goto(`${Config.baseURL}cart`)
+        })
+
+        await step('Add a gift service', async () => {
+            await cartpage.addGiftService(prodIndex)
+        })
+
+        await step('Verify that gift service is added', async () => {
+            await expect(cartpage.prodGiftRow).toBeVisible()
+        })
+
+        await step('Remove a gift service', async () => {
+            await cartpage.click(cartpage.removeGiftServiceButton, "Click gift service button")
+        })
+
+        await step('Verify that gift service is removed', async () => {
+            await expect(cartpage.prodGiftRow).not.toBeVisible()
         })
     })
 });

@@ -32,7 +32,8 @@ npm run test
 npm run test:login
 
 - Run test with specified options: (example)
-run-tests.bat jp stg tests/delivery
+CMD: run-tests.bat jp stg tests/delivery
+Powershell: .\run-tests.bat jp stg tests/delivery
 OR:
 npx cross-env ENV=stg LOCALE=jp npx playwright test --project=chromium tests/delivery/login 
  
