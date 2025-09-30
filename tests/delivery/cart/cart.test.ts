@@ -103,13 +103,36 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify view cart button and checkout button are displayed', async () => {
+            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 300,
+                maxTries: 3,
+                timeoutMs: 5000
+            })
             await minicart.assertVisible(minicart.viewCartButton)
             await minicart.assertVisible(minicart.checkoutButton)
         })
 
-        await step('Verify amazone pay button is displayed', async () => {
-            await minicart.assertVisible(minicart.amazonePayButton)
-        })
+        if (process.env.LOCALE === 'jp') {
+            await step('Verify amazone pay button is displayed', async () => {
+                await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                    delayMs: 300,
+                    maxTries: 3,
+                    timeoutMs: 5000
+                })
+                await minicart.assertVisible(minicart.amazonePayButton)
+            })
+
+            await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
+                await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                    delayMs: 500,
+                    maxTries: 3,
+                    timeoutMs: 3000
+                })
+
+                await homePage.click(minicart.amazonePayButton, "Click on Amazone pay button")
+                await homePage.assertUrl(/amazon\.co\.jp/)
+            })
+        }
 
         await step('Verify the cart page is displayed when clicking on view cart button', async () => {
             await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
@@ -133,18 +156,6 @@ test.describe("Add products to cart without login", () => {
             await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.checkoutButton, `${Config.baseURL}checkoutlogin`,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
-        })
-
-        await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
-            await clickUntil(basicAuthPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
-                delayMs: 500,
-                maxTries: 3,
-                timeoutMs: 3000
-            })
-
-            await homePage.click(minicart.amazonePayButton, "Click on Amazone pay button")
-
-            await homePage.assertUrl(/amazon\.co\.jp/)
         })
     })
 
@@ -177,11 +188,19 @@ test.describe("Add products to cart without login", () => {
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
         const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
+
+        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}` )
+
         const firstMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
         const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
+
+        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}` )
+
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
+
+        console.log(`Shipping cost: ${shippingCost}, and total price: ${totalPrice}` )
 
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)

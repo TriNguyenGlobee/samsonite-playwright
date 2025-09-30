@@ -121,7 +121,13 @@
     "ginzaflagshipstore": "銀座 旗艦店"
   },
   "minicart": {
-    "emptymsg": "カートは空です。"
+    "emptymsg": "カートは空です。",
+    "startshoppingbutton": "お買い物を続ける",
+    "viewcartbutton": "カートを見る",
+    "checkoutbutton": "注文手続きへ",
+    "removeprodmodaltitle": "商品を削除しますか?",
+    "removeconfirmbutton": "はい",
+    "removecancelbutton": "キャンセル"
   },
   "cartpage": {
     "title": "ショッピングカート｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
