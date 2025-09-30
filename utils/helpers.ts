@@ -149,7 +149,7 @@ export function extractNumber(priceText: string): number {
   const cleaned = priceText.replace(/[^0-9.,]/g, "");
   const normalized = cleaned.replace(/,/g, "");
   const value = parseFloat(normalized);
-  
+
   return isNaN(value) ? 0 : value;
 }
 
@@ -171,6 +171,8 @@ export const t = {
   ourbrandstorypage: (key: keyof Translations['ourbrandstorypage']) => I18n.translations.ourbrandstorypage[key],
   ginzaflagshipstore: (key: keyof Translations['ginzaflagshipstore']) => I18n.translations.ginzaflagshipstore[key],
   sale: (key: keyof Translations['sale']) => I18n.translations.sale[key],
+  offers: (key: keyof Translations['offers']) => I18n.translations.offers[key],
+  whyshopwithus: (key: keyof Translations['whyshopwithus']) => I18n.translations.whyshopwithus[key],
   mypage: (key: keyof Translations['mypage']) => I18n.translations.mypage[key],
   menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
   minicart: (key: keyof Translations['minicart']) => I18n.translations.minicart[key],

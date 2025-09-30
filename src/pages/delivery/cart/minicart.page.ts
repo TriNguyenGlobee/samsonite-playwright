@@ -1,7 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { get } from "http";
 import { clickUntil } from "../../../../utils/helpers";
 
 export class MinicartPage extends BasePage {

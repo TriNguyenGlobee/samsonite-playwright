@@ -1,10 +1,10 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../../base.page";
-import { t, delay } from "../../../../../utils/helpers";
+import { t, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { step } from "allure-js-commons";
 
-export class BrandPage extends BasePage {
+export abstract class BrandPage extends BasePage {
     readonly logoImg: Locator;
     readonly baseLocator: Locator;
 
@@ -23,8 +23,10 @@ export class BrandPage extends BasePage {
     // 📦 Helpers
     // =========================
     async isBrandPageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page)
         try {
             const title = await this.page.title();
+
             if (!title.includes(t.brandpage('title'))) {
                 await step(`Check title: ${title}`, async () => {
                     console.log(`Element not visible: ${title}`);
@@ -33,13 +35,17 @@ export class BrandPage extends BasePage {
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "brand/";
-            if (!currentUrl.startsWith(expectedUrl)) {
-                await step(`Current URL: ${currentUrl}`, async () => {
-                    console.log(`Current: ${currentUrl}` + ` Expected: ${expectedUrl}`);
+            const expectedBaseUrl = Config.baseURL;
+            const validSuffixes = ["brand/", "labels/"];
+            const isValid = validSuffixes.some(suffix => currentUrl.startsWith(expectedBaseUrl + suffix));
+
+            if (!isValid) {
+                await step(`URL check failed`, async () => {
+                    console.log(`Current: ${currentUrl} | Expected one of: ${validSuffixes.map(s => expectedBaseUrl + s).join(", ")}`);
                 });
                 return false;
             }
+
             return true;
         } catch (error) {
             console.error('Error checking brand page:', error);
@@ -50,16 +56,6 @@ export class BrandPage extends BasePage {
     // =========================
     // ✅ Assertions
     // =========================
-    async assertBrandItems(page: Page): Promise<void> {
-        await delay(3000);
-
-        const brandItems = [
-            { text: 'サムソナイト商品一覧', href: '/brand/samsonite/' },
-            { text: 'サムソナイト・ブラックレーベル商品一覧', href: '/brand/samsonite-black/' },
-            { text: 'サムソナイト・レッド商品一覧', href: '/brand/samsonite-red/' },
-            { text: 'ハートマン商品一覧', href: '/brand/hartmann/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, undefined, brandItems);
-    }
+    abstract assertBrandItems(page: Page): Promise<void>;
 
 }

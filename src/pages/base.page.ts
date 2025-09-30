@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
-import { I18n, Translations } from "../../config/i18n.config";
+import { Translations } from "../../config/i18n.config";
 import { t, extractNumber } from "../../utils/helpers";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
@@ -370,7 +370,7 @@ export class BasePage {
     async assertLocatorInside(locate: Locator, data: LocatorInside) {
         if (data.href) {
             const link = locate.locator('xpath=.//a');
-            await expect(link).toHaveAttribute('href', data.href)
+            await expect(link.first()).toHaveAttribute('href', data.href)
         }
 
         if (data.hasImage) {

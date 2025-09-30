@@ -1,22 +1,24 @@
-import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
+import { test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
-import { LuggagePage } from "../../../src/pages/delivery/productlistingpage/luggage/luggage.page";
-import { BackpacksPage } from "../../../src/pages/delivery/productlistingpage/backpacks/backpacks.page";
-import { BagsPage } from "../../../src/pages/delivery/productlistingpage/bags/bags.page";
-import { BrandPage } from "../../../src/pages/delivery/productlistingpage/brand/brand.page";
-import { OurBrandStoryPage } from "../../../src/pages/delivery/productlistingpage/ourbrandstory/ourbrandstory.page";
+import { createLuggagePage } from "../../../src/factories/productlistingpage/luggage.factory";
+import { createBackpacksPage } from "../../../src/factories/productlistingpage/backpacks.factory"
+import { createBagsPage } from "../../../src/factories/productlistingpage/bags.factory"
+import { createBrandPage } from "../../../src/factories/productlistingpage/brand.factory"
+import { createOurBrandStoryPage } from "../../../src/factories/productlistingpage/ourbrandstory.factory";
+import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Category Menu", () => {
     test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const newarrivalspage = new NewArrivalsPage(basicAuthPage);
-        const luggagepage = new LuggagePage(basicAuthPage);
-        const backpackspage = new BackpacksPage(basicAuthPage);
-        const bagspage = new BagsPage(basicAuthPage);
-        const brandpage = new BrandPage(basicAuthPage);
-        const ourbrandstorypage = new OurBrandStoryPage(basicAuthPage);
+        const luggagepage = createLuggagePage(basicAuthPage);
+        const backpackspage = createBackpacksPage(basicAuthPage);
+        const bagspage = createBagsPage(basicAuthPage);
+        const brandpage = createBrandPage(basicAuthPage);
+        const ourbrandstorypage = createOurBrandStoryPage(basicAuthPage);
+        const offerspage = new OffersPage(basicAuthPage);
 
         await step("Hover over 'New Arrivals' menu", async () => {
             await homePage.hover(homePage.newArrivalsMenuItem);
@@ -65,5 +67,15 @@ test.describe("Category Menu", () => {
         await step("Verify that all categories under 'Discover' are displayed", async () => {
             await ourbrandstorypage.assertOurBrandStoryListItems(basicAuthPage);
         });
+
+        if (process.env.LOCALE === 'sg') {
+            await step("Hover over 'Offers' menu", async () => {
+                await homePage.hover(homePage.offersMenuItem);
+            });
+
+            await step("Verify that all categories under 'Offers' are displayed", async () => {
+                await offerspage.assertOffersListItems(basicAuthPage);
+            });
+        }
     });
 });

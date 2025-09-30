@@ -6,9 +6,9 @@ export const carouselItems = [
 ];
 
 export const hightlightCategoryItems = [
-    { href: 'https://ssjp.stg.samsonite-asia.com/luggage/', hasImage: true, enText: 'Luggage', jaText: 'スーツケースを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, enText: 'BACKPACKS', jaText: 'バックパックを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, enText: 'BAGS', jaText: 'バッグを見る' },
+    { href: 'https://ssjp.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'スーツケースを見る' },
+    { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'BACKPACKS', underText: 'バックパックを見る' },
+    { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, aboveText: 'BAGS', underText: 'バッグを見る' },
 ];
 
 export const recommendedProductItems = [
@@ -17,3 +17,11 @@ export const recommendedProductItems = [
     { buttonText: 'For Her', divClass: 'product-pills-3' },
     { buttonText: 'For Him', divClass: 'product-pills-4' }
 ];
+
+export const campaignData = [
+    {
+        href: "/newsdetail?id=news-samsonite-jp-2025-08-13-evoaz-campaign",
+        rightSideTitleText: "EVOA Zキャンペーン開催中。限定色と新モデルが登場",
+        hasImage: true
+    }
+]
