@@ -8,14 +8,14 @@ export const carouselItems = [
 ];
 
 export const hightlightCategoryItems = [
-    { href: 'https://ssjp.stg.samsonite-asia.com/luggage/', hasImage: true, enText: 'Luggage', jaText: 'スーツケースを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, enText: 'BACKPACKS', jaText: 'バックパックを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, enText: 'BAGS', jaText: 'バッグを見る' },
+    { href: 'https://sssg.stg.samsonite-asia.com/bags/for-her/', hasImage: true, aboveText: 'Ladies Bags', underText: 'For her Convenience' },
+    { href: 'https://sssg.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'Travel with Confidence' },
+    { href: 'https://sssg.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'Backpacks', underText: 'Carry Functionally' },
 ];
 
 export const recommendedProductItems = [
-    { buttonText: 'おすすめ', divClass: 'product-pills-1' },
-    { buttonText: '新着', divClass: 'product-pills-2' },
+    { buttonText: 'New In', divClass: 'product-pills-1' },
+    { buttonText: 'Best Sellers', divClass: 'product-pills-2' },
     { buttonText: 'For Her', divClass: 'product-pills-3' },
     { buttonText: 'For Him', divClass: 'product-pills-4' }
 ];

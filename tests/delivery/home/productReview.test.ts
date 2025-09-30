@@ -1,14 +1,14 @@
-import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
+import { test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { scrollToBottom } from "../../../utils/helpers";
+import { createHomePage } from "../../../src/factories/home.factory";
 
 test.describe("Product Review Section", () => {
     test(`
         1. Click swiper button to navigate review
         2. Navigate to correct URL when clicking on product
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const prodRoot = basicAuthPage.locator(`//div[contains(@class,"AddProductReviews")]//div[contains(@class,"swiper-slide-active")]`)
         const prodImg = prodRoot.locator(`xpath=.//img`)
         const prodViewButton = prodRoot.locator(`xpath=.//button`)

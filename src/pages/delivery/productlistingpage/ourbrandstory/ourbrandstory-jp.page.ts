@@ -1,6 +1,5 @@
-import { Page, Locator, expect } from "@playwright/test";
-import { t, delay } from "../../../../../utils/helpers";
-import { Config } from "../../../../../config/env.config";
+import { Page, expect } from "@playwright/test";
+import { delay } from "../../../../../utils/helpers";
 import { OurBrandStoryPage } from "./ourbrandstory.page";
 
 export class OurBrandStoryPageJP extends OurBrandStoryPage {

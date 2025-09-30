@@ -6,9 +6,9 @@ export const carouselItems = [
 ];
 
 export const hightlightCategoryItems = [
-    { href: 'https://ssjp.stg.samsonite-asia.com/luggage/', hasImage: true, enText: 'Luggage', jaText: 'スーツケースを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, enText: 'BACKPACKS', jaText: 'バックパックを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, enText: 'BAGS', jaText: 'バッグを見る' },
+    { href: 'https://ssjp.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'スーツケースを見る' },
+    { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'BACKPACKS', underText: 'バックパックを見る' },
+    { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, aboveText: 'BAGS', underText: 'バッグを見る' },
 ];
 
 export const recommendedProductItems = [

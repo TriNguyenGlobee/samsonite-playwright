@@ -1,11 +1,12 @@
-import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
+import { test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
-import { hightlightCategoryItems } from "../../../utils/data/stg/jp/data";
+import { loadTestData } from "../../../utils/data";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Highlight category", () => {
     test(`1. Highlight category section is displayed with full information`, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const { hightlightCategoryItems } = await loadTestData();
+        const homePage = createHomePage(basicAuthPage);
 
         await step("Scroll to highlight section", async () => {
             await homePage.highlightSection.scrollIntoViewIfNeeded();
@@ -17,7 +18,8 @@ test.describe("Highlight category", () => {
     });
 
     test(`2. Click highlight category item to navigate to correct URL`, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const { hightlightCategoryItems } = await loadTestData();
+        const homePage = createHomePage(basicAuthPage);
         const baseUrl = basicAuthPage.url();
 
         await step("Verify highlight category item navigation", async () => {

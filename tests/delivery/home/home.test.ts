@@ -1,21 +1,21 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
-import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
-import { LuggagePage } from "../../../src/pages/delivery/productlistingpage/luggage/luggage.page";
-import { BackpacksPage } from "../../../src/pages/delivery/productlistingpage/backpacks/backpacks.page";
-import { BagsPage } from "../../../src/pages/delivery/productlistingpage/bags/bags.page";
-import { BrandPage } from "../../../src/pages/delivery/productlistingpage/brand/brand.page";
-import { OurBrandStoryPage } from "../../../src/pages/delivery/productlistingpage/ourbrandstory/ourbrandstory.page";
+import { createLuggagePage } from "../../../src/factories/productlistingpage/luggage.factory";
+import { createBackpacksPage } from "../../../src/factories/productlistingpage/backpacks.factory";
+import { createBagsPage } from "../../../src/factories/productlistingpage/bags.factory";
+import { createBrandPage } from "../../../src/factories/productlistingpage/brand.factory";
+import { createOurBrandStoryPage } from "../../../src/factories/productlistingpage/ourbrandstory.factory";
 import { GinzaFlagshipStorePage } from "../../../src/pages/delivery/productlistingpage/ginzaflashipstore/ginzaflagshipstore.page";
 import { SalePage } from "../../../src/pages/delivery/productlistingpage/sale/sale.page";
 import { MembershipPage } from "../../../src/pages/delivery/home/membership.page";
 import { scrollToBottom } from "../../../utils/helpers";
+import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Home Tests", () => {
     test("1. Home page is displayed", async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
 
         await step("Verify that the Home page is displayed", async () => {
             expect(await homePage.isHomepageDisplayed()).toBe(true);
@@ -26,9 +26,9 @@ test.describe("Home Tests", () => {
         2. Go to New Arrivals Page
         3. Go to Luggage Page
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const newArrivalsPage = new NewArrivalsPage(basicAuthPage);
-        const luggagepage = new LuggagePage(basicAuthPage);
+        const luggagepage = createLuggagePage(basicAuthPage);
 
         await step("Go to New Arrivals Page", async () => {
             await homePage.clickMenuItem("newarrivals");
@@ -52,9 +52,9 @@ test.describe("Home Tests", () => {
         4. Go to Back Packs Page
         5. Go to Bags Page
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
-        const backpacks = new BackpacksPage(basicAuthPage);
-        const bags = new BagsPage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
+        const backpacks = createBackpacksPage(basicAuthPage);
+        const bags = createBagsPage(basicAuthPage);
 
         await step("Go to Back Packs Page", async () => {
             await homePage.clickMenuItem("backpacks");
@@ -77,9 +77,9 @@ test.describe("Home Tests", () => {
         6. Go to Brand Page
         7. Go to Our Brand Story Page
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
-        const brandpage = new BrandPage(basicAuthPage);
-        const ourbrandstorypage = new OurBrandStoryPage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
+        const brandpage = createBrandPage(basicAuthPage);
+        const ourbrandstorypage = createOurBrandStoryPage(basicAuthPage);
 
         await step("Go to Labels Page", async () => {
             await homePage.clickMenuItem("label");
@@ -103,11 +103,13 @@ test.describe("Home Tests", () => {
         9. Go to Sale Page
         10. Go to membership page
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        test.skip(process.env.LOCALE !== 'jp', "These testcases for Japan only");    
+
+        const homePage = createHomePage(basicAuthPage);
         const ginzaflagshipstorepage = new GinzaFlagshipStorePage(basicAuthPage);
         const Salepage = new SalePage(basicAuthPage);
         const membershippage = new MembershipPage(basicAuthPage);
-
+        
         await step("Go to Ginza Flagship Store Page", async () => {
             await homePage.clickMenuItem("ginzaflagshipstore");
         });
@@ -134,7 +136,7 @@ test.describe("Home Tests", () => {
     });
 
     test(`11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
 
         await scrollToBottom(basicAuthPage);
 
@@ -146,32 +148,25 @@ test.describe("Home Tests", () => {
             await homePage.assertVisible(homePage.withUsTitle)
         })
 
-        await step(`Verify that the Offical Site section is displayed correctly`, async () => {
-            await homePage.assertLocatorInside(homePage.withUsOfficalSite, {
-                hasImage: true,
-                text: "新作、キャンペーン情報を随時発信しています。公式サイトからメンバープログラムにも登録いただけます。"
-            })
-        })
-
-        await step(`Verify that the Safe Shopping section is displayed correctly`, async () => {
-            await homePage.assertLocatorInside(homePage.withUsSafeShopping, {
-                hasImage: true,
-                text: "ショッピングを安心してお楽しみ頂けるようセキュリティに配慮しています。"
-            })
-        })
-
-        await step(`Verify that the Gift section is displayed correctly`, async () => {
-            await homePage.assertLocatorInside(homePage.withUsGift, {
-                hasImage: true,
-                text: "公式サイトでは大切な方への贈り物にギフトラッピングを承っています。"
-            })
-        })
-
-        await step(`Verify that the Warranty section is displayed correctly`, async () => {
-            await homePage.assertLocatorInside(homePage.withUsWarranty, {
-                hasImage: true,
-                text: "公式サイトからお求めいただいた製品には、サムソナイトの保証規定が適用されます。"
-            })
+        await step(`Verify that Why Shop With Us content exactly`, async () => {
+            await homePage.assertWhyShopWithUsContent(basicAuthPage)
         })
     })
+
+    test(`
+        12. Go to Offers Page
+        `, async ({ basicAuthPage }) => {
+        test.skip(process.env.LOCALE !== 'sg', "These testcases for SSSG only");       
+
+        const homePage = createHomePage(basicAuthPage);
+        const offerspage = new OffersPage(basicAuthPage)
+
+        await step("Go to Labels Page", async () => {
+            await homePage.clickMenuItem("offers");
+        });
+
+        await step("Verify that the Labels page is displayed", async () => {
+            expect(await offerspage.isOffersPageDisplayed()).toBe(true);
+        })
+    });    
 });

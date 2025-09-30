@@ -1,7 +1,9 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../../base.page";
-import { t, delay } from "../../../../../utils/helpers";
+import { t, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
+import { attachment } from "allure-js-commons";
+import { test } from "@playwright/test";
 
 export abstract class BagsPage extends BasePage {
     readonly logoImg: Locator;
@@ -32,14 +34,23 @@ export abstract class BagsPage extends BasePage {
     // 📦 Helpers
     // =========================
     async isBagsPageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page)
         try {
             const title = await this.page.title();
+            const currentUrl = await this.page.url();
+            const expectedUrl = Config.baseURL + "bags/";
+
+            await test.step("Bags page data: ", async () => {
+                await attachment("Current Page Title", title, "text/plain");
+                await attachment("Expected Page Title", t.bagspage('title'), "text/plain");
+                await attachment("Current URL", currentUrl, "text/plain");
+                await attachment("Expected URL", expectedUrl, "text/plain");
+            });
+
             if (!title.includes(t.bagspage('title'))) {
                 return false;
             }
 
-            const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "bags/";
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             return true;

@@ -1,5 +1,5 @@
-import { Page, Locator, expect } from "@playwright/test";
-import { t, delay } from "../../../../../utils/helpers";
+import { Page, expect } from "@playwright/test";
+import { delay } from "../../../../../utils/helpers";
 import { OurBrandStoryPage } from "./ourbrandstory.page";
 
 export class OurBrandStoryPageSG extends OurBrandStoryPage {
@@ -19,8 +19,9 @@ export class OurBrandStoryPageSG extends OurBrandStoryPage {
         await delay(3000);
 
         const elementsToCheck = [
-            this.discoverArticle,
-            this.discoverSamsonite
+            this.discoverLatest,
+            this.discoverSamsonite,
+            this.discoverCollection
         ];
 
         for (const locator of elementsToCheck) {

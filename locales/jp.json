@@ -80,6 +80,23 @@
   "sale": {
     "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
+  "offers": {
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "whyshopwithus": {
+    "officialwebsitetitle": "公式サイト",
+    "officialwebsite": "新作、キャンペーン情報を随時発信しています。公式サイトからメンバープログラムにも登録いただけます。",
+    "securityShop": "ショッピングを安心してお楽しみ頂けるようセキュリティに配慮しています。",
+    "securityShoptitle": "安全なショッピング",
+    "fastdelivery": "",
+    "fastdeliverytitle": "Fast Delivery",
+    "fullcollection": "",
+    "fullcollectiontitle": "Full Collection",
+    "gift": "公式サイトでは大切な方への贈り物にギフトラッピングを承っています。",
+    "gifttitle": "ギフト",
+    "warranty": "公式サイトからお求めいただいた製品には、サムソナイトの保証規定が適用されます。",
+    "warrantytitle": "製品保証"
+  },
   "mypage": {
     "title": "マイアカウント｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
     "pageTitle": "マイアカウント",

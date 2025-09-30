@@ -5,7 +5,7 @@ import { step } from "allure-js-commons";
 import { Config } from "../../../../config/env.config";
 import { test } from "../../../fixtures/test-fixture";
 
-export class HomePage extends BasePage {
+export abstract class HomePage extends BasePage {
     readonly logoImg: Locator;
     readonly centerBanner: Locator;
     readonly highlightSection: Locator;
@@ -21,12 +21,14 @@ export class HomePage extends BasePage {
     readonly withUsSafeShopping: Locator;
     readonly withUsGift: Locator;
     readonly withUsWarranty: Locator;
+    readonly withUsFastDelivery: Locator;
+    readonly withUsCollection: Locator;
 
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.centerBanner = page.locator('//div[contains(@class,"homepage-banner-carouselregion")]');
-        this.highlightSection = page.locator('//div[@class="container category-highlight"]');
+        this.highlightSection = page.locator('//div[contains(@class,"category-highlight")]');
         this.recommendedSection = page.locator('//div[contains(@class,"category-product initialized-component")]');
         this.campaignUnderwaysection = page.locator('//div[contains(@class,"magazine-carousel-column-desktop")]');
         this.productReviewSection = page.locator(`//div[contains(@class,"AddProductReviews")]`);
@@ -35,10 +37,12 @@ export class HomePage extends BasePage {
         this.journalsPreviousButton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Previous"]]`);
         this.whyShopWithUsSection = page.locator(`//div[@class="home-why-shop-with-us"]//div[@class="content"]`);
         this.withUsTitle = this.whyShopWithUsSection.locator(`xpath=.//h2[normalize-space(text())="Why shop with us?"]`);
-        this.withUsOfficalSite = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="公式サイト"]]`);
-        this.withUsSafeShopping = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="安全なショッピング"]]`);
-        this.withUsGift = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="ギフト"]]`);
-        this.withUsWarranty = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="製品保証"]]`);
+        this.withUsOfficalSite = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('officialwebsitetitle')}"]]`);
+        this.withUsSafeShopping = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('securityShoptitle')}"]]`);
+        this.withUsGift = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('gifttitle')}"]]`);
+        this.withUsWarranty = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('warrantytitle')}"]]`);
+        this.withUsFastDelivery = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fastdeliverytitle')}"]]`)
+        this.withUsCollection = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fullcollectiontitle')}"]]`)
     }
 
     // =========================
@@ -292,6 +296,7 @@ export class HomePage extends BasePage {
             const item = data[i];
 
             const link = card.locator('a.card-link');
+            console.log(`Received url: -${link.getAttribute('href')}--- Expected url: -${item.href}-`)
             await expect(link).toHaveAttribute('href', item.href);
 
             if (item.hasImage) {
@@ -301,11 +306,11 @@ export class HomePage extends BasePage {
                 expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp)/);
             }
 
-            const enText = card.locator('p.card-text');
-            await expect(enText).toHaveText(item.enText);
+            const aboveText = card.locator('p.card-text');
+            await expect(aboveText).toHaveText(item.aboveText);
 
-            const jaText = card.locator('span');
-            await expect(jaText).toHaveText(item.jaText);
+            const underText = card.locator('span');
+            await expect(underText).toHaveText(item.underText);
         }
     }
 
@@ -341,12 +346,12 @@ export class HomePage extends BasePage {
             const activeDiv = page.locator(`//div[contains(@class,"${divClass}") and contains(@class,"active") and contains(@class,"show")]`);
             await expect(activeDiv).toBeVisible({ timeout: 300000 });
 
-            await expect(button).toHaveClass(/nav-link\s+active(\s+show)?/);
+            await expect(button).toHaveClass(/nav-link(?:\s+\S+)*\s+active(?:\s+show)?/);
 
             for (const other of expectedItems) {
                 if (other.buttonText === buttonText) continue;
                 const otherButton = page.locator(`//button[normalize-space(text())="${other.buttonText}"]`);
-                await expect(otherButton).not.toHaveClass(/nav-link\s+active/);
+                await expect(otherButton).not.toHaveClass(/nav-link(?:\s+\S+)*\s+active/);
 
                 const otherDiv = page.locator(`//div[contains(@class,"${other.divClass}")]`);
                 await expect(otherDiv).not.toHaveClass(/active/);
@@ -444,6 +449,7 @@ export class HomePage extends BasePage {
             }
         }
     }
+    abstract assertWhyShopWithUsContent(page: Page): Promise<void>;
 }
 
 type CarouselItem = {
@@ -455,8 +461,8 @@ type CarouselItem = {
 interface HighlightCategoryItem {
     href: string;
     hasImage: boolean;
-    enText: string;
-    jaText: string;
+    aboveText: string;
+    underText: string;
 }
 
 interface RecommendedProductItem {

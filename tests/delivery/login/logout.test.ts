@@ -1,13 +1,6 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { LoginPage } from "../../../src/pages/delivery/login/login.page";
-import { ForgotPasswordPage } from "../../../src/pages/delivery/login/forgot-password.page";
-import { RegisterPage } from "../../../src/pages/delivery/login/register.page";
-import { MembershipPage } from "../../../src/pages/delivery/login/membership.page";
 import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
-import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t } from "../../../utils/helpers";
 import { createLoginPage } from "../../../src/factories/login.factory";
 
 test.describe("Logout Completion Screen", () => {

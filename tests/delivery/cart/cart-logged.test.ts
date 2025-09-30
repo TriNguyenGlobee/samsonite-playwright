@@ -3,15 +3,14 @@ import { CartPage } from "../../../src/pages/delivery/cart/cart.page";
 import { MinicartPage } from "../../../src/pages/delivery/cart/minicart.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { getRandomArrayElement, t, clickUntil, extractNumber } from "../../../utils/helpers";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
-import { Locator } from "@playwright/test";
+import { t, clickUntil, extractNumber } from "../../../utils/helpers";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Empty cart after login", () => {
     let initialCartBadge = 0
 
     test.beforeAll(async ({ loggedInPage }) => {
-        const homepage = new HomePage(loggedInPage)
+        const homepage = createHomePage(loggedInPage)
         const cartpage = new CartPage(loggedInPage)
 
         initialCartBadge = await homepage.getCartBadgeValue()
@@ -34,7 +33,7 @@ test.describe("Empty cart after login", () => {
         2. Click shopping cart button to close minicart
         3. Explore by category
         `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
+        const homePage = createHomePage(loggedInPage);
         const minicartPage = new MinicartPage(loggedInPage)
 
         await step("Click on Cart icon", async () => {
@@ -90,7 +89,7 @@ test.describe("Add products to cart after login", () => {
     let initialCartBadge = 0
 
     test.beforeEach(async ({ loggedInPage }) => {
-        const homepage = new HomePage(loggedInPage)
+        const homepage = createHomePage(loggedInPage)
         const cartpage = new CartPage(loggedInPage)
 
         initialCartBadge = await homepage.getCartBadgeValue()
@@ -117,7 +116,7 @@ test.describe("Add products to cart after login", () => {
         6. Checkout page is displayed when clicking on checkout button
         7. Amazone pay page is displayed when clicking on Amanazon pay button
         `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
+        const homePage = createHomePage(loggedInPage);
         const minicart = new MinicartPage(loggedInPage)
         const cartpage = new CartPage(loggedInPage)
 
@@ -201,7 +200,7 @@ test.describe("Add products to cart after login", () => {
         12. Remove product modal can be closed by close button and cancel button
         13. Remove all products in the cart
         `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
+        const homePage = createHomePage(loggedInPage);
         const minicart = new MinicartPage(loggedInPage)
         const cartpage = new CartPage(loggedInPage)
 
@@ -292,7 +291,7 @@ test.describe("Add products to cart after login", () => {
         20. Remove product modal can be closed by close button and cancel button
         21. Remove all products in the Cart page
         `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
+        const homePage = createHomePage(loggedInPage);
         const cartpage = new CartPage(loggedInPage)
 
         const prodIndexes = [1, 2, 3];
@@ -389,7 +388,7 @@ test.describe("Add products to cart after login", () => {
         22. Add gift service
         23. Remove gift service
         `, async ({ loggedInPage }) => {
-        const homePage = new HomePage(loggedInPage);
+        const homePage = createHomePage(loggedInPage);
         const cartpage = new CartPage(loggedInPage)
 
         const prodIndex = 1;

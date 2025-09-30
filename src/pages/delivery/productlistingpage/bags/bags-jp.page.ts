@@ -1,6 +1,5 @@
-import { Page, Locator, expect } from "@playwright/test";
-import { t, delay } from "../../../../../utils/helpers";
-import { Config } from "../../../../../config/env.config";
+import { Page, expect } from "@playwright/test";
+import { delay } from "../../../../../utils/helpers";
 import { BagsPage } from "./bags.page";
 
 export class BagsPageJP extends BagsPage {

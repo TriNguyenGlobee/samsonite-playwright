@@ -1,30 +1,12 @@
 import { BackpacksPage } from "./backpacks.page";
 import { Page, expect } from "@playwright/test";
-import { delay, t } from "../../../../../utils/helpers";
-import { Config } from "../../../../../config/env.config";
+import { delay } from "../../../../../utils/helpers";
 
 export class BackpacksPageSG extends BackpacksPage {
 
     // =========================
     // ✅ Assertions
     // =========================
-    async isBackpacksPageDisplayed(): Promise<boolean> {
-        try {
-            const title = await this.page.title();
-            if (!title.includes(t.backpackspage('title'))) {
-                return false;
-            }
-
-            const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "backpacks/";
-            if (!currentUrl.startsWith(expectedUrl)) return false;
-
-            return true;
-        } catch (error) {
-            console.error('Error checking backpacks page:', error);
-            return false;
-        }
-    }
 
     // =========================
     // ✅ Assertions

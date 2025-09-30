@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { t, delay } from "../../../../../utils/helpers";
+import { delay } from "../../../../../utils/helpers";
 import { BrandPage } from "./brand.page";
 
 export class BrandPageSG extends BrandPage {

@@ -3,9 +3,8 @@ import { CartPage } from "../../../src/pages/delivery/cart/cart.page";
 import { MinicartPage } from "../../../src/pages/delivery/cart/minicart.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { getRandomArrayElement, t, clickUntil, extractNumber } from "../../../utils/helpers";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
-import { Locator } from "@playwright/test";
+import { t, clickUntil, extractNumber } from "../../../utils/helpers";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Empty cart without login", () => {
     test(`
@@ -13,7 +12,7 @@ test.describe("Empty cart without login", () => {
         2. Click shopping cart button to close minicart
         3. Explore by category
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const minicartPage = new MinicartPage(basicAuthPage)
 
         await step("Click on Cart icon", async () => {
@@ -75,7 +74,7 @@ test.describe("Add products to cart without login", () => {
         6. Checkout login page is displayed when clicking on checkout button
         7. Amazone pay page is displayed when clicking on Amanazon pay button
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const minicart = new MinicartPage(basicAuthPage)
         const cartpage = new CartPage(basicAuthPage)
 
@@ -157,7 +156,7 @@ test.describe("Add products to cart without login", () => {
         12. Remove product modal can be closed by close button and cancel button
         13. Remove all products in the cart
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const minicart = new MinicartPage(basicAuthPage)
         const cartpage = new CartPage(basicAuthPage)
 
@@ -248,7 +247,7 @@ test.describe("Add products to cart without login", () => {
         20. Remove product modal can be closed by close button and cancel button
         21. Remove all products in the Cart page
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const cartpage = new CartPage(basicAuthPage)
 
         const prodIndexes = [1, 2, 3];
@@ -345,7 +344,7 @@ test.describe("Add products to cart without login", () => {
         22. Add gift service
         23. Remove gift service
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const cartpage = new CartPage(basicAuthPage)
 
         const prodIndex = 1;

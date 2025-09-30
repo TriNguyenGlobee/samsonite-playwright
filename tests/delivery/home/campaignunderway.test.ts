@@ -1,8 +1,8 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
 import { scrollToBottom } from "../../../utils/helpers";
 import { loadTestData } from "../../../utils/data";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Campaign Underway Section", () => {
     test(`
@@ -13,7 +13,7 @@ test.describe("Campaign Underway Section", () => {
         `, async ({ basicAuthPage }) => {
         const { campaignData } = await loadTestData();
 
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
         const leftSideColumn = basicAuthPage.locator('//div[contains(@class,"magazine-carousel-column-desktop")]//div[contains(@class,"magazine-main-image placeholder-glow")]')
         const rightSideTitle = basicAuthPage.locator(`//div[@class="magazine-title"]`)
 
