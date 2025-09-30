@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../../base.page";
-import { t } from "../../../../../utils/helpers";
+import { PageUtils, t } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 
 export class SalePage extends BasePage {
@@ -20,6 +20,7 @@ export class SalePage extends BasePage {
     // 📦 Helpers
     // =========================
     async isSalePageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page)
         try {
             const title = await this.page.title();
             if (!title.includes(t.sale('title'))) {

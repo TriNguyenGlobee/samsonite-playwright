@@ -1,7 +1,7 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { HomePage } from "../../../src/pages/delivery/home/home.page";
 import { step } from "allure-js-commons";
 import { scrollToBottom, delay } from "../../../utils/helpers";
+import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Samsonite Journals section", () => {
     test(`
@@ -9,7 +9,7 @@ test.describe("Samsonite Journals section", () => {
         2. Verify the slide works properly
         3. Verify that clicking on the active item navigates to the correct URL 
         `, async ({ basicAuthPage }) => {
-        const homePage = new HomePage(basicAuthPage);
+        const homePage = createHomePage(basicAuthPage);
 
         await scrollToBottom(basicAuthPage);
 

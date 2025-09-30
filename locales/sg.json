@@ -69,7 +69,7 @@
     "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "brandpage": {
-    "title": "Brand | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
     "title": "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
@@ -79,6 +79,23 @@
   },
   "sale": {
     "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "offers": {
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+  },
+  "whyshopwithus": {
+    "officialwebsitetitle": "Official Website",
+    "officialwebsite": "The largest online selection of official Samsonite products including luggage, backpacks, bags and travel accessories.",
+    "securityShop": "Secure Socket Layer (SSL) encryption makes every transaction safe and reliable.",
+    "securityShoptitle": "Secure payment",
+    "fastdelivery": "Online orders are delivered within 5 working days using a premium courier service.",
+    "fastdeliverytitle": "Fast Delivery",
+    "fullcollection": "One-stop shop for exploring the complete Samsonite collection online.",
+    "fullcollectiontitle": "Full Collection",
+    "gift": "公式サイトでは大切な方への贈り物にギフトラッピングを承っています。",
+    "gifttitle": "ギフト",
+    "warranty": "公式サイトからお求めいただいた製品には、サムソナイトの保証規定が適用されます。",
+    "warrantytitle": "製品保証"
   },
   "mypage": {
     "title": "My Account | Samsonite Singapore",
@@ -99,7 +116,7 @@
     "bags": "Bags",
     "label": "Labels",
     "discover": "Discover",
-    "offers": "Offers",
+    "offers": "OFFERS",
     "friendofsamsonite": "FRIENDS OF SAMSONITE",
     "ginzaflagshipstore": "銀座 旗艦店"
   },
