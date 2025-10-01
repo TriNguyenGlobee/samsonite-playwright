@@ -1,6 +1,6 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { CartPage } from "../../../src/pages/delivery/cart/cart.page";
-import { MinicartPage } from "../../../src/pages/delivery/cart/minicart.page";
+import { createCartPage } from "../../../src/factories/cart.factory";
+import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
 import { t, clickUntil, extractNumber } from "../../../utils/helpers";
@@ -11,7 +11,7 @@ test.describe("Empty cart after login", () => {
 
     test.beforeAll(async ({ loggedInPage }) => {
         const homepage = createHomePage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         initialCartBadge = await homepage.getCartBadgeValue()
 
@@ -34,7 +34,7 @@ test.describe("Empty cart after login", () => {
         3. Explore by category
         `, async ({ loggedInPage }) => {
         const homePage = createHomePage(loggedInPage);
-        const minicartPage = new MinicartPage(loggedInPage)
+        const minicartPage = createMinicartPage(loggedInPage)
 
         await step("Click on Cart icon", async () => {
             await homePage.click(homePage.cartIcon)
@@ -70,7 +70,7 @@ test.describe("Empty cart after login", () => {
     })
 
     test(`4. Cart page is displayed`, async ({ loggedInPage }) => {
-        const cartpage = new CartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         await step('Go to Cart page by URL', async () => {
             await loggedInPage.goto(`${Config.baseURL}cart`)
@@ -90,7 +90,7 @@ test.describe("Add products to cart after login", () => {
 
     test.beforeEach(async ({ loggedInPage }) => {
         const homepage = createHomePage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         initialCartBadge = await homepage.getCartBadgeValue()
 
@@ -117,8 +117,8 @@ test.describe("Add products to cart after login", () => {
         7. Amazone pay page is displayed when clicking on Amanazon pay button
         `, async ({ loggedInPage }) => {
         const homePage = createHomePage(loggedInPage);
-        const minicart = new MinicartPage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
+        const minicart = createMinicartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         const prodIndex = 1;
         let prodCollection: string, prodName: string
@@ -147,13 +147,20 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Verify view cart button and checkout button are displayed', async () => {
+            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                delayMs: 300,
+                maxTries: 3,
+                timeoutMs: 5000
+            })
             await minicart.assertVisible(minicart.viewCartButton)
             await minicart.assertVisible(minicart.checkoutButton)
         })
 
-        await step('Verify amazone pay button is displayed', async () => {
-            await minicart.assertVisible(minicart.amazonePayButton)
-        })
+        if (process.env.LOCALE === "jp") {
+            await step('Verify amazone pay button is displayed', async () => {
+                await minicart.assertVisible(minicart.amazonePayButton)
+            })
+        }
 
         await step('Verify the cart page is displayed when clicking on view cart button', async () => {
             await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
@@ -179,17 +186,20 @@ test.describe("Add products to cart after login", () => {
             )
         })
 
-        await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
-            await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
-                delayMs: 500,
-                maxTries: 3,
-                timeoutMs: 3000
+        if (process.env.LOCALE === "jp") {
+            await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
+                await clickUntil(loggedInPage, homePage.cartIcon, minicart.minicartRender, 'visible', {
+                    delayMs: 500,
+                    maxTries: 3,
+                    timeoutMs: 3000
+                })
+
+                await homePage.click(minicart.amazonePayButton, "Click on Amazone pay button")
+
+                await homePage.assertUrl(/amazon\.co\.jp/)
             })
 
-            await homePage.click(minicart.amazonePayButton, "Click on Amazone pay button")
-
-            await homePage.assertUrl(/amazon\.co\.jp/)
-        })
+        }
     })
 
     test(`
@@ -201,8 +211,8 @@ test.describe("Add products to cart after login", () => {
         13. Remove all products in the cart
         `, async ({ loggedInPage }) => {
         const homePage = createHomePage(loggedInPage);
-        const minicart = new MinicartPage(loggedInPage)
-        const cartpage = new CartPage(loggedInPage)
+        const minicart = createMinicartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         const prodIndexes = [1, 2, 3];
 
@@ -225,13 +235,14 @@ test.describe("Add products to cart after login", () => {
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
         const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
         const shippingCost = await extractNumber(await minicart.getShippingCost());
+        const shippingDiscount = await extractNumber(await minicart.getShippingDiscount())
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
 
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
             expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost)
+            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost - shippingDiscount)
         })
 
         await step('Verify remove product modal is displayed when removing a product in the minicart', async () => {
@@ -292,7 +303,7 @@ test.describe("Add products to cart after login", () => {
         21. Remove all products in the Cart page
         `, async ({ loggedInPage }) => {
         const homePage = createHomePage(loggedInPage);
-        const cartpage = new CartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         const prodIndexes = [1, 2, 3];
         const prodIndex = 1;
@@ -334,27 +345,31 @@ test.describe("Add products to cart after login", () => {
             )
         })
 
-        await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
-            await homePage.click(cartpage.amazonePayButton, "Click on Amazone pay button")
+        if (process.env.LOCALE === "jp") {
+            await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
+                await homePage.click(cartpage.amazonePayButton, "Click on Amazone pay button")
 
-            await homePage.assertUrl(/amazon\.co\.jp/)
-        })
+                await homePage.assertUrl(/amazon\.co\.jp/)
+            })
 
-        await step('Go to Cart page by URL', async () => {
-            await loggedInPage.goto(`${Config.baseURL}cart`)
-        })
+            await step('Go to Cart page by URL', async () => {
+                await loggedInPage.goto(`${Config.baseURL}cart`)
+            })
+
+        }
 
         const firstMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[1]));
         const thirdMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[2]));
         const shippingCost = await extractNumber(await cartpage.getShippingCost());
+        const shippingDiscount = await extractNumber(await cartpage.getShippingDiscount())
         const totalPrice = await extractNumber(await cartpage.getTotalPrice());
 
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
             expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost)
+            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost - shippingDiscount)
         })
 
         await step('Verify remove product modal is displayed when removing a product in Cart page', async () => {
@@ -388,8 +403,10 @@ test.describe("Add products to cart after login", () => {
         22. Add gift service
         23. Remove gift service
         `, async ({ loggedInPage }) => {
+        test.skip(process.env.LOCALE !== 'jp', "Add gift for Japan site only");
+
         const homePage = createHomePage(loggedInPage);
-        const cartpage = new CartPage(loggedInPage)
+        const cartpage = createCartPage(loggedInPage)
 
         const prodIndex = 1;
 

@@ -3,7 +3,7 @@ import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
 import { t, PageUtils, clickUntil, delay } from "../../../../utils/helpers";
 
-export class CartPage extends BasePage {
+export abstract class CartPage extends BasePage {
     readonly removeProductButton: Locator;
     readonly pageTitle: Locator;
     readonly emptymsg: Locator;
@@ -28,11 +28,11 @@ export class CartPage extends BasePage {
         this.pageTitle = page.locator('//div[contains(@class,"title")]//h1');
         this.emptymsg = page.locator('//div[contains(@class,"cart-empty")]//h2')
         this.minicartRender = page.locator('//div[@class="minicart-container minicart-slide-down"]')
-        this.removeProductModal = page.locator(`//div[@class="modal-content" and .//h4[normalize-space(text())="商品を削除しますか?"]]`)
+        this.removeProductModal = page.locator(`//div[@class="modal-content" and .//h4[normalize-space(text())="${t.cartpage('removeprodmodaltitle')}"]]`)
         this.removeProdModalCloseButton = this.removeProductModal.locator(`xpath=.//button[span]`)
-        this.removeProdModalConfirmButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="はい"]`)
-        this.removeProdModalCancelButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="キャンセル"]`)
-        this.checkoutButton = page.locator(`//div[contains(@class,"cart-page")]//a[normalize-space(text())="注文手続きへ"]`)
+        this.removeProdModalConfirmButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="${t.cartpage('removeconfirmbutton')}"]`)
+        this.removeProdModalCancelButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="${t.cartpage('removecancelbutton')}"]`)
+        this.checkoutButton = page.locator(`//div[contains(@class,"cart-page")]//a[normalize-space(text())="${t.cartpage('checkoutbutton')}"]`)
         this.amazonePayButton = page.locator(`//div[contains(@class,"cart-page")]//div[contains(@class,"amazon-pay-onetime-button")]`).locator('div.amazonpay-button-view1');
         this.prodRow = page.locator(`//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")]`)
         this.giftserviceButton = this.prodRow.locator(`xpath=.//button[contains(@class,"add-gift")]`)
@@ -189,7 +189,7 @@ export class CartPage extends BasePage {
     }
 
     async getShippingCost(): Promise<string> {
-        const shipping = this.page.locator(`//div[contains(@class,"cart-page")]//div[@class="shipping-cost"]`)
+        const shipping = this.page.locator(`//div[contains(@class,"cart-page")]//div[@class="shipping-information"]`)
 
         return (await shipping.innerText()).trim()
     }
@@ -199,6 +199,9 @@ export class CartPage extends BasePage {
 
         return (await total.innerText()).trim()
     }
+
+    abstract getShippingDiscount(): Promise<string>
+
     // =========================
     // ✅ Assertions
     // =========================
