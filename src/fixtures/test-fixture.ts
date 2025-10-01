@@ -1,8 +1,9 @@
-import { test as base, Page, BrowserContext } from "@playwright/test";
+import { test as base, Page } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { closeModalIfPresent } from "../../utils/helpers";
-import { createLoginPage } from '../factories/login.factory'
+import { createLoginPage } from '../factories/login.factory';
+import { startModalWatchdog } from '../../utils/modalWatchdog';
 
 type MyFixtures = {
     user: { username: string; password: string };
@@ -12,7 +13,6 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
     user: async ({ }, use) => {
-        // Get user credentials from env.config.ts
         await use(Config.credentials);
     },
 
@@ -29,12 +29,16 @@ export const test = base.extend<MyFixtures>({
         });
 
         const page = await context.newPage();
+
+        const stopWatchdog = await startModalWatchdog(page);
+
         await step("Go to base URL with Basic Auth only", async () => {
             await page.goto(Config.baseURL);
         });
-        await closeModalIfPresent(page);
+
         await use(page);
 
+        stopWatchdog();
         await page.close();
         await context.close();
     },
@@ -54,11 +58,11 @@ export const test = base.extend<MyFixtures>({
         const page = await context.newPage();
         const loginPage = createLoginPage(page);
 
+        const stopWatchdog = await startModalWatchdog(page);
+
         await step("Go to Main Page", async () => {
             await page.goto(Config.baseURL);
         });
-
-        await closeModalIfPresent(page);
 
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
@@ -69,6 +73,8 @@ export const test = base.extend<MyFixtures>({
         });
 
         await use(page);
+
+        stopWatchdog();
         await context.close();
     },
 });
