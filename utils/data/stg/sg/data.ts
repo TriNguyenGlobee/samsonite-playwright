@@ -1,5 +1,4 @@
 export const carouselItems = [
-    { href: 'https://sssg.stg.samsonite-asia.com/paralux/', hasImage: true },
     { href: 'https://sssg.stg.samsonite-asia.com/samsonite/enwrap/spinner-55/20-exp/ss-125647-1542.html', hasImage: true },
     { href: 'https://sssg.stg.samsonite-asia.com/samsonite/c-lite/spinner-55/20-exp-ltd/ss-141368-A568.html', hasImage: true },
     { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/sbl-signature/', hasImage: true },
