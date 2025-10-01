@@ -2,7 +2,8 @@ import { test as base, Page } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { closeModalIfPresent } from "../../utils/helpers";
-import { createLoginPage } from '../factories/login.factory'
+import { createLoginPage } from '../factories/login.factory';
+import { startModalWatchdog } from '../../utils/modalWatchdog';
 
 type MyFixtures = {
     user: { username: string; password: string };
@@ -29,12 +30,7 @@ export const test = base.extend<MyFixtures>({
 
         const page = await context.newPage();
 
-        page.on("load", async () => {
-            await closeModalIfPresent(page);
-        });
-        page.on("framenavigated", async () => {
-            await closeModalIfPresent(page);
-        });
+        const stopWatchdog = await startModalWatchdog(page);
 
         await step("Go to base URL with Basic Auth only", async () => {
             await page.goto(Config.baseURL);
@@ -42,6 +38,7 @@ export const test = base.extend<MyFixtures>({
 
         await use(page);
 
+        stopWatchdog();
         await page.close();
         await context.close();
     },
@@ -61,12 +58,7 @@ export const test = base.extend<MyFixtures>({
         const page = await context.newPage();
         const loginPage = createLoginPage(page);
 
-        page.on("load", async () => {
-            await closeModalIfPresent(page);
-        });
-        page.on("framenavigated", async () => {
-            await closeModalIfPresent(page);
-        });
+        const stopWatchdog = await startModalWatchdog(page);
 
         await step("Go to Main Page", async () => {
             await page.goto(Config.baseURL);
@@ -81,6 +73,8 @@ export const test = base.extend<MyFixtures>({
         });
 
         await use(page);
+
+        stopWatchdog();
         await context.close();
     },
 });

@@ -299,7 +299,7 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
         console.warn(`${modal.name} did not detach in time`);
       });
     } else {
-      console.log(`${modal.name} not found.`);
+      //console.log(`${modal.name} not found.`);
     }
   }
 }
