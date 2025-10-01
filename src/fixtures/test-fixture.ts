@@ -1,4 +1,4 @@
-import { test as base, Page, BrowserContext } from "@playwright/test";
+import { test as base, Page } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { closeModalIfPresent } from "../../utils/helpers";
@@ -12,7 +12,6 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
     user: async ({ }, use) => {
-        // Get user credentials from env.config.ts
         await use(Config.credentials);
     },
 
@@ -29,10 +28,18 @@ export const test = base.extend<MyFixtures>({
         });
 
         const page = await context.newPage();
+
+        page.on("load", async () => {
+            await closeModalIfPresent(page);
+        });
+        page.on("framenavigated", async () => {
+            await closeModalIfPresent(page);
+        });
+
         await step("Go to base URL with Basic Auth only", async () => {
             await page.goto(Config.baseURL);
         });
-        await closeModalIfPresent(page);
+
         await use(page);
 
         await page.close();
@@ -54,11 +61,16 @@ export const test = base.extend<MyFixtures>({
         const page = await context.newPage();
         const loginPage = createLoginPage(page);
 
+        page.on("load", async () => {
+            await closeModalIfPresent(page);
+        });
+        page.on("framenavigated", async () => {
+            await closeModalIfPresent(page);
+        });
+
         await step("Go to Main Page", async () => {
             await page.goto(Config.baseURL);
         });
-
-        await closeModalIfPresent(page);
 
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
