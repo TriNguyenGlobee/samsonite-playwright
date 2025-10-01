@@ -3,7 +3,7 @@ import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
 import { clickUntil, t } from "../../../../utils/helpers";
 
-export class MinicartPage extends BasePage {
+export abstract class MinicartPage extends BasePage {
     readonly minicartModal: Locator;
     readonly emptyCartMsg: Locator;
     readonly startShoppingButton: Locator;
@@ -33,7 +33,7 @@ export class MinicartPage extends BasePage {
         this.removeProductModal = page.locator(`//div[@class="modal-content" and .//h4[normalize-space(text())="${t.minicart('removeprodmodaltitle')}"]]`)
         this.removeProdModalCloseButton = this.removeProductModal.locator(`xpath=.//button[span]`)
         this.removeProdModalConfirmButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="${t.minicart('removeconfirmbutton')}"]`)
-        this.removeProdModalCancelButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="キャンセル"]`)
+        this.removeProdModalCancelButton = this.removeProductModal.locator(`xpath=.//button[normalize-space(text())="${t.minicart('removecancelbutton')}"]`)
         this.minicartRemoveProdButton = page.locator(`(//div[contains(@class,"card product-info")])[1]//button[not(@data-price)]//span`)
     }
 
@@ -109,11 +109,7 @@ export class MinicartPage extends BasePage {
         return (await total.innerText()).trim()
     }
 
-    async getShippingDiscount(): Promise<string> {
-        const total = this.page.locator(`//span[@class="applied-promotion-discount"]`)
-
-        return (await total.innerText()).trim()
-    }
+    abstract getShippingDiscount(): Promise<string> 
 
     // =========================
     // ✅ Assertions

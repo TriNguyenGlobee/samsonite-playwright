@@ -132,6 +132,10 @@
   "cartpage": {
     "title": "ショッピングカート｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
     "pageTitle": "カート",
-    "emptymsg": "カートは空です"
+    "emptymsg": "カートは空です",
+    "checkoutbutton": "注文手続きへ",
+    "removeprodmodaltitle": "商品を削除しますか?",
+    "removeconfirmbutton": "はい",
+    "removecancelbutton": "キャンセル"
   }
 }
