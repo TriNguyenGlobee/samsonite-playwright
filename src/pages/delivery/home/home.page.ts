@@ -300,6 +300,7 @@ export abstract class HomePage extends BasePage {
             await expect(link).toHaveAttribute('href', item.href);
 
             if (item.hasImage) {
+                PageUtils.waitForDomAvailable(page)
                 const img = card.locator('xpath=.//picture//img');
                 await expect(img).toHaveCount(1);
                 const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');

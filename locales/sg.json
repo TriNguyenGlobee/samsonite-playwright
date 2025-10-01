@@ -121,11 +121,21 @@
     "ginzaflagshipstore": "銀座 旗艦店"
   },
   "minicart": {
-    "emptymsg": "Your Cart is Empty"
+    "emptymsg": "Your Cart is Empty",
+    "startshoppingbutton": "Start Shopping now",
+    "viewcartbutton": "View Cart",
+    "checkoutbutton": "Checkout",
+    "removeprodmodaltitle": "Remove Product?",
+    "removeconfirmbutton": "Yes",
+    "removecancelbutton": "Cancel"
   },
   "cartpage": {
     "title": "Shopping Cart | Samsonite Singapore",
     "pageTitle": "Your Cart",
-    "emptymsg": "Your Shopping Cart is Empty"
+    "emptymsg": "Your Shopping Cart is Empty",
+    "checkoutbutton": "Checkout",
+    "removeprodmodaltitle": "Remove Product?",
+    "removeconfirmbutton": "Yes",
+    "removecancelbutton": "Cancel"
   }
 }
