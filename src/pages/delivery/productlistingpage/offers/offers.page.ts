@@ -9,12 +9,14 @@ export class OffersPage extends BasePage {
     readonly logoImg: Locator;
     readonly baseLocator: Locator;
     readonly referFriendItem: Locator;
+    readonly top10PicksItem: Locator;
 
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.baseLocator = page.locator(`xpath=.//div[@id="category-category-promotion-page"]`);
-        this.referFriendItem = this.baseLocator.locator(`xpath=.//li[@role="menuitem"]`)
+        this.referFriendItem = this.baseLocator.locator(`xpath=.//li[@role="menuitem" and .//text()="Refer a Friend"]`)
+        this.top10PicksItem = this.baseLocator.locator(`xpath=.//li[@role="menuitem" and .//text()="Top 10 Picks"]`)
     }
 
     // =========================
@@ -59,7 +61,8 @@ export class OffersPage extends BasePage {
         await delay(3000);
 
         const elementsToCheck = [
-            this.referFriendItem
+            this.referFriendItem,
+            this.top10PicksItem
         ];
 
         for (const locator of elementsToCheck) {
@@ -71,6 +74,12 @@ export class OffersPage extends BasePage {
             hasImage: true,
             href: "https://sssg.stg.samsonite-asia.com/referralshow",
             text: "Refer a Friend"
+        })
+
+        this.assertLocatorInside(this.top10PicksItem, {
+            hasImage: true,
+            href: "https://sssg.stg.samsonite-asia.com/2025-top-10-picks/",
+            text: "Top 10 Picks"
         })
 
     }

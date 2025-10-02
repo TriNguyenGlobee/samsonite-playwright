@@ -1,5 +1,4 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
-import { CartPage } from "../../../src/pages/delivery/cart/cart.page";
 import { createMinicartPage } from '../../../src/factories/minicart.factory'
 import { createCartPage } from '../../../src/factories/cart.factory'
 import { Config } from "../../../config/env.config";

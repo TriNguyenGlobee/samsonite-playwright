@@ -2,20 +2,30 @@ import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../../base.page";
 import { t, delay, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
-import { attachment } from "allure-js-commons";
+import { attachment, step } from "allure-js-commons";
 import { test } from "@playwright/test";
 
 export class NewArrivalsPage extends BasePage {
     readonly logoImg: Locator;
+    readonly prodItem: Locator;
+    readonly promotionMsg: Locator;
 
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
+        this.prodItem = page.locator(`//div[@class="product"]`);
+        this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
     }
 
     // =========================
     // 🚀 Actions
     // =========================
+    async selectProdByIndex(prodIndex: number, description?: string): Promise<void> {
+        await step(description || `Click on product at index ${prodIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page)
+            await this.click(this.prodItem.nth(prodIndex - 1), `Click on product at index ${prodIndex}`)
+        })
+    }
 
 
     // =========================
@@ -46,6 +56,15 @@ export class NewArrivalsPage extends BasePage {
             console.error('Error checking new arrivals page:', error);
             return false;
         }
+    }
+
+    async getPromotionMessage(prodIndex: number, description?: string): Promise<string | null> {
+        return await step(description || "Get promotion message", async () => {
+            const productMsg = this.prodItem.nth(prodIndex - 1).locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
+            if (await productMsg.count() > 0) {
+                return (await this.getText(productMsg, `Get Promotion Msg of Product at index ${prodIndex}`))?.trim() ?? null
+            } else return null
+        });
     }
 
     // =========================
