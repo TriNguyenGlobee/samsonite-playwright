@@ -223,13 +223,23 @@ export class BasePage {
 
     async getLocatorURL(locate: Locator, description?: string): Promise<string | null> {
         return await step(description || "Get Locator URL", async () => {
-            let link = locate.locator(`xpath=.//a`).first()
-            const isVisible = await link.isVisible()
-            if (!isVisible) {
-                link = locate.locator(`xpath=./parent::a`)
+            const selfHref = await locate.getAttribute('href');
+
+            if (selfHref) {
+                return selfHref;
             }
-            return link.getAttribute('href')
-        })
+
+            let link = locate.locator('xpath=.//a').first();
+            if (await link.isVisible()) {
+                return await link.getAttribute('href');
+            }
+            
+            link = locate.locator('xpath=./parent::a');
+            if (await link.isVisible()) {
+                return await link.getAttribute('href');
+            }
+            return null;
+        });
     }
 
     async getProdCollection(index: number): Promise<string> {
@@ -250,7 +260,7 @@ export class BasePage {
         return (await prod.innerText()).trim()
     }
 
-    async getCartBadgeValue(): Promise<number>{
+    async getCartBadgeValue(): Promise<number> {
         const cartBadgeValue = await this.cartBadge.textContent()
 
         return await extractNumber(cartBadgeValue!)
@@ -270,6 +280,12 @@ export class BasePage {
     async assertHidden(locator: Locator, description?: string) {
         await step(description || "Assert element hidden", async () => {
             await expect(locator).toBeHidden();
+        });
+    }
+
+    async assertEqual(actual: any, expected: any, description?: string) {
+        await step(description || "Assert equal", async () => {
+            expect(actual).toBe(expected);
         });
     }
 
