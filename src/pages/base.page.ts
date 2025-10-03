@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber } from "../../utils/helpers";
+import { t, extractNumber, PageUtils, delay } from "../../utils/helpers";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
@@ -29,6 +29,9 @@ export class BasePage {
     readonly ginzaFlagshipStore: Locator;
     readonly cartBadge: Locator;
     readonly viewCartButton: Locator;
+    readonly prodItem: Locator;
+    readonly promotionMsg: Locator;
+    readonly ratedProd: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -54,6 +57,9 @@ export class BasePage {
         this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
         this.cartBadge = this.cartIcon.locator('xpath=.//span[@class="minicart-quantity"]');
         this.viewCartButton = page.locator(`//div[@id="miniCartModal"]//a[contains(text(),"View Cart")]`)
+        this.prodItem = page.locator(`//div[@class="product"]`);
+        this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
+        this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]`)
     }
 
     // =========================
@@ -200,6 +206,20 @@ export class BasePage {
         });
     }
 
+    async selectProdByIndex(prodIndex: number, description?: string): Promise<void> {
+        await step(description || `Click on product at index ${prodIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page)
+            await this.click(this.prodItem.nth(prodIndex - 1), `Click on product at index ${prodIndex}`)
+        })
+    }
+
+    async selectRatedProd(description?: string): Promise<void> {
+        await step(description || `Click on rated product`, async () => {
+            await PageUtils.waitForDomAvailable(this.page)
+            await this.click(this.ratedProd.first())
+        })
+    }
+
     // =========================
     // 📦 Helpers
     // =========================
@@ -233,7 +253,7 @@ export class BasePage {
             if (await link.isVisible()) {
                 return await link.getAttribute('href');
             }
-            
+
             link = locate.locator('xpath=./parent::a');
             if (await link.isVisible()) {
                 return await link.getAttribute('href');
@@ -401,7 +421,7 @@ export class BasePage {
         }
     }
 
-    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string, description?: string) {
+    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string, description?: string, button: 'left' | 'middle' | 'right' = 'middle') {
         await step(description || `Assert expected URL is: ${url}`, async () => {
             let link = locate.locator('xpath=.//a');
 
@@ -411,17 +431,29 @@ export class BasePage {
                 link = locate
             }
 
-            const [newPage] = await Promise.all([
-                page.context().waitForEvent('page', { timeout: 60000 }),
-                link.click({ button: 'middle' }),
-            ]);
+            if (button === 'middle') {
+                await this.hover(link)
+                const [newPage] = await Promise.all([
+                    page.context().waitForEvent('page', { timeout: 60000 }),
+                    link.click({ button }),
+                ]);
 
-            await newPage.waitForLoadState('domcontentloaded');
-            const currentUrl = newPage.url()
+                await newPage.waitForLoadState('domcontentloaded');
+                const currentUrl = newPage.url();
+                await expect(currentUrl).toContain(url);
 
-            await expect(currentUrl).toContain(url);
+                await newPage.close();
+            } else {
+                console.log(`Now loading .............${button} click on button`)
+                await Promise.all([
+                    page.waitForURL(url, { timeout: 60000 }),
+                    link.click({ button }),
+                ]);
 
-            await newPage.close();
+                await delay(500)
+                const currentUrl = page.url();
+                await expect(currentUrl).toContain(url);
+            }
         })
     }
 }

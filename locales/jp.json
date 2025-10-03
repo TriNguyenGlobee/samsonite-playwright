@@ -137,5 +137,12 @@
     "removeprodmodaltitle": "商品を削除しますか?",
     "removeconfirmbutton": "はい",
     "removecancelbutton": "キャンセル"
+  },
+  "PDP": {
+    "readmore": "続きを読む",
+    "readless": "閉じる",
+    "addedwishlistmsg": "この商品がウィッシュリストに追加されました。",
+    "removedwishlistmsg": "ウィッシュリストから商品が削除されました。",
+    "viewwishlistbtn": "View"
   }
 }

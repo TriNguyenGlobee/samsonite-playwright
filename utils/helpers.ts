@@ -177,6 +177,7 @@ export const t = {
   menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
   minicart: (key: keyof Translations['minicart']) => I18n.translations.minicart[key],
   cartpage: (key: keyof Translations['cartpage']) => I18n.translations.cartpage[key],
+  PDP: (key: keyof Translations['PDP']) => I18n.translations.PDP[key],
 };
 
 /**
@@ -323,6 +324,38 @@ export async function scrollToBottom(page: Page, distance: number = 100, delay: 
     },
     { scrollDistance: distance, scrollDelay: delay }
   );
+}
+
+export async function lazyLoad(page: Page) {
+  const delayMs = 800;
+  const maxScroll = 50;
+
+  for (let i = 0; i < maxScroll; i++) {
+    const currentText = await page.locator('.current-products').innerText().catch(() => '0');
+    const totalText = await page.locator('.total-products').innerText().catch(() => '0');
+
+    const current = parseInt(currentText.replace(/\D/g, ''), 10) || 0;
+    const total = parseInt(totalText.replace(/\D/g, ''), 10) || 0;
+
+    console.log(`lazyLoad: ${current} of ${total}`);
+
+    if (total > 0 && current >= total) {
+      console.log('All products loaded');
+      break;
+    }
+
+    await page.evaluate(() => {
+      window.scrollBy(0, window.innerHeight);
+    });
+
+    await page.waitForTimeout(delayMs);
+  }
+
+  const finalCurrent = parseInt(await page.locator('.current-products').innerText(), 10);
+  const finalTotal = parseInt(await page.locator('.total-products').innerText(), 10);
+
+  await expect(finalCurrent).toBe(finalTotal);
+  console.log(`Finished lazy load: ${finalCurrent} of ${finalTotal}`);
 }
 
 // Click a locator until another locator visible|hidden
