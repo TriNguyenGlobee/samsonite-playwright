@@ -79,10 +79,10 @@ test.describe("PDP is shown correctly", async () => {
     })
 
     test(`
-        3. Minicart is displayed when clicking on Add to cart button
-        3. The number of products increased by one after clicking on Add to cart button
-        4. Navigate to checkoutlogin page by clicking on Buy now button
-        5. Navigate to Amazone page by clicking on Amazone pay button
+        6. Minicart is displayed when clicking on Add to cart button
+        7. The number of products increased by one after clicking on Add to cart button
+        8. Navigate to checkoutlogin page by clicking on Buy now button
+        9. Navigate to Amazone page by clicking on Amazone pay button
         `, async ({ basicAuthPage }) => {
         const pdppage = new PDPPage(basicAuthPage)
         const minicart = createMinicartPage(basicAuthPage)

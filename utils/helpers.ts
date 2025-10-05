@@ -290,17 +290,22 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
   ];
 
   for (const modal of modalsToCheck) {
-    const isVisible = await modal.locator.isVisible().catch(() => false);
+    const locator = modal.locator;
+
+    const isAttached = await locator.evaluate((el) => !!el).catch(() => false);
+    if (!isAttached) continue;
+
+    const box = await locator.boundingBox().catch(() => null);
+    const isVisible = !!box;
+
     if (isVisible) {
       console.log(`${modal.name} detected → Closing it...`);
-      await modal.locator.click().catch((e) => {
+      await locator.click().catch((e) => {
         console.warn(`Failed to click close for ${modal.name}:`, e);
       });
-      await modal.locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
+      await locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
         console.warn(`${modal.name} did not detach in time`);
       });
-    } else {
-      //console.log(`${modal.name} not found.`);
     }
   }
 }

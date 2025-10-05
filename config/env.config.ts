@@ -25,10 +25,10 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
         sg: {
             baseURL: 'https://sssg.dev.samsonite-asia.com/',
             credentials: {
-                username: process.env.DEV_USERNAME as string,
-                password: process.env.DEV_PASSWORD as string,
-                gg_username: process.env.DEV_GG_USERNAME as string,
-                gg_password: process.env.DEV_GG_PASSWORD as string
+                username: process.env.DEV_USERNAME_SG as string,
+                password: process.env.DEV_PASSWORD_SG as string,
+                gg_username: process.env.DEV_GG_USERNAME_SG as string,
+                gg_password: process.env.DEV_GG_PASSWORD_SG as string
             },
             basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
             basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
@@ -36,10 +36,10 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
         jp: {
             baseURL: 'https://ssjp.dev.samsonite-asia.com/',
             credentials: {
-                username: process.env.DEV_USERNAME as string,
-                password: process.env.DEV_PASSWORD as string,
-                gg_username: process.env.DEV_GG_USERNAME as string,
-                gg_password: process.env.DEV_GG_PASSWORD as string
+                username: process.env.DEV_USERNAME_JP as string,
+                password: process.env.DEV_PASSWORD_JP as string,
+                gg_username: process.env.DEV_GG_USERNAME_JP as string,
+                gg_password: process.env.DEV_GG_PASSWORD_JP as string
             },
             basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
             basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
@@ -52,8 +52,8 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             credentials: {
                 username: process.env.STG_USERNAME_SG as string,
                 password: process.env.STG_PASSWORD_SG as string,
-                gg_username: process.env.STG_GG_USERNAME as string,
-                gg_password: process.env.STG_GG_PASSWORD as string
+                gg_username: process.env.STG_GG_USERNAME_SG as string,
+                gg_password: process.env.STG_GG_PASSWORD_SG as string
             },
             basicAuthUser: process.env.STG_BASIC_AUTH_USER,
             basicAuthPass: process.env.STG_BASIC_AUTH_PASS,
@@ -74,26 +74,30 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
         sg: {
             baseURL: 'https://www.samsonite.com.sg/',
             credentials: {
-                username: process.env.PROD_USERNAME as string,
-                password: process.env.PROD_PASSWORD as string,
-                gg_username: process.env.PROD_GG_USERNAME as string,
-                gg_password: process.env.PROD_GG_PASSWORD as string
+                username: process.env.PROD_USERNAME_SG as string,
+                password: process.env.PROD_PASSWORD_SG as string,
+                gg_username: process.env.PROD_GG_USERNAME_SG as string,
+                gg_password: process.env.PROD_GG_PASSWORD_SG as string
             },
+            basicAuthUser: process.env.PROD_BASIC_AUTH_USER,
+            basicAuthPass: process.env.PROD_BASIC_AUTH_PASS,
         },
         jp: {
             baseURL: 'https://www.samsonite.co.jp/',
             credentials: {
-                username: process.env.PROD_USERNAME as string,
-                password: process.env.PROD_PASSWORD as string,
-                gg_username: process.env.PROD_GG_USERNAME as string,
-                gg_password: process.env.PROD_GG_PASSWORD as string
+                username: process.env.PROD_USERNAME_JP as string,
+                password: process.env.PROD_PASSWORD_JP as string,
+                gg_username: process.env.PROD_GG_USERNAME_JP as string,
+                gg_password: process.env.PROD_GG_PASSWORD_JP as string
             },
+            basicAuthUser: process.env.PROD_BASIC_AUTH_USER,
+            basicAuthPass: process.env.PROD_BASIC_AUTH_PASS,
         }
     }
 };
 
 // Get ENV from terminal (defautl: stg, jp)
-const currentEnv: EnvironmentName = (process.env.ENV as EnvironmentName) || 'stg';
+const currentEnv: EnvironmentName = (process.env.ENV as EnvironmentName) || 'dev';
 const currentLocale = (process.env.LOCALE as Locale) || 'jp';
 
 export const Config = environments[currentEnv][currentLocale];
