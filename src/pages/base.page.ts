@@ -286,6 +286,15 @@ export class BasePage {
         return await extractNumber(cartBadgeValue!)
     }
 
+    async isAddToCartButtonDisabled(index: number): Promise<boolean> {
+        const addToCartButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${index}]`)
+        const isDisabledExist = await addToCartButton.getAttribute('disabled')
+        
+        if (isDisabledExist !== null) {
+            return true
+        } else return false
+    }
+
     // =========================
     // ✅ Assertions
     // =========================

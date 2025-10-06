@@ -173,7 +173,7 @@ test.describe("Add products to cart without login", () => {
         const minicart = createMinicartPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 3];
+        const prodIndexes = [1, 2, 1];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
@@ -271,7 +271,7 @@ test.describe("Add products to cart without login", () => {
         const homePage = createHomePage(basicAuthPage);
         const cartpage = createCartPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 3];
+        const prodIndexes = [1, 2, 1];
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 

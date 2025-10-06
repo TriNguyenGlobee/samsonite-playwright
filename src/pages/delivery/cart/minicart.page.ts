@@ -100,7 +100,7 @@ export abstract class MinicartPage extends BasePage {
     async getShippingCost(): Promise<string> {
         const shipping = this.page.locator(`//div[@class="shipping-cost" or @class="shipping-information"]`)
 
-        return (await shipping.innerText()).trim()
+        return (await shipping.first().innerText()).trim()
     }
 
     async getTotalPrice(): Promise<string> {
