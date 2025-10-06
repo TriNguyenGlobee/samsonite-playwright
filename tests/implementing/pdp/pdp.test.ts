@@ -177,16 +177,18 @@ test.describe("PDP extra features", () => {
 
         await step("Verify that user can add product to wishlist", async () => {
             await Promise.all([
-                expect(pdppage.wishlistIcon).toHaveAttribute('class', 'fa fa-heart'),
-                expect(pdppage.wishlistMsg).toHaveText(`${t.PDP('addedwishlistmsg')}`),
+                pdppage.assertAttributeValue(pdppage.wishlistIcon, 'class', 'fa fa-heart',
+                    'Assert the wishlist icon status is changed'),
+                pdppage.assertText(pdppage.wishlistMsg, `${t.PDP('addedwishlistmsg')}`, 
+                    'Assert wishlist modal text'),
                 pdppage.click(pdppage.wishlistIcon, "Click on wishlish icon")
             ])
         })
 
         await step("Verify wishlist page is displayed", async () => {
-            await pdppage.click(pdppage.viewWishListButton, "Click on view wishlist button")
+            await pdppage.click(pdppage.viewWishListButton, "Click on View wishlist button")
 
-            
+
         })
     });
 });

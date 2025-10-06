@@ -270,6 +270,8 @@ export async function selectComboboxOption(page: Page, comboboxName: string, opt
 }
 
 export async function closeModalIfPresent(page: Page): Promise<void> {
+  if (!page || page.isClosed()) return;
+
   const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
   const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
   const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
@@ -278,34 +280,89 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
     {
       name: 'Signup Modal',
       locator: modalCloseBtn.first(),
+      useJsClick: true,
+      containerSelector: '#staticBackdrop',
     },
     {
       name: 'Intent Cart Modal',
       locator: intentCartCloseBtn.first(),
+      useJsClick: false,
+      containerSelector: '#mcp-exit-intent-cart',
     },
     {
       name: 'Popup Container',
       locator: popupContainerBtn.first(),
+      useJsClick: false,
+      containerSelector: '.popup-container',
     },
   ];
 
   for (const modal of modalsToCheck) {
-    const locator = modal.locator;
+    const { name, locator, useJsClick, containerSelector } = modal;
 
-    const isAttached = await locator.evaluate((el) => !!el).catch(() => false);
+    if (page.isClosed()) {
+      console.log(`[closeModalIfPresent] Page closed → stop checking ${name}`);
+      return;
+    }
+
+    let isAttached = false;
+    try {
+      isAttached = await locator.evaluate((el) => !!el).catch(() => false);
+    } catch {
+      continue;
+    }
     if (!isAttached) continue;
 
-    const box = await locator.boundingBox().catch(() => null);
-    const isVisible = !!box;
+    const isVisible = await locator.isVisible().catch(() => false);
+    if (!isVisible) continue;
 
-    if (isVisible) {
-      console.log(`${modal.name} detected → Closing it...`);
-      await locator.click().catch((e) => {
-        console.warn(`Failed to click close for ${modal.name}:`, e);
-      });
-      await locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
-        console.warn(`${modal.name} did not detach in time`);
-      });
+    console.log(`${name} detected → Closing it...`);
+
+    try {
+      if (useJsClick) {
+        await page.evaluate(() => {
+          const btn = document.querySelector('.close-signup-popup') as HTMLElement | null;
+          btn?.click();
+        });
+        console.log(`${name}: JS click executed`);
+      } else {
+        await locator.click({ force: true }).catch(() => {
+          console.warn(`⚠️ ${name}: Failed normal click, trying JS click`);
+        });
+      }
+
+      try {
+        await Promise.race([
+          page.waitForSelector(containerSelector, { state: 'hidden', timeout: 4000 }),
+          page.waitForSelector(containerSelector, { state: 'detached', timeout: 4000 }),
+          page.waitForFunction(
+            (sel) => {
+              const modal = document.querySelector(sel);
+              if (!modal) return true;
+              const style = getComputedStyle(modal);
+              return (
+                style.display === 'none' ||
+                style.opacity === '0' ||
+                (modal.classList.contains('fade') && !modal.classList.contains('show'))
+              );
+            },
+            containerSelector,
+            { timeout: 4000 }
+          ),
+        ]);
+      } catch (waitErr) {
+        if (!/Target page.*closed/i.test(String(waitErr))) {
+          console.warn(`${name}: Modal did not hide in time`);
+        }
+      }
+
+      console.log(`${name}: Closed or ignored`);
+    } catch (err) {
+      if (/Target page.*closed/i.test(String(err))) {
+        console.log(`[closeModalIfPresent] ${name}: Page closed — safe to ignore`);
+        return;
+      }
+      console.warn(`Failed to close ${name}:`, err);
     }
   }
 }

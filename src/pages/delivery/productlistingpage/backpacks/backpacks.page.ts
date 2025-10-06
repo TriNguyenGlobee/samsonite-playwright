@@ -4,6 +4,7 @@ import { t, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";
+import { loadTestData } from "../../../../../utils/data";
 
 export abstract class BackpacksPage extends BasePage {
     readonly logoImg: Locator;
@@ -15,6 +16,8 @@ export abstract class BackpacksPage extends BasePage {
     readonly backpackLaptop: Locator;
     readonly backpackCollection: Locator;
 
+    protected testData: ReturnType<typeof loadTestData>;
+
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
@@ -25,6 +28,8 @@ export abstract class BackpacksPage extends BasePage {
         this.backpackBrand = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-backpack-brand")]`);
         this.backpackLaptop = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-backpack-laptop")]`);
         this.backpackCollection = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-backpack-collection")]`);
+
+        this.testData = loadTestData();
     }
 
     // =========================

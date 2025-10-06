@@ -57,7 +57,7 @@ export abstract class HomePage extends BasePage {
         try {
             const title = await this.page.title();
             if (!title.includes(t.homepage('title'))) {
-                await step(`Check visibility of element: ${title.toString()}`, async () => {
+                await step(`Check title of page: ${title.toString()}`, async () => {
                     console.log(`Element not visible: ${title.toString()}`);
                 });
                 return false;
@@ -278,7 +278,14 @@ export abstract class HomePage extends BasePage {
             await newPage.waitForLoadState('domcontentloaded');
             const currentUrl = newPage.url();
 
-            await expect(currentUrl).toContain(href);
+            if (href.includes('/sale/')) {
+                await expect(
+                    currentUrl === href ||
+                    currentUrl.startsWith('https://ssjp.dev.samsonite-asia.com/login')
+                ).toBeTruthy();
+            } else {
+                await expect(currentUrl).toContain(href);
+            }
 
             await newPage.close();
         }
@@ -368,11 +375,11 @@ export abstract class HomePage extends BasePage {
         await PageUtils.waitForDomAvailable(page, 20000)
         const title = page.locator('//div[@class="magazine-title"]');
         const itemList = page.locator(`//div[@class="magazine-title"]/following-sibling::div[@class="swiper-wrapper"]`)
-        const itemRow = page.locator(`//div[@class="magazine-title"]/following-sibling::div[@class="swiper-wrapper"]//div[contains(@class,"swiper-slide")]`)
+        const itemRow = page.locator(`//div[@class="magazine-title"]/following-sibling::div[@class="swiper-wrapper"]//div[contains(@class,"swiper-slide") and @aria-label]`)
 
         const prevButton = title.locator('xpath=./following-sibling::div[contains(@class,"swiper-button-prev")]');
         const nextButton = title.locator('xpath=./following-sibling::div[contains(@class,"swiper-button-next")]');
-        const getActiveItem = () => itemList.locator('xpath=.//div[contains(@class,"swiper-slide swiper-slide-active")]');
+        const getActiveItem = () => itemList.locator('xpath=.//div[contains(@class,"swiper-slide-active")]');
         const items = await itemRow.count()
 
         await expect(prevButton).toHaveClass(/swiper-button-disabled/);

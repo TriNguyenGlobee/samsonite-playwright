@@ -4,6 +4,7 @@ import { t, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";
+import { loadTestData } from "../../../../../utils/data";
 
 export abstract class OurBrandStoryPage extends BasePage {
     readonly logoImg: Locator;
@@ -13,6 +14,8 @@ export abstract class OurBrandStoryPage extends BasePage {
     readonly discoverLatest: Locator;
     readonly discoverCollection: Locator;
 
+    protected testData: ReturnType<typeof loadTestData>;
+
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
@@ -21,6 +24,8 @@ export abstract class OurBrandStoryPage extends BasePage {
         this.discoverLatest = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-latest")]');
         this.discoverSamsonite = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-about-samsonite")]');
         this.discoverCollection = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-collection")]');
+
+        this.testData = loadTestData();
     }
 
     // =========================
@@ -36,7 +41,7 @@ export abstract class OurBrandStoryPage extends BasePage {
         try {
             const title = await this.page.title();
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "our-brand-story/";
+            const expectedUrl = Config.baseURL + "brand-story.html";
 
             await test.step("Our Brand Story page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");

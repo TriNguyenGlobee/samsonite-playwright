@@ -131,6 +131,8 @@ test.describe("Add products to cart without login", () => {
 
                 await homePage.click(minicart.amazonePayButton, "Click on Amazone pay button")
                 await homePage.assertUrl(/amazon\.co\.jp/)
+
+                await homePage.goBack("home page")
             })
         }
 

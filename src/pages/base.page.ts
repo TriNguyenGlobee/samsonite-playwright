@@ -309,6 +309,18 @@ export class BasePage {
         });
     }
 
+    async assertAttributeValue(locator: Locator, attributeName: string, value: string, description?: string) {
+        await step(description || "Assert Locator attribute value", async () => {
+            expect(locator).toHaveAttribute(attributeName, value);
+        })
+    }
+
+    async assertText(locator: Locator, text: string, description?: string) {
+        await step(description || "Assert Locator text", async () => {
+            expect(locator).toHaveText(text);
+        })
+    }
+
     async assertUrl(expectedUrl: string | RegExp, description?: string) {
         await expect(this.page, description || "Check current URL").toHaveURL(expectedUrl);
     }
