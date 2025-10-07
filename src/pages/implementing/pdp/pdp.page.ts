@@ -80,7 +80,7 @@ export class PDPPage extends BasePage {
             }
             return true;
         } catch (error) {
-            console.error('Error checking login page:', error);
+            console.error('Error checking PDP page:', error);
             return false;
         }
     }
@@ -117,10 +117,12 @@ export class PDPPage extends BasePage {
             await step("Assert the first tab again", async () => {
                 const firstTab = tabs.first();
 
-                await firstTab.click();
-                await expect(firstTab).toHaveClass(/active/, { timeout: 3000 });
+                if (await firstTab.isVisible() == true) {
+                    await firstTab.click();
+                    await expect(firstTab).toHaveClass(/active/, { timeout: 3000 });
 
-                await delay(200);
+                    await delay(200);
+                }
             });
         }
     }

@@ -27,12 +27,8 @@ export class BrandPageSG extends BrandPage {
     async assertBrandItems(page: Page): Promise<void> {
         await delay(3000);
 
-        const brandItems = [
-            { text: 'Samsonite BLACK LABEL', href: 'https://sssg.stg.samsonite-asia.com/black/' },
-            { text: 'Samsonite', href: 'https://sssg.stg.samsonite-asia.com/samsonite/' },
-            { text: 'Samsonite RED', href: 'https://sssg.stg.samsonite-asia.com/red/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, undefined, brandItems);
+        const { brandItemsBR } = this.testData;
+        await this.assertItemsListForCategoryMenu(this.baseLocator, undefined, brandItemsBR);
     }
 
 }

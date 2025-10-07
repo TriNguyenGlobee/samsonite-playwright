@@ -8,7 +8,7 @@
     "addtocart": "Add to Cart"
   },
   "loginpage": {
-    "title": "Sign In To Your Account | Samsonite Singapore",
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
     "singinTitle": "Sign in",
     "loginmsg": "Existing customer or House of Samsonite user",
     "usernamelabel": "Email / Username",
@@ -34,7 +34,7 @@
     "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
-    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Singapore",
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
     "pageTitle": "Forgot your password?",
     "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
     "emailTextbox": "Email",
@@ -72,7 +72,7 @@
     "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Brand Story | Salesforce Commerce Cloud | 3.3.0"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -98,7 +98,7 @@
     "warrantytitle": "製品保証"
   },
   "mypage": {
-    "title": "My Account | Samsonite Singapore",
+    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
     "pageTitle": "Your Account",
     "myOrders": "My Orders",
     "membership": "My Membership",
@@ -143,6 +143,9 @@
     "readless": "Read less",
     "addedwishlistmsg": "ITEM IS ADDED TO YOUR WISHLIST.",
     "removedwishlistmsg": "ITEM IS REMOVED FROM YOUR WISHLIST.",
-    "viewwishlistbtn": "リストを見る"
+    "viewwishlistbtn": "View"
+  },
+  "wishlist": {
+    "title": "My Wishlist"
   }
 }

@@ -152,7 +152,6 @@ export abstract class CartPage extends BasePage {
         }
     }
 
-
     async removeAllProducts() {
         const count = await this.removeProductButton.count();
 
@@ -204,7 +203,7 @@ export abstract class CartPage extends BasePage {
 
             return true;
         } catch (error) {
-            console.error('Error checking login page:', error);
+            console.error('Error checking cart page:', error);
             return false;
         }
     }

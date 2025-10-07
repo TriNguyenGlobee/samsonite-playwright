@@ -143,6 +143,9 @@
     "readless": "閉じる",
     "addedwishlistmsg": "この商品がウィッシュリストに追加されました。",
     "removedwishlistmsg": "ウィッシュリストから商品が削除されました。",
-    "viewwishlistbtn": "View"
+    "viewwishlistbtn": "リストを見る"
+  },
+  "wishlist": {
+    "title": "ウィッシュリスト｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト"
   }
 }

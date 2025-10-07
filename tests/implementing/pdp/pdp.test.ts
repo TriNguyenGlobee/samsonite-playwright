@@ -3,10 +3,11 @@ import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 import { PDPPage } from "../../../src/pages/implementing/pdp/pdp.page";
-import { extractNumber, lazyLoad, scrollToBottom } from "../../../utils/helpers";
+import { delay, extractNumber, lazyLoad, PageUtils, scrollToBottom } from "../../../utils/helpers";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
 import { t } from "../../../utils/helpers";
+import { WishlistPage } from "../../../src/pages/implementing/pdp/wishlist.page";
 
 test.describe("PDP is shown correctly", async () => {
     const prodIndex = 1
@@ -123,6 +124,7 @@ test.describe("PDP is shown correctly", async () => {
 test.describe("Breadcrumb", () => {
     const prodIndex = 1
     let prodName: string;
+    let prodCollection: string;
 
     test.beforeEach(async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -130,6 +132,7 @@ test.describe("Breadcrumb", () => {
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
 
+        prodCollection = (await homepage.getProdCollection(prodIndex)).trim()
         prodName = (await homepage.getProdName(prodIndex)).trim()
 
         await newarrivalspage.selectProdByIndex(prodIndex, "Click on first-product on New Arrivals page")
@@ -150,14 +153,13 @@ test.describe("Breadcrumb", () => {
         });
 
         await step("Verify the breadcrumb-product name", async () => {
-            expect(breadcrumbProdName).toBe(prodName)
+            expect(breadcrumbProdName).toBe(`${prodCollection} ${prodName}`)
         })
     });
 });
 
 test.describe("PDP extra features", () => {
     const prodIndex = 1
-    let prodName: string;
 
     test.beforeEach(async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -171,24 +173,37 @@ test.describe("PDP extra features", () => {
     test(`
         1. User can add product to wishlist
         2. Go to Wishlist page page
-        3. User can remove product from wishlist
+        3. Product exist in wishlist page
+        4. User can remove product from wishlist
         `, async ({ basicAuthPage }) => {
         const pdppage = new PDPPage(basicAuthPage)
+        const wishlistpage = new WishlistPage(basicAuthPage)
+
+        const pdpProdName = await pdppage.getText(pdppage.prodName)
+        const pdpProdCollection = await pdppage.getText(pdppage.prodCollecton)
 
         await step("Verify that user can add product to wishlist", async () => {
-            await Promise.all([
-                pdppage.assertAttributeValue(pdppage.wishlistIcon, 'class', 'fa fa-heart',
-                    'Assert the wishlist icon status is changed'),
-                pdppage.assertText(pdppage.wishlistMsg, `${t.PDP('addedwishlistmsg')}`, 
-                    'Assert wishlist modal text'),
-                pdppage.click(pdppage.wishlistIcon, "Click on wishlish icon")
-            ])
+            await PageUtils.waitForPageLoad(basicAuthPage)
+
+            await pdppage.click(pdppage.wishlistIcon, "Click on wishlish icon")
+            await delay(500)
+
+            await pdppage.assertText(pdppage.wishlistMsg, `${t.PDP('addedwishlistmsg')}`,
+                'Assert wishlist modal text')
+
+            await pdppage.assertAttributeValue(pdppage.wishlistIcon, 'class', 'fa fa-heart',
+                'Assert the wishlist icon status is changed')
         })
 
         await step("Verify wishlist page is displayed", async () => {
             await pdppage.click(pdppage.viewWishListButton, "Click on View wishlist button")
+            expect(await wishlistpage.isWishlistPageDisplayed()).toBe(true)
+        })
 
-
+        await step("Verify the product exist in wishlist page", async () => {
+            await wishlistpage.assertProdExist(pdpProdName!, pdpProdCollection!,
+                "Assert that Product exist in wishlist page"
+            )
         })
     });
 });
