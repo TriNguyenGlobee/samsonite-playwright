@@ -3,7 +3,7 @@ import { createMinicartPage } from '../../../src/factories/minicart.factory'
 import { createCartPage } from '../../../src/factories/cart.factory'
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber } from "../../../utils/helpers";
+import { t, clickUntil, extractNumber, PageUtils } from "../../../utils/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Empty cart without login", () => {
@@ -83,6 +83,9 @@ test.describe("Add products to cart without login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await step('Click on In-stock checkbox', async () => {
+                await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+            })
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
         })
@@ -177,6 +180,10 @@ test.describe("Add products to cart without login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+        })
+
+        await step('Click on In-stock checkbox', async () => {
+            await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
         await step('Add multi products to cart', async () => {
@@ -277,6 +284,9 @@ test.describe("Add products to cart without login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await step('Click on In-stock checkbox', async () => {
+                await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+            })
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
         })
@@ -397,7 +407,8 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Remove a gift service', async () => {
-            await cartpage.click(cartpage.removeGiftServiceButton, "Click gift service button")
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await cartpage.click(cartpage.removeGiftServiceButton, "Click Remove gift service button")
         })
 
         await step('Verify that gift service is removed', async () => {

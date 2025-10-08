@@ -73,6 +73,7 @@ export class BasePage {
 
     async click(locator: Locator, description?: string) {
         await step(description || "Click on locator", async () => {
+            await PageUtils.waitForPageLoad(this.page)
             await locator.click();
         });
     }
@@ -210,6 +211,7 @@ export class BasePage {
         await step(description || `Click on product at index ${prodIndex}`, async () => {
             await PageUtils.waitForDomAvailable(this.page)
             await this.click(this.prodItem.nth(prodIndex - 1), `Click on product at index ${prodIndex}`)
+            await PageUtils.waitForPageLoad(this.page)
         })
     }
 
@@ -218,6 +220,44 @@ export class BasePage {
             await PageUtils.waitForDomAvailable(this.page)
             await this.click(this.ratedProd.first())
         })
+    }
+
+    async clickCheckboxByLabel(page: Page, labelText: string, description?: string) {
+        await step(description || `Click on the checkbox label "${labelText}"`, async () => {
+            const labelLocator = page.locator(
+                `xpath=(//label[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //a[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]])`
+            );
+
+            const target = labelLocator.last();
+            await target.scrollIntoViewIfNeeded();
+
+            const MAX_RETRIES = 3;
+            let attempt = 0;
+            let isChecked = false;
+
+            while (attempt < MAX_RETRIES) {
+                attempt++;
+
+                await target.click({ position: { x: 5, y: 5 } });
+                await delay(3000);
+
+                const inputLocator = target.locator('input[type="checkbox"]');
+                if (await inputLocator.count()) {
+                    isChecked = await inputLocator.isChecked();
+                } else {
+                    isChecked = await target.getAttribute('class').then(cls => cls?.includes('selected') || false);
+                }
+
+                if (isChecked) {
+                    //console.log(`Checkbox "${labelText}" is checked after ${attempt} attempt(s).`);
+                    break;
+                }
+
+                //console.log(`Checkbox "${labelText}" not checked (attempt ${attempt}), retrying...`);
+            }
+            await expect(isChecked, `Checkbox "${labelText}" should be checked after ${MAX_RETRIES} attempts.`).toBeTruthy();
+            await delay(2000)
+        });
     }
 
     // =========================
@@ -289,7 +329,7 @@ export class BasePage {
     async isAddToCartButtonDisabled(index: number): Promise<boolean> {
         const addToCartButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${index}]`)
         const isDisabledExist = await addToCartButton.getAttribute('disabled')
-        
+
         if (isDisabledExist !== null) {
             return true
         } else return false

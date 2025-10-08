@@ -16,65 +16,46 @@ export const test = base.extend<MyFixtures>({
   },
 
   basicAuthPage: async ({ browser }, use) => {
-    const context = await browser.newContext({
-      ...(Config.basicAuthUser && Config.basicAuthPass
+    const context = await browser.newContext(
+      Config.basicAuthUser && Config.basicAuthPass
         ? {
             httpCredentials: {
               username: Config.basicAuthUser,
               password: Config.basicAuthPass,
             },
           }
-        : {}),
-    });
+        : {}
+    );
 
     const page = await context.newPage();
     const stopWatchdog = await startModalWatchdog(page);
 
-    await step("Go to base URL with Basic Auth only", async () => {
+    await step("Go to base URL", async () => {
       await page.goto(Config.baseURL, { waitUntil: "domcontentloaded" });
     });
 
     await use(page);
 
-    try {
-      await Promise.race([
-        stopWatchdog(),
-        new Promise((resolve) => setTimeout(resolve, 2500)),
-      ]);
-    } catch (e) {
-      console.warn("stopWatchdog() timeout ignored:", e);
-    }
-
-    if (!page.isClosed()) {
-      try {
-        await page.close({ runBeforeUnload: false });
-      } catch (e) {
-        console.warn("Error while closing page:", e);
-      }
-    }
-
-    try {
-      await context.close();
-    } catch (e) {
-      console.warn("Error while closing context:", e);
-    }
+    // Dừng watchdog gọn gàng
+    await stopWatchdog().catch(() => {});
+    await page.close({ runBeforeUnload: false }).catch(() => {});
+    await context.close().catch(() => {});
   },
 
   loggedInPage: async ({ browser, user }, use) => {
-    const context = await browser.newContext({
-      ...(Config.basicAuthUser && Config.basicAuthPass
+    const context = await browser.newContext(
+      Config.basicAuthUser && Config.basicAuthPass
         ? {
             httpCredentials: {
               username: Config.basicAuthUser,
               password: Config.basicAuthPass,
             },
           }
-        : {}),
-    });
+        : {}
+    );
 
     const page = await context.newPage();
     const loginPage = createLoginPage(page);
-
     const stopWatchdog = await startModalWatchdog(page);
 
     await step("Go to Main Page", async () => {
@@ -91,28 +72,9 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
 
-    try {
-      await Promise.race([
-        stopWatchdog(),
-        new Promise((resolve) => setTimeout(resolve, 2500)),
-      ]);
-    } catch (e) {
-      console.warn("stopWatchdog() timeout ignored:", e);
-    }
-
-    if (!page.isClosed()) {
-      try {
-        await page.close({ runBeforeUnload: false });
-      } catch (e) {
-        console.warn("Error while closing loggedInPage:", e);
-      }
-    }
-
-    try {
-      await context.close();
-    } catch (e) {
-      console.warn("Error while closing loggedInPage context:", e);
-    }
+    await stopWatchdog().catch(() => {});
+    await page.close({ runBeforeUnload: false }).catch(() => {});
+    await context.close().catch(() => {});
   },
 });
 

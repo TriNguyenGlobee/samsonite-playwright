@@ -5,7 +5,8 @@
     "loginRegister": "Login/Register",
     "myaccount": "My account",
     "logout": "Logout",
-    "addtocart": "Add to Cart"
+    "addtocart": "Add to Cart",
+    "in-stock": "In-stock"
   },
   "loginpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",

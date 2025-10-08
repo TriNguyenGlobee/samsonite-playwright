@@ -53,4 +53,18 @@ export class WishlistPage extends BasePage {
         })
     }
 
+    async assertProdNotExist(proName: string, prodCollection: string, description?: string): Promise<void> {
+        await step(description || "Assert product not exist in wishlist page", async () => {
+            const productNameLocator = this.prodName.filter({
+                hasText: proName.trim()
+            });
+            const productCollectionLocator = this.prodCollection.filter({
+                hasText: prodCollection.trim()
+            });
+
+            await expect(productNameLocator.first()).toBeHidden();
+            await expect(productCollectionLocator.first()).toBeHidden();
+        })
+    }
+
 }

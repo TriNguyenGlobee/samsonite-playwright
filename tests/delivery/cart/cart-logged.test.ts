@@ -125,6 +125,11 @@ test.describe("Add products to cart after login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+
+            await step('Click on In-stock checkbox', async () => {
+                await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+            })
+
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
             console.log(`Product collection: ${prodCollection}, Product name: ${prodName}, On new arrivals page`);
@@ -220,6 +225,10 @@ test.describe("Add products to cart after login", () => {
             await homePage.clickMenuItem('newarrivals')
         })
 
+        await step('Click on In-stock checkbox', async () => {
+            await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+        })
+
         await step('Add multi products to cart', async () => {
             await cartpage.addProductToCartByIndex(prodIndexes)
         })
@@ -311,6 +320,9 @@ test.describe("Add products to cart after login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await step('Click on In-stock checkbox', async () => {
+                await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+            })
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
         })

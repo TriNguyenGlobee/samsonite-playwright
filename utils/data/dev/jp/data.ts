@@ -156,6 +156,7 @@ export const typeItemsBP = [
     { text: 'レザー', href: '/backpack/type/leather/' },
     { text: 'ナイロン', href: '/backpack/type/nylon/' },
     { text: 'ポリエステル', href: '/backpack/type/polyester/' },
+    { text: 'ウィメンズ', href: 'https://ssjp.dev.samsonite-asia.com/backpacks/?cgid=bag&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アクエリアス%7Cアルヴァーノ%7Cカリッサ+エヴォ%7Cツイードぺブル%7Cハートマンリザーブ%7Cムーヴ+5.0&start=0&sz=18&useNewPLP=true' },
     { text: 'すべて見る', href: 'https://ssjp.dev.samsonite-asia.com/backpacks/' }
 ];
 
@@ -203,6 +204,7 @@ export const typeItemsB = [
     { text: 'トート', href: '/bags/type/tote/' },
     { text: 'ショルダーバッグ', href: '/bags/type/shoulder-bag/' },
     { text: 'ダッフル', href: '/bags/type/duffles/' },
+    { text: 'ウィメンズ', href: 'https://ssjp.dev.samsonite-asia.com/bags/?cgid=bag&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アクエリアス%7Cアルヴァーノ%7Cカリッサ+エヴォ%7Cツイードぺブル%7Cハートマンリザーブ%7Cムーヴ+5.0&start=0&sz=18&useNewPLP=true' },
     { text: 'すべて見る', href: 'https://ssjp.dev.samsonite-asia.com/bags/' }
 ];
 

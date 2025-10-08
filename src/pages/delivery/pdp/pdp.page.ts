@@ -89,7 +89,7 @@ export class PDPPage extends BasePage {
         return await step(description || "Get promotion message", async () => {
             const productMsg = this.prodInfor.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
             if (await productMsg.count() > 0) {
-                return (await this.getText(productMsg, `Get Promotion Msg of Product`))?.trim() ?? null
+                return (await this.getText(productMsg.first(), `Get Promotion Msg of Product`))?.trim() ?? null
             } else return null
         });
     }

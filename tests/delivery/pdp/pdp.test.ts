@@ -2,12 +2,12 @@ import { expect, test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
-import { PDPPage } from "../../../src/pages/implementing/pdp/pdp.page";
+import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
 import { delay, extractNumber, lazyLoad, PageUtils, scrollToBottom } from "../../../utils/helpers";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
 import { t } from "../../../utils/helpers";
-import { WishlistPage } from "../../../src/pages/implementing/pdp/wishlist.page";
+import { WishlistPage } from "../../../src/pages/delivery/pdp/wishlist.page";
 
 test.describe("PDP is shown correctly", async () => {
     const prodIndex = 1
@@ -22,6 +22,9 @@ test.describe("PDP is shown correctly", async () => {
         const pdppage = new PDPPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        await step('Click on In-stock checkbox', async()=>{
+            await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+        })
 
         prodName = await homepage.getProdName(prodIndex)
         prodCollection = await homepage.getProdCollection(prodIndex)
@@ -29,9 +32,9 @@ test.describe("PDP is shown correctly", async () => {
         promotionMsg = await newarrivalspage.getPromotionMessage(prodIndex)
 
         await newarrivalspage.selectProdByIndex(prodIndex, "Click on first-product on New Arrivals page")
-        pdpProdName = await newarrivalspage.getText(pdppage.prodName)
-        pdpProdCollection = await newarrivalspage.getText(pdppage.prodCollecton)
-        pdpProdPrice = await extractNumber((await newarrivalspage.getText(pdppage.prodPrice)) as string)
+        pdpProdName = await pdppage.getText(pdppage.prodName)
+        pdpProdCollection = await pdppage.getText(pdppage.prodCollecton)
+        pdpProdPrice = await extractNumber((await pdppage.getText(pdppage.prodPrice)) as string)
         pdpPromotionMsg = await pdppage.getPromotionMessage()
     });
 
@@ -131,6 +134,9 @@ test.describe("Breadcrumb", () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        await step('Click on In-stock checkbox', async()=>{
+            await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+        })
 
         prodCollection = (await homepage.getProdCollection(prodIndex)).trim()
         prodName = (await homepage.getProdName(prodIndex)).trim()
@@ -159,13 +165,15 @@ test.describe("Breadcrumb", () => {
 });
 
 test.describe("PDP extra features", () => {
-    const prodIndex = 1
-
     test.beforeEach(async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        await step('Click on In-stock checkbox', async()=>{
+            await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+        })
+
         await lazyLoad(basicAuthPage)
         await newarrivalspage.selectRatedProd()
     });
@@ -203,6 +211,20 @@ test.describe("PDP extra features", () => {
         await step("Verify the product exist in wishlist page", async () => {
             await wishlistpage.assertProdExist(pdpProdName!, pdpProdCollection!,
                 "Assert that Product exist in wishlist page"
+            )
+        })
+
+        await step("Verify user can remove product from wishlist", async()=>{
+            await wishlistpage.goBack("PDP")
+
+            await PageUtils.waitForPageLoad(basicAuthPage)
+
+            await pdppage.click(pdppage.wishlistIcon, "Click on wishlish icon")
+            await delay(500)
+            await pdppage.click(pdppage.viewWishListButton, "Click on View wishlist button")
+
+            await wishlistpage.assertProdNotExist(pdpProdName!, pdpProdCollection!,
+                "Assert that Product Not exist in wishlist page"
             )
         })
     });

@@ -95,7 +95,7 @@ export abstract class CartPage extends BasePage {
             await delay(300)
 
             await Promise.all([
-                await this.click(addButton, `Add product at index ${i} to cart`),
+                this.click(addButton, `Add product at index ${i} to cart`),
                 expect(this.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
 
@@ -157,17 +157,21 @@ export abstract class CartPage extends BasePage {
 
         for (let i = 0; i < count; i++) {
             await step(`Remove product ${i + 1} in the Cart page`, async () => {
+                await PageUtils.waitForPageLoad(this.page, 6000)
                 await clickUntil(this.page, this.removeProductButton.first(), this.removeProductModal, 'visible', {
                     delayMs: 300,
                     maxTries: 3,
                     timeoutMs: 3000
                 })
+                await delay(2000)
+
                 await this.click(this.removeProdModalConfirmButton, 'Confirm remove product')
                 await this.removeProductModal.waitFor({ state: 'hidden' })
 
-                await delay(1000)
+                await delay(5000)
 
-                await PageUtils.waitForDomAvailable(this.page, 6000)
+                await PageUtils.waitForDomAvailable(this.page, 10000)
+                await PageUtils.waitForPageLoad(this.page, 6000)
 
                 if (count - (i + 1) == 0) {
                     await this.removeProductButton.waitFor({ state: "hidden", timeout: 10000 })
