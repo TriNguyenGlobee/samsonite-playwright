@@ -232,7 +232,7 @@ export abstract class CartPage extends BasePage {
     }
 
     async getCartPageProdPrice(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")])[${index}]//span[@class="regular-price"]`)
+        const prod = this.page.locator(`((//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")])[${index}]//*[contains(@class,"regular-price") or contains(@class,"line-item-final-price")])`)
 
         return (await prod.innerText()).trim()
     }
@@ -255,7 +255,7 @@ export abstract class CartPage extends BasePage {
         return (await total.innerText()).trim()
     }
 
-    abstract getShippingDiscount(): Promise<string>
+    abstract getShippingDiscount(): Promise<any>
 
     // =========================
     // ✅ Assertions
