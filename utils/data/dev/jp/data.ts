@@ -31,6 +31,9 @@ export const campaignData = [
     }
 ]
 
+// --- New Arrivals ---
+export const newArrivalsItem = []
+
 // --- luggage-type ---
 export const typeItems = [
     { text: 'ハード', href: '/luggage/type/hard/' },
@@ -240,6 +243,7 @@ export const collectionItemsB = [
     { text: '4PACK', href: 'https://ssjp.dev.samsonite-asia.com/search?q=4pack&srule=predictive-search-sorting&lang=ja_JP' },
 ];
 
+// --- brand - label ---
 export const brandItemsBR = [
     { text: 'サムソナイト商品一覧', href: '/brand/samsonite/' },
     { text: 'サムソナイト・ブラックレーベル商品一覧', href: '/brand/samsonite-black/' },

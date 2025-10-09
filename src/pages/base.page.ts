@@ -433,8 +433,15 @@ export class BasePage {
             ? baseLocator.locator(`xpath=.//ul[contains(@class,"${ulClass}") and @role="menu"]`)
             : baseLocator;
 
-        const lis = ul.locator('xpath=.//li');
-        await expect(lis, `<ul> ${ulClass ?? 'root'} should have ${items.length} <li>`).toHaveCount(items.length);
+        let lis = ul.locator('xpath=.//li');
+
+        if (ulClass === "new-arrivals") { // New Arrivals menu only
+            lis = ul.locator('xpath=.//li[@class="category-level-2 dropdown-item"]');
+        }
+
+        await step('Assert number of level 2 menu items', async () => {
+            expect(lis, `<ul> ${ulClass ?? 'root'} should have ${items.length} <li>`).toHaveCount(items.length);
+        })
 
         for (let i = 0; i < items.length; i++) {
             const li = lis.nth(i);

@@ -4,13 +4,20 @@ import { t, delay, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { attachment, step } from "allure-js-commons";
 import { test } from "@playwright/test";
+import { loadTestData } from "../../../../../utils/data";
 
 export class NewArrivalsPage extends BasePage {
     readonly logoImg: Locator;
+    readonly baseLocator: Locator;
+
+    protected testData: ReturnType<typeof loadTestData>;
 
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
+        this.baseLocator = page.locator(`xpath=.//div[@id="menu-group"]`);
+
+        this.testData = loadTestData();
     }
 
     // =========================
@@ -65,48 +72,15 @@ export class NewArrivalsPage extends BasePage {
     // ✅ Assertions
     // =========================
     async assertNewArrivalsListItems(page: Page): Promise<void> {
-        const listItems = page.locator('//div[@id="category-new-arrivals"]//li');
-        const itemCount = await listItems.count();
+        await delay(2000);
 
-        await delay(1000);
+        // --- new arrivals ---
+        const { newArrivalsItem } = this.testData;
 
-        for (let i = 0; i < itemCount; i++) {
-            const li = listItems.nth(i);
-            const links = li.locator('a');
-            const linkCount = await links.count();
-
-            if (i === itemCount - 1) {
-                expect(linkCount).toBe(1);
-
-                const lastLink = links.first();
-                const lastHref = await lastLink.getAttribute('href');
-                const lastText = await lastLink.textContent();
-
-                expect(lastHref).toBe('https://ssjp.stg.samsonite-asia.com/new-arrivals/');
-                expect(lastText?.trim()).toBe('すべて見る');
-
-                console.log(`Item ${i + 1} (last) passed`);
-            } else {
-                expect(linkCount).toBe(2);
-
-                const firstLink = links.nth(0);
-                const secondLink = links.nth(1);
-
-                const firstHref = await firstLink.getAttribute('href');
-                const secondHref = await secondLink.getAttribute('href');
-
-                expect(firstHref).not.toBeNull();
-                expect(secondHref).not.toBeNull();
-                expect(firstHref).toBe(secondHref);
-
-                const pictureCount = await firstLink.locator('picture').count();
-                expect(pictureCount).toBeGreaterThan(0);
-
-                const text = await secondLink.textContent();
-                expect(text?.trim().length).toBeGreaterThan(0);
-
-                console.log(`Item ${i + 1} passed`);
-            }
-        }
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'new-arrivals', newArrivalsItem, {
+            twoLinksPerLi: true,
+            lastItemIsTextOnly: true,
+            checkPictureTag: true
+        });
     }
 }

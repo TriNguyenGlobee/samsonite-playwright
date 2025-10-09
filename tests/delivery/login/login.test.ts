@@ -8,10 +8,11 @@ import { step } from "allure-js-commons";
 import { t, PageUtils } from "../../../utils/helpers";
 import { createLoginPage } from "../../../src/factories/login.factory";
 import { createHomePage } from "../../../src/factories/home.factory"
+import { testCase } from "../../../utils/localeUtils"
 
 test.describe("Login Screen", () => {
-    test(`
-        1. Login page is displayed 
+    testCase(test, ["jp","sg"],
+        `1. Login page is displayed
         2. Passwordreset screen is displayed
         3. Register page is displayed
         `, async ({ basicAuthPage }) => {
@@ -48,9 +49,8 @@ test.describe("Login Screen", () => {
         });
     });
 
-    test(`4. Membership page is displayed`, async ({ basicAuthPage }) => {
-        test.skip(process.env.LOCALE !== 'jp', "Membership page for Japan only");
-
+    testCase(test, ["jp"],
+        `4. Membership page is displayed`, async ({ basicAuthPage }) => {
         const loginPage = createLoginPage(basicAuthPage);
         const membershipPage = new MembershipPage(basicAuthPage);
 
