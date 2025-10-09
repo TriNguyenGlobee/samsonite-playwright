@@ -38,7 +38,7 @@ export class PDPPage extends BasePage {
         this.prodName = this.prodInfor.locator(`xpath=.//h2[@class="product-name"]`)
         this.prodSticker = this.prodInfor.locator(`xpath=.//div[@class="product-sticker-wrapper"]`)
         this.prodStatus = this.prodInfor.locator(`xpath=.//ul[contains(@class,"availability-msg")]`)
-        this.prodPrice = this.prodInfor.locator(`xpath=.//div[contains(@class,"product-detail-section")]//div[@class="price"]`)
+        this.prodPrice = this.prodInfor.locator(`xpath=.//div[contains(@class,"product-detail-section")]//div[@class="price"]//span[@class="sales"]`)
         this.addToCartButton = this.prodInfor.locator(`xpath=.//button[contains(@class,"add-to-cart")]`)
         this.buyNowButton = this.prodInfor.locator(`xpath=.//button[contains(@class,"quick-checkout")]`)
         this.prodDescriptionsDetail = this.prodInfor.locator(`xpath=.//div[@class="description-and-detail"]`)

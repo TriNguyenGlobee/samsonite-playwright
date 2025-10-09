@@ -347,7 +347,6 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
         }
       }
 
-      // Wait until modal disappears
       await Promise.race([
         page.waitForSelector(containerSelector, { state: "hidden", timeout: 3000 }).catch(() => { }),
         page.waitForSelector(containerSelector, { state: "detached", timeout: 3000 }).catch(() => { }),
@@ -422,11 +421,13 @@ export async function lazyLoad(page: Page) {
     await page.waitForTimeout(delayMs);
   }
 
-  const finalCurrent = parseInt(await page.locator('.current-products').innerText(), 10);
+  const rawText = await page.locator('.current-products').innerText();
+  const cleanedText = rawText.replace(/[^\d]/g, '');
+  const finalCurrent = cleanedText ? parseInt(cleanedText, 10) : 0;
+
   const finalTotal = parseInt(await page.locator('.total-products').innerText(), 10);
 
   await expect(finalCurrent).toBe(finalTotal);
-  console.log(`Finished lazy load: ${finalCurrent} of ${finalTotal}`);
 }
 
 // Click a locator until another locator visible|hidden

@@ -36,13 +36,12 @@ export async function startModalWatchdog(page: Page, intervalMs = 3000) {
 
   loopPromise = loop();
 
-  // Hàm dừng watchdog
   return async () => {
     running = false;
     try {
       await Promise.race([
         loopPromise,
-        new Promise((resolve) => setTimeout(resolve, 2500)), // timeout để đảm bảo không treo
+        new Promise((resolve) => setTimeout(resolve, 2500)),
       ]);
     } catch {
       console.log("[Watchdog] stop() ignored error");

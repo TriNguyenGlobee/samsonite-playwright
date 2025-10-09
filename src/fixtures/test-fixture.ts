@@ -36,7 +36,6 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
 
-    // Dừng watchdog gọn gàng
     await stopWatchdog().catch(() => {});
     await page.close({ runBeforeUnload: false }).catch(() => {});
     await context.close().catch(() => {});

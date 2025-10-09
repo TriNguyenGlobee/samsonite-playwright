@@ -50,8 +50,13 @@ export class NewArrivalsPage extends BasePage {
     async getPromotionMessage(prodIndex: number, description?: string): Promise<string | null> {
         return await step(description || "Get promotion message", async () => {
             const productMsg = this.prodItem.nth(prodIndex - 1).locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`).first()
+            const productExplanations = this.prodItem.nth(prodIndex - 1).locator(`xpath=.//div[@class="promotions"]//div[contains(@class,"tooltip-explanation")]//span[@id="tooltip-popup"]`).first()
             if (await productMsg.count() > 0) {
+                console.log(`Get Promotion Msg of Product at index ${prodIndex}`)
                 return (await this.getText(productMsg, `Get Promotion Msg of Product at index ${prodIndex}`))?.trim() ?? null
+            } else if (await productExplanations.count() > 0) {
+                console.log(`Get Explanation Msg of Product at index ${prodIndex}`)
+                return (await this.getText(productExplanations, `Get Explanation Msg of Product at index ${prodIndex}`))?.trim() ?? null
             } else return null
         });
     }
