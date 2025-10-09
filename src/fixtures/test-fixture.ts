@@ -3,15 +3,22 @@ import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { createLoginPage } from "../factories/login.factory";
 import { startModalWatchdog } from "../../utils/modalWatchdog";
+import { getLocales } from "../../utils/localeHelper";
 
 type MyFixtures = {
   user: { username: string; password: string };
   basicAuthPage: Page;
   loggedInPage: Page;
+  locale: string;
 };
 
 export const test = base.extend<MyFixtures>({
-  user: async ({}, use) => {
+  locale: async ({ }, use) => {
+    const locales = getLocales();
+    await use(locales[0]);
+  },
+
+  user: async ({ }, use) => {
     await use(Config.credentials);
   },
 
@@ -19,11 +26,11 @@ export const test = base.extend<MyFixtures>({
     const context = await browser.newContext(
       Config.basicAuthUser && Config.basicAuthPass
         ? {
-            httpCredentials: {
-              username: Config.basicAuthUser,
-              password: Config.basicAuthPass,
-            },
-          }
+          httpCredentials: {
+            username: Config.basicAuthUser,
+            password: Config.basicAuthPass,
+          },
+        }
         : {}
     );
 
@@ -36,20 +43,20 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
 
-    await stopWatchdog().catch(() => {});
-    await page.close({ runBeforeUnload: false }).catch(() => {});
-    await context.close().catch(() => {});
+    await stopWatchdog().catch(() => { });
+    await page.close({ runBeforeUnload: false }).catch(() => { });
+    await context.close().catch(() => { });
   },
 
   loggedInPage: async ({ browser, user }, use) => {
     const context = await browser.newContext(
       Config.basicAuthUser && Config.basicAuthPass
         ? {
-            httpCredentials: {
-              username: Config.basicAuthUser,
-              password: Config.basicAuthPass,
-            },
-          }
+          httpCredentials: {
+            username: Config.basicAuthUser,
+            password: Config.basicAuthPass,
+          },
+        }
         : {}
     );
 
@@ -71,9 +78,9 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
 
-    await stopWatchdog().catch(() => {});
-    await page.close({ runBeforeUnload: false }).catch(() => {});
-    await context.close().catch(() => {});
+    await stopWatchdog().catch(() => { });
+    await page.close({ runBeforeUnload: false }).catch(() => { });
+    await context.close().catch(() => { });
   },
 });
 

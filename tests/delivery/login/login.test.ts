@@ -8,11 +8,12 @@ import { step } from "allure-js-commons";
 import { t, PageUtils } from "../../../utils/helpers";
 import { createLoginPage } from "../../../src/factories/login.factory";
 import { createHomePage } from "../../../src/factories/home.factory"
-import { testCase } from "../../../utils/localeUtils"
+import { tests } from "../../../utils/localeTest"
 
 test.describe("Login Screen", () => {
-    testCase(test, ["jp","sg"],
-        `1. Login page is displayed
+    tests(["jp", "sg"],
+        `
+        1. Login page is displayed 
         2. Passwordreset screen is displayed
         3. Register page is displayed
         `, async ({ basicAuthPage }) => {
@@ -49,7 +50,7 @@ test.describe("Login Screen", () => {
         });
     });
 
-    testCase(test, ["jp"],
+    tests(["jp"],
         `4. Membership page is displayed`, async ({ basicAuthPage }) => {
         const loginPage = createLoginPage(basicAuthPage);
         const membershipPage = new MembershipPage(basicAuthPage);
@@ -69,7 +70,8 @@ test.describe("Login Screen", () => {
 });
 
 test.describe('Login by normal email', () => {
-    test(`1. Login success`, async ({ basicAuthPage }) => {
+    tests(["jp","sg"]
+        ,`1. Login success`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const loginPage = createLoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
@@ -87,7 +89,7 @@ test.describe('Login by normal email', () => {
         });
     });
 
-    test(`
+    tests(["jp","sg"],`
         2. Login with invalid email
         3. Login with wrong account
         4. Login with empty email and password
@@ -149,7 +151,7 @@ test.describe('Login by normal email', () => {
 });
 
 test.describe("Login with email link", () => {
-    test(`
+    tests(["jp","sg"],`
         1. SIGN IN WITH EMAIL LINK Popup is displayed
         2. Clicking Send Login Link button without inputing anythings
         3. Clicking Send Login Link button with invalid email
@@ -198,16 +200,14 @@ test.describe("Login with email link", () => {
             expect(await loginPage.assertVisible(loginPage.popupRequireCaptchaMsg, "Require captcha message is displayed"));
         });
     });
-    test(`
+    tests([],`
         5. Clicking Send Login Link button with valid email
         6. The pop-up is closed
         7. Login request email is sent
         8. Login success with login link
         `, async ({ basicAuthPage }) => {
         const loginPage = createLoginPage(basicAuthPage);
-        
-        test.skip(process.env.LOCALE !== '', "Blocked by storefront PW")
-        
+
         await step("Go to login page", async () => {
             await loginPage.goToLoginRegisterPage();
         });
@@ -233,12 +233,10 @@ test.describe("Login with email link", () => {
 });
 
 test.describe("Login by Google login", () => {
-    test(`
+    tests([],`
         1. SIGN IN WITH GOOGLE Popup is displayed
         2. Login success by Google account
         `, async ({ basicAuthPage }) => {
-
-        test.skip(process.env.LOCALE !== '', "Blocked by google");
 
         const loginPage = createLoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
