@@ -4,6 +4,7 @@ import { t, delay, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";
+import { loadTestData } from "../../../../../utils/data";
 
 export class OffersPage extends BasePage {
     readonly logoImg: Locator;
@@ -11,12 +12,16 @@ export class OffersPage extends BasePage {
     readonly referFriendItem: Locator;
     readonly top10PicksItem: Locator;
 
+    protected testData: ReturnType<typeof loadTestData>;
+
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.baseLocator = page.locator(`xpath=.//div[@id="category-category-promotion-page"]`);
         this.referFriendItem = this.baseLocator.locator(`xpath=.//li[@role="menuitem" and .//text()="Refer a Friend"]`)
         this.top10PicksItem = this.baseLocator.locator(`xpath=.//li[@role="menuitem" and .//text()="Top 10 Picks"]`)
+
+        this.testData = loadTestData();
     }
 
     // =========================
@@ -70,17 +75,14 @@ export class OffersPage extends BasePage {
         }
 
         // Refer a friend
-        this.assertLocatorInside(this.referFriendItem, {
-            hasImage: true,
-            href: "https://sssg.stg.samsonite-asia.com/referralshow",
-            text: "Refer a Friend"
-        })
+        const { referAFriend } = this.testData;
 
-        this.assertLocatorInside(this.top10PicksItem, {
-            hasImage: true,
-            href: "https://sssg.stg.samsonite-asia.com/2025-top-10-picks/",
-            text: "Top 10 Picks"
-        })
+        this.assertLocatorInside(this.referFriendItem, referAFriend[0])
+
+        // Top 10 picks
+        const { top10picks } = this.testData;
+
+        this.assertLocatorInside(this.top10PicksItem, top10picks[0])
 
     }
 }

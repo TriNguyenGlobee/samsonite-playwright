@@ -3,15 +3,20 @@ import { BasePage } from "../../../base.page";
 import { t, PageUtils } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { step } from "allure-js-commons";
+import { loadTestData } from "../../../../../utils/data";
 
 export abstract class BrandPage extends BasePage {
     readonly logoImg: Locator;
     readonly baseLocator: Locator;
 
+    protected testData: ReturnType<typeof loadTestData>;
+
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.baseLocator = page.locator(`xpath=.//div[@id="category-brand"]`);
+
+        this.testData = loadTestData();
     }
 
     // =========================

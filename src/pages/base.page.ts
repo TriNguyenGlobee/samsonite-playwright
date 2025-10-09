@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber } from "../../utils/helpers";
+import { t, extractNumber, PageUtils, delay } from "../../utils/helpers";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
@@ -29,6 +29,9 @@ export class BasePage {
     readonly ginzaFlagshipStore: Locator;
     readonly cartBadge: Locator;
     readonly viewCartButton: Locator;
+    readonly prodItem: Locator;
+    readonly promotionMsg: Locator;
+    readonly ratedProd: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -54,6 +57,9 @@ export class BasePage {
         this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
         this.cartBadge = this.cartIcon.locator('xpath=.//span[@class="minicart-quantity"]');
         this.viewCartButton = page.locator(`//div[@id="miniCartModal"]//a[contains(text(),"View Cart")]`)
+        this.prodItem = page.locator(`//div[@class="product"]`);
+        this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
+        this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[normalize-space(@class)="product-tile"]`)
     }
 
     // =========================
@@ -67,6 +73,7 @@ export class BasePage {
 
     async click(locator: Locator, description?: string) {
         await step(description || "Click on locator", async () => {
+            await PageUtils.waitForPageLoad(this.page)
             await locator.click();
         });
     }
@@ -200,6 +207,59 @@ export class BasePage {
         });
     }
 
+    async selectProdByIndex(prodIndex: number, description?: string): Promise<void> {
+        await step(description || `Click on product at index ${prodIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page)
+            await this.click(this.prodItem.nth(prodIndex - 1), `Click on product at index ${prodIndex}`)
+            await PageUtils.waitForPageLoad(this.page)
+        })
+    }
+
+    async selectRatedProd(description?: string): Promise<void> {
+        await step(description || `Click on rated product`, async () => {
+            await PageUtils.waitForDomAvailable(this.page)
+            await this.click(this.ratedProd.first())
+        })
+    }
+
+    async clickCheckboxByLabel(page: Page, labelText: string, description?: string) {
+        await step(description || `Click on the checkbox label "${labelText}"`, async () => {
+            const labelLocator = page.locator(
+                `xpath=(//label[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //a[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]])`
+            );
+
+            const target = labelLocator.last();
+            await target.scrollIntoViewIfNeeded();
+
+            const MAX_RETRIES = 3;
+            let attempt = 0;
+            let isChecked = false;
+
+            while (attempt < MAX_RETRIES) {
+                attempt++;
+
+                await target.click({ position: { x: 5, y: 5 } });
+                await delay(3000);
+
+                const inputLocator = target.locator('input[type="checkbox"]');
+                if (await inputLocator.count()) {
+                    isChecked = await inputLocator.isChecked();
+                } else {
+                    isChecked = await target.getAttribute('class').then(cls => cls?.includes('selected') || false);
+                }
+
+                if (isChecked) {
+                    //console.log(`Checkbox "${labelText}" is checked after ${attempt} attempt(s).`);
+                    break;
+                }
+
+                //console.log(`Checkbox "${labelText}" not checked (attempt ${attempt}), retrying...`);
+            }
+            await expect(isChecked, `Checkbox "${labelText}" should be checked after ${MAX_RETRIES} attempts.`).toBeTruthy();
+            await delay(2000)
+        });
+    }
+
     // =========================
     // 📦 Helpers
     // =========================
@@ -233,7 +293,7 @@ export class BasePage {
             if (await link.isVisible()) {
                 return await link.getAttribute('href');
             }
-            
+
             link = locate.locator('xpath=./parent::a');
             if (await link.isVisible()) {
                 return await link.getAttribute('href');
@@ -266,6 +326,15 @@ export class BasePage {
         return await extractNumber(cartBadgeValue!)
     }
 
+    async isAddToCartButtonDisabled(index: number): Promise<boolean> {
+        const addToCartButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${index}]`)
+        const isDisabledExist = await addToCartButton.getAttribute('disabled')
+
+        if (isDisabledExist !== null) {
+            return true
+        } else return false
+    }
+
     // =========================
     // ✅ Assertions
     // =========================
@@ -285,8 +354,23 @@ export class BasePage {
 
     async assertEqual(actual: any, expected: any, description?: string) {
         await step(description || "Assert equal", async () => {
+            console.log(`Test data:`)
+            console.log(`Actual - "${actual}"`)
+            console.log(`Expected - "${expected}"`)
             expect(actual).toBe(expected);
         });
+    }
+
+    async assertAttributeValue(locator: Locator, attributeName: string, value: string, description?: string) {
+        await step(description || "Assert Locator attribute value", async () => {
+            expect(locator).toHaveAttribute(attributeName, value);
+        })
+    }
+
+    async assertText(locator: Locator, text: string, description?: string) {
+        await step(description || "Assert Locator text", async () => {
+            expect(locator).toHaveText(text);
+        })
     }
 
     async assertUrl(expectedUrl: string | RegExp, description?: string) {
@@ -401,7 +485,7 @@ export class BasePage {
         }
     }
 
-    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string, description?: string) {
+    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string, description?: string, button: 'left' | 'middle' | 'right' = 'middle') {
         await step(description || `Assert expected URL is: ${url}`, async () => {
             let link = locate.locator('xpath=.//a');
 
@@ -411,17 +495,29 @@ export class BasePage {
                 link = locate
             }
 
-            const [newPage] = await Promise.all([
-                page.context().waitForEvent('page', { timeout: 60000 }),
-                link.click({ button: 'middle' }),
-            ]);
+            if (button === 'middle') {
+                await this.hover(link)
+                const [newPage] = await Promise.all([
+                    page.context().waitForEvent('page', { timeout: 60000 }),
+                    link.click({ button }),
+                ]);
 
-            await newPage.waitForLoadState('domcontentloaded');
-            const currentUrl = newPage.url()
+                await newPage.waitForLoadState('domcontentloaded');
+                const currentUrl = newPage.url();
+                await expect(currentUrl).toContain(url);
 
-            await expect(currentUrl).toContain(url);
+                await newPage.close();
+            } else {
+                console.log(`Now loading .............${button} click on button`)
+                await Promise.all([
+                    page.waitForURL(url, { timeout: 60000 }),
+                    link.click({ button }),
+                ]);
 
-            await newPage.close();
+                await delay(500)
+                const currentUrl = page.url();
+                await expect(currentUrl).toContain(url);
+            }
         })
     }
 }
