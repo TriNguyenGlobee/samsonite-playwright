@@ -1,11 +1,12 @@
 {
   "homepage": {
-    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0",
+    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
     "trackOder": "ご注文状況を確認する",
     "loginRegister": "マイアカウント",
     "myaccount": "マイアカウント",
     "logout": "ログアウト",
-    "addtocart": "カートに入れる"
+    "addtocart": "カートに入れる",
+    "in-stock": "在庫あり"
   },
   "loginpage": {
     "title": "サインイン｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
@@ -72,7 +73,7 @@
     "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": "Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -137,5 +138,15 @@
     "removeprodmodaltitle": "商品を削除しますか?",
     "removeconfirmbutton": "はい",
     "removecancelbutton": "キャンセル"
+  },
+  "PDP": {
+    "readmore": "続きを読む",
+    "readless": "閉じる",
+    "addedwishlistmsg": "この商品がウィッシュリストに追加されました。",
+    "removedwishlistmsg": "ウィッシュリストから商品が削除されました。",
+    "viewwishlistbtn": "リストを見る"
+  },
+  "wishlist": {
+    "title": "ウィッシュリスト｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト"
   }
 }

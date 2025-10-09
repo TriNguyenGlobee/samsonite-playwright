@@ -1,15 +1,15 @@
 export const carouselItems = [
-    { href: 'https://sssg.stg.samsonite-asia.com/samsonite/enwrap/spinner-55/20-exp/ss-125647-1542.html', hasImage: true },
-    { href: 'https://sssg.stg.samsonite-asia.com/samsonite/c-lite/spinner-55/20-exp-ltd/ss-141368-A568.html', hasImage: true },
-    { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/sbl-signature/', hasImage: true },
-    { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/ss25/', hasImage: true },
-    { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/audrina/', hasImage: true },
+    { href: 'https://sssg.dev.samsonite-asia.com/samsonite/enwrap/spinner-55/20-exp/ss-125647-1542.html', hasImage: true },
+    { href: 'https://sssg.dev.samsonite-asia.com/samsonite-evoaz-retro-blue/', hasImage: true },
+    { href: 'https://sssg.dev.samsonite-asia.com/new-arrivals/sbl-signature/', hasImage: true },
+    { href: 'https://sssg.dev.samsonite-asia.com/new-arrivals/ss25/', hasImage: true },
+    { href: 'https://sssg.dev.samsonite-asia.com/new-arrivals/audrina/', hasImage: true },
 ];
 
 export const hightlightCategoryItems = [
-    { href: 'https://sssg.stg.samsonite-asia.com/bags/for-her/', hasImage: true, aboveText: 'Ladies Bags', underText: 'For her Convenience' },
-    { href: 'https://sssg.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'Travel with Confidence' },
-    { href: 'https://sssg.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'Backpacks', underText: 'Carry Functionally' },
+    { href: 'https://sssg.dev.samsonite-asia.com/bags/for-her/', hasImage: true, aboveText: 'Ladies Bags', underText: 'For her Convenience' },
+    { href: 'https://sssg.dev.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'Travel with Confidence' },
+    { href: 'https://sssg.dev.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'Backpacks', underText: 'Carry Functionally' },
 ];
 
 export const recommendedProductItems = [
@@ -21,7 +21,7 @@ export const recommendedProductItems = [
 
 export const campaignData = [
     {
-        href: "https://sssg.stg.samsonite-asia.com/c-lite-1/",
+        href: "https://sssg.dev.samsonite-asia.com/c-lite-1/",
         rightSideTitleText: "C-LITE",
         hasImage: true
     }
@@ -32,29 +32,29 @@ export const typeItems = [
     { text: 'Hardside', href: '/luggage/hardside/' },
     { text: 'Softside', href: '/luggage/softside/' },
     { text: 'Aluminium', href: '/luggage/aluminium/' },
-    { text: 'Shop all luggage', href: 'https://sssg.stg.samsonite-asia.com/luggage/' }
+    { text: 'Shop all luggage', href: 'https://sssg.dev.samsonite-asia.com/luggage/' }
 ];
 
 // --- luggage-size ---
 export const sizeItems = [
-    { text: 'Cabin/Small', href: 'https://sssg.stg.samsonite-asia.com/luggage/cabin' },
-    { text: 'Medium', href: 'https://sssg.stg.samsonite-asia.com/luggage/medium' },
-    { text: 'Large', href: 'https://sssg.stg.samsonite-asia.com/luggage/large' }
+    { text: 'Cabin/Small', href: 'https://sssg.dev.samsonite-asia.com/luggage/cabin' },
+    { text: 'Medium', href: 'https://sssg.dev.samsonite-asia.com/luggage/medium' },
+    { text: 'Large', href: 'https://sssg.dev.samsonite-asia.com/luggage/large' }
 ];
 
 // --- luggage-color ---
 export const colorItems = [
     {
         text: 'Mono',
-        href: 'https://sssg.stg.samsonite-asia.com/luggage/black_grey_silver_white'
+        href: 'https://sssg.dev.samsonite-asia.com/luggage/black_grey_silver_white'
     },
     {
         text: 'Cool',
-        href: 'https://sssg.stg.samsonite-asia.com/luggage/blue_green_navy'
+        href: 'https://sssg.dev.samsonite-asia.com/luggage/blue_green_navy'
     },
     {
         text: 'Warm',
-        href: 'https://sssg.stg.samsonite-asia.com/luggage/beige_orange_pink_red_yellow'
+        href: 'https://sssg.dev.samsonite-asia.com/luggage/beige_orange_pink_red_yellow'
     },
     {
         text: 'Shop all colours',
@@ -125,10 +125,6 @@ export const collectionItems = [
         href: '/luggage/collection/c-lite/'
     },
     {
-        text: 'Proxis',
-        href: '/luggage/collection/proxis/'
-    },
-    {
         text: 'Unimax',
         href: '/luggage/collection/unimax/'
     },
@@ -143,6 +139,10 @@ export const collectionItems = [
     {
         text: 'Niar',
         href: '/luggage/collection/niar/'
+    },
+    {
+        text: 'Enow',
+        href: '/luggage/collection/enow/'
     }
 ];
 
@@ -152,14 +152,14 @@ export const typeItemsBP = [
     { text: 'Casual Backpacks', href: '/backpacks/casual-backpacks/' },
     { text: 'For Her', href: '/backpacks/for-her/' },
     { text: 'For Kids', href: '/backpacks/for-kids/' },
-    { text: 'Shop all backpacks', href: 'https://sssg.stg.samsonite-asia.com/backpacks/' }
+    { text: 'Shop all backpacks', href: 'https://sssg.dev.samsonite-asia.com/backpacks/' }
 ];
 
 // --- backpack-color ---
 export const colorItemsBP = [
-    { text: 'Mono', href: 'https://sssg.stg.samsonite-asia.com/backpacks/black_grey_silver_white' },
-    { text: 'Cool', href: 'https://sssg.stg.samsonite-asia.com/backpacks/blue_green_navy_purple' },
-    { text: 'Warm', href: 'https://sssg.stg.samsonite-asia.com/backpacks/beige_orange_pink_red_yellow' },
+    { text: 'Mono', href: 'https://sssg.dev.samsonite-asia.com/backpacks/black_grey_silver_white' },
+    { text: 'Cool', href: 'https://sssg.dev.samsonite-asia.com/backpacks/blue_green_navy_purple' },
+    { text: 'Warm', href: 'https://sssg.dev.samsonite-asia.com/backpacks/beige_orange_pink_red_yellow' },
     { text: 'Shop all colours', href: '/backpacks/colour/shop-all-colours/' }
 ];
 
@@ -199,14 +199,14 @@ export const typeItemsB = [
     { text: 'Duffles', href: '/bags/duffle/' },
     { text: 'Totes', href: '/bags/totes/' },
     { text: 'For Her', href: '/bags/for-her/' },
-    { text: 'Shop all bags', href: 'https://sssg.stg.samsonite-asia.com/bags/' }
+    { text: 'Shop all bags', href: 'https://sssg.dev.samsonite-asia.com/bags/' }
 ];
 
 // --- bag-color ---
 export const colorItemsB = [
-    { text: 'Mono', href: 'https://sssg.stg.samsonite-asia.com/bags/black_grey_white' },
-    { text: 'Cool', href: 'https://sssg.stg.samsonite-asia.com/bags/blue_green_navy' },
-    { text: 'Warm', href: 'https://sssg.stg.samsonite-asia.com/bags/beige_orange_pink_red_yellow' },
+    { text: 'Mono', href: 'https://sssg.dev.samsonite-asia.com/bags/black_grey_white' },
+    { text: 'Cool', href: 'https://sssg.dev.samsonite-asia.com/bags/blue_green_navy' },
+    { text: 'Warm', href: 'https://sssg.dev.samsonite-asia.com/bags/beige_orange_pink_red_yellow' },
     { text: 'Shop all colours', href: '/bags/bags-all-color/' }
 ];
 
@@ -232,31 +232,21 @@ export const collectionItemsB = [
 ];
 
 export const brandItemsBR = [
-    { text: 'Samsonite BLACK LABEL', href: 'https://sssg.stg.samsonite-asia.com/black/' },
-    { text: 'Samsonite', href: 'https://sssg.stg.samsonite-asia.com/samsonite/' },
-    { text: 'Samsonite RED', href: 'https://sssg.stg.samsonite-asia.com/red/' }
+    { text: 'Samsonite BLACK LABEL', href: 'https://sssg.dev.samsonite-asia.com/black/' },
+    { text: 'Samsonite', href: 'https://sssg.dev.samsonite-asia.com/samsonite/' },
+    { text: 'Samsonite RED', href: 'https://sssg.dev.samsonite-asia.com/red/' }
 ];
 
 // --- discover-article ---
 export const articleItems = [
-    { text: `Father's Day Gifts`, href: 'https://sssg.stg.samsonite-asia.com/fathers-day-gifts.html' },
-    { text: `Mother's Day Gifts`, href: 'https://sssg.stg.samsonite-asia.com/mothers-day-gifts.html' },
-    { text: 'Wedding and Honeymoon', href: 'https://sssg.stg.samsonite-asia.com/wedding-and-honeymoon.html' },
-    { text: 'Your Business Look', href: 'https://sssg.stg.samsonite-asia.com/your-business-look.html' },
-    { text: 'Your Backpack Look', href: 'https://sssg.stg.samsonite-asia.com/your-backpack-look.html' },
-    { text: 'Lavish Travels', href: 'https://sssg.stg.samsonite-asia.com/lavish-travels.html' },
-    { text: 'The Art of Packing', href: 'https://sssg.stg.samsonite-asia.com/art-of-packing.html' },
-    { text: 'The Best Bags for every Travel Need', href: 'https://sssg.stg.samsonite-asia.com/best-bags.html' },
-    { text: 'Discover All', href: 'https://sssg.stg.samsonite-asia.com/discover-all' }
+    { text: `Mother's Day Gifts`, href: 'https://sssg.dev.samsonite-asia.com/mothers-day-gifts.html' },
+    { text: 'Wedding and Honeymoon', href: 'https://sssg.dev.samsonite-asia.com/wedding-and-honeymoon.html' },
+    { text: 'Your Business Look', href: 'https://sssg.dev.samsonite-asia.com/your-business-look.html' },
 ];
 
 // --- discover-about-Samsonite ---
 export const aboutSamsoniteItems = [
-    { text: 'Beyond The Design', href: 'https://sssg.stg.samsonite-asia.com/2025-going-beyond-design/' },
-    { text: 'Beyond The Average Test', href: 'https://sssg.stg.samsonite-asia.com/2025-going-beyond-testing/' },
-    { text: 'Our Brand Story - Celebrating 115 Years of Heritage', href: 'https://sssg.stg.samsonite-asia.com/brand-story.html' },
-    { text: 'Friends of Samsonite', href: 'https://sssg.stg.samsonite-asia.com/2021-friends-of-samsonite.html' },
-    { text: 'Our Responsible Journey', href: 'https://sssg.stg.samsonite-asia.com/sustainability.html' }
+    { text: 'Our Responsible Journey', href: 'https://sssg.dev.samsonite-asia.com/sustainability.html' }
 ];
 
 // --- discover-collections ---
@@ -268,7 +258,7 @@ export const aboutCollections = [
 export const referAFriend = [
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/referralshow",
+        href: "https://sssg.dev.samsonite-asia.com/referralshow",
         text: "Refer a Friend"
     }
 ]
@@ -277,7 +267,7 @@ export const referAFriend = [
 export const top10picks = [
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/2025-top-10-picks/",
+        href: "https://sssg.dev.samsonite-asia.com/2025-top-10-picks/",
         text: "Top 10 Picks"
     }
 ]

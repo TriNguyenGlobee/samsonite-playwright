@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { clickUntil, t } from "../../../../utils/helpers";
+import { clickUntil, delay, t } from "../../../../utils/helpers";
 
 export abstract class MinicartPage extends BasePage {
     readonly minicartModal: Locator;
@@ -47,17 +47,19 @@ export abstract class MinicartPage extends BasePage {
 
         for (let i = 0; i < count; i++) {
             await step(`Remove product ${i + 1} in the minicart`, async () => {
+                await delay(500)
                 await clickUntil(this.page, this.cartIcon, this.minicartRender, 'visible', {
                     delayMs: 300,
                     maxTries: 3,
                     timeoutMs: 3000
                 })
-
+                await delay(500)
                 await clickUntil(this.page, removeButton, this.removeProductModal, 'visible', {
                     delayMs: 300,
                     maxTries: 3,
                     timeoutMs: 3000
                 })
+                await delay(500)
                 await this.click(this.removeProdModalConfirmButton, 'Confirm remove product')
                 await this.waitFor(this.removeProductModal, 'hidden')
             })
@@ -86,7 +88,7 @@ export abstract class MinicartPage extends BasePage {
     }
 
     async getMinicartProdPrice(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[contains(@class,"card product-info")])[${index}]//span[@class="regular-price"]`)
+        const prod = this.page.locator(`((//div[contains(@class,"card product-info")])[${index}]//*[contains(@class,"regular-price") or contains(@class,"line-item-final-price")])`)
 
         return (await prod.innerText()).trim()
     }
@@ -100,7 +102,7 @@ export abstract class MinicartPage extends BasePage {
     async getShippingCost(): Promise<string> {
         const shipping = this.page.locator(`//div[@class="shipping-cost" or @class="shipping-information"]`)
 
-        return (await shipping.innerText()).trim()
+        return (await shipping.first().innerText()).trim()
     }
 
     async getTotalPrice(): Promise<string> {

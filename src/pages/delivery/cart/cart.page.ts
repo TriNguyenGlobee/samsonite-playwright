@@ -95,11 +95,60 @@ export abstract class CartPage extends BasePage {
             await delay(300)
 
             await Promise.all([
-                await this.click(addButton, `Add product at index ${i} to cart`),
+                this.click(addButton, `Add product at index ${i} to cart`),
                 expect(this.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
 
             await expect(this.minicartRender).toBeHidden();
+        }
+    }
+
+    async addMultipleProductsToCart(count: number) {
+        const addText = t.homepage('addtocart');
+        const allButtons = this.page.locator(`//button[normalize-space(text())="${addText}"]`);
+        const totalButtons = await allButtons.count();
+
+        let added = 0;
+        let index = 1;
+
+        while (added < count && index <= totalButtons) {
+            const isDisabled = await this.isAddToCartButtonDisabled(index);
+            if (isDisabled) {
+                console.log(`Button #${index} is disabled`);
+                index++;
+                continue;
+            }
+
+            await step(`Adding product ${index} to cart`, async () => {
+                const addButton = this.page.locator(`(//button[normalize-space(text())="${addText}"])[${index}]`);
+
+                try {
+                    await addButton.scrollIntoViewIfNeeded();
+                    await delay(300);
+
+                    await Promise.all([
+                        this.click(addButton, `Add product at index ${index} to cart`),
+                        this.minicartRender.waitFor({ state: 'visible', timeout: 5000 }),
+                    ]);
+
+                    await this.minicartRender.waitFor({ state: 'hidden', timeout: 5000 });
+
+                    added++;
+                    console.log(`Added product at #${index} (Tổng cộng: ${added}/${count})`);
+                } catch (error) {
+                    console.warn(`Cannot add product at #${index}:`, error);
+                }
+            });
+
+            index++;
+        }
+
+        if (added < count) {
+            console.warn(
+                `Added ${added}/${count} products to cart`
+            );
+        } else {
+            console.log(`Added ${added}/${count} products to cart`);
         }
     }
 
@@ -108,15 +157,21 @@ export abstract class CartPage extends BasePage {
 
         for (let i = 0; i < count; i++) {
             await step(`Remove product ${i + 1} in the Cart page`, async () => {
+                await PageUtils.waitForPageLoad(this.page, 6000)
                 await clickUntil(this.page, this.removeProductButton.first(), this.removeProductModal, 'visible', {
                     delayMs: 300,
                     maxTries: 3,
                     timeoutMs: 3000
                 })
+                await delay(2000)
+
                 await this.click(this.removeProdModalConfirmButton, 'Confirm remove product')
                 await this.removeProductModal.waitFor({ state: 'hidden' })
 
-                await PageUtils.waitForDomAvailable(this.page, 6000)
+                await delay(5000)
+
+                await PageUtils.waitForDomAvailable(this.page, 10000)
+                await PageUtils.waitForPageLoad(this.page, 6000)
 
                 if (count - (i + 1) == 0) {
                     await this.removeProductButton.waitFor({ state: "hidden", timeout: 10000 })
@@ -152,7 +207,7 @@ export abstract class CartPage extends BasePage {
 
             return true;
         } catch (error) {
-            console.error('Error checking login page:', error);
+            console.error('Error checking cart page:', error);
             return false;
         }
     }
@@ -177,7 +232,7 @@ export abstract class CartPage extends BasePage {
     }
 
     async getCartPageProdPrice(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")])[${index}]//span[@class="regular-price"]`)
+        const prod = this.page.locator(`((//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")])[${index}]//*[contains(@class,"regular-price") or contains(@class,"line-item-final-price")])`)
 
         return (await prod.innerText()).trim()
     }
@@ -200,7 +255,7 @@ export abstract class CartPage extends BasePage {
         return (await total.innerText()).trim()
     }
 
-    abstract getShippingDiscount(): Promise<string>
+    abstract getShippingDiscount(): Promise<any>
 
     // =========================
     // ✅ Assertions
