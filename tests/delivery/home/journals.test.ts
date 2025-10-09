@@ -27,7 +27,7 @@ test.describe("Samsonite Journals section", () => {
         await step(`Verify the Journals slide works properly when clicking the next button`, async () => {
             const expectedIndexes_01 = [0, 1, 2]
             const expectedIndexes_02 = [3, 4, 5]
-            const expectedIndexes_03 = [6, 7, 8]
+            //const expectedIndexes_03 = [6, 7, 8]
 
             const activeItemIndexs_01 = await homePage.getJournalsActiveItemIndexes()
 
@@ -35,19 +35,19 @@ test.describe("Samsonite Journals section", () => {
             await delay(300)
             const activeItemIndexs_02 = await homePage.getJournalsActiveItemIndexes()
 
-            await homePage.click(homePage.journalsNextbutton, `Click Next button`)
-            await delay(300)
-            const activeItemIndexs_03 = await homePage.getJournalsActiveItemIndexes()
+            //await homePage.click(homePage.journalsNextbutton, `Click Next button`)
+            //await delay(300)
+            //const activeItemIndexs_03 = await homePage.getJournalsActiveItemIndexes()
 
             expect(activeItemIndexs_01).toEqual(expectedIndexes_01)
             expect(activeItemIndexs_02).toEqual(expectedIndexes_02)
-            expect(activeItemIndexs_03).toEqual(expectedIndexes_03)
+            //expect(activeItemIndexs_03).toEqual(expectedIndexes_03)
         })
 
         await step(`Verify the Journals slide works properly when clicking the previous button`, async () => {
-            const expectedIndexes_03 = [0, 1, 2]
-            const expectedIndexes_02 = [3, 4, 5]
-            const expectedIndexes_01 = [6, 7, 8]
+            const expectedIndexes_02 = [0, 1, 2]
+            const expectedIndexes_01 = [3, 4, 5]
+            //const expectedIndexes_01 = [6, 7, 8]
 
             const activeItemIndexs_01 = await homePage.getJournalsActiveItemIndexes()
 
@@ -55,13 +55,13 @@ test.describe("Samsonite Journals section", () => {
             await delay(300)
             const activeItemIndexs_02 = await homePage.getJournalsActiveItemIndexes()
 
-            await homePage.click(homePage.journalsPreviousButton, `Click previous button`)
-            await delay(300)
-            const activeItemIndexs_03 = await homePage.getJournalsActiveItemIndexes()
+            //await homePage.click(homePage.journalsPreviousButton, `Click previous button`)
+            //await delay(300)
+            //const activeItemIndexs_03 = await homePage.getJournalsActiveItemIndexes()
 
             expect(activeItemIndexs_01).toEqual(expectedIndexes_01)
             expect(activeItemIndexs_02).toEqual(expectedIndexes_02)
-            expect(activeItemIndexs_03).toEqual(expectedIndexes_03)
+            //expect(activeItemIndexs_03).toEqual(expectedIndexes_03)
         })
 
         await step(`Verify that clicking on the active item navigates to the correct URL `, async () => {

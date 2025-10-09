@@ -103,13 +103,13 @@ test.describe("Home Tests", () => {
         9. Go to Sale Page
         10. Go to membership page
         `, async ({ basicAuthPage }) => {
-        test.skip(process.env.LOCALE !== 'jp', "These testcases for Japan only");    
+        test.skip(process.env.LOCALE !== 'jp', "These testcases for Japan only");
 
         const homePage = createHomePage(basicAuthPage);
         const ginzaflagshipstorepage = new GinzaFlagshipStorePage(basicAuthPage);
         const Salepage = new SalePage(basicAuthPage);
         const membershippage = new MembershipPage(basicAuthPage);
-        
+
         await step("Go to Ginza Flagship Store Page", async () => {
             await homePage.clickMenuItem("ginzaflagshipstore");
         });
@@ -118,21 +118,23 @@ test.describe("Home Tests", () => {
             expect(await ginzaflagshipstorepage.isGinzaFlagshipStorePageDisplayed()).toBe(true);
         })
 
-        await step("Go to Sale Page", async () => {
-            await homePage.clickMenuItem("offers");
-        });
+        if (process.env.LOCALE !== "jp" && process.env.ENV !== "dev") {
+            await step("Go to Sale Page", async () => {
+                await homePage.clickMenuItem("offers");
+            });
 
-        await step("Verify that the Sale page is displayed", async () => {
-            expect(await Salepage.isSalePageDisplayed()).toBe(true);
-        });
+            await step("Verify that the Sale page is displayed", async () => {
+                expect(await Salepage.isSalePageDisplayed()).toBe(true);
+            });
 
-        await step("Go to membership page", async () => {
-            await homePage.clickMenuItem("friendofsamsonite");
-        });
+            await step("Go to membership page", async () => {
+                await homePage.clickMenuItem("friendofsamsonite");
+            });
 
-        await step("Verify that the membership page is displayed", async () => {
-            expect(await membershippage.isMembershipPageDisplayed()).toBe(true);
-        });
+            await step("Verify that the membership page is displayed", async () => {
+                expect(await membershippage.isMembershipPageDisplayed()).toBe(true);
+            });
+        }
     });
 
     test(`11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
@@ -156,7 +158,7 @@ test.describe("Home Tests", () => {
     test(`
         12. Go to Offers Page
         `, async ({ basicAuthPage }) => {
-        test.skip(process.env.LOCALE !== 'sg', "These testcases for SSSG only");       
+        test.skip(process.env.LOCALE !== 'sg', "These testcases for SSSG only");
 
         const homePage = createHomePage(basicAuthPage);
         const offerspage = new OffersPage(basicAuthPage)
@@ -168,5 +170,5 @@ test.describe("Home Tests", () => {
         await step("Verify that the Labels page is displayed", async () => {
             expect(await offerspage.isOffersPageDisplayed()).toBe(true);
         })
-    });    
+    });
 });

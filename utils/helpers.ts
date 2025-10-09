@@ -177,6 +177,8 @@ export const t = {
   menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
   minicart: (key: keyof Translations['minicart']) => I18n.translations.minicart[key],
   cartpage: (key: keyof Translations['cartpage']) => I18n.translations.cartpage[key],
+  PDP: (key: keyof Translations['PDP']) => I18n.translations.PDP[key],
+  wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key],
 };
 
 /**
@@ -269,37 +271,106 @@ export async function selectComboboxOption(page: Page, comboboxName: string, opt
 }
 
 export async function closeModalIfPresent(page: Page): Promise<void> {
+  if (!page || page.isClosed()) return;
+
+  const isJPDev = process.env.LOCALE === "jp" && process.env.ENV === "dev";
+
   const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
   const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
   const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
 
   const modalsToCheck = [
     {
-      name: 'Signup Modal',
+      name: "Signup Modal",
       locator: modalCloseBtn.first(),
+      useJsClick: true,
+      containerSelector: "#staticBackdrop",
     },
     {
-      name: 'Intent Cart Modal',
+      name: "Intent Cart Modal",
       locator: intentCartCloseBtn.first(),
+      useJsClick: false,
+      containerSelector: "#mcp-exit-intent-cart",
     },
     {
-      name: 'Popup Container',
+      name: "Popup Container",
       locator: popupContainerBtn.first(),
+      useJsClick: false,
+      containerSelector: ".popup-container",
     },
   ];
 
   for (const modal of modalsToCheck) {
-    const isVisible = await modal.locator.isVisible().catch(() => false);
-    if (isVisible) {
-      console.log(`${modal.name} detected → Closing it...`);
-      await modal.locator.click().catch((e) => {
-        console.warn(`Failed to click close for ${modal.name}:`, e);
-      });
-      await modal.locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
-        console.warn(`${modal.name} did not detach in time`);
-      });
-    } else {
-      //console.log(`${modal.name} not found.`);
+    const { name, locator, useJsClick, containerSelector } = modal;
+
+    if (page.isClosed()) return;
+
+    let isAttached = false;
+    try {
+      isAttached = await locator.evaluate((el) => !!el).catch(() => false);
+    } catch {
+      continue;
+    }
+    if (!isAttached) continue;
+
+    const isVisible = await locator.isVisible().catch(() => false);
+    if (!isVisible) continue;
+
+    console.log(`${name} detected → Closing it...`);
+
+    try {
+      if (useJsClick && isJPDev) {
+        await page.evaluate(() => {
+          const btn = document.querySelector(".close-signup-popup") as HTMLElement | null;
+          btn?.click();
+        });
+      } else {
+        const maxRetries = 2;
+        for (let attempt = 1; attempt <= maxRetries; attempt++) {
+          try {
+            await locator.click();
+
+            await page.waitForSelector('//div[@id="staticBackdrop"]', {
+              state: 'hidden',
+              timeout: 5000,
+            });
+
+            console.log(`Signup Modal closed after ${attempt} attempt(s).`);
+            break;
+          } catch (e) {
+            if (attempt < maxRetries) {
+              console.log(`Signup Modal still visible (attempt ${attempt}), retrying...`);
+            } else {
+              console.warn("Signup Modal could not be closed after 3 attempts.", e);
+            }
+          }
+        }
+      }
+
+      await Promise.race([
+        page.waitForSelector(containerSelector, { state: "hidden", timeout: 3000 }).catch(() => { }),
+        page.waitForSelector(containerSelector, { state: "detached", timeout: 3000 }).catch(() => { }),
+        page.waitForFunction(
+          (sel) => {
+            const modal = document.querySelector(sel);
+            if (!modal) return true;
+            const style = getComputedStyle(modal);
+            return (
+              style.display === "none" ||
+              style.opacity === "0" ||
+              (modal.classList.contains("fade") && !modal.classList.contains("show"))
+            );
+          },
+          containerSelector,
+          { timeout: 3000 }
+        ).catch(() => { }),
+      ]);
+    } catch (err) {
+      if (/Target page.*closed/i.test(String(err))) {
+        console.log(`[closeModalIfPresent] ${name}: Page closed — safe to ignore`);
+        return;
+      }
+      console.warn(`[closeModalIfPresent] Failed to close ${name}:`, err);
     }
   }
 }
@@ -323,6 +394,40 @@ export async function scrollToBottom(page: Page, distance: number = 100, delay: 
     },
     { scrollDistance: distance, scrollDelay: delay }
   );
+}
+
+export async function lazyLoad(page: Page) {
+  const delayMs = 800;
+  const maxScroll = 50;
+
+  for (let i = 0; i < maxScroll; i++) {
+    const currentText = await page.locator('.current-products').innerText().catch(() => '0');
+    const totalText = await page.locator('.total-products').innerText().catch(() => '0');
+
+    const current = parseInt(currentText.replace(/\D/g, ''), 10) || 0;
+    const total = parseInt(totalText.replace(/\D/g, ''), 10) || 0;
+
+    console.log(`lazyLoad: ${current} of ${total}`);
+
+    if (total > 0 && current >= total) {
+      console.log('All products loaded');
+      break;
+    }
+
+    await page.evaluate(() => {
+      window.scrollBy(0, window.innerHeight);
+    });
+
+    await page.waitForTimeout(delayMs);
+  }
+
+  const rawText = await page.locator('.current-products').innerText();
+  const cleanedText = rawText.replace(/[^\d]/g, '');
+  const finalCurrent = cleanedText ? parseInt(cleanedText, 10) : 0;
+
+  const finalTotal = parseInt(await page.locator('.total-products').innerText(), 10);
+
+  await expect(finalCurrent).toBe(finalTotal);
 }
 
 // Click a locator until another locator visible|hidden

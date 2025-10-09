@@ -28,60 +28,38 @@ export class BackpacksPageSG extends BackpacksPage {
         }
 
         // --- backpack-type ---
-        const typeItems = [
-            { text: 'Business Backpacks', href: '/backpacks/business/' },
-            { text: 'Casual Backpacks', href: '/backpacks/casual-backpacks/' },
-            { text: 'For Her', href: '/backpacks/for-her/' },
-            { text: 'For Kids', href: '/backpacks/for-kids/' },
-            { text: 'Shop all backpacks', href: 'https://sssg.stg.samsonite-asia.com/backpacks/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-type', typeItems, {
+        const { typeItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-type', typeItemsBP, {
             lastItemIsTextOnly: true
         });
 
         // --- backpack-color ---
-        const colorItems = [
-            { text: 'Mono', href: 'https://sssg.stg.samsonite-asia.com/backpacks/black_grey_silver_white' },
-            { text: 'Cool', href: 'https://sssg.stg.samsonite-asia.com/backpacks/blue_green_navy_purple' },
-            { text: 'Warm', href: 'https://sssg.stg.samsonite-asia.com/backpacks/beige_orange_pink_red_yellow' },
-            { text: 'Shop all colours', href: '/backpacks/colour/shop-all-colours/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-color', colorItems, {
+        const { colorItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-color', colorItemsBP, {
             lastItemIsTextOnly: true
         });
 
         // --- backpack-smart-function ---
-        const smartFunctionItems = [
-            { text: 'RFID Pocket', href: '/backpack/rfid-pocket/' },
-            { text: 'USB Port', href: '/backpack/usb-port/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-smart-function', smartFunctionItems);
+        const { smartFunctionItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-smart-function', smartFunctionItemsBP);
 
         // --- backpack-brand ---
-        const brandItems = [
-            { text: 'Samsonite', href: '/backpack/brand-samsonite/' },
-            { text: 'Samsonite Black', href: '/backpack/brand-samsonite-black/' },
-            { text: 'Samsonite Red', href: '/backpack/brand-samsonite-red/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-brand', brandItems);
+        const { brandItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-brand', brandItemsBP);
 
         // --- backpack-laptop ---
-        const laptopItems = [
-            { text: 'Fit up to 13" laptop', href: '/backpacks/fit-up-to-13%22-laptop/' },
-            { text: 'Fit up to 15" laptop', href: '/backpacks/fit-up-to-15%22-laptop/' },
-            { text: 'Fit up to 17" laptop', href: '/backpacks/fit-up-to-17%22-laptop/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-laptop', laptopItems);
+        const { laptopItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-laptop', laptopItemsBP);
 
         // --- backpack-collection ---
-        const collectionItems = [
-            { text: 'Sefton', href: '/backpacks/collection/sefton/' },
-            { text: 'Pro-Dlx 6', href: '/backpacks/collection/pro-dlx-6/' },
-            { text: 'Ecodiver', href: '/backpacks/collection/ecodiver/' },
-            { text: 'Sammies Dream', href: '/backpacks/collection/sammies-dream/' },
-            { text: 'Prudence Eco', href: '/backpacks/collection/prudence-eco/' },
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItems, {
+        const { collectionItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItemsBP, {
             twoLinksPerLi: false
         });
     }

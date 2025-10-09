@@ -1,4 +1,5 @@
 import { MinicartPage } from "./minicart.page"
+import { extractNumber } from "../../../../utils/helpers"
 
 export class MinicartPageSG extends MinicartPage {
 
@@ -11,9 +12,19 @@ export class MinicartPageSG extends MinicartPage {
     // =========================
 
     async getShippingDiscount(): Promise<string> {
-        const shippingDiscount = this.page.locator(`//span[@class="applied-promotion-discount"]`)
+        const shippingDiscount_1 = this.page.locator(`(//span[@class="applied-promotion-discount"])[2]`)
+        const shippingDiscount_2 = this.page.locator(`(//span[@class="applied-promotion-discount"])[3]`)
 
-        return (await shippingDiscount.innerText()).trim()
+        let shippingDiscount_1_num: number
+        let shippingDiscount_2_num: number
+
+        shippingDiscount_1_num = await extractNumber((await shippingDiscount_1.innerText()).trim())
+
+        if (await shippingDiscount_2.isVisible()) {
+            shippingDiscount_2_num = await extractNumber((await shippingDiscount_2.innerText()).trim())
+        }
+
+        return (shippingDiscount_1_num + shippingDiscount_2_num!).toString()
     }
 
     // =========================

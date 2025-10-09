@@ -4,6 +4,7 @@ import { PageUtils, t } from "../../../../../utils/helpers";
 import { Config } from "../../../../../config/env.config";
 import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";
+import { loadTestData } from "../../../../../utils/data";
 
 export abstract class LuggagePage extends BasePage {
     readonly logoImg: Locator;
@@ -16,6 +17,8 @@ export abstract class LuggagePage extends BasePage {
     readonly luggageDestination: Locator;
     readonly luggageCollection: Locator;
 
+    protected testData: ReturnType<typeof loadTestData>;
+
     constructor(page: Page) {
         super(page);
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
@@ -27,6 +30,8 @@ export abstract class LuggagePage extends BasePage {
         this.luggageBrand = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-brand")]`);
         this.luggageDestination = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-destination")]`);
         this.luggageCollection = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-collection")]`);
+
+        this.testData = loadTestData();
     }
 
     // =========================
@@ -67,5 +72,5 @@ export abstract class LuggagePage extends BasePage {
     // =========================
     // ✅ Assertions
     // =========================
-    abstract assertLuggageListItems(page: Page): Promise<void>;
+    abstract assertLuggageListItems(page: Page): Promise<void>
 }

@@ -31,7 +31,11 @@ export default defineConfig({
     ],
     reporter: [
         ['list'],
-        ['allure-playwright']
+        ['allure-playwright', {
+            outputFolder: 'allure-results',
+            stdout: true,
+            stderr: false
+        }],
     ],
     use: {
         headless: false,

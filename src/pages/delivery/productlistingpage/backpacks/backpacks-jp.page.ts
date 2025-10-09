@@ -28,56 +28,36 @@ export class BackpacksPageJP extends BackpacksPage {
         }
 
         // --- backpack-type ---
-        const typeItems = [
-            { text: 'レザー', href: '/backpack/type/leather/' },
-            { text: 'ナイロン', href: '/backpack/type/nylon/' },
-            { text: 'ポリエステル', href: '/backpack/type/polyester/' },
-            { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-type', typeItems, {
+        const { typeItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-type', typeItemsBP, {
             lastItemIsTextOnly: true
         });
 
         // --- backpack-color ---
-        const colorItems = [
-            { text: 'モノトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/その他_グレー_ブラック' },
-            { text: 'クールトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/グリーン_ネイビー_パープル_ブルー' },
-            { text: 'ウォームトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/オレンジ_ピンク' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-color', colorItems);
+        const { colorItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-color', colorItemsBP);
 
         // --- backpack-smart-function ---
-        const smartFunctionItems = [
-            { text: 'USBポート', href: '/backpack/smart-function/usb-port/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-smart-function', smartFunctionItems);
+        const { smartFunctionItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-smart-function', smartFunctionItemsBP);
 
         // --- backpack-brand ---
-        const brandItems = [
-            { text: 'サムソナイトのバックパック', href: '/backpack/brand/samsonite/' },
-            { text: 'サムソナイト・ブラックレーベルのバックパック', href: '/backpack/brand/samsonite-black/' },
-            { text: 'サムソナイト・レッドのバックパック', href: '/backpack/brand/samsonite-red/' },
-            { text: 'ハートマンのバックパック', href: '/backpack/brand/hartmann/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-brand', brandItems);
+        const { brandItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-brand', brandItemsBP);
 
         // --- backpack-laptop ---
-        const laptopItems = [
-            { text: 'Fit up to 13" laptop', href: '/backpacks/fit-up-to-13-laptop/' },
-            { text: 'Fit up to 15" laptop', href: '/backpacks/fit-up-to-15-laptop/' },
-            { text: 'Fit up to 17" laptop', href: '/backpacks/fit-up-to-17-laptop/' }
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-laptop', laptopItems);
+        const { laptopItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-laptop', laptopItemsBP);
 
         // --- backpack-collection ---
-        const collectionItems = [
-            { text: 'サブリム', href: 'https://ssjp.stg.samsonite-asia.com/backpack/collection/sub-lim/' },
-            { text: 'テクノス コンボ', href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%83%86%E3%82%AF%E3%83%8E%E3%82%B9-%E3%82%B3%E3%83%B3%E3%83%9C/' },
-            { text: 'アルヴァーノ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アルヴァーノ&start=0&sz=18&useNewPLP=true' },
-            { text: 'オードリナ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=オードリナ&start=0&sz=18&useNewPLP=true' },
-            { text: 'ゼットジップ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=ゼットジップ&start=0&sz=18&useNewPLP=true' },
-        ];
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItems, {
+        const { collectionItemsBP } = this.testData;
+
+        await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItemsBP, {
             twoLinksPerLi: false
         });
     }
