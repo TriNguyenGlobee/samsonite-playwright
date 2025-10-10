@@ -2,8 +2,8 @@ import { test as base, Page } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Config } from "../../config/env.config";
 import { createLoginPage } from "../factories/login.factory";
-import { startModalWatchdog } from "../../utils/modalWatchdog";
-import { getLocales } from "../../utils/localeHelper";
+import { startModalWatchdog } from "../../utils/helpers/modalWatchdog";
+import { getLocales } from "../../utils/helpers/localeHelper";
 
 type MyFixtures = {
   user: { username: string; password: string };

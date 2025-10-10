@@ -1,4 +1,4 @@
-import { t } from "../../../../utils/helpers";
+import { t } from "../../../../utils/helpers/helpers";
 import { HomePage } from "./home.page";
 import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";

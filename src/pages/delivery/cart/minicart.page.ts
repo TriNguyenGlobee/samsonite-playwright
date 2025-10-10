@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { clickUntil, delay, t } from "../../../../utils/helpers";
+import { clickUntil, delay, t } from "../../../../utils/helpers/helpers";
 
 export abstract class MinicartPage extends BasePage {
     readonly minicartModal: Locator;

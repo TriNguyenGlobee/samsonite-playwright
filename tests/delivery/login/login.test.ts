@@ -5,10 +5,10 @@ import { MembershipPage } from "../../../src/pages/delivery/login/membership.pag
 import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, PageUtils } from "../../../utils/helpers";
+import { t, PageUtils } from "../../../utils/helpers/helpers";
 import { createLoginPage } from "../../../src/factories/login.factory";
 import { createHomePage } from "../../../src/factories/home.factory"
-import { tests } from "../../../utils/localeTest"
+import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Login Screen", () => {
     tests(["jp", "sg"],

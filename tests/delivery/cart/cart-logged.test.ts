@@ -3,10 +3,10 @@ import { createCartPage } from "../../../src/factories/cart.factory";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber } from "../../../utils/helpers";
+import { t, clickUntil, extractNumber } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
-import { tests } from "../../../utils/localeTest"
-import { steps } from "../../../utils/localeStep"
+import { tests } from "../../../utils/helpers/localeTest"
+import { steps } from "../../../utils/helpers/localeStep"
 
 test.describe("Empty cart after login", () => {
     let initialCartBadge = 0

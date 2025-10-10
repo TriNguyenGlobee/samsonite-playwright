@@ -1,5 +1,5 @@
 import { getLocales, shouldRunForLocale } from "./localeHelper";
-import { test } from "../src/fixtures/test-fixture";
+import { test } from "../../src/fixtures/test-fixture";
 
 const ACTIVE_LOCALES = getLocales();
 

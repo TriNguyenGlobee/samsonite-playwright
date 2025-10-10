@@ -1,5 +1,5 @@
 import { TestInfo } from "@playwright/test";
-import { test as base } from "../src/fixtures/test-fixture";
+import { test as base } from "../../src/fixtures/test-fixture";
 import { getLocales, shouldRunForLocale } from "./localeHelper";
 
 const ACTIVE_LOCALES = getLocales();

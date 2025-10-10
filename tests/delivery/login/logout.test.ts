@@ -2,7 +2,7 @@ import { test, expect } from "../../../src/fixtures/test-fixture";
 import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
 import { step } from "allure-js-commons";
 import { createLoginPage } from "../../../src/factories/login.factory";
-import { tests } from "../../../utils/localeTest"
+import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Logout Completion Screen", () => {
     tests(["jp","sg"],`1. Logout success`, async ({ loggedInPage }) => {

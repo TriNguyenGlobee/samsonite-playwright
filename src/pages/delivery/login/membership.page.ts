@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t } from "../../../../utils/helpers";
+import { t } from "../../../../utils/helpers/helpers";
 import { Config } from "../../../../config/env.config";
 import { step } from "allure-js-commons";
 

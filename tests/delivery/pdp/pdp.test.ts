@@ -3,12 +3,11 @@ import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
-import { delay, extractNumber, lazyLoad, PageUtils, scrollToBottom } from "../../../utils/helpers";
+import { delay, extractNumber, lazyLoad, PageUtils, scrollToBottom, t } from "../../../utils/helpers/helpers";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
-import { t } from "../../../utils/helpers";
 import { WishlistPage } from "../../../src/pages/delivery/pdp/wishlist.page";
-import { steps } from "../../../utils/localeStep"
+import { steps } from "../../../utils/helpers/localeStep"
 
 test.describe("PDP is shown correctly", async () => {
     const prodIndex = 1

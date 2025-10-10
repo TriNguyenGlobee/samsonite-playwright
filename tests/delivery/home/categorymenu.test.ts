@@ -8,8 +8,8 @@ import { createBrandPage } from "../../../src/factories/productlistingpage/brand
 import { createOurBrandStoryPage } from "../../../src/factories/productlistingpage/ourbrandstory.factory";
 import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
 import { createHomePage } from "../../../src/factories/home.factory"
-import { PageUtils } from "../../../utils/helpers";
-import { steps } from "../../../utils/localeStep"
+import { PageUtils } from "../../../utils/helpers/helpers";
+import { steps } from "../../../utils/helpers/localeStep"
 
 test.describe("Category Menu", () => {
     test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {

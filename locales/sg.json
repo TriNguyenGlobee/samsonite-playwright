@@ -121,6 +121,9 @@
     "friendofsamsonite": "FRIENDS OF SAMSONITE",
     "ginzaflagshipstore": "銀座 旗艦店"
   },
+  "lv2MenuItem": {
+    "brand-samsonite": "Samsonite"
+  },
   "minicart": {
     "emptymsg": "Your Cart is Empty",
     "startshoppingbutton": "Start Shopping now",

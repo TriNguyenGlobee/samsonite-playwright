@@ -1,9 +1,8 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t } from "../../../../utils/helpers";
 import { Config } from "../../../../config/env.config";
-import { PageUtils, maskEmail } from "../../../../utils/helpers";
+import { PageUtils, maskEmail, t } from "../../../../utils/helpers/helpers";
 
 export abstract class LoginPage extends BasePage {
     readonly signinTitle: Locator;
@@ -81,7 +80,8 @@ export abstract class LoginPage extends BasePage {
             await this.click(this.signInButton, "Click login button");
         });
 
-        await PageUtils.waitForPageLoadComplete(this.page);
+        await PageUtils.waitForDomAvailable(this.page);
+        await PageUtils.waitForPageLoad(this.page);
     }
 
     async loginByGoogleAccount(googleUsername: string, googlePassword: string) {

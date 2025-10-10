@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t, PageUtils, clickUntil, delay } from "../../../../utils/helpers";
+import { t, PageUtils, clickUntil, delay } from "../../../../utils/helpers/helpers";
 
 export abstract class CartPage extends BasePage {
     readonly removeProductButton: Locator;
@@ -103,53 +103,59 @@ export abstract class CartPage extends BasePage {
         }
     }
 
-    async addMultipleProductsToCart(count: number) {
-        const addText = t.homepage('addtocart');
-        const allButtons = this.page.locator(`//button[normalize-space(text())="${addText}"]`);
-        const totalButtons = await allButtons.count();
+    /**
+     * Add "In-stock" products to cart with requied amount
+     * @param count 
+     */
+    async addMultipleProductsToCart(count: number, description?: string) {
+        await step(description || "Add multiple products to cart", async () => {
+            const addText = t.homepage('addtocart');
+            const allButtons = this.page.locator(`//button[normalize-space(text())="${addText}"]`);
+            const totalButtons = await allButtons.count();
 
-        let added = 0;
-        let index = 1;
+            let added = 0;
+            let index = 1;
 
-        while (added < count && index <= totalButtons) {
-            const isDisabled = await this.isAddToCartButtonDisabled(index);
-            if (isDisabled) {
-                console.log(`Button #${index} is disabled`);
+            while (added < count && index <= totalButtons) {
+                const isDisabled = await this.isAddToCartButtonDisabled(index);
+                if (isDisabled) {
+                    console.log(`Button #${index} is disabled`);
+                    index++;
+                    continue;
+                }
+
+                await step(`Adding product ${index} to cart`, async () => {
+                    const addButton = this.page.locator(`(//button[normalize-space(text())="${addText}"])[${index}]`);
+
+                    try {
+                        await addButton.scrollIntoViewIfNeeded();
+                        await delay(300);
+
+                        await Promise.all([
+                            this.click(addButton, `Add product at index ${index} to cart`),
+                            this.minicartRender.waitFor({ state: 'visible', timeout: 5000 }),
+                        ]);
+
+                        await this.minicartRender.waitFor({ state: 'hidden', timeout: 5000 });
+
+                        added++;
+                        console.log(`Added product at #${index} (Tổng cộng: ${added}/${count})`);
+                    } catch (error) {
+                        console.warn(`Cannot add product at #${index}:`, error);
+                    }
+                });
+
                 index++;
-                continue;
             }
 
-            await step(`Adding product ${index} to cart`, async () => {
-                const addButton = this.page.locator(`(//button[normalize-space(text())="${addText}"])[${index}]`);
-
-                try {
-                    await addButton.scrollIntoViewIfNeeded();
-                    await delay(300);
-
-                    await Promise.all([
-                        this.click(addButton, `Add product at index ${index} to cart`),
-                        this.minicartRender.waitFor({ state: 'visible', timeout: 5000 }),
-                    ]);
-
-                    await this.minicartRender.waitFor({ state: 'hidden', timeout: 5000 });
-
-                    added++;
-                    console.log(`Added product at #${index} (Tổng cộng: ${added}/${count})`);
-                } catch (error) {
-                    console.warn(`Cannot add product at #${index}:`, error);
-                }
-            });
-
-            index++;
-        }
-
-        if (added < count) {
-            console.warn(
-                `Added ${added}/${count} products to cart`
-            );
-        } else {
-            console.log(`Added ${added}/${count} products to cart`);
-        }
+            if (added < count) {
+                console.warn(
+                    `Added ${added}/${count} products to cart`
+                );
+            } else {
+                console.log(`Added ${added}/${count} products to cart`);
+            }
+        })
     }
 
     async removeAllProducts() {
