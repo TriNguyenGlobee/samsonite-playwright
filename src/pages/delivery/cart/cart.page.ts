@@ -139,7 +139,7 @@ export abstract class CartPage extends BasePage {
                         await this.minicartRender.waitFor({ state: 'hidden', timeout: 5000 });
 
                         added++;
-                        console.log(`Added product at #${index} (Tổng cộng: ${added}/${count})`);
+                        console.log(`Added product at #${index} (Total: ${added}/${count})`);
                     } catch (error) {
                         console.warn(`Cannot add product at #${index}:`, error);
                     }

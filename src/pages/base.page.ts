@@ -2,6 +2,7 @@ import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
 import { t, extractNumber, PageUtils, delay, splitString } from "../../utils/helpers/helpers";
+import { loadTestData } from "../../utils/data";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
@@ -34,6 +35,8 @@ export class BasePage {
     readonly ratedProd: Locator;
     readonly productTableShow: Locator;
 
+    protected testData: ReturnType<typeof loadTestData>;
+
     constructor(page: Page) {
         this.page = page;
         this.shoppingCartButton = page.locator('//div[@id="shopping_cart_container"]');
@@ -62,6 +65,8 @@ export class BasePage {
         this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
         this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[normalize-space(@class)="product-tile"]`)
         this.productTableShow = page.locator(`//div[@class="product-grid row"]`)
+
+        this.testData = loadTestData();
     }
 
     // =========================

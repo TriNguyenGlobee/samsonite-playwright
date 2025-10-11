@@ -1,6 +1,6 @@
 import path from "path";
 
-const ENV = process.env.ENV || "stg";
+const ENV = process.env.ENV || "dev";
 const LOCALE = process.env.LOCALE || "jp";
 
 export function loadTestData() {

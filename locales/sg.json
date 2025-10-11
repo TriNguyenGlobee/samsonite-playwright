@@ -122,7 +122,10 @@
     "ginzaflagshipstore": "銀座 旗艦店"
   },
   "lv2MenuItem": {
-    "brand-samsonite": "Samsonite"
+    "brand-samsonite": "Samsonite",
+    "brand-samsoniteBlack": "Samsonite BLACK LABEL",
+    "brand-samsoniteRed": "Samsonite RED",
+    "brand-hartmann": "Hartmann"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

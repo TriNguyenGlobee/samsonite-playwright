@@ -9,6 +9,14 @@ export class BrandLandingPage extends BasePage {
     readonly activeBanner: Locator;
     readonly hardcaseMenu: Locator;
     readonly softcaseMenu: Locator;
+    readonly briefcaseMenu: Locator;
+    readonly luggageMenu: Locator;
+    readonly backpacksMenu: Locator;
+    readonly bagsMenu: Locator;
+    readonly travelHartmannMenu: Locator;
+    readonly backpackHartmannMenu: Locator;
+    readonly bagHartmannMenu: Locator;
+    readonly accessoryHartmannMenu: Locator;
     readonly brandInforSection: Locator;
     readonly brInforToptitle: Locator;
     readonly brInforTitle: Locator;
@@ -21,11 +29,19 @@ export class BrandLandingPage extends BasePage {
         this.activeBanner = page.locator(`//div[@class="firstly-content"]//div[@class="owl-stage"]//div[@class="owl-item active"]`)
         this.hardcaseMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[@class="row no-gutters" and .//a[text()="Hardcase"]]`)
         this.softcaseMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[@class="row no-gutters" and .//a[text()="Softcase"]]`)
-        this.brandInforSection = page.locator(`//div[@class="secondary-content"]//div[@class="brand-info"]`)
+        this.briefcaseMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[@class="row no-gutters" and .//a[text()="Briefcase"]]`)
+        this.luggageMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Luggage"]]`)
+        this.backpacksMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Backpacks"]]`)
+        this.bagsMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Bags"]]`)
+        this.travelHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Travel"]]`)
+        this.backpackHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Backpack"]]`)
+        this.bagHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Bag"]]`)
+        this.accessoryHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Accessory"]]`)
+        this.brandInforSection = page.locator(`//div[@class="secondary-content"]//div[@class="brand-info" or @class="section container"]`)
         this.brInforToptitle = this.brandInforSection.locator(`xpath=.//h4`)
         this.brInforTitle = this.brandInforSection.locator(`xpath=.//h2`)
         this.brInforContent = this.brandInforSection.locator(`xpath=.//p`)
-        this.brInforButton = this.brandInforSection.locator(`xpath=.//a[@class="btn"]`)
+        this.brInforButton = this.brandInforSection.locator(`xpath=.//a[contains(@class,"btn")]`)
     }
 
     // =========================

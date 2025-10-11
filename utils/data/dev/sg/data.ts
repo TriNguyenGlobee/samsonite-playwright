@@ -282,3 +282,21 @@ export const top10picks = [
         text: "Top 10 Picks"
     }
 ]
+
+export const subMenuDataSamsoniteRed = [
+    {
+        hasImage: true,
+        href: "https://sssg.dev.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Luggage"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.dev.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Backpacks"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.dev.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Bags"
+    }
+]
