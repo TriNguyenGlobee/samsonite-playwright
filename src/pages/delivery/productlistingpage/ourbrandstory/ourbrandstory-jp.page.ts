@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test";
-import { delay } from "../../../../../utils/helpers";
+import { delay } from "../../../../../utils/helpers/helpers";
 import { OurBrandStoryPage } from "./ourbrandstory.page";
 
 export class OurBrandStoryPageJP extends OurBrandStoryPage {

@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { I18n, Translations } from "../config/i18n.config";
+import { I18n, Translations } from "../../config/i18n.config";
 import { test, expect } from '@playwright/test';
 
 /**
@@ -175,10 +175,11 @@ export const t = {
   whyshopwithus: (key: keyof Translations['whyshopwithus']) => I18n.translations.whyshopwithus[key],
   mypage: (key: keyof Translations['mypage']) => I18n.translations.mypage[key],
   menuItem: (key: keyof Translations['menuItem']) => I18n.translations.menuItem[key],
+  lv2MenuItem: (key: keyof Translations['lv2MenuItem']) => I18n.translations.lv2MenuItem[key],
   minicart: (key: keyof Translations['minicart']) => I18n.translations.minicart[key],
   cartpage: (key: keyof Translations['cartpage']) => I18n.translations.cartpage[key],
   PDP: (key: keyof Translations['PDP']) => I18n.translations.PDP[key],
-  wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key],
+  wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key], 
 };
 
 /**

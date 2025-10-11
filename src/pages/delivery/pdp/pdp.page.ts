@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { delay, t } from "../../../../utils/helpers";
+import { delay, t } from "../../../../utils/helpers/helpers";
 
 export class PDPPage extends BasePage {
     readonly logoImg: Locator;

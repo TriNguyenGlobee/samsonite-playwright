@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { closeModalIfPresent } from "../utils/helpers";
+import { closeModalIfPresent } from "../helpers/helpers";
 
 export async function startModalWatchdog(page: Page, intervalMs = 3000) {
   let running = true;
