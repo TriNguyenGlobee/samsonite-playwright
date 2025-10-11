@@ -27,6 +27,16 @@ export const campaignData = [
     }
 ]
 
+// --- New Arrivals ---
+export const newArrivalsItem = [
+    { text: 'C-Lite Colourburst', href: '/new-arrivals/c-lite-colourburst/' },
+    { text: 'Relyon', href: '/new-arrivals/relyon/' },
+    { text: 'SBL Signature', href: '/new-arrivals/sbl-signature/' },
+    { text: 'Audrina', href: '/new-arrivals/audrina/' },
+    { text: 'SS25', href: '/new-arrivals/ss25/' },
+    { text: 'Shop all new arrivals', href: 'https://sssg.dev.samsonite-asia.com/new-arrivals/' }
+]
+
 // --- luggage-type ---
 export const typeItems = [
     { text: 'Hardside', href: '/luggage/hardside/' },
@@ -231,6 +241,7 @@ export const collectionItemsB = [
     { text: 'Sammies Dream', href: '/bags/collection/sammies-dream/' },
 ];
 
+// --- brand - label ---
 export const brandItemsBR = [
     { text: 'Samsonite BLACK LABEL', href: 'https://sssg.dev.samsonite-asia.com/black/' },
     { text: 'Samsonite', href: 'https://sssg.dev.samsonite-asia.com/samsonite/' },
@@ -269,5 +280,23 @@ export const top10picks = [
         hasImage: true,
         href: "https://sssg.dev.samsonite-asia.com/2025-top-10-picks/",
         text: "Top 10 Picks"
+    }
+]
+
+export const subMenuDataSamsoniteRed = [
+    {
+        hasImage: true,
+        href: "https://sssg.dev.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Luggage"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.dev.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Backpacks"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.dev.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Bags"
     }
 ]

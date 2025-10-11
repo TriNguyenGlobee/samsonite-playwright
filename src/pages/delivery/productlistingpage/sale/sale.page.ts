@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../../base.page";
-import { PageUtils, t } from "../../../../../utils/helpers";
+import { PageUtils, t } from "../../../../../utils/helpers/helpers";
 import { Config } from "../../../../../config/env.config";
 
 export class SalePage extends BasePage {

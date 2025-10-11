@@ -9,9 +9,10 @@ import { createOurBrandStoryPage } from "../../../src/factories/productlistingpa
 import { GinzaFlagshipStorePage } from "../../../src/pages/delivery/productlistingpage/ginzaflashipstore/ginzaflagshipstore.page";
 import { SalePage } from "../../../src/pages/delivery/productlistingpage/sale/sale.page";
 import { MembershipPage } from "../../../src/pages/delivery/home/membership.page";
-import { scrollToBottom } from "../../../utils/helpers";
+import { scrollToBottom } from "../../../utils/helpers/helpers";
 import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
 import { createHomePage } from "../../../src/factories/home.factory"
+import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Home Tests", () => {
     test("1. Home page is displayed", async ({ basicAuthPage }) => {
@@ -98,13 +99,11 @@ test.describe("Home Tests", () => {
         })
     });
 
-    test(`
+    tests(["jp"],`
         8. Go to Ginza Flagship Store Page
         9. Go to Sale Page
         10. Go to membership page
         `, async ({ basicAuthPage }) => {
-        test.skip(process.env.LOCALE !== 'jp', "These testcases for Japan only");
-
         const homePage = createHomePage(basicAuthPage);
         const ginzaflagshipstorepage = new GinzaFlagshipStorePage(basicAuthPage);
         const Salepage = new SalePage(basicAuthPage);
@@ -155,11 +154,9 @@ test.describe("Home Tests", () => {
         })
     })
 
-    test(`
+    tests(["sg"],`
         12. Go to Offers Page
         `, async ({ basicAuthPage }) => {
-        test.skip(process.env.LOCALE !== 'sg', "These testcases for SSSG only");
-
         const homePage = createHomePage(basicAuthPage);
         const offerspage = new OffersPage(basicAuthPage)
 

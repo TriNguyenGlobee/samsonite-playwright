@@ -1,6 +1,6 @@
 import { BackpacksPage } from "./backpacks.page";
 import { Page, expect } from "@playwright/test";
-import { delay } from "../../../../../utils/helpers";
+import { delay } from "../../../../../utils/helpers/helpers";
 
 export class BackpacksPageSG extends BackpacksPage {
 

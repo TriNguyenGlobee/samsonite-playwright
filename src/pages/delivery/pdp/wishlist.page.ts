@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t } from "../../../../utils/helpers";
+import { t } from "../../../../utils/helpers/helpers";
 
 export class WishlistPage extends BasePage {
     readonly logoImg: Locator

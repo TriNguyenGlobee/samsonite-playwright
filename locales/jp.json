@@ -121,6 +121,12 @@
     "friendofsamsonite": "メンバーシップ",
     "ginzaflagshipstore": "銀座 旗艦店"
   },
+  "lv2MenuItem": {
+    "brand-samsonite": "サムソナイト商品一覧",
+    "brand-samsoniteBlack": "サムソナイト・ブラックレーベル商品一覧",
+    "brand-samsoniteRed": "サムソナイト・レッド商品一覧",
+    "brand-hartmann": "ハートマン商品一覧"
+  },
   "minicart": {
     "emptymsg": "カートは空です。",
     "startshoppingbutton": "お買い物を続ける",

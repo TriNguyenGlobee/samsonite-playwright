@@ -31,6 +31,9 @@ export const campaignData = [
     }
 ]
 
+// --- New Arrivals ---
+export const newArrivalsItem = []
+
 // --- luggage-type ---
 export const typeItems = [
     { text: 'ハード', href: '/luggage/type/hard/' },
@@ -240,6 +243,7 @@ export const collectionItemsB = [
     { text: '4PACK', href: 'https://ssjp.dev.samsonite-asia.com/search?q=4pack&srule=predictive-search-sorting&lang=ja_JP' },
 ];
 
+// --- brand - label ---
 export const brandItemsBR = [
     { text: 'サムソナイト商品一覧', href: '/brand/samsonite/' },
     { text: 'サムソナイト・ブラックレーベル商品一覧', href: '/brand/samsonite-black/' },
@@ -263,3 +267,79 @@ export const aboutSamsoniteItems = [
     { text: 'ハートマンブランドストーリー', href: 'https://ssjp.dev.samsonite-asia.com/about-hartmann.html' },
     { text: 'Our Responsible Journey', href: 'https://ssjp.dev.samsonite-asia.com/sustainability.html' }
 ];
+
+export const subMenuDataSamsonite = [
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/luggage/type/hard/?prefn1=brand&prefv1=Samsonite%20Black%20Label%7CSamsonite",
+        text: "Hardcase"
+    },
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/luggage/type/soft/",
+        text: "Softcase"
+    }
+]
+
+export const subMenuDataSamsoniteBlack = [
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/bags/type/briefcase/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "Briefcase"
+    },
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/luggage/brand/samsonite-black/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "Luggage"
+    },
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/backpack/brand/samsonite-black/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "Backpacks"
+    }
+]
+
+export const subMenuDataHartmann = [
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/luggage/brand/hartmann/",
+        text: "Travel"
+    },
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/backpack/brand/hartmann/",
+        text: "Backpack"
+    },
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/bags/brand/hartmann/",
+        text: "Bag"
+    },
+    {
+        hasImage: true,
+        href: "https://ssjp.dev.samsonite-asia.com/accessories/?prefn1=brand&prefv1=Hartmann",
+        text: "Accessory"
+    }
+]
+
+export const brandInfoSamsonite = {
+    toptile: "All-time favourite",
+    title: "The world’s first luggage choice for 100 years",
+    content: "サムソナイトは100年の長きにわたり、変わりゆく人々のライフスタイルや旅行者のニーズに応え、機能的でありながらもデザイン性の高い製品を開発しています。",
+    href: "#product-list-campaign"
+}
+
+export const brandInfoSamsoniteBlack = {
+    toptile: "Boarding Now",
+    title: "Calling all discerning frequent flyers",
+    content: "100年以上の歴史をもつ、“サムソナイト”のラグジュアリーブランド“サムソナイト・ブラックレーベル”は、上質な日常や旅のスタイルにこだわりを持つトラベラーおよびビジネスマンに向けたプレミアムブランドです。",
+    href: "#product-list-campaign"
+}
+
+export const brandInfoSamsoniteRed = {
+    toptile: "Ready, set, go",
+    title: "Stylish luggage for those on the move",
+    content: `デザインはトレンドを纏いながらも、余計な装飾を削ぎ落としシンプルで合わせやすく、高い基準で選び抜かれた素材、工場で丁寧に生産されています。
+                        気がつけば、日常のあらゆるシーンに溶け込んでいる、そんなリラックスしたいつも使いたくなるバッグをサムソナイト・レッド は目指しています。`,
+    href: "#product-list-campaign"
+}
