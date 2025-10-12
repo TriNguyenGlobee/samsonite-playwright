@@ -34,6 +34,7 @@ export class BasePage {
     readonly promotionMsg: Locator;
     readonly ratedProd: Locator;
     readonly productTableShow: Locator;
+    readonly notifyMebutton: Locator;
 
     protected testData: ReturnType<typeof loadTestData>;
 
@@ -65,6 +66,7 @@ export class BasePage {
         this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
         this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[normalize-space(@class)="product-tile"]`)
         this.productTableShow = page.locator(`//div[@class="product-grid row"]`)
+        this.notifyMebutton = page.locator(`//button[normalize-space(text())="${t.homepage('notifyme')}"]`)
 
         this.testData = loadTestData();
     }
@@ -109,6 +111,11 @@ export class BasePage {
         });
     }
 
+    /**
+     * Input menu item key to click on the menu on the Top-navbar
+     * @param menuItemKey 
+     * @param description 
+     */
     async clickMenuItem(menuItemKey: keyof Translations['menuItem'], description?: string): Promise<void> {
         const menuItemText = t.menuItem(menuItemKey);
         const menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);
@@ -121,6 +128,12 @@ export class BasePage {
         await menuItemLocator.click();
     }
 
+    /**
+     * Input the menu path to click on level 2 or level 3 category menu
+     * @param page 
+     * @param menupath 
+     * @param description 
+     */
     async selectSamsoniteMenuItem(
         page: Page,
         menupath: string,
@@ -155,7 +168,11 @@ export class BasePage {
         }
     }
 
-
+    /**
+     * Select item from RightNavbarItem to click menu item
+     * @param item 
+     * @param description 
+     */
     async clickRightNavbarItem(item: RightNavbarItem, description?: string): Promise<void> {
         const itemMap: Record<RightNavbarItem, Locator> = {
             search: this.searchIcon,
@@ -271,6 +288,7 @@ export class BasePage {
             );
 
             const target = labelLocator.last();
+            await PageUtils.waitForPageLoad(page)
             await target.scrollIntoViewIfNeeded();
 
             const MAX_RETRIES = 3;
@@ -281,7 +299,7 @@ export class BasePage {
                 attempt++;
 
                 await target.click({ position: { x: 5, y: 5 } });
-                await delay(3000);
+                await delay(5000);
 
                 const inputLocator = target.locator('input[type="checkbox"]');
                 if (await inputLocator.count()) {
@@ -298,6 +316,7 @@ export class BasePage {
                 //console.log(`Checkbox "${labelText}" not checked (attempt ${attempt}), retrying...`);
             }
             await expect(isChecked, `Checkbox "${labelText}" should be checked after ${MAX_RETRIES} attempts.`).toBeTruthy();
+            await PageUtils.waitForPageLoad(page)
             await delay(2000)
         });
     }

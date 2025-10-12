@@ -6,7 +6,8 @@
     "myaccount": "My account",
     "logout": "Logout",
     "addtocart": "Add to Cart",
-    "in-stock": "In-stock"
+    "in-stock": "In-stock",
+    "notifyme": "Notify me"
   },
   "loginpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
@@ -58,7 +59,8 @@
     "title": ""
   },
   "newarrivalspage": {
-    "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.dev.samsonite-asia.com/new-arrivals/"
   },
   "luggagepage": {
     "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
@@ -125,7 +127,13 @@
     "brand-samsonite": "Samsonite",
     "brand-samsoniteBlack": "Samsonite BLACK LABEL",
     "brand-samsoniteRed": "Samsonite RED",
-    "brand-hartmann": "Hartmann"
+    "brand-hartmann": "Hartmann",
+    "C-Lite-Colourburst": "C-Lite Colourburst",
+    "Relyon": "Relyon",
+    "SBL-Signature": "SBL Signature",
+    "Audrina": "Audrina",
+    "SS25": "SS25",
+    "showall": "Shop all new arrivals"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

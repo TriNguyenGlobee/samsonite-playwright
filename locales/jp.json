@@ -6,7 +6,8 @@
     "myaccount": "マイアカウント",
     "logout": "ログアウト",
     "addtocart": "カートに入れる",
-    "in-stock": "在庫あり"
+    "in-stock": "在庫あり",
+    "notifyme": "再入荷リクエスト"
   },
   "loginpage": {
     "title": "サインイン｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
@@ -58,7 +59,8 @@
     "title": "エクスプローラープログラム｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"
   },
   "newarrivalspage": {
-    "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.dev.samsonite-asia.com/new-arrivals/"
   },
   "luggagepage": {
     "title": "スーツケース｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -125,7 +127,13 @@
     "brand-samsonite": "サムソナイト商品一覧",
     "brand-samsoniteBlack": "サムソナイト・ブラックレーベル商品一覧",
     "brand-samsoniteRed": "サムソナイト・レッド商品一覧",
-    "brand-hartmann": "ハートマン商品一覧"
+    "brand-hartmann": "ハートマン商品一覧",
+    "C-Lite-Colourburst": "C-Lite Colourburst",
+    "Relyon": "Relyon",
+    "SBL-Signature": "SBL Signature",
+    "Audrina": "Audrina",
+    "SS25": "SS25",
+    "showall": "Shop all new arrivals"
   },
   "minicart": {
     "emptymsg": "カートは空です。",
