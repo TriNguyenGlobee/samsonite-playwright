@@ -1,5 +1,5 @@
 import { MinicartPage } from "./minicart.page"
-import { extractNumber } from "../../../../utils/helpers"
+import { extractNumber } from "../../../../utils/helpers/helpers"
 
 export class MinicartPageSG extends MinicartPage {
 

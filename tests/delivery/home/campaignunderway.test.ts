@@ -1,6 +1,6 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
-import { scrollToBottom } from "../../../utils/helpers";
+import { scrollToBottom } from "../../../utils/helpers/helpers";
 import { loadTestData } from "../../../utils/data";
 import { createHomePage } from "../../../src/factories/home.factory"
 

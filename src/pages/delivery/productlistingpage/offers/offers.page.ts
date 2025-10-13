@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../../base.page";
-import { t, delay, PageUtils } from "../../../../../utils/helpers";
+import { t, delay, PageUtils } from "../../../../../utils/helpers/helpers";
 import { Config } from "../../../../../config/env.config";
 import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";

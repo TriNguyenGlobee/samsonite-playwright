@@ -1,6 +1,6 @@
 import { test, expect } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
-import { scrollToBottom, delay } from "../../../utils/helpers";
+import { scrollToBottom, delay } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 
 test.describe("Samsonite Journals section", () => {

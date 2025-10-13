@@ -6,7 +6,9 @@
     "myaccount": "マイアカウント",
     "logout": "ログアウト",
     "addtocart": "カートに入れる",
-    "in-stock": "在庫あり"
+    "in-stock": "在庫あり",
+    "notifyme": "再入荷リクエスト",
+    "out-of-stock": "該当の商品は見つかりませんでした。"
   },
   "loginpage": {
     "title": "サインイン｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
@@ -58,10 +60,12 @@
     "title": "エクスプローラープログラム｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"
   },
   "newarrivalspage": {
-    "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.dev.samsonite-asia.com/new-arrivals/"
   },
   "luggagepage": {
-    "title": "スーツケース｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "スーツケース｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.dev.samsonite-asia.com/luggage/"
   },
   "backpackspage": {
     "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -120,6 +124,57 @@
     "offers": "セール",
     "friendofsamsonite": "メンバーシップ",
     "ginzaflagshipstore": "銀座 旗艦店"
+  },
+  "lv2MenuItem": {
+    "brand-samsonite": "サムソナイト商品一覧",
+    "brand-samsoniteBlack": "サムソナイト・ブラックレーベル商品一覧",
+    "brand-samsoniteRed": "サムソナイト・レッド商品一覧",
+    "brand-hartmann": "ハートマン商品一覧",
+    "C-Lite-Colourburst": "C-Lite Colourburst",
+    "Relyon": "Relyon",
+    "SBL-Signature": "SBL Signature",
+    "Audrina": "Audrina",
+    "SS25": "SS25",
+    "showallnewarrivals": "Shop all new arrivals",
+    "type": "タイプ",
+    "size": "サイズ",
+    "smartfeature": "フィーチャー/特長",
+    "labels": "ブランド",
+    "color": "カラー",
+    "travaltype": "トラベルタイプ",
+    "collection": "コレクション",
+    "hardside": "ハード",
+    "softside": "ソフト",
+    "aluminium": "アルミ",
+    "trunk": "トランク",
+    "shopallluggage": "すべて見る",
+    "small": "キャビン／機内持込 1〜3泊",
+    "medium": "ミディアム（中型）4〜6泊",
+    "large": "ラージ（大型）1週間以上",
+    "mono": "モノトーン",
+    "cool": "クールトーン",
+    "warm": "ウォームトーン",
+    "Special": "Special",
+    "shopallcolour": "Shop all colours",
+    "doublecoilzippers": "Double Coil Zippers",
+    "easybrakesystem": "ブレーキシステム",
+    "magnetic": "マグネットファスナー",
+    "suspensionwheels": "サスペンションホイール",
+    "usbport": "USBポート",
+    "samsonite": "サムソナイトのスーツケース",
+    "samsoniteblack": "サムソナイト・ブラックレーベルのスーツケース",
+    "samsonitered": "サムソナイト・レッドのスーツケース",
+    "hartmann": "ハートマンのスーツケース",
+    "city": "都市",
+    "adventure": "ビーチ",
+    "business": "ビジネス",
+    "C-Lite": "シーライト",
+    "Unimax": "シーライト",
+    "73H": "73H",
+    "SBL Richmond II": "RICHMOND2",
+    "Niar": "Niar",
+    "minter": "パラリュクス",
+    "litebox": "ミンター"
   },
   "minicart": {
     "emptymsg": "カートは空です。",

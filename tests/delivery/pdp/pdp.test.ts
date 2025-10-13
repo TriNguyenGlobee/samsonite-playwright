@@ -3,11 +3,11 @@ import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
-import { delay, extractNumber, lazyLoad, PageUtils, scrollToBottom } from "../../../utils/helpers";
+import { delay, extractNumber, lazyLoad, PageUtils, scrollToBottom, t } from "../../../utils/helpers/helpers";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
-import { t } from "../../../utils/helpers";
 import { WishlistPage } from "../../../src/pages/delivery/pdp/wishlist.page";
+import { steps } from "../../../utils/helpers/localeStep"
 
 test.describe("PDP is shown correctly", async () => {
     const prodIndex = 1
@@ -22,7 +22,7 @@ test.describe("PDP is shown correctly", async () => {
         const pdppage = new PDPPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        await step('Click on In-stock checkbox', async()=>{
+        await step('Click on In-stock checkbox', async () => {
             await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
@@ -107,20 +107,18 @@ test.describe("PDP is shown correctly", async () => {
             )
         })
 
-        if (process.env.LOCALE === 'jp') {
-            await step('Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
-                await Promise.all([
-                    basicAuthPage.waitForURL((newUrl) => newUrl.toString().includes('samsonite'), { timeout: 10000 }),
-                    pdppage.goBack("PDP")
-                ]);
-                await Promise.all([
-                    basicAuthPage.waitForURL((newUrl) => newUrl.toString().includes('amazon'), { timeout: 10000 }),
-                    pdppage.amazonePayButton.click()
-                ]);
+        await steps(["jp"], 'Verify the Amazone pay page is displayed when clicking on Amazone pay button', async () => {
+            await Promise.all([
+                basicAuthPage.waitForURL((newUrl) => newUrl.toString().includes('samsonite'), { timeout: 10000 }),
+                pdppage.goBack("PDP")
+            ]);
+            await Promise.all([
+                basicAuthPage.waitForURL((newUrl) => newUrl.toString().includes('amazon'), { timeout: 10000 }),
+                pdppage.amazonePayButton.click()
+            ]);
 
-                await pdppage.assertUrl(/amazon\.co\.jp/)
-            })
-        }
+            await pdppage.assertUrl(/amazon\.co\.jp/)
+        })
     })
 })
 
@@ -134,7 +132,7 @@ test.describe("Breadcrumb", () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        await step('Click on In-stock checkbox', async()=>{
+        await step('Click on In-stock checkbox', async () => {
             await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
@@ -170,7 +168,7 @@ test.describe("PDP extra features", () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        await step('Click on In-stock checkbox', async()=>{
+        await step('Click on In-stock checkbox', async () => {
             await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
@@ -214,7 +212,7 @@ test.describe("PDP extra features", () => {
             )
         })
 
-        await step("Verify user can remove product from wishlist", async()=>{
+        await step("Verify user can remove product from wishlist", async () => {
             await wishlistpage.goBack("PDP")
 
             await PageUtils.waitForPageLoad(basicAuthPage)

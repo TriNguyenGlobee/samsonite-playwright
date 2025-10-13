@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t, PageUtils, getRandomInt } from "../../../../utils/helpers";
+import { t, PageUtils, getRandomInt } from "../../../../utils/helpers/helpers";
 import { step } from "allure-js-commons";
 import { Config } from "../../../../config/env.config";
 import { test } from "../../../fixtures/test-fixture";

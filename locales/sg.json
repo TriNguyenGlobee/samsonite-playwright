@@ -6,7 +6,9 @@
     "myaccount": "My account",
     "logout": "Logout",
     "addtocart": "Add to Cart",
-    "in-stock": "In-stock"
+    "in-stock": "In-stock",
+    "notifyme": "Notify me",
+    "out-of-stock": "No results available for this filter. Click Reset All to try again."
   },
   "loginpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
@@ -58,10 +60,12 @@
     "title": ""
   },
   "newarrivalspage": {
-    "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.dev.samsonite-asia.com/new-arrivals/"
   },
   "luggagepage": {
-    "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.dev.samsonite-asia.com/luggage/"
   },
   "backpackspage": {
     "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
@@ -120,6 +124,57 @@
     "offers": "OFFERS",
     "friendofsamsonite": "FRIENDS OF SAMSONITE",
     "ginzaflagshipstore": "銀座 旗艦店"
+  },
+  "lv2MenuItem": {
+    "brand-samsonite": "Samsonite",
+    "brand-samsoniteBlack": "Samsonite BLACK LABEL",
+    "brand-samsoniteRed": "Samsonite RED",
+    "brand-hartmann": "Hartmann",
+    "C-Lite-Colourburst": "C-Lite Colourburst",
+    "Relyon": "Relyon",
+    "SBL-Signature": "SBL Signature",
+    "Audrina": "Audrina",
+    "SS25": "SS25",
+    "showallnewarrivals": "Shop all new arrivals",
+    "type": "Type",
+    "size": "Size",
+    "smartfeature": "Smart feature",
+    "labels": "Labels",
+    "color": "Colour",
+    "travaltype": "Travel Type",
+    "collection": "Collection",
+    "hardside": "Hardside",
+    "softside": "Softside",
+    "aluminium": "Aluminium",
+    "trunk": "",
+    "shopallluggage": "Shop all luggage",
+    "small": "Cabin/Small",
+    "medium": "Medium",
+    "large": "Large",
+    "mono": "Mono",
+    "cool": "Cool",
+    "warm": "Warm",
+    "Special": "",
+    "shopallcolour": "Shop all colours",
+    "doublecoilzippers": "Double Coil Zippers",
+    "easybrakesystem": "Easy Brake System",
+    "magnetic": "Magnetic Zippers",
+    "suspensionwheels": "Suspension Wheels",
+    "usbport": "USB port",
+    "samsonite": "Samsonite",
+    "samsoniteblack": "Samsonite Black",
+    "samsonitered": "Samsonite Red",
+    "hartmann": "Hartmann",
+    "city": "City",
+    "adventure": "Adventure",
+    "business": "Business",
+    "C-Lite": "C-Lite",
+    "Unimax": "Unimax",
+    "73H": "73H",
+    "SBL Richmond II": "SBL Richmond II",
+    "Niar": "Niar",
+    "minter": "パラリュクス",
+    "litebox": "ミンター"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

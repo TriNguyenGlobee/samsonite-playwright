@@ -8,7 +8,8 @@ import { createBrandPage } from "../../../src/factories/productlistingpage/brand
 import { createOurBrandStoryPage } from "../../../src/factories/productlistingpage/ourbrandstory.factory";
 import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
 import { createHomePage } from "../../../src/factories/home.factory"
-import { PageUtils } from "../../../utils/helpers";
+import { PageUtils } from "../../../utils/helpers/helpers";
+import { steps } from "../../../utils/helpers/localeStep"
 
 test.describe("Category Menu", () => {
     test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {
@@ -70,14 +71,13 @@ test.describe("Category Menu", () => {
             await ourbrandstorypage.assertOurBrandStoryListItems(basicAuthPage);
         });
 
-        if (process.env.LOCALE === 'sg') {
-            await step("Hover over 'Offers' menu", async () => {
-                await homePage.hover(homePage.offersMenuItem);
-            });
+        await steps(["sg"], "Hover over 'Offers' menu", async () => {
+            await homePage.hover(homePage.offersMenuItem);
+        });
 
-            await step("Verify that all categories under 'Offers' are displayed", async () => {
-                await offerspage.assertOffersListItems(basicAuthPage);
-            });
-        }
+        await steps(["sg"], "Verify that all categories under 'Offers' are displayed", async () => {
+            await offerspage.assertOffersListItems(basicAuthPage);
+        });
+
     });
 });
