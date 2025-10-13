@@ -279,6 +279,7 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
   const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
   const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
   const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
+  const PWPtilePopupCloseBtn = page.locator('//div[span[text()="Popup Tile PWP"]]//button');
 
   const modalsToCheck = [
     {

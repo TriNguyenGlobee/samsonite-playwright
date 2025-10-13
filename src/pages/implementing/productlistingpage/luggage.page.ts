@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 
-export class NewArrivalsPage extends BasePage {
+export class LuggagePage extends BasePage {
     readonly logoImg: Locator;
 
 
