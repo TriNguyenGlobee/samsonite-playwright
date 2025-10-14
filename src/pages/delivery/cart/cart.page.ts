@@ -88,18 +88,20 @@ export abstract class CartPage extends BasePage {
         const indices = Array.isArray(index) ? index : [index];
 
         for (const i of indices) {
-            const addButton = this.page.locator(`(//button[normalize-space(text())="${t.homepage('addtocart')}"])[${i}]`);
+            await PageUtils.waitForPageLoad(this.page)
+            const addButton = this.page.locator(`(//div[contains(@class,"product-tile")]//button[normalize-space(text())="${t.homepage('addtocart')}"])[${i}]`);
 
             await addButton.scrollIntoViewIfNeeded()
 
             await delay(300)
 
-            await Promise.all([
-                this.click(addButton, `Add product at index ${i} to cart`),
-                expect(this.minicartRender).toBeVisible({ timeout: 5000 })
-            ]);
+            await this.click(addButton, `Add product at index ${i} to cart`)
+            
+            await handlePwpModalIfPresent(this.page);
 
-            await expect(this.minicartRender).toBeHidden();
+            await expect(this.minicartRender).toBeVisible({ timeout: 10000 })
+
+            await this.minicartRender.waitFor({ state: 'hidden', timeout: 10000 });
         }
     }
 

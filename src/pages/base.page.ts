@@ -37,6 +37,7 @@ export class BasePage {
     readonly noAvailableProdMsg: Locator;
     readonly notifyMebutton: Locator;
     readonly addProdToCartButton: Locator;
+    readonly underlay: Locator;
 
     protected testData: ReturnType<typeof loadTestData>;
 
@@ -71,6 +72,7 @@ export class BasePage {
         this.noAvailableProdMsg = this.productTableShow.locator(`xpath=.//span[normalize-space(text())="${t.homepage('out-of-stock')}"]`)
         this.notifyMebutton = page.locator(`//button[normalize-space(text())="${t.homepage('notifyme')}"]`)
         this.addProdToCartButton = this.prodItem.locator(`xpath=.//button[normalize-space(text())="${t.homepage("addtocart")}"]`)
+        this.underlay = page.locator(`//div[@class="underlay"]`)
 
         this.testData = loadTestData();
     }
@@ -129,7 +131,7 @@ export class BasePage {
         }
 
         await menuItemLocator.scrollIntoViewIfNeeded();
-        await menuItemLocator.click();
+        await menuItemLocator.click(); 
     }
 
     /**
@@ -294,8 +296,11 @@ export class BasePage {
             const target = labelLocator.last();
             await PageUtils.waitForPageLoad(page)
             await target.scrollIntoViewIfNeeded();
-
-            await target.click({ position: { x: 7, y: 7 } });
+            
+            await Promise.all([
+                target.click({ position: { x: 7, y: 7 } }),
+                this.underlay.waitFor({ state: 'hidden', timeout: 10000 })
+            ]);
             await delay(5000);
             /*
             const MAX_RETRIES = 3;

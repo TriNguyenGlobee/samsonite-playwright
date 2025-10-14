@@ -1,8 +1,8 @@
 export const carouselItems = [
+    { href: 'newsdetail?id=news-samsonite-jp-2025-10-01-jet-biz3-campaign', hasImage: true },
     { href: 'https://ssjp.stg.samsonite-asia.com/paralux/', hasImage: true },
-    { href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim115/', hasImage: true },
-    { href: 'search?q=exflyz&srule=predictive-search-sorting&lang=ja_JP', hasImage: true },
-    { href: 'https://ssjp.stg.samsonite-asia.com/2025-women-product/', hasImage: true },
+    { href: 'newsdetail?id=news-samsonite-jp-2025-10-01-richmond2-campaign', hasImage: true },
+    { href: 'search?q=hartmann-tweed&srule=predictive-search-sorting&lang=ja_JP', hasImage: true },
 ];
 
 export const hightlightCategoryItems = [
@@ -24,6 +24,17 @@ export const campaignData = [
         rightSideTitleText: "EVOA Z 限定色シルバーと新モデルをチェック",
         hasImage: true
     }
+]
+
+// --- New Arrivals ---
+export const newArrivalsItem = [
+    { text: 'ジェットビズ3 115周年限定モデル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/jet_biz3/2way_bag_exp-115/black/ss-158122-1041.html' },
+    { text: 'パラリュクス', href: 'https://ssjp.stg.samsonite-asia.com/samsonite/paralux-hs/spinner55exp/midnight-navy/ss-156523-1552.html' },
+    { text: 'エスプルム', href: "https://ssjp.stg.samsonite-asia.com/search?q=esplum&srule=predictive-search-sorting&lang=ja_JP" },
+    { text: 'ハートマンツイード', href: "https://ssjp.stg.samsonite-asia.com/search?q=hartmann-tweed&srule=predictive-search-sorting&lang=ja_JP" },
+    { text: 'リッチモンド 2', href: "https://ssjp.stg.samsonite-asia.com/search?q=richmond2&srule=predictive-search-sorting&lang=ja_JP" },
+    { text: 'サブリム115周年限定モデル', href: "https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim115/" },
+    { text: 'すべて見る', href: "https://ssjp.stg.samsonite-asia.com/new-arrivals/" }
 ]
 
 // --- luggage-type ---
@@ -155,6 +166,7 @@ export const typeItemsBP = [
     { text: 'レザー', href: '/backpack/type/leather/' },
     { text: 'ナイロン', href: '/backpack/type/nylon/' },
     { text: 'ポリエステル', href: '/backpack/type/polyester/' },
+    { text: 'ウィメンズ', href: "https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=bag&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アクエリアス%7Cアルヴァーノ%7Cカリッサ+エヴォ%7Cツイードぺブル%7Cハートマンリザーブ%7Cムーヴ+5.0&start=0&sz=18&useNewPLP=true"},
     { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/' }
 ];
 
@@ -202,6 +214,7 @@ export const typeItemsB = [
     { text: 'トート', href: '/bags/type/tote/' },
     { text: 'ショルダーバッグ', href: '/bags/type/shoulder-bag/' },
     { text: 'ダッフル', href: '/bags/type/duffles/' },
+    { text: 'ウィメンズ', href: "https://ssjp.stg.samsonite-asia.com/bags/?cgid=bag&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アクエリアス%7Cアルヴァーノ%7Cカリッサ+エヴォ%7Cツイードぺブル%7Cハートマンリザーブ%7Cムーヴ+5.0&start=0&sz=18&useNewPLP=true" },
     { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/bags/' }
 ];
 
@@ -241,7 +254,8 @@ export const brandItemsBR = [
     { text: 'サムソナイト商品一覧', href: '/brand/samsonite/' },
     { text: 'サムソナイト・ブラックレーベル商品一覧', href: '/brand/samsonite-black/' },
     { text: 'サムソナイト・レッド商品一覧', href: '/brand/samsonite-red/' },
-    { text: 'ハートマン商品一覧', href: '/brand/hartmann/' }
+    { text: 'ハートマン商品一覧', href: '/brand/hartmann/' },
+    { text: 'American Tourister', href: 'https://www.americantourister.jp/' }
 ];
 
 // --- discover-article ---
