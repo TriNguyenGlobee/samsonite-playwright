@@ -162,10 +162,10 @@ export class BasePage {
 
         if (pathLength === 2) {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]`);
-            await menu2Locator.click({ position: { x: 50, y: 20 } });
+            await menu2Locator.click({ position: { x: 40, y: 15 } });
         } else if (pathLength === 3) {
             const menu3Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]//ul[@role="menu"]//li[contains(@class,"dropdown-item") and .//a[normalize-space(text())="${menu3}"]]`);
-            await menu3Locator.click({ position: { x: 50, y: 20 } });
+            await menu3Locator.click({ position: { x: 40, y: 15 } });
         }
         if (description) {
             console.log(`Selected menu item: ${menupath} - ${description}`);
@@ -405,6 +405,24 @@ export class BasePage {
         } else return false
     }
 
+    async decodeUrlIfNeeded(url: string): Promise<string> {
+        if (!url) return url;
+
+        try {
+            if (/%[0-9A-Fa-f]{2}/.test(url)) {
+                const decoded = decodeURIComponent(url);
+
+                if (decoded !== url) {
+                    return decoded;
+                }
+            }
+        } catch (err) {
+            console.warn(`[decodeUrlIfNeeded] Cannot decode URL: ${url}`, err);
+        }
+
+        return url;
+    }
+
     // =========================
     // ✅ Assertions
     // =========================
@@ -418,7 +436,9 @@ export class BasePage {
 
     async assertHidden(locator: Locator, description?: string) {
         await step(description || "Assert element hidden", async () => {
-            await expect(locator).toBeHidden();
+            await expect(locator.first()).toBeHidden({
+                timeout: 10000
+            });
         });
     }
 
@@ -444,7 +464,17 @@ export class BasePage {
     }
 
     async assertUrl(expectedUrl: string | RegExp, description?: string) {
-        await expect(this.page, description || "Check current URL").toHaveURL(expectedUrl);
+        const currentUrl = await this.page.url();
+        const decodedUrl = await this.decodeUrlIfNeeded(currentUrl);
+
+        await step(description || "Check current URL", async () => {
+            const urlToCheck = String(decodedUrl);
+            if (expectedUrl instanceof RegExp) {
+                expect(urlToCheck).toMatch(expectedUrl);
+            } else {
+                expect(urlToCheck).toBe(expectedUrl);
+            }
+        });
     }
 
     async assertArraySorted(locator: Locator, expectedOrder: string[], description?: string) {

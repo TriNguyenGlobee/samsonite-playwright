@@ -81,7 +81,7 @@ export abstract class LoginPage extends BasePage {
         });
 
         await PageUtils.waitForDomAvailable(this.page);
-        await PageUtils.waitForPageLoad(this.page);
+        await PageUtils.waitForPageLoadComplete(this.page);
     }
 
     async loginByGoogleAccount(googleUsername: string, googlePassword: string) {

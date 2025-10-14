@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t, PageUtils, clickUntil, delay } from "../../../../utils/helpers/helpers";
+import { t, PageUtils, clickUntil, delay, handlePwpModalIfPresent } from "../../../../utils/helpers/helpers";
 
 export abstract class CartPage extends BasePage {
     readonly removeProductButton: Locator;
@@ -131,12 +131,13 @@ export abstract class CartPage extends BasePage {
                         await addButton.scrollIntoViewIfNeeded();
                         await delay(300);
 
-                        await Promise.all([
-                            this.click(addButton, `Add product at index ${index} to cart`),
-                            this.minicartRender.waitFor({ state: 'visible', timeout: 5000 }),
-                        ]);
+                        await this.click(addButton, `Add product at index ${index} to cart`);
 
-                        await this.minicartRender.waitFor({ state: 'hidden', timeout: 5000 });
+                        await handlePwpModalIfPresent(this.page);
+
+                        await expect(this.minicartRender).toBeVisible({ timeout: 10000 })
+
+                        await this.minicartRender.waitFor({ state: 'hidden', timeout: 10000 });
 
                         added++;
                         console.log(`Added product at #${index} (Total: ${added}/${count})`);
