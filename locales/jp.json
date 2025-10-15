@@ -61,11 +61,11 @@
   },
   "newarrivalspage": {
     "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssjp.dev.samsonite-asia.com/new-arrivals/"
+    "url": ["https://ssjp.dev.samsonite-asia.com/new-arrivals/","https://ssjp.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
     "title": "スーツケース｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssjp.dev.samsonite-asia.com/luggage/"
+    "url": ["https://ssjp.dev.samsonite-asia.com/luggage/","https://ssjp.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
     "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -130,12 +130,17 @@
     "brand-samsoniteBlack": "サムソナイト・ブラックレーベル商品一覧",
     "brand-samsoniteRed": "サムソナイト・レッド商品一覧",
     "brand-hartmann": "ハートマン商品一覧",
+    "brand-americantourister": "American Tourister",
     "C-Lite-Colourburst": "C-Lite Colourburst",
     "Relyon": "Relyon",
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
     "SS25": "SS25",
-    "showallnewarrivals": "Shop all new arrivals",
+    "showallnewarrivals": "すべて見る",
+    "espulme": "エスプルム",
+    "hartmann-tweed": "ハートマンツイード",
+    "richmondginza": "リッチモンド 2",
+    "sub-lim": "サブリム115周年限定モデル",
     "type": "タイプ",
     "size": "サイズ",
     "smartfeature": "フィーチャー/特長",
@@ -166,16 +171,18 @@
     "samsonitered": "サムソナイト・レッドのスーツケース",
     "hartmann": "ハートマンのスーツケース",
     "city": "都市",
-    "adventure": "",
+    "adventure": "アドベンチャー",
     "beach": "ビーチ",
     "business": "ビジネス",
     "C-Lite": "シーライト",
     "Unimax": "シーライト",
     "73H": "73H",
-    "SBL Richmond II": "RICHMOND2",
+    "SBL Richmond II": "リッチモンド 2",
     "Niar": "Niar",
-    "minter": "パラリュクス",
-    "litebox": "ミンター"
+    "minter": "ミンター",
+    "litebox": "ミンター",
+    "paralux": "パラリュクス",
+    "zipprix": "ジップリックスFT"
   },
   "minicart": {
     "emptymsg": "カートは空です。",

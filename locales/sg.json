@@ -130,12 +130,17 @@
     "brand-samsoniteBlack": "Samsonite BLACK LABEL",
     "brand-samsoniteRed": "Samsonite RED",
     "brand-hartmann": "Hartmann",
+    "brand-americantourister": "American Tourister",
     "C-Lite-Colourburst": "C-Lite Colourburst",
     "Relyon": "Relyon",
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
     "SS25": "SS25",
     "showallnewarrivals": "Shop all new arrivals",
+    "espulme": "エスプルム",
+    "hartmann-tweed": "ハートマンツイード",
+    "richmondginza": "リッチモンド 2",
+    "sub-lim": "サブリム115周年限定モデル",
     "type": "Type",
     "size": "Size",
     "smartfeature": "Smart feature",
@@ -175,7 +180,9 @@
     "SBL Richmond II": "SBL Richmond II",
     "Niar": "Niar",
     "minter": "パラリュクス",
-    "litebox": "ミンター"
+    "litebox": "ミンター",
+    "paralux": "",
+    "zipprix": ""
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

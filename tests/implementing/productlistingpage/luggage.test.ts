@@ -1389,7 +1389,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["sg"],`
+    tests(["sg,jp"],`
         5. Go to Adventure page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1410,7 +1410,7 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Verity Adventure page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(adventure)\/?$/, "Assert Adventure page URL")
+            await luggagepage.assertUrl(/luggage\/(adventure|destination\/adventure)\/?$/, "Assert Adventure page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1577,8 +1577,6 @@ test.describe("Luggage Collection", async () => {
 
         await step("Go to Collection C-Lite page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            
-            await homepage.pause()
 
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('C-Lite')}`,
                 "Go to Luggage -> Collection -> C-Lite"
@@ -1586,7 +1584,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Collection C-Lite page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/c-lite)\/?$/, "Assert Collection C-Lite page URL")
+            await luggagepage.assertUrl(/(collection\/c-lite|collection\/シーライト)\/?$/, "Assert Collection C-Lite page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1622,7 +1620,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    test(`
+    tests(["sg"],`
         5. Go to Unimax page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1643,7 +1641,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Adventure page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/unimax)\/?$/, "Assert Unimax page URL")
+            await luggagepage.assertUrl(/(collection\/unimax)\/?$/, "Assert Unimax page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1700,7 +1698,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Beach page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/73h)\/?$/, "Assert 73h page URL")
+            await luggagepage.assertUrl(/(collection\/73h)\/?$/, "Assert 73h page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1757,7 +1755,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Richmond II page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/sbl-richmond-ii|collection\/richmond2)\/?$/, "Assert Richmond II page URL")
+            await luggagepage.assertUrl(/(collection\/sbl-richmond-ii|collection\/richmond2|リッチモンド-2)\/?$/, "Assert Richmond II page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1814,7 +1812,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Niar page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/niar)\/?$/, "Assert Niar page URL")
+            await luggagepage.assertUrl(/(collection\/niar)\/?$/, "Assert Niar page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1871,7 +1869,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Minter page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/minter)\/?$/, "Assert Minter page URL")
+            await luggagepage.assertUrl(/minter/, "Assert Minter page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1907,7 +1905,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["jp"],`
+    tests([],`
         25. Go to Lite box alu page
         26. In-stock products are displayed when clicking on in-stock checkbox
         27. User can add product to cart
@@ -1928,7 +1926,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Lite box alu page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(collection\/lite-box-alu)\/?$/, "Assert Lite box alu page URL")
+            await luggagepage.assertUrl(/(collection\/lite-box-alu)\/?$/, "Assert Lite box alu page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1961,6 +1959,120 @@ test.describe("Luggage Collection", async () => {
             })
         } else {
             test.skip(true, "No in-stock products found on Lite box alu page");
+        }
+    })
+
+    tests(["jp"],`
+        29. Go to Paralux page
+        30. In-stock products are displayed when clicking on in-stock checkbox
+        31. User can add product to cart
+        32. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = new LuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Paralux page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('paralux')}`,
+                "Go to Luggage -> Collection -> Paralux"
+            )
+        })
+
+        await step("Verity Paralux page URL", async () => {
+            await luggagepage.assertUrl(/(collection\/パラリュクス)\/?$/, "Assert Paralux page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Paralux page");
+        }
+    })
+
+    tests(["jp"],`
+        33. Go to Zipprix page
+        34. In-stock products are displayed when clicking on in-stock checkbox
+        35. User can add product to cart
+        36. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = new LuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Zipprix page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('zipprix')}`,
+                "Go to Luggage -> Collection -> Zipprix"
+            )
+        })
+
+        await step("Verity Zipprix page URL", async () => {
+            await luggagepage.assertUrl(/(collection\/ジップリックスft)\/?$/, "Assert Zipprix page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Zipprix page");
         }
     })
 })

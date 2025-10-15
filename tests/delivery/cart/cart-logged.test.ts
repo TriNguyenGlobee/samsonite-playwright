@@ -250,6 +250,9 @@ test.describe("Add products to cart after login", () => {
         const shippingDiscount = await extractNumber(await minicart.getShippingDiscount())
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
 
+        console.log(`Datatest: firstProductPrice: ${firstProductPrice}, secondProductPrice: ${secondProductPrice}, thirdProductPrice: ${thirdProductPrice}, firstMinicartProductPrice: ${firstMinicartProductPrice}, secondMinicartProductPrice: ${secondMinicartProductPrice}, thirdMinicartProductPrice: ${thirdMinicartProductPrice}`)
+        console.log(`Datatest: shippingCost: ${shippingCost}, shippingDiscount: ${shippingDiscount}, totalPrice: ${totalPrice}`)
+
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)

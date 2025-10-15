@@ -8,6 +8,7 @@ import { BrandLandingPage } from "../../../src/pages/implementing/productlisting
 import { createCartPage } from "../../../src/factories/cart.factory";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
+import { AmericanTouristerPage } from "../../../src/pages/implementing/productlistingpage/americantourister.page";
 import { loadTestData } from "../../../utils/data"
 
 const testData = loadTestData();
@@ -27,7 +28,7 @@ test.describe("Samsonite Brand Landing Page", () => {
         5. The Brand Information section is shown
         `, async ({ basicAuthPage }) => {
         const brandlandingpage = new BrandLandingPage(basicAuthPage)
-            const { subMenuDataSamsonite, brandInfoSamsonite } = testData;
+        const { subMenuDataSamsonite, brandInfoSamsonite } = testData;
 
         await step("Verify center banner is displayed", async () => {
             await brandlandingpage.assertCenterBannerDisplayed(basicAuthPage, "Assert the number of banners, href, image")
@@ -127,7 +128,7 @@ test.describe("Samsonite Black Brand Landing Page", () => {
         5. The Brand Information section is shown
         `, async ({ basicAuthPage }) => {
         const brandlandingpage = new BrandLandingPage(basicAuthPage)
-            const { subMenuDataSamsoniteBlack, brandInfoSamsoniteBlack } = testData;
+        const { subMenuDataSamsoniteBlack, brandInfoSamsoniteBlack } = testData;
 
         await step("Verify center banner is displayed", async () => {
             await brandlandingpage.assertCenterBannerDisplayed(basicAuthPage, "Assert the number of banners, href, image")
@@ -201,6 +202,8 @@ test.describe("Samsonite Black Brand Landing Page", () => {
         })
 
         await step("Verify user can add product to cart", async () => {
+            await brandlandingpage.productTableShow.scrollIntoViewIfNeeded()
+            await delay(500)
             await Promise.all([
                 cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
                 expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
@@ -229,7 +232,7 @@ test.describe("Samsonite Red Brand Landing Page", () => {
         5. The Brand Information section is shown
         `, async ({ basicAuthPage }) => {
         const brandlandingpage = new BrandLandingPage(basicAuthPage)
-            const { subMenuDataSamsoniteRed, brandInfoSamsoniteRed } = testData
+        const { subMenuDataSamsoniteRed, brandInfoSamsoniteRed } = testData
 
         await steps(["jp"], "Verify center banner is displayed", async () => {
             await brandlandingpage.assertCenterBannerDisplayed(basicAuthPage, "Assert the number of banners, href, image")
@@ -333,7 +336,7 @@ test.describe("Hartmann Brand Landing Page", () => {
         5. The Brand Information section is shown
         `, async ({ basicAuthPage }) => {
         const brandlandingpage = new BrandLandingPage(basicAuthPage)
-            const { subMenuDataHartmann } = testData
+        const { subMenuDataHartmann } = testData
 
         await step("Verify center banner is displayed", async () => {
             await brandlandingpage.assertCenterBannerDisplayed(basicAuthPage, "Assert the number of banners, href, image")
@@ -404,4 +407,24 @@ test.describe("Hartmann Brand Landing Page", () => {
             expect(await pdppage.isPDPPageDisplayed()).toBe(true)
         })
     })
+});
+
+test.describe("American tourister Page", () => {
+    test.beforeEach(async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        await PageUtils.waitForPageLoad(basicAuthPage)
+        await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('label')}->${t.lv2MenuItem('brand-americantourister')}`, "Go to Brand -> American Tourister")
+    })
+
+    tests(["jp"],
+        `1. Verify American Tourister page is displayed
+        `, async ({ basicAuthPage }) => {
+        const americantouristerpage = new AmericanTouristerPage(basicAuthPage)
+
+        await step("Verify American Tourister page is displayed", async () => {
+            await americantouristerpage.assertUrl("https://www.americantourister.jp/",
+                "Assert URL of American Tourister page"
+            )
+        })
+    });
 });

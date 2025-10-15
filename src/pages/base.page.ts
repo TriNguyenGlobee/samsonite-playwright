@@ -477,7 +477,7 @@ export class BasePage {
             if (expectedUrl instanceof RegExp) {
                 expect(urlToCheck).toMatch(expectedUrl);
             } else {
-                expect(urlToCheck).toBe(expectedUrl);
+                expect(expectedUrl).toContain(urlToCheck);
             }
         });
     }
