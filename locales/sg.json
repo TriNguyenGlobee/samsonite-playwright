@@ -65,7 +65,7 @@
   },
   "luggagepage": {
     "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.dev.samsonite-asia.com/luggage/"
+    "url": ["https://sssg.dev.samsonite-asia.com/luggage/", "https://sssg.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
     "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
@@ -77,7 +77,7 @@
     "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": "Brand Story | Salesforce Commerce Cloud | 3.3.0"
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"]
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"

@@ -27,9 +27,10 @@ test.describe("Luggage Page", () => {
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
+        const expectedURL = t.luggagepage('url')
 
         await step("Verity Luggage page URL", async () => {
-            await luggagepage.assertUrl(t.luggagepage('url'), "Assert Luggage page URL")
+            await luggagepage.assertUrl(expectedURL.toString(), "Assert Luggage page URL")
         })
 
         await step("Click In-stock checkbox", async () => {

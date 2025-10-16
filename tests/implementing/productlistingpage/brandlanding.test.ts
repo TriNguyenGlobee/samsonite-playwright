@@ -20,44 +20,64 @@ test.describe("Samsonite Brand Landing Page", () => {
         await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('label')}->${t.lv2MenuItem('brand-samsonite')}`, "Go to Brand -> Samnonite")
     })
 
-    tests(["jp"],
+    tests(["jp","sg"],
         `1. Center Banner is displayed
         2. Navigate to correct URL when clicking on a banner
-        3. Sub-menu (Hardcase, softcase) are displayed
+        3. Sub-menu (jp = Hardcase, softcase ||sg = Luggage, Backpacks, Bags) are displayed
         4. Verify URL when clicking on the sub-menu
         5. The Brand Information section is shown
         `, async ({ basicAuthPage }) => {
         const brandlandingpage = new BrandLandingPage(basicAuthPage)
         const { subMenuDataSamsonite, brandInfoSamsonite } = testData;
 
-        await step("Verify center banner is displayed", async () => {
+        await steps(["jp"],"Verify center banner is displayed", async () => {
             await brandlandingpage.assertCenterBannerDisplayed(basicAuthPage, "Assert the number of banners, href, image")
         })
 
-        await step("Verify URL when clicking on a banner", async () => {
+        await steps(["jp"],"Verify URL when clicking on a banner", async () => {
             const activeBannerURL = await brandlandingpage.getLocatorURL(brandlandingpage.activeBanner)
             await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.activeBanner, activeBannerURL!,
                 "Assert the URL after clicking on active banner"
             )
         })
 
-        await step("Verify sub-mnenu are displayed", async () => {
-            await brandlandingpage.hardcaseMenu.scrollIntoViewIfNeeded()
+        await steps(["jp"],"Verify sub-mnenu (Hardcase, softcase) are displayed", async () => {
+            await brandlandingpage.ssn_hardcaseMenu.scrollIntoViewIfNeeded()
 
-            await brandlandingpage.assertLocatorInside(brandlandingpage.hardcaseMenu, subMenuDataSamsonite[0])
-            await brandlandingpage.assertLocatorInside(brandlandingpage.softcaseMenu, subMenuDataSamsonite[1])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_hardcaseMenu, subMenuDataSamsonite[0])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_softcaseMenu, subMenuDataSamsonite[1])
         })
 
-        await step("Verify URL when clicking on the sub-menu", async () => {
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.hardcaseMenu, subMenuDataSamsonite[0].href,
+        await steps(["sg"],"Verify sub-mnenu (Luggage, Backpacks, Bags) are displayed", async () => {
+            await brandlandingpage.ssn_luggageMenu.scrollIntoViewIfNeeded()
+
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_luggageMenu, subMenuDataSamsonite[0])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_backpacksMenu, subMenuDataSamsonite[1])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bagsMenu, subMenuDataSamsonite[2])
+        })
+
+        await steps(["jp"],"Verify URL when clicking on the sub-menu (Hardcase, softcase)", async () => {
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_hardcaseMenu, subMenuDataSamsonite[0].href,
                 "Verify URL after clicking on Hardcase menu"
             )
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.softcaseMenu, subMenuDataSamsonite[1].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_softcaseMenu, subMenuDataSamsonite[1].href,
                 "Verify URL after clicking on Softcase menu"
             )
         })
 
-        await step("Verify brand information section is shown correctly", async () => {
+        await steps(["sg"],"Verify URL when clicking on the sub-menu (Luggage, Backpacks, Bags)", async () => {
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_luggageMenu, subMenuDataSamsonite[0].href,
+                "Verify URL after clicking on Luggage menu"
+            )
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_backpacksMenu, subMenuDataSamsonite[1].href,
+                "Verify URL after clicking on Backpacks menu"
+            )
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bagsMenu, subMenuDataSamsonite[2].href,
+                "Verify URL after clicking on Bags menu"
+            )
+        })
+
+        await steps(["jp"],"Verify brand information section is shown correctly", async () => {
             await brandlandingpage.brandInforSection.scrollIntoViewIfNeeded()
 
             await brandlandingpage.assertText(brandlandingpage.brInforToptitle, brandInfoSamsonite.toptile,
@@ -142,26 +162,26 @@ test.describe("Samsonite Black Brand Landing Page", () => {
         })
 
         await step("Verify sub-mnenu are displayed", async () => {
-            await brandlandingpage.briefcaseMenu.scrollIntoViewIfNeeded()
+            await brandlandingpage.ssn_bl_briefcaseMenu.scrollIntoViewIfNeeded()
 
-            await brandlandingpage.assertLocatorInside(brandlandingpage.briefcaseMenu, subMenuDataSamsoniteBlack[0])
-            await brandlandingpage.assertLocatorInside(brandlandingpage.luggageMenu, subMenuDataSamsoniteBlack[1])
-            await brandlandingpage.assertLocatorInside(brandlandingpage.backpacksMenu, subMenuDataSamsoniteBlack[2])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_briefcaseMenu, subMenuDataSamsoniteBlack[0])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_luggageMenu, subMenuDataSamsoniteBlack[1])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_backpacksMenu, subMenuDataSamsoniteBlack[2])
         })
 
         await step("Verify URL when clicking on the sub-menu", async () => {
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.briefcaseMenu, subMenuDataSamsoniteBlack[0].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_briefcaseMenu, subMenuDataSamsoniteBlack[0].href,
                 "Verify URL after clicking on Briefcase menu"
             )
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.luggageMenu, subMenuDataSamsoniteBlack[1].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_luggageMenu, subMenuDataSamsoniteBlack[1].href,
                 "Verify URL after clicking on Luggage menu"
             )
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.backpacksMenu, subMenuDataSamsoniteBlack[2].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_backpacksMenu, subMenuDataSamsoniteBlack[2].href,
                 "Verify URL after clicking on Backpacks menu"
             )
         })
 
-        await step("Verify brand information section is shown correctly", async () => {
+        await steps(["jp"],"Verify brand information section is shown correctly", async () => {
             await brandlandingpage.brandInforSection.scrollIntoViewIfNeeded()
 
             await brandlandingpage.assertText(brandlandingpage.brInforToptitle, brandInfoSamsoniteBlack.toptile,
@@ -246,21 +266,21 @@ test.describe("Samsonite Red Brand Landing Page", () => {
         })
 
         await steps(["sg"], "Verify sub-mnenu are displayed", async () => {
-            await brandlandingpage.luggageMenu.scrollIntoViewIfNeeded()
+            await brandlandingpage.ssn_bl_luggageMenu.scrollIntoViewIfNeeded()
 
-            await brandlandingpage.assertLocatorInside(brandlandingpage.luggageMenu, subMenuDataSamsoniteRed[0])
-            await brandlandingpage.assertLocatorInside(brandlandingpage.backpacksMenu, subMenuDataSamsoniteRed[1])
-            await brandlandingpage.assertLocatorInside(brandlandingpage.bagsMenu, subMenuDataSamsoniteRed[2])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_luggageMenu, subMenuDataSamsoniteRed[0])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_backpacksMenu, subMenuDataSamsoniteRed[1])
+            await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_red_bagsMenu, subMenuDataSamsoniteRed[2])
         })
 
         await steps(["sg"], "Verify URL when clicking on the sub-menu", async () => {
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.luggageMenu, subMenuDataSamsoniteRed[0].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_luggageMenu, subMenuDataSamsoniteRed[0].href,
                 "Verify URL after clicking on Luggage menu"
             )
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.backpacksMenu, subMenuDataSamsoniteRed[1].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_backpacksMenu, subMenuDataSamsoniteRed[1].href,
                 "Verify URL after clicking on Backpacks menu"
             )
-            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.bagsMenu, subMenuDataSamsoniteRed[2].href,
+            await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_red_bagsMenu, subMenuDataSamsoniteRed[2].href,
                 "Verify URL after clicking on Bags menu"
             )
         })
