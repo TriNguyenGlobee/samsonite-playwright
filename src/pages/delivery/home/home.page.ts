@@ -56,7 +56,7 @@ export abstract class HomePage extends BasePage {
     async isHomepageDisplayed(): Promise<boolean> {
         try {
             const title = await this.page.title();
-            if (!title.includes(t.homepage('title'))) {
+            if (!t.homepage('title').includes(title)) {
                 await step(`Check title of page: ${title.toString()}`, async () => {
                     console.log(`Element not visible: ${title.toString()}`);
                 });

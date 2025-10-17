@@ -135,6 +135,8 @@ export abstract class LoginPage extends BasePage {
 
     async goToMembershipPage(): Promise<void> {
         await this.click(this.memberLink, "Click membership link");
+        await PageUtils.waitForDomAvailable(this.page);
+        await PageUtils.waitForPageLoadComplete(this.page);
     }
 
     async clickOnRecaptchaCheckbox(): Promise<void> {

@@ -279,7 +279,6 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
   const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
   const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
   const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
-  const PWPtilePopupCloseBtn = page.locator('//div[span[text()="Popup Tile PWP"]]//button');
 
   const modalsToCheck = [
     {
@@ -375,6 +374,19 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
       console.warn(`[closeModalIfPresent] Failed to close ${name}:`, err);
     }
   }
+}
+
+export async function handlePwpModalIfPresent(page: Page) {
+    const modal = page.locator('//div[contains(@class,"modal") and .//span[normalize-space(.)="Popup Tile PWP"]]');
+    const closeButton = modal.locator('xpath=.//button[contains(@class,"close")]');
+
+    await delay(2000)
+
+    if(await closeButton.count() > 0 && await closeButton.isVisible()) {
+        console.log("PWP Modal detected → Closing it...")
+        await closeButton.click()
+        await modal.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => { });
+    }
 }
 
 export async function scrollToBottom(page: Page, distance: number = 100, delay: number = 100): Promise<void> {

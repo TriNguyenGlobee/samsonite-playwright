@@ -7,6 +7,7 @@ import { t, clickUntil, extractNumber, PageUtils } from "../../../utils/helpers/
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
+import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals.page"
 
 test.describe("Empty cart without login", () => {
     test(`
@@ -79,12 +80,15 @@ test.describe("Add products to cart without login", () => {
         const homePage = createHomePage(basicAuthPage);
         const minicart = createMinicartPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
+
             await step('Click on In-stock checkbox', async () => {
                 await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
             })
@@ -175,11 +179,13 @@ test.describe("Add products to cart without login", () => {
         const homePage = createHomePage(basicAuthPage);
         const minicart = createMinicartPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         const prodIndexes = [1, 2, 1];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
         })
 
         await step('Click on In-stock checkbox', async () => {
@@ -277,6 +283,7 @@ test.describe("Add products to cart without login", () => {
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const cartpage = createCartPage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         const prodIndexes = [1, 2, 1];
         const prodIndex = 1;
@@ -284,6 +291,8 @@ test.describe("Add products to cart without login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
+
             await step('Click on In-stock checkbox', async () => {
                 await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
             })
@@ -378,11 +387,13 @@ test.describe("Add products to cart without login", () => {
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const cartpage = createCartPage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         const prodIndex = 1;
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
         })
 
         await step('Add a product to cart', async () => {

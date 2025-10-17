@@ -1,6 +1,6 @@
 {
   "homepage": {
-    "title": "スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア",
+    "title": ["スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア","スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"],
     "trackOder": "ご注文状況を確認する",
     "loginRegister": "マイアカウント",
     "myaccount": "マイアカウント",
@@ -61,11 +61,11 @@
   },
   "newarrivalspage": {
     "title": "サムソナイト商品検索 ｜サムソナイト / Samsonite公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssjp.dev.samsonite-asia.com/new-arrivals/"
+    "url": ["https://ssjp.dev.samsonite-asia.com/new-arrivals/","https://ssjp.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
     "title": "スーツケース｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssjp.dev.samsonite-asia.com/luggage/"
+    "url": ["https://ssjp.dev.samsonite-asia.com/luggage/","https://ssjp.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
     "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -77,7 +77,7 @@
     "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": "ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"
+    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"]
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -130,18 +130,24 @@
     "brand-samsoniteBlack": "サムソナイト・ブラックレーベル商品一覧",
     "brand-samsoniteRed": "サムソナイト・レッド商品一覧",
     "brand-hartmann": "ハートマン商品一覧",
+    "brand-americantourister": "American Tourister",
     "C-Lite-Colourburst": "C-Lite Colourburst",
     "Relyon": "Relyon",
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
     "SS25": "SS25",
-    "showallnewarrivals": "Shop all new arrivals",
+    "fw25": "FW25",
+    "showallnewarrivals": "すべて見る",
+    "espulme": "エスプルム",
+    "hartmann-tweed": "ハートマンツイード",
+    "richmondginza": "リッチモンド 2",
+    "sub-lim": "サブリム115周年限定モデル",
     "type": "タイプ",
     "size": "サイズ",
     "smartfeature": "フィーチャー/特長",
     "labels": "ブランド",
     "color": "カラー",
-    "travaltype": "トラベルタイプ",
+    "traveltype": "トラベルタイプ",
     "collection": "コレクション",
     "hardside": "ハード",
     "softside": "ソフト",
@@ -154,7 +160,7 @@
     "mono": "モノトーン",
     "cool": "クールトーン",
     "warm": "ウォームトーン",
-    "Special": "Special",
+    "special": "Special",
     "shopallcolour": "Shop all colours",
     "doublecoilzippers": "Double Coil Zippers",
     "easybrakesystem": "ブレーキシステム",
@@ -166,15 +172,19 @@
     "samsonitered": "サムソナイト・レッドのスーツケース",
     "hartmann": "ハートマンのスーツケース",
     "city": "都市",
-    "adventure": "ビーチ",
+    "adventure": "アドベンチャー",
+    "beach": "ビーチ",
     "business": "ビジネス",
     "C-Lite": "シーライト",
     "Unimax": "シーライト",
     "73H": "73H",
-    "SBL Richmond II": "RICHMOND2",
+    "SBL Richmond II": "リッチモンド 2",
     "Niar": "Niar",
-    "minter": "パラリュクス",
-    "litebox": "ミンター"
+    "minter": "ミンター",
+    "litebox": "ミンター",
+    "paralux": "パラリュクス",
+    "zipprix": "ジップリックスFT",
+    "proxis": "Proxis"
   },
   "minicart": {
     "emptymsg": "カートは空です。",

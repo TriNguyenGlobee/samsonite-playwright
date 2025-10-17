@@ -61,11 +61,11 @@
   },
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.dev.samsonite-asia.com/new-arrivals/"
+    "url": ["https://sssg.dev.samsonite-asia.com/new-arrivals/","https://sssg.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
     "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.dev.samsonite-asia.com/luggage/"
+    "url": ["https://sssg.dev.samsonite-asia.com/luggage/", "https://sssg.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
     "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
@@ -77,7 +77,7 @@
     "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": "Brand Story | Salesforce Commerce Cloud | 3.3.0"
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"]
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -130,18 +130,24 @@
     "brand-samsoniteBlack": "Samsonite BLACK LABEL",
     "brand-samsoniteRed": "Samsonite RED",
     "brand-hartmann": "Hartmann",
+    "brand-americantourister": "American Tourister",
     "C-Lite-Colourburst": "C-Lite Colourburst",
     "Relyon": "Relyon",
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
     "SS25": "SS25",
+    "fw25": "FW25",
     "showallnewarrivals": "Shop all new arrivals",
+    "espulme": "エスプルム",
+    "hartmann-tweed": "ハートマンツイード",
+    "richmondginza": "リッチモンド 2",
+    "sub-lim": "サブリム115周年限定モデル",
     "type": "Type",
     "size": "Size",
     "smartfeature": "Smart feature",
     "labels": "Labels",
     "color": "Colour",
-    "travaltype": "Travel Type",
+    "traveltype": "Travel Type",
     "collection": "Collection",
     "hardside": "Hardside",
     "softside": "Softside",
@@ -154,7 +160,7 @@
     "mono": "Mono",
     "cool": "Cool",
     "warm": "Warm",
-    "Special": "",
+    "special": "",
     "shopallcolour": "Shop all colours",
     "doublecoilzippers": "Double Coil Zippers",
     "easybrakesystem": "Easy Brake System",
@@ -167,6 +173,7 @@
     "hartmann": "Hartmann",
     "city": "City",
     "adventure": "Adventure",
+    "beach": "ビーチ",
     "business": "Business",
     "C-Lite": "C-Lite",
     "Unimax": "Unimax",
@@ -174,7 +181,10 @@
     "SBL Richmond II": "SBL Richmond II",
     "Niar": "Niar",
     "minter": "パラリュクス",
-    "litebox": "ミンター"
+    "litebox": "ミンター",
+    "paralux": "",
+    "zipprix": "",
+    "proxis": "Proxis"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

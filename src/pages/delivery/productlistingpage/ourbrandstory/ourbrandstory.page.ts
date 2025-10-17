@@ -41,20 +41,23 @@ export abstract class OurBrandStoryPage extends BasePage {
         try {
             const title = await this.page.title();
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "brand-story.html";
+            const expectedUrl = [
+                Config.baseURL + "brand-story.html",
+                Config.baseURL + "our-brand-story/"
+            ];
 
             await test.step("Our Brand Story page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");
-                await attachment("Expected Page Title", t.ourbrandstorypage('title'), "text/plain");
+                await attachment("Expected Page Title", t.ourbrandstorypage('title')[0] || t.ourbrandstorypage('title')[1], "text/plain");
                 await attachment("Current URL", currentUrl, "text/plain");
-                await attachment("Expected URL", expectedUrl, "text/plain");
+                await attachment("Expected URL", expectedUrl[0] || expectedUrl[1], "text/plain");
             });
 
-            if (!title.includes(t.ourbrandstorypage('title'))) {
+            if (!t.ourbrandstorypage('title').includes(title)) {
                 return false;
             }
 
-            if (!currentUrl.startsWith(expectedUrl)) return false;
+            if (!expectedUrl.includes(currentUrl)) return false;
 
             return true;
         } catch (error) {

@@ -46,17 +46,18 @@ export abstract class LuggagePage extends BasePage {
         await PageUtils.waitForDomAvailable(this.page)
         try {
             const title = await this.page.title();
+            const expectedTitle = t.luggagepage('title')
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "luggage/";
 
             await test.step("Luggage page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");
-                await attachment("Expected Page Title", t.luggagepage('title'), "text/plain");
+                await attachment("Expected Page Title", expectedTitle.toString(), "text/plain");
                 await attachment("Current URL", currentUrl, "text/plain");
                 await attachment("Expected URL", expectedUrl, "text/plain");
             });
 
-            if (!title.includes(t.luggagepage('title'))) {
+            if (!expectedTitle.includes(title)) {
                 return false;
             }
 

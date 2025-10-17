@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { t } from "../../../../utils/helpers/helpers";
+import { t, PageUtils } from "../../../../utils/helpers/helpers";
 
 export class WishlistPage extends BasePage {
     readonly logoImg: Locator
@@ -23,9 +23,14 @@ export class WishlistPage extends BasePage {
     // 📦 Helpers
     // =========================
     async isWishlistPageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page);
+        await PageUtils.waitForPageLoadComplete(this.page);
         try {
             const title = await this.page.title();
             if (!title.includes(t.wishlist('title'))) {
+                await step(`Check title of page: ${title.toString()}`, async () => {
+                    console.log(`Element not visible: ${title.toString()}`);
+                });
                 return false;
             }
             return true;
