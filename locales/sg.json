@@ -61,7 +61,7 @@
   },
   "newarrivalspage": {
     "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.dev.samsonite-asia.com/new-arrivals/"
+    "url": ["https://sssg.dev.samsonite-asia.com/new-arrivals/","https://sssg.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
     "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
@@ -136,6 +136,7 @@
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
     "SS25": "SS25",
+    "fw25": "FW25",
     "showallnewarrivals": "Shop all new arrivals",
     "espulme": "エスプルム",
     "hartmann-tweed": "ハートマンツイード",
@@ -182,7 +183,8 @@
     "minter": "パラリュクス",
     "litebox": "ミンター",
     "paralux": "",
-    "zipprix": ""
+    "zipprix": "",
+    "proxis": "Proxis"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

@@ -136,6 +136,7 @@
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
     "SS25": "SS25",
+    "fw25": "FW25",
     "showallnewarrivals": "すべて見る",
     "espulme": "エスプルム",
     "hartmann-tweed": "ハートマンツイード",
@@ -182,7 +183,8 @@
     "minter": "ミンター",
     "litebox": "ミンター",
     "paralux": "パラリュクス",
-    "zipprix": "ジップリックスFT"
+    "zipprix": "ジップリックスFT",
+    "proxis": "Proxis"
   },
   "minicart": {
     "emptymsg": "カートは空です。",

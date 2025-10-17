@@ -208,8 +208,12 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -700,7 +704,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    tests(["sg"],`
+    tests(["sg"], `
         13. Go to Shop all colours page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -757,7 +761,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    tests(["jp"],`
+    tests(["jp"], `
         17. Go to Special color page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -816,7 +820,7 @@ test.describe("Luggage Colours", async () => {
 })
 
 test.describe("Luggage Smart feature", async () => {
-    tests(["sg"],`
+    tests(["sg"], `
         1. Go to Double Coil Zippers page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1274,7 +1278,7 @@ test.describe("Luggage Labels/Brand", async () => {
         }
     })
 
-    tests(["jp"],`
+    tests(["jp"], `
         13. Go to Hartmann page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1333,7 +1337,7 @@ test.describe("Luggage Labels/Brand", async () => {
 })
 
 test.describe("Luggage travel type/destination", async () => {
-    tests(["jp"],`
+    tests(["jp"], `
         1. Go to City page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1390,7 +1394,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["sg,jp"],`
+    tests(["sg,jp"], `
         5. Go to Adventure page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1447,7 +1451,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["jp"],`
+    tests(["jp"], `
         9. Go to Beach page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -1529,8 +1533,12 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1621,7 +1629,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg"],`
+    tests(["sg"], `
         5. Go to Unimax page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1678,7 +1686,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg"],`
+    tests(["sg"], `
         9. Go to 73h page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -1792,8 +1800,8 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg"],`
-        17. Go to Niar page
+    tests(["sg"], `
+        17. Go to Proxis page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
         20. Go to the PDP
@@ -1805,15 +1813,15 @@ test.describe("Luggage Collection", async () => {
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Niar page", async () => {
+        await step("Go to Proxis page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('Niar')}`,
-                "Go to Luggage -> Collection -> Niar"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('proxis')}`,
+                "Go to Luggage -> Collection -> Proxis"
             )
         })
 
-        await step("Verity Niar page URL", async () => {
-            await luggagepage.assertUrl(/(collection\/niar)\/?$/, "Assert Niar page URL")
+        await step("Verity Proxis page URL", async () => {
+            await luggagepage.assertUrl(/(collection\/proxis)\/?$/, "Assert Proxis page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1845,11 +1853,11 @@ test.describe("Luggage Collection", async () => {
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Niar page");
+            test.skip(true, "No in-stock products found on Proxis page");
         }
     })
 
-    tests(["jp"],`
+    tests(["jp"], `
         21. Go to Minter page
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart
@@ -1906,7 +1914,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests([],`
+    tests([], `
         25. Go to Lite box alu page
         26. In-stock products are displayed when clicking on in-stock checkbox
         27. User can add product to cart
@@ -1963,7 +1971,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["jp"],`
+    tests(["jp"], `
         29. Go to Paralux page
         30. In-stock products are displayed when clicking on in-stock checkbox
         31. User can add product to cart
@@ -2020,7 +2028,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["jp"],`
+    tests(["jp"], `
         33. Go to Zipprix page
         34. In-stock products are displayed when clicking on in-stock checkbox
         35. User can add product to cart

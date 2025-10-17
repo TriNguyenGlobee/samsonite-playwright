@@ -26,10 +26,11 @@ test.describe("New Arrivals Page", () => {
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
+        const expectedURL = t.newarrivalspage('url')
         const amount = 1
 
         await step("Verity new arrival page URL", async () => {
-            await newarrivalspage.assertUrl(t.newarrivalspage('url'), "Assert New Arrivals page URL")
+            await newarrivalspage.assertUrl(expectedURL.toString(), "Assert New Arrivals page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -295,7 +296,7 @@ test.describe("New Arrivals Level 2 category", async () => {
     })
 
     tests(["sg"], `
-        17. Go to SS25 page
+        17. Go to FW25 page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
         20. Go to the PDP
@@ -307,15 +308,15 @@ test.describe("New Arrivals Level 2 category", async () => {
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to SS25 page", async () => {
+        await step("Go to FW25 page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('SS25')}`,
-                "Go to New Arrivals -> SS25"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('fw25')}`,
+                "Go to New Arrivals -> FW25"
             )
         })
 
-        await step("Verity SS25 page URL", async () => {
-            await newarrivalspage.assertUrl(/ss25/, "Assert SS25 page URL")
+        await step("Verity FW25 page URL", async () => {
+            await newarrivalspage.assertUrl(/fw25/, "Assert FW25 page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -347,7 +348,7 @@ test.describe("New Arrivals Level 2 category", async () => {
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on SS25 page");
+            test.skip(true, "No in-stock products found on FW25 page");
         }
     })
 
