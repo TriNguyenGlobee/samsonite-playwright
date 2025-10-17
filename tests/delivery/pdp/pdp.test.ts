@@ -156,9 +156,16 @@ test.describe("Breadcrumb", () => {
             await pdppage.assertNavigatedURLByClickLocator(basicAuthPage, breadcrumbFirstItem, breadcrumbItemURL!)
         });
 
-        await step("Verify the breadcrumb-product name", async () => {
-            expect(breadcrumbProdName).toBe(`${prodCollection} ${prodName}`)
-        })
+        if (process.env.ENV === "dev") {
+            await step("Verify the breadcrumb-product name", async () => {
+                expect(breadcrumbProdName).toBe(`${prodCollection} ${prodName}`)
+            })
+        } else {
+            await step("Verify the breadcrumb-product name", async () => {
+                expect(breadcrumbProdName).toBe(prodName)
+            })
+        }
+
     });
 });
 

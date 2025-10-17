@@ -26,13 +26,20 @@ export class MembershipPage extends BasePage {
         try {
             const title = await this.page.title();
             if (!title.includes(t.membershippage('title'))) {
+                await step(`Check title of page: ${title.toString()}`, async () => {
+                    console.log(`Element not visible: ${title.toString()}`);
+                });
                 return false;
             }
 
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "MembershipPrivilegePage.html";
-            if (!currentUrl.startsWith(expectedUrl)) return false;
-
+            if (!currentUrl.startsWith(expectedUrl)) {
+                await step(`Check Url: ${currentUrl}`, async () => {
+                    console.log(`Current URL is: ${currentUrl}`);
+                });
+                return false;
+            }
             const elementsToCheck = [
                 this.pageTitle,
             ];

@@ -12,8 +12,8 @@ export class MinicartPageSG extends MinicartPage {
     // =========================
 
     async getShippingDiscount(): Promise<string> {
-        const shippingDiscount_1 = this.page.locator(`(//span[@class="applied-promotion-discount"])[2]`)
-        const shippingDiscount_2 = this.page.locator(`(//span[@class="applied-promotion-discount"])[3]`)
+        const shippingDiscount_1 = this.page.locator(`(//span[@class="applied-promotion-discount"])[1]`)
+        const shippingDiscount_2 = this.page.locator(`(//span[@class="applied-promotion-discount"])[2]`)
 
         let shippingDiscount_1_num: number
         let shippingDiscount_2_num: number

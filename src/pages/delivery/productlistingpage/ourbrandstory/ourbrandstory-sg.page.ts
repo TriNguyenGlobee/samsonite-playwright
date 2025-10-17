@@ -43,8 +43,9 @@ export class OurBrandStoryPageSG extends OurBrandStoryPage {
             await this.assertItemsListForCategoryMenu(this.baseLocator, 'dropdown-discover-latest', articleItems, {
                 lastItemIsTextOnly: true
             });
+        } else {
+            await this.assertItemsListForCategoryMenu(this.baseLocator, 'dropdown-discover-latest', articleItems);
         }
-        await this.assertItemsListForCategoryMenu(this.baseLocator, 'dropdown-discover-latest', articleItems);
 
         // --- discover-about-Samsonite ---
         const { aboutSamsoniteItems } = this.testData;

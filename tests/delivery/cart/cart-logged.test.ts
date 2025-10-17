@@ -3,10 +3,11 @@ import { createCartPage } from "../../../src/factories/cart.factory";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber } from "../../../utils/helpers/helpers";
+import { t, clickUntil, extractNumber, lazyLoad, delay } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
+import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals.page";
 
 test.describe("Empty cart after login", () => {
     let initialCartBadge = 0
@@ -121,24 +122,26 @@ test.describe("Add products to cart after login", () => {
         const homePage = createHomePage(loggedInPage);
         const minicart = createMinicartPage(loggedInPage)
         const cartpage = createCartPage(loggedInPage)
+        const newarrivalspage = new NewArrivalsPage(loggedInPage)
 
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
 
             await step('Click on In-stock checkbox', async () => {
                 await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+
+                await delay(500)
             })
 
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
-            console.log(`Product collection: ${prodCollection}, Product name: ${prodName}, On new arrivals page`);
         })
 
         await step('Verify the minicart is displayed after adding product to cart', async () => {
-            console.log('Preparing to add product to cart - step 1');
             await Promise.all([
                 cartpage.addProductToCartByIndex(prodIndex),
                 expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
@@ -216,11 +219,13 @@ test.describe("Add products to cart after login", () => {
         const homePage = createHomePage(loggedInPage);
         const minicart = createMinicartPage(loggedInPage)
         const cartpage = createCartPage(loggedInPage)
+        const newarrivalspage = new NewArrivalsPage(loggedInPage)
 
         const prodIndexes = [1, 2, 1];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
         })
 
         await step('Click on In-stock checkbox', async () => {
@@ -244,6 +249,9 @@ test.describe("Add products to cart after login", () => {
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const shippingDiscount = await extractNumber(await minicart.getShippingDiscount())
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
+
+        console.log(`Datatest: firstProductPrice: ${firstProductPrice}, secondProductPrice: ${secondProductPrice}, thirdProductPrice: ${thirdProductPrice}, firstMinicartProductPrice: ${firstMinicartProductPrice}, secondMinicartProductPrice: ${secondMinicartProductPrice}, thirdMinicartProductPrice: ${thirdMinicartProductPrice}`)
+        console.log(`Datatest: shippingCost: ${shippingCost}, shippingDiscount: ${shippingDiscount}, totalPrice: ${totalPrice}`)
 
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
@@ -311,6 +319,7 @@ test.describe("Add products to cart after login", () => {
         `, async ({ loggedInPage }) => {
         const homePage = createHomePage(loggedInPage);
         const cartpage = createCartPage(loggedInPage)
+        const newarrivalspage = new NewArrivalsPage(loggedInPage)
 
         const prodIndexes = [1, 2, 1];
         const prodIndex = 1;
@@ -318,6 +327,8 @@ test.describe("Add products to cart after login", () => {
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
+
             await step('Click on In-stock checkbox', async () => {
                 await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
             })
@@ -412,11 +423,13 @@ test.describe("Add products to cart after login", () => {
         `, async ({ loggedInPage }) => {
         const homePage = createHomePage(loggedInPage);
         const cartpage = createCartPage(loggedInPage)
+        const newarrivalspage = new NewArrivalsPage(loggedInPage)
 
         const prodIndex = 1;
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
         })
 
         await step('Add a product to cart', async () => {

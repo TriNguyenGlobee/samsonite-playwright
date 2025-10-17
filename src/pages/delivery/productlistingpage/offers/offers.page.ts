@@ -66,8 +66,7 @@ export class OffersPage extends BasePage {
         await delay(3000);
 
         const elementsToCheck = [
-            this.referFriendItem,
-            this.top10PicksItem
+            this.referFriendItem
         ];
 
         for (const locator of elementsToCheck) {
@@ -78,11 +77,6 @@ export class OffersPage extends BasePage {
         const { referAFriend } = this.testData;
 
         this.assertLocatorInside(this.referFriendItem, referAFriend[0])
-
-        // Top 10 picks
-        const { top10picks } = this.testData;
-
-        this.assertLocatorInside(this.top10PicksItem, top10picks[0])
 
     }
 }

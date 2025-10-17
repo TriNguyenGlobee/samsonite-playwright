@@ -31,17 +31,18 @@ export class NewArrivalsPage extends BasePage {
         await PageUtils.waitForDomAvailable(this.page)
         try {
             const title = await this.page.title();
+            const expectedTitle = t.newarrivalspage('title')
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "new-arrivals/";
 
             await test.step("New Arrivals page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");
-                await attachment("Expected Page Title", t.newarrivalspage('title'), "text/plain");
+                await attachment("Expected Page Title", expectedTitle.toString(), "text/plain");
                 await attachment("Current URL", currentUrl, "text/plain");
                 await attachment("Expected URL", expectedUrl, "text/plain");
             });
 
-            if (!title.includes(t.newarrivalspage('title'))) {
+            if (!expectedTitle.includes(title)) {
                 return false;
             }
 

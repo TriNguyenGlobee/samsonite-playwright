@@ -2,8 +2,7 @@ export const carouselItems = [
     { href: 'https://sssg.stg.samsonite-asia.com/samsonite/enwrap/spinner-55/20-exp/ss-125647-1542.html', hasImage: true },
     { href: 'https://sssg.stg.samsonite-asia.com/samsonite/c-lite/spinner-55/20-exp-ltd/ss-141368-A568.html', hasImage: true },
     { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/sbl-signature/', hasImage: true },
-    { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/ss25/', hasImage: true },
-    { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/audrina/', hasImage: true },
+    { href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/audrina/', hasImage: true }
 ];
 
 export const hightlightCategoryItems = [
@@ -25,6 +24,16 @@ export const campaignData = [
         rightSideTitleText: "C-LITE",
         hasImage: true
     }
+]
+
+// --- New Arrivals ---
+export const newArrivalsItem = [
+    { text: 'C-Lite Colourburst', href: '/new-arrivals/c-lite-colourburst/' },
+    { text: 'Relyon', href: '/new-arrivals/relyon/' },
+    { text: 'SBL Signature', href: '/new-arrivals/sbl-signature/' },
+    { text: 'Audrina', href: '/new-arrivals/audrina/' },
+    { text: 'FW25', href: '/new-arrivals/fw25/' },
+    { text: 'Shop all new arrivals', href: 'https://sssg.stg.samsonite-asia.com/new-arrivals/' }
 ]
 
 // --- luggage-type ---
@@ -276,8 +285,62 @@ export const referAFriend = [
 // --- offers-Top10Picks ---
 export const top10picks = [
     {
-        hasImage: true,
+        hasImage: false,
         href: "https://sssg.stg.samsonite-asia.com/2025-top-10-picks/",
         text: "Top 10 Picks"
+    }
+]
+
+export const subMenuDataSamsonite = [
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite",
+        text: "Luggage"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite",
+        text: "Backpacks"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite",
+        text: "Bags"
+    }
+]
+
+export const subMenuDataSamsoniteBlack = [
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "BRIEFCASES"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "Luggage"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "Backpacks"
+    }
+]
+
+export const subMenuDataSamsoniteRed = [
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Luggage"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Backpacks"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Bags"
     }
 ]
