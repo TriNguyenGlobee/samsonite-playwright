@@ -172,6 +172,9 @@ export class BasePage {
         if (description) {
             console.log(`Selected menu item: ${menupath} - ${description}`);
         }
+
+        await PageUtils.waitForPageLoad(page);
+        await PageUtils.waitForDomAvailable(page);
     }
 
     /**

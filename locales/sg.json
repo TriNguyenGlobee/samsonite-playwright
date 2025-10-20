@@ -68,7 +68,8 @@
     "url": ["https://sssg.dev.samsonite-asia.com/luggage/", "https://sssg.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://sssg.dev.samsonite-asia.com/backpacks/", "https://sssg.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
     "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
@@ -166,11 +167,11 @@
     "easybrakesystem": "Easy Brake System",
     "magnetic": "Magnetic Zippers",
     "suspensionwheels": "Suspension Wheels",
-    "usbport": "USB port",
-    "samsonite": "Samsonite",
-    "samsoniteblack": "Samsonite Black",
-    "samsonitered": "Samsonite Red",
-    "hartmann": "Hartmann",
+    "usbport": ["USB port", "USB Port"],
+    "samsonite": ["Samsonite", "Samsonite"],
+    "samsoniteblack": ["Samsonite Black", "Samsonite Black"],
+    "samsonitered": ["Samsonite Red", "Samsonite Red"],
+    "hartmann": ["Hartmann"],
     "city": "City",
     "adventure": "Adventure",
     "beach": "ビーチ",
@@ -184,7 +185,18 @@
     "litebox": "ミンター",
     "paralux": "",
     "zipprix": "",
-    "proxis": "Proxis"
+    "proxis": "Proxis",
+    "businessbackpacks": "Business Backpacks",
+    "casualbackpacks": "Casual Backpacks",
+    "forher": "For Her",
+    "forkids": "For Kids",
+    "shopallbackpacks": "Shop all backpacks",
+    "leather": "レザー",
+    "nylon": "ナイロン",
+    "polyester": "ポリエステル",
+    "woman": "ウィメンズ",
+    "RFIDPocket": "RFID Pocket",
+    "features": "Features"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

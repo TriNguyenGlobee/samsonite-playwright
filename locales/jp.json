@@ -68,7 +68,8 @@
     "url": ["https://ssjp.dev.samsonite-asia.com/luggage/","https://ssjp.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssjp.dev.samsonite-asia.com/backpacks/","https://ssjp.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
     "title": "バッグ｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -166,11 +167,11 @@
     "easybrakesystem": "ブレーキシステム",
     "magnetic": "マグネットファスナー",
     "suspensionwheels": "サスペンションホイール",
-    "usbport": "USBポート",
-    "samsonite": "サムソナイトのスーツケース",
-    "samsoniteblack": "サムソナイト・ブラックレーベルのスーツケース",
-    "samsonitered": "サムソナイト・レッドのスーツケース",
-    "hartmann": "ハートマンのスーツケース",
+    "usbport": ["USBポート", "USBポート"],
+    "samsonite": ["サムソナイトのスーツケース", "サムソナイトのバックパック"],
+    "samsoniteblack": ["サムソナイト・ブラックレーベルのスーツケース", "サムソナイト・ブラックレーベルのバックパック"],
+    "samsonitered": ["サムソナイト・レッドのスーツケース", "サムソナイト・レッドのバックパック"],
+    "hartmann": ["ハートマンのスーツケース","ハートマンのバックパック"],
     "city": "都市",
     "adventure": "アドベンチャー",
     "beach": "ビーチ",
@@ -184,7 +185,18 @@
     "litebox": "ミンター",
     "paralux": "パラリュクス",
     "zipprix": "ジップリックスFT",
-    "proxis": "Proxis"
+    "proxis": "Proxis",
+    "businessbackpacks": "",
+    "casualbackpacks": "",
+    "forher": "",
+    "forkids": "",
+    "shopallbackpacks": "すべて見る",
+    "leather": "レザー",
+    "nylon": "ナイロン",
+    "polyester": "ポリエステル",
+    "woman": "ウィメンズ",
+    "RFIDPocket": "",
+    "features": "フィーチャー/特長"
   },
   "minicart": {
     "emptymsg": "カートは空です。",
