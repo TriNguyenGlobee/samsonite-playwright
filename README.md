@@ -35,7 +35,7 @@ npm run test:login
 CMD: run-tests.bat jp dev tests/delivery
 Powershell: .\run-tests.bat jp dev tests/delivery
 OR:
-npx cross-env ENV=dev LOCALE=jp npx playwright test --project=chromium tests/delivery/login 
+npx cross-env ENV=stg LOCALE=jp npx playwright test --project=chromium tests/delivery/login 
  
 ## Chrome 
 - Run test with Chrome (ENV=dev) - default:

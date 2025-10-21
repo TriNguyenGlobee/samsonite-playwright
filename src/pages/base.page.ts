@@ -166,12 +166,15 @@ export class BasePage {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]`);
             await menu2Locator.click({ position: { x: 40, y: 15 } });
         } else if (pathLength === 3) {
-            const menu3Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]//ul[@role="menu"]//li[contains(@class,"dropdown-item") and .//a[normalize-space(text())="${menu3}"]]`);
+            const menu3Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]//ul[@role="menu"]//li[contains(@class,"dropdown-item") and .//a[normalize-space(text())='${menu3}']]`);
             await menu3Locator.click({ position: { x: 40, y: 15 } });
         }
         if (description) {
             console.log(`Selected menu item: ${menupath} - ${description}`);
         }
+
+        await PageUtils.waitForPageLoad(page);
+        await PageUtils.waitForDomAvailable(page);
     }
 
     /**
