@@ -7,43 +7,43 @@ import { steps } from "../../../utils/helpers/localeStep";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { createCartPage } from "../../../src/factories/cart.factory";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
-import { createBackpacksPage } from "../../../src/factories/productlistingpage/backpacks.factory";
+import { createBagsPage } from "../../../src/factories/productlistingpage/bags.factory";
 
-test.describe("Backpacks Page", () => {
+test.describe("Bags Page", () => {
     test.beforeEach(async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         await PageUtils.waitForPageLoad(basicAuthPage)
-        await homepage.clickMenuItem('backpacks', "Go to Backpacks page")
+        await homepage.clickMenuItem('bags', "Go to Bags page")
     })
 
     test(`
-        1. Assert that the Backpacks page is displayed
+        1. Assert that the Bags page is displayed
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
-        const backpacksPage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
-        const expectedURL = t.backpackspage('url')
+        const expectedURL = t.bagspage('url')
 
-        await step("Verity Backpacks page URL", async () => {
-            await backpacksPage.assertUrl(expectedURL.toString(), "Assert Backpacks page URL")
+        await step("Verity Bags page URL", async () => {
+            await bagsPage.assertUrl(expectedURL.toString(), "Assert Bags page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpacksPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpacksPage.assertHidden(backpacksPage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
-        const isInStockProdNotExist = await backpacksPage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -57,54 +57,54 @@ test.describe("Backpacks Page", () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpacksPage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Backpacks page");
+            test.skip(true, "No in-stock products found on Bags page");
         }
     })
 });
 
-test.describe("Backpacks Type", async () => {
-    tests(["sg"], `
-        1. Go to Business backpacks Type
+test.describe("Bags Type", async () => {
+    test(`
+        1. Go to Briefcase Bags Type
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpacksPage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Business Backpacks type", async () => {
+        await step("Go to Briefcase Bags type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('businessbackpacks')}`,
-                "Go to Backpacks -> Type -> Business Backpacks"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('briefcasebags')}`,
+                "Go to Bags -> Type -> Briefcase Bags"
             )
         })
 
-        await step("Verity Business Backpacks type URL", async () => {
-            await backpacksPage.assertUrl(/backpacks\/(business|businessbackpacks)\/?$/, "Assert Business Backpacks type URL")
+        await step("Verity Briefcase Bags type URL", async () => {
+            await bagsPage.assertUrl(/bags\/(briefcase|type\/briefcase)\/?$/, "Assert Briefcase Bags type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpacksPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
 
             await lazyLoad(basicAuthPage)
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpacksPage.assertHidden(backpacksPage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpacksPage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -118,50 +118,50 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpacksPage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Business Backpacks type page");
+            test.skip(true, "No in-stock products found on Briefcase Bags type page");
         }
     })
 
     tests(["sg"], `
-        5. Go to Casual Backpacks Type
+        5. Go to Cross Body bags Type
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Casual Backpacks type", async () => {
+        await step("Go to Cross Body Bags type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('casualbackpacks')}`,
-                "Go to Backpacks -> Type -> Casual Backpacks"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('crossbodybags')}`,
+                "Go to Bags -> Type -> Cross Body Bags"
             )
         })
 
-        await step("Verity Casual Backpacks type URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(casual|casual-backpacks)\/?$/, "Assert Casual Backpacks type URL")
+        await step("Verity Cross Body Bags type URL", async () => {
+            await bagsPage.assertUrl(/bags\/(cross-body-bags)\/?$/, "Assert Cross Body Bags type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -175,22 +175,144 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Backpacks type page");
+            test.skip(true, "No in-stock products found on Cross Body type page");
         }
     })
 
-    tests(["sg"], `
-        9. Go to For Her Type
+    test(`
+        9. Go to Duffle Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Duffle type", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('dufflebags')}`,
+                "Go to Bags -> Type -> Duffle Bags"
+            )
+        })
+
+        await step("Verity Duffle type URL", async () => {
+            await bagsPage.assertUrl(/bags\/(duffle|type\/duffles)\/?$/, "Assert Duffle type URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await bagsPage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
+    })
+
+    test(`
+        13. Go to Totes Type
+        14. In-stock products are displayed when clicking on in-stock checkbox
+        15. User can add product to cart
+        16. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Totes type", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('tote')}`,
+                "Go to Bags -> Type -> Totes"
+            )
+        })
+
+        await step("Verity Totes type URL", async () => {
+            await bagsPage.assertUrl(/bags\/(totes|type\/tote)\/?$/, "Assert Totes type URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await bagsPage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Totes type page");
+        }
+    })
+
+    tests(["sg"], `
+            17. Go to For Her Type
+            18. In-stock products are displayed when clicking on in-stock checkbox
+            19. User can add product to cart
+            20. Go to the PDP
+            `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -198,18 +320,18 @@ test.describe("Backpacks Type", async () => {
 
         await step("Go to For Her type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('forher')}`,
-                "Go to Backpacks -> Type -> For Her"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('forher')}`,
+                "Go to Bags -> Type -> For Her"
             )
         })
 
         await step("Verity For Her type URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(for-her)\/?$/, "Assert For Her type URL")
+            await bagsPage.assertUrl(/bags\/(for-her)\/?$/, "Assert For Her type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -217,12 +339,12 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -236,129 +358,11 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
             test.skip(true, "No in-stock products found on For Her type page");
-        }
-    })
-
-    tests(["sg"], `
-        13. Go to For Kids Type
-        14. In-stock products are displayed when clicking on in-stock checkbox
-        15. User can add product to cart
-        16. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to For Kids type", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('forkids')}`,
-                "Go to Backpacks -> Type -> For Kids"
-            )
-        })
-
-        await step("Verity For Kids type URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(for-kids)\/?$/, "Assert For Kids type URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                    "Checking the In-stock checkbox")
-            } else {
-                test.skip(true, "Product table not visible, skipping the test.");
-            }
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
-                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on For Kids type page");
-        }
-    })
-
-    test(`
-        17. Go to Shop all backpacks
-        18. In-stock products are displayed when clicking on in-stock checkbox
-        19. User can add product to cart
-        20. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to Shop all backpacks", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('shopallbackpacks')}`,
-                "Go to Backpacks -> Type -> Shop all backpacks"
-            )
-        })
-
-        await step("Verity Shop all backpacks type URL", async () => {
-            await backpackspage.assertUrl(`${t.backpackspage('url')}`, "Assert Shop all backpacks URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
-                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on Shop all backpacks page");
         }
     })
 
@@ -369,7 +373,7 @@ test.describe("Backpacks Type", async () => {
         24. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -377,18 +381,18 @@ test.describe("Backpacks Type", async () => {
 
         await step("Go to Leather type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('leather')}`,
-                "Go to Backpacks -> Type -> Leather"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('leather')}`,
+                "Go to Bags -> Type -> Leather"
             )
         })
 
         await step("Verity Leather type URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(type\/leather)\/?$/, "Assert Leather type URL")
+            await bagsPage.assertUrl(/bags\/(type\/leather)\/?$/, "Assert Leather type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -396,12 +400,12 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -415,7 +419,7 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -424,32 +428,32 @@ test.describe("Backpacks Type", async () => {
     })
 
     tests(["jp"], `
-        25. Go to Nylon Type
+        25. Go to 2 way 3 way Type
         26. In-stock products are displayed when clicking on in-stock checkbox
         27. User can add product to cart
         28. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Nylon type", async () => {
+        await step("Go to 2 way 3 way type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('nylon')}`,
-                "Go to Backpacks -> Type -> Nylon"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('2way3way')}`,
+                "Go to Bags -> Type -> 2WAY／3WAY"
             )
         })
 
-        await step("Verity Nylon type URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(type\/nylon)\/?$/, "Assert Nylon type URL")
+        await step("Verity 2WAY／3WAY type URL", async () => {
+            await bagsPage.assertUrl(/bags\/(type\/2-way)\/?$/, "Assert 2WAY／3WAY type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -457,12 +461,12 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -476,41 +480,41 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Nylon type page");
+            test.skip(true, "No in-stock products found on 2WAY／3WAY type page");
         }
     })
 
     tests(["jp"], `
-        29. Go to Polyester Type
+        29. Go to Shoulder Type
         30. In-stock products are displayed when clicking on in-stock checkbox
         31. User can add product to cart
         32. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Polyester type", async () => {
+        await step("Go to Shoulder type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('polyester')}`,
-                "Go to Backpacks -> Type -> Polyester"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('shoulderbags')}`,
+                "Go to Bags -> Type -> Shoulder"
             )
         })
 
-        await step("Verity Polyester type URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(type\/polyester)\/?$/, "Assert Polyester type URL")
+        await step("Verity Shoulder type URL", async () => {
+            await bagsPage.assertUrl(/bags\/(type\/shoulder-bag)\/?$/, "Assert Shoulder type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -518,12 +522,12 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -537,11 +541,11 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Polyester type page");
+            test.skip(true, "No in-stock products found on Shoulder type page");
         }
     })
 
@@ -552,7 +556,7 @@ test.describe("Backpacks Type", async () => {
         36. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -560,18 +564,18 @@ test.describe("Backpacks Type", async () => {
 
         await step("Go to Woman type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('woman')}`,
-                "Go to Backpacks -> Type -> Woman"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('woman')}`,
+                "Go to Bags -> Type -> Woman"
             )
         })
 
         await step("Verity Woman type URL", async () => {
-            await backpackspage.assertUrl(/backpacks?(?:\/expandable)?\/?(?:\?.*)?$/, "Assert Woman type URL");
+            await bagsPage.assertUrl(/bags?(?:\/expandable)?\/?(?:\?.*)?$/, "Assert Woman type URL");
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -579,12 +583,12 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -598,51 +602,50 @@ test.describe("Backpacks Type", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
             test.skip(true, "No in-stock products found on Woman type page");
         }
     })
-})
 
-test.describe("Backpacks Colours", async () => {
     test(`
-        1. Go to Mono color page
-        2. In-stock products are displayed when clicking on in-stock checkbox
-        3. User can add product to cart
-        4. Go to the PDP
+        37. Go to Shop all bags
+        38. In-stock products are displayed when clicking on in-stock checkbox
+        39. User can add product to cart
+        40. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Mono color page", async () => {
+        await step("Go to Shop all bags", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('colour')}->${t.lv2MenuItem('mono')}`,
-                "Go to Backpacks -> Colours -> Mono"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('type')}->${t.lv2MenuItem('shopallbags')}`,
+                "Go to Bags -> Type -> Shop all bags"
             )
         })
 
-        await step("Verity Mono color page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(black_grey_silver_white|その他_グレー_ブラック)\/?$/, "Assert Mono colours page URL")
+        await step("Verity Shop all bags type URL", async () => {
+            await bagsPage.assertUrl(`${t.bagspage('url')}`, "Assert Shop all bags URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -650,13 +653,70 @@ test.describe("Backpacks Colours", async () => {
                 await delay(500)
                 await Promise.all([
                     cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
-                    //expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
                 ]);
 
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Shop all bags page");
+        }
+    })
+})
+
+test.describe("Bags Colours", async () => {
+    test(`
+        1. Go to Mono color page
+        2. In-stock products are displayed when clicking on in-stock checkbox
+        3. User can add product to cart
+        4. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Mono color page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('mono')}`,
+                "Go to Bags -> Colours -> Mono"
+            )
+        })
+
+        await step("Verity Mono color page URL", async () => {
+            await bagsPage.assertUrl(/bags\/(black_grey_white|グレー_ブラック_ホワイト)\/?$/, "Assert Mono colours page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart")
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -671,7 +731,7 @@ test.describe("Backpacks Colours", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -679,27 +739,27 @@ test.describe("Backpacks Colours", async () => {
 
         await step("Go to Cool color", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('colour')}->${t.lv2MenuItem('cool')}`,
-                "Go to Backpacks -> Colours -> Cool"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('cool')}`,
+                "Go to Bags -> Colours -> Cool"
             )
         })
 
         await step("Verity Softside type URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(blue_green_navy_purple|グリーン_ネイビー_パープル_ブルー)\/?$/, "Assert Cool Color page URL")
+            await bagsPage.assertUrl(/bags\/(blue_green_navy|グリーン_ネイビー_ブルー)\/?$/, "Assert Cool Color page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -713,7 +773,7 @@ test.describe("Backpacks Colours", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -728,7 +788,7 @@ test.describe("Backpacks Colours", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -736,27 +796,27 @@ test.describe("Backpacks Colours", async () => {
 
         await step("Go to Warm colours page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('colour')}->${t.lv2MenuItem('warm')}`,
-                "Go to Backpacks -> Colours -> Warm"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('warm')}`,
+                "Go to Bags -> Colours -> Warm"
             )
         })
 
         await step("Verity Large size page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(beige_orange_pink_red_yellow|オレンジ_ピンク)\/?$/, "Assert Warm color page URL")
+            await bagsPage.assertUrl(/bags\/(beige_orange_pink_red_yellow|オレンジ_ピンク_レッド)\/?$/, "Assert Warm color page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -770,7 +830,7 @@ test.describe("Backpacks Colours", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -778,14 +838,14 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["sg"], `
+    test(`
             13. Go to Shop all colours page
             14. In-stock products are displayed when clicking on in-stock checkbox
             15. User can add product to cart
             16. Go to the PDP
             `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -793,27 +853,27 @@ test.describe("Backpacks Colours", async () => {
 
         await step("Go to Shop all colours page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('colour')}->${t.lv2MenuItem('shopallcolour')}`,
-                "Go to Backpacks -> Colours -> Shop all colours"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('shopallcolour')}`,
+                "Go to Bags -> Colours -> Shop all colours"
             )
         })
 
         await step("Verity Large size page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/colour\/shop-all-colours\/?$/, "Assert Shop all colours page URL")
+            await bagsPage.assertUrl(/bags\/(shop-all-colours\/?$|)/, "Assert Shop all colours page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -827,7 +887,7 @@ test.describe("Backpacks Colours", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -836,129 +896,7 @@ test.describe("Backpacks Colours", async () => {
     })
 })
 
-test.describe("Backpacks Smart feature", async () => {
-    tests(["sg"], `
-        1. Go to RFID Pocket page
-        2. In-stock products are displayed when clicking on in-stock checkbox
-        3. User can add product to cart
-        4. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to RFID Pocket page", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('features')}->${t.lv2MenuItem('RFIDPocket')}`,
-                "Go to Backpacks -> Features -> RFID Pocket"
-            )
-        })
-
-        await step("Verity RFID Pocket page URL", async () => {
-            await backpackspage.assertUrl(/backpack\/rfid-pocket/, "Assert RFID Pocket page URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                    "Checking the In-stock checkbox")
-            } else {
-                test.skip(true, "Product table not visible, skipping the test.");
-            }
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart")
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on RFID Pocket page");
-        }
-    })
-
-    test(`
-        5. Go to USB feature page
-        6. In-stock products are displayed when clicking on in-stock checkbox
-        7. User can add product to cart
-        8. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to USB port", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('features')}->${t.lv2MenuItem('usbport')[1]}`,
-                "Go to Backpacks -> Features -> USB Port"
-            )
-        })
-
-        await step("Verity USB port page URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(usb-port|smart-function\/usb-port)\/?$/, "Assert USB port page URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                    "Checking the In-stock checkbox")
-            } else {
-                test.skip(true, "Product table not visible, skipping the test.");
-            }
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
-                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on USB port page");
-        }
-    })
-})
-
-test.describe("Backpacks Labels/Brand", async () => {
+test.describe("Bags Labels/Brand", async () => {
     test(`
         1. Go to Samsonite page
         2. In-stock products are displayed when clicking on in-stock checkbox
@@ -966,26 +904,25 @@ test.describe("Backpacks Labels/Brand", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to Samsonite page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonite')[1]}`,
-                "Go to Backpacks -> Labels/Brand -> Samsonite"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonite')[2]}`,
+                "Go to Bags -> Labels/Brand -> Samsonite"
             )
         })
 
         await step("Verity Samsonite page URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(brand-samsonite|brand\/samsonite)\/?$/, "Assert Samsonite page URL")
+            await bagsPage.assertUrl(/bags\/(brand-samsonite|brand\/samsonite)\/?$/, "Assert Samsonite page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -993,12 +930,12 @@ test.describe("Backpacks Labels/Brand", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1011,7 +948,7 @@ test.describe("Backpacks Labels/Brand", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1026,26 +963,26 @@ test.describe("Backpacks Labels/Brand", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to Samsonite black", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsoniteblack')[1]}`,
-                "Go to Backpacks -> Labels/Brand -> Samsonite Black"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsoniteblack')[2]}`,
+                "Go to Bags -> Labels/Brand -> Samsonite Black"
             )
         })
 
         await step("Verity Samsonite Black page URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(brand-samsonite-black|brand\/samsonite-black)\/?$/, "Assert Samsonite Black page URL")
+            await bagsPage.assertUrl(/bags\/(brand-samsonite-black|brand\/samsonite-black)\/?$/, "Assert Samsonite Black page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1053,12 +990,12 @@ test.describe("Backpacks Labels/Brand", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1072,7 +1009,7 @@ test.describe("Backpacks Labels/Brand", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1087,7 +1024,7 @@ test.describe("Backpacks Labels/Brand", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1095,18 +1032,18 @@ test.describe("Backpacks Labels/Brand", async () => {
 
         await step("Go to Samsonite Red page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonitered')[1]}`,
-                "Go to Backpacks -> Labels/Brand -> Samsonite Red"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonitered')[2]}`,
+                "Go to Bags -> Labels/Brand -> Samsonite Red"
             )
         })
 
         await step("Verity Samsonite Red page URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(brand-samsonite-red|brand\/samsonite-red)\/?$/, "Assert Samsonite Red page URL")
+            await bagsPage.assertUrl(/bags\/(brand-samsonite-red|brand\/samsonite-red)\/?$/, "Assert Samsonite Red page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1114,12 +1051,12 @@ test.describe("Backpacks Labels/Brand", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1133,7 +1070,7 @@ test.describe("Backpacks Labels/Brand", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1148,7 +1085,7 @@ test.describe("Backpacks Labels/Brand", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1156,18 +1093,18 @@ test.describe("Backpacks Labels/Brand", async () => {
 
         await step("Go to Hartmann page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('hartmann')[1]}`,
-                "Go to Backpacks -> Labels/Brand -> Hartmann"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('hartmann')[2]}`,
+                "Go to Bags -> Labels/Brand -> Hartmann"
             )
         })
 
         await step("Verity Hartmann page URL", async () => {
-            await backpackspage.assertUrl(/backpack\/(brand\/hartmann)\/?$/, "Assert Hartmann page URL")
+            await bagsPage.assertUrl(/bags\/(brand\/hartmann)\/?$/, "Assert Hartmann page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            if (await backpackspage.productTableShow.isVisible()) {
-                await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1175,12 +1112,12 @@ test.describe("Backpacks Labels/Brand", async () => {
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1194,7 +1131,7 @@ test.describe("Backpacks Labels/Brand", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1203,7 +1140,7 @@ test.describe("Backpacks Labels/Brand", async () => {
     })
 })
 
-test.describe("Backpacks laptop", async () => {
+test.describe("Bags laptop", async () => {
     test(`
         1. Go to 13" laptop page
         2. In-stock products are displayed when clicking on in-stock checkbox
@@ -1211,34 +1148,38 @@ test.describe("Backpacks laptop", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to 13\" laptop page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('laptop')}->${t.lv2MenuItem('13inchlaptop')}`,
-                "Go to Backpacks -> Labels/Brand -> 13\" Laptop"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('laptop')}->${t.lv2MenuItem('13inchlaptop')}`,
+                "Go to Bags -> Labels/Brand -> 13\" Laptop"
             )
         })
 
         await step("Verity 13\" laptop page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(fit-up-to-13"-laptop|fit-up-to-13-laptop)\/?$/, "Assert 13\" Laptop page URL")
+            await bagsPage.assertUrl(/bags\/(fit-up-to-13"-laptop|fit-up-to-13-laptop)\/?$/, "Assert 13\" Laptop page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1251,7 +1192,7 @@ test.describe("Backpacks laptop", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1266,34 +1207,38 @@ test.describe("Backpacks laptop", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to 15\" laptop page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('laptop')}->${t.lv2MenuItem('15inchlaptop')}`,
-                "Go to Backpacks -> Labels/Brand -> 15\" Laptop"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('laptop')}->${t.lv2MenuItem('15inchlaptop')}`,
+                "Go to Bags -> Labels/Brand -> 15\" Laptop"
             )
         })
 
         await step("Verity 15\" laptop page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(fit-up-to-15"-laptop|fit-up-to-15-laptop)\/?$/, "Assert 15\" Laptop page URL")
+            await bagsPage.assertUrl(/bags\/(fit-up-to-15"-laptop|fit-up-to-15-laptop)\/?$/, "Assert 15\" Laptop page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1306,7 +1251,7 @@ test.describe("Backpacks laptop", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1321,34 +1266,38 @@ test.describe("Backpacks laptop", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to 17\" laptop page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('laptop')}->${t.lv2MenuItem('17inchlaptop')}`,
-                "Go to Backpacks -> Labels/Brand -> 17\" Laptop"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('laptop')}->${t.lv2MenuItem('17inchlaptop')}`,
+                "Go to Bags -> Labels/Brand -> 17\" Laptop"
             )
         })
 
         await step("Verity 17\" laptop page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(fit-up-to-17"-laptop|fit-up-to-17-laptop)\/?$/, "Assert 17\" Laptop page URL")
+            await bagsPage.assertUrl(/bags\/(fit-up-to-17"-laptop|fit-up-to-17-laptop)\/?$/, "Assert 17\" Laptop page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1361,7 +1310,7 @@ test.describe("Backpacks laptop", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1370,63 +1319,7 @@ test.describe("Backpacks laptop", async () => {
     })
 })
 
-test.describe("Backpacks Collection", async () => {
-    tests(["sg"], `
-        1. Go to Collection Sefton page
-        2. In-stock products are displayed when clicking on in-stock checkbox
-        3. User can add product to cart
-        4. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to Collection Sefton page", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('sefton')}`,
-                "Go to Backpacks -> Collection -> Sefton"
-            )
-        })
-
-        await step("Verity Collection Sefton page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/collection\/sefton\/?$/, "Assert Collection Sefton page URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart")
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on Collection Sefton page");
-        }
-    })
-
+test.describe("Bags Collection", async () => {
     tests(["sg"], `
         5. Go to Pro-Dxl 6 page
         6. In-stock products are displayed when clicking on in-stock checkbox
@@ -1434,35 +1327,35 @@ test.describe("Backpacks Collection", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Unimax page", async () => {
+        await step("Go to Pro-Dxl 6 page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('prodlx6')}`,
-                "Go to Backpacks -> Collection -> Pro Dxl 6"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('prodlx6')}`,
+                "Go to Bags -> Collection -> Pro Dxl 6"
             )
         })
 
         await step("Verity Adventure page URL", async () => {
-            await backpackspage.assertUrl(/(collection\/pro-dlx-6)\/?$/, "Assert Pro Dxl 6 page URL")
+            await bagsPage.assertUrl(/(collection\/pro-dlx-6)\/?$/, "Assert Pro Dxl 6 page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1476,68 +1369,11 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
             test.skip(true, "No in-stock products found on Pro-Dxl 6 page");
-        }
-    })
-
-    tests(["sg"], `
-        9. Go to Ecodiver page
-        10. In-stock products are displayed when clicking on in-stock checkbox
-        11. User can add product to cart
-        12. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to Ecodiver page", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('ecodiver')}`,
-                "Go to Backpacks -> Collection -> Ecodiver"
-            )
-        })
-
-        await step("Verity Ecodiver page URL", async () => {
-            await backpackspage.assertUrl(/(collection\/ecodiver)\/?$/, "Assert Ecodiver page URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
-                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on Ecodiver page");
         }
     })
 
@@ -1548,7 +1384,7 @@ test.describe("Backpacks Collection", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1556,27 +1392,27 @@ test.describe("Backpacks Collection", async () => {
 
         await step("Go to Sammies dream page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('sammiesdream')}`,
-                "Go to Backpacks -> Collection -> Sammies Dream"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('sammiesdream')}`,
+                "Go to Bags -> Collection -> Sammies Dream"
             )
         })
 
         await step("Verity Sammies Dream page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/collection\/sammies-dream/, "Assert Sammies Dream page URL")
+            await bagsPage.assertUrl(/bags\/collection\/sammies-dream/, "Assert Sammies Dream page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1590,7 +1426,7 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1605,7 +1441,7 @@ test.describe("Backpacks Collection", async () => {
         20. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1613,27 +1449,27 @@ test.describe("Backpacks Collection", async () => {
 
         await step("Go to Prudence-eco page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('prudenceeco')}`,
-                "Go to BackPacks -> Collection -> Prudence-eco"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('prudenceeco')}`,
+                "Go to Bags -> Collection -> Prudence-eco"
             )
         })
 
         await step("Verity Prudence-eco page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/collection\/prudence-eco/, "Assert Prudence-eco page URL")
+            await bagsPage.assertUrl(/bags\/collection\/prudence-eco/, "Assert Prudence-eco page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1647,7 +1483,7 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1662,7 +1498,7 @@ test.describe("Backpacks Collection", async () => {
         24. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1670,27 +1506,27 @@ test.describe("Backpacks Collection", async () => {
 
         await step("Go to Sub-lim page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('backpack-sub-limcollection')}`,
-                "Go to BackPacks -> Collection -> Sub-lim"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('backpack-sub-limcollection')}`,
+                "Go to Bags -> Collection -> Sub-lim"
             )
         })
 
         await step("Verity Sub-lim page URL", async () => {
-            await backpackspage.assertUrl(/sub-lim/, "Assert Sub-lim page URL")
+            await bagsPage.assertUrl(/sub-lim/, "Assert Sub-lim page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1704,7 +1540,7 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
@@ -1713,41 +1549,41 @@ test.describe("Backpacks Collection", async () => {
     })
 
     tests(["jp"], `
-        25. Go to tech nos page
-        26. In-stock products are displayed when clicking on in-stock checkbox
-        27. User can add product to cart
-        28. Go to the PDP
+        21. Go to Epid 4 page
+        22. In-stock products are displayed when clicking on in-stock checkbox
+        23. User can add product to cart
+        24. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Tech NOS page", async () => {
+        await step("Go to Epid 4 page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('technos')}`,
-                "Go to Backpacks -> Collection -> Tech NOS"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('epid4')}`,
+                "Go to Bags -> Collection -> Epid 4"
             )
         })
 
-        await step("Verity Tech NOS page URL", async () => {
-            await backpackspage.assertUrl(/(collection\/テクノス-コンボ)\/?$/, "Assert Tech NOS page URL")
+        await step("Verity Epid 4 page URL", async () => {
+            await bagsPage.assertUrl(/epid-4/, "Assert Epid 4 page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1761,50 +1597,50 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Tech NOS page");
+            test.skip(true, "No in-stock products found on Epid 4 page");
         }
     })
 
     tests(["jp"], `
-        29. Go to Hartmann page
-        30. In-stock products are displayed when clicking on in-stock checkbox
-        31. User can add product to cart
-        32. Go to the PDP
+        21. Go to Debonair 5 page
+        22. In-stock products are displayed when clicking on in-stock checkbox
+        23. User can add product to cart
+        24. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Hartmann page", async () => {
+        await step("Go to Debonair 5 page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('hartmann-collection')}`,
-                "Go to Backpacks -> Collection -> Hartmann"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('debonair5')}`,
+                "Go to Bags -> Collection -> Debonair 5"
             )
         })
 
-        await step("Verity Hartmann page URL", async () => {
-            await backpackspage.assertUrl(/アルヴァーノ/, "Assert Hartmann page URL")
+        await step("Verity Debonair 5 page URL", async () => {
+            await bagsPage.assertUrl(/debonair-5/, "Assert Debonair 5 page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1818,50 +1654,107 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Hartmann page");
+            test.skip(true, "No in-stock products found on Debonair 5 page");
+        }
+    })
+    
+    tests(["jp"], `
+        21. Go to Black DMX page
+        22. In-stock products are displayed when clicking on in-stock checkbox
+        23. User can add product to cart
+        24. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Black DMX page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('blackdmx')}`,
+                "Go to Bags -> Collection -> Black DMX"
+            )
+        })
+
+        await step("Verity Black DMX page URL", async () => {
+            await bagsPage.assertUrl(/black-dmx/, "Assert Black DMX page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await bagsPage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Black DMX page");
         }
     })
 
     tests(["jp"], `
-        33. Go to Audrina page
-        34. In-stock products are displayed when clicking on in-stock checkbox
-        35. User can add product to cart
-        36. Go to the PDP
+        21. Go to Glendale page
+        22. In-stock products are displayed when clicking on in-stock checkbox
+        23. User can add product to cart
+        24. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
+        const bagsPage = createBagsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
-        await step("Go to Audrina page", async () => {
+        await step("Go to Glendale page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('audrina-collection')}`,
-                "Go to Backpacks -> Collection -> Audrina"
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('bags')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('glendale')}`,
+                "Go to Bags -> Collection -> Glendale"
             )
         })
 
-        await step("Verity Audrina page URL", async () => {
-            await backpackspage.assertUrl(/オードリナ/, "Assert Audrina page URL")
+        await step("Verity Glendale page URL", async () => {
+            await bagsPage.assertUrl(/glendale/, "Assert Glendale page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
         await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+            await bagsPage.assertHidden(bagsPage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
         })
 
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+        const isInStockProdNotExist = await bagsPage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
@@ -1875,68 +1768,11 @@ test.describe("Backpacks Collection", async () => {
             })
 
             await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
+                await bagsPage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })
         } else {
-            test.skip(true, "No in-stock products found on Audrina page");
-        }
-    })
-
-    tests(["jp"], `
-        37. Go to Samsonite red page
-        38. In-stock products are displayed when clicking on in-stock checkbox
-        39. User can add product to cart
-        40. Go to the PDP
-        `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const backpackspage = createBackpacksPage(basicAuthPage)
-        const pdppage = new PDPPage(basicAuthPage)
-        const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
-        const amount = 1
-
-        await step("Go to Samsonite red page", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('samsonite-red-collection')}`,
-                "Go to Backpacks -> Collection -> Samsonite Red"
-            )
-        })
-
-        await step("Verity Samsonite Red page URL", async () => {
-            await backpackspage.assertUrl(/ゼットジップ/, "Assert Samsonite Red page URL")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-        })
-
-        await step("Verify notify me button do not exist", async () => {
-            await backpackspage.assertHidden(backpackspage.notifyMebutton,
-                "Assert the In-stock products are displayed only"
-            )
-        })
-
-        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
-
-        if (!isInStockProdNotExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
-                await lazyLoad(basicAuthPage)
-                await delay(500)
-                await Promise.all([
-                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
-                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
-                ]);
-
-            })
-
-            await step("Verify user can go to PDP", async () => {
-                await backpackspage.selectProdByIndex(1, "Select the first product")
-                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
-            })
-        } else {
-            test.skip(true, "No in-stock products found on Samsonite Red page");
+            test.skip(true, "No in-stock products found on Glendale page");
         }
     })
 })
