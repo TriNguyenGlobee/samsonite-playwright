@@ -85,10 +85,12 @@
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "Official Website",

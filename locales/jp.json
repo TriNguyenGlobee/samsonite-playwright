@@ -85,10 +85,12 @@
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.stg.samsonite-asia.com/sale/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "公式サイト",

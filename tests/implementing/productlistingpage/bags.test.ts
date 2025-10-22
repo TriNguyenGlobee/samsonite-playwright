@@ -1321,10 +1321,10 @@ test.describe("Bags laptop", async () => {
 
 test.describe("Bags Collection", async () => {
     tests(["sg"], `
-        5. Go to Pro-Dxl 6 page
-        6. In-stock products are displayed when clicking on in-stock checkbox
-        7. User can add product to cart
-        8. Go to the PDP
+        1. Go to Pro-Dxl 6 page
+        2. In-stock products are displayed when clicking on in-stock checkbox
+        3. User can add product to cart
+        4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
@@ -1378,10 +1378,10 @@ test.describe("Bags Collection", async () => {
     })
 
     tests(["sg"], `
-        13. Go to Sammies dream page
-        14. In-stock products are displayed when clicking on in-stock checkbox
-        15. User can add product to cart
-        16. Go to the PDP
+        5. Go to Sammies dream page
+        6. In-stock products are displayed when clicking on in-stock checkbox
+        7. User can add product to cart
+        8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
@@ -1435,10 +1435,10 @@ test.describe("Bags Collection", async () => {
     })
 
     tests(["sg"], `
-        17. Go to Prudence-eco page
-        18. In-stock products are displayed when clicking on in-stock checkbox
-        19. User can add product to cart
-        20. Go to the PDP
+        9. Go to Prudence-eco page
+        10. In-stock products are displayed when clicking on in-stock checkbox
+        11. User can add product to cart
+        12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
@@ -1492,10 +1492,10 @@ test.describe("Bags Collection", async () => {
     })
 
     tests(["jp"], `
-        21. Go to Sub-lim page
-        22. In-stock products are displayed when clicking on in-stock checkbox
-        23. User can add product to cart
-        24. Go to the PDP
+        13. Go to Sub-lim page
+        14. In-stock products are displayed when clicking on in-stock checkbox
+        15. User can add product to cart
+        16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
@@ -1549,10 +1549,10 @@ test.describe("Bags Collection", async () => {
     })
 
     tests(["jp"], `
-        21. Go to Epid 4 page
-        22. In-stock products are displayed when clicking on in-stock checkbox
-        23. User can add product to cart
-        24. Go to the PDP
+        17. Go to Epid 4 page
+        18. In-stock products are displayed when clicking on in-stock checkbox
+        19. User can add product to cart
+        20. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
@@ -1626,7 +1626,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Verity Debonair 5 page URL", async () => {
-            await bagsPage.assertUrl(/debonair-5/, "Assert Debonair 5 page URL")
+            await bagsPage.assertUrl(/デボネア/, "Assert Debonair 5 page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1663,10 +1663,10 @@ test.describe("Bags Collection", async () => {
     })
     
     tests(["jp"], `
-        21. Go to Black DMX page
-        22. In-stock products are displayed when clicking on in-stock checkbox
-        23. User can add product to cart
-        24. Go to the PDP
+        25. Go to Black DMX page
+        26. In-stock products are displayed when clicking on in-stock checkbox
+        27. User can add product to cart
+        28. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
@@ -1683,7 +1683,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Verity Black DMX page URL", async () => {
-            await bagsPage.assertUrl(/black-dmx/, "Assert Black DMX page URL")
+            await bagsPage.assertUrl(/ホクストン/, "Assert Black DMX page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1720,10 +1720,10 @@ test.describe("Bags Collection", async () => {
     })
 
     tests(["jp"], `
-        21. Go to Glendale page
-        22. In-stock products are displayed when clicking on in-stock checkbox
-        23. User can add product to cart
-        24. Go to the PDP
+        29. Go to Glendale page
+        30. In-stock products are displayed when clicking on in-stock checkbox
+        31. User can add product to cart
+        32. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const bagsPage = createBagsPage(basicAuthPage)
