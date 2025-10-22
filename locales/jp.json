@@ -79,7 +79,8 @@
     "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"]
+    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://ssjp.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -225,7 +226,11 @@
     "epid4": "エピッド 4",
     "debonair5": "デボネア 5",
     "blackdmx": "ホクストン",
-    "glendale": "グレンデール"
+    "glendale": "グレンデール",
+    "referAFriend": "Refer a Friend",
+    "latest": "特集コンテンツ",
+    "fathersday": "父の日に日々を彩るバッグを",
+    "mothersday": ""
   },
   "minicart": {
     "emptymsg": "カートは空です。",

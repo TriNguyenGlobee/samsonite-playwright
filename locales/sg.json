@@ -79,7 +79,8 @@
     "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"]
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://sssg.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
@@ -225,7 +226,11 @@
     "epid4": "エピッド 4",
     "debonair5": "デボネア 5",
     "blackdmx": "ホクストン",
-    "glendale": "グレンデール"
+    "glendale": "グレンデール",
+    "referAFriend": "Refer a Friend",
+    "latest": "LATEST",
+    "fathersday": "Father",
+    "mothersday": "Mother"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",
