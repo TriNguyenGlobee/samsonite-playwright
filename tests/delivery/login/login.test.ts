@@ -102,7 +102,10 @@ test.describe('Login by normal email', () => {
         });
 
         await step("Login with invalid email and password", async () => {
-            await loginPage.login("stgglobeetestssjp1009", "Globee@12345");
+            await loginPage.type(loginPage.emailTextbox, "stgglobeetestssjp1009", "Type username");
+            await loginPage.type(loginPage.passwordTextbox, "Globee@12345", "Type password");
+
+            await loginPage.click(loginPage.signInButton, "Click login button");
         });
 
         await step("Verify login failure by checking login page is still displayed", async () => {
@@ -119,7 +122,10 @@ test.describe('Login by normal email', () => {
         });
 
         await step("Login with wrong email and password", async () => {
-            await loginPage.login("stgglobeetestssjp1009@yopmail.com", "Globee@1234578");
+            await loginPage.type(loginPage.emailTextbox, "stgglobeetestssjp1009@yopmail.com", "Type username");
+            await loginPage.type(loginPage.passwordTextbox, "Globee@1234578", "Type password");
+
+            await loginPage.click(loginPage.signInButton, "Click login button");
         });
 
         await step("Verify login failure by checking login page is still displayed", async () => {
@@ -136,7 +142,10 @@ test.describe('Login by normal email', () => {
         });
 
         await step("Login with empty email and password", async () => {
-            await loginPage.login("", "");
+            await loginPage.type(loginPage.emailTextbox, "", "Type username");
+            await loginPage.type(loginPage.passwordTextbox, "", "Type password");
+
+            await loginPage.click(loginPage.signInButton, "Click login button");
         });
 
         await step("Verify login failure by checking login page is still displayed", async () => {

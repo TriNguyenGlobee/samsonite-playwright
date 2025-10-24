@@ -44,15 +44,16 @@ export abstract class BagsPage extends BasePage {
             const title = await this.page.title();
             const currentUrl = await this.page.url();
             const expectedUrl = Config.baseURL + "bags/";
+            const expectedTitle = t.bagspage('title').toString();
 
             await test.step("Bags page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");
-                await attachment("Expected Page Title", t.bagspage('title'), "text/plain");
+                await attachment("Expected Page Title", expectedTitle, "text/plain");
                 await attachment("Current URL", currentUrl, "text/plain");
                 await attachment("Expected URL", expectedUrl, "text/plain");
             });
 
-            if (!title.includes(t.bagspage('title'))) {
+            if (!title.includes(expectedTitle)) {
                 return false;
             }
 

@@ -68,25 +68,30 @@
     "url": ["https://ssjp.dev.samsonite-asia.com/luggage/","https://ssjp.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "バックパック(リュック)｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssjp.dev.samsonite-asia.com/backpacks/","https://ssjp.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
-    "title": "バッグ｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "バッグ｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssjp.dev.samsonite-asia.com/bags/","https://ssjp.stg.samsonite-asia.com/bags/"]
   },
   "brandpage": {
     "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"]
+    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://ssjp.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.stg.samsonite-asia.com/sale/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "公式サイト",
@@ -146,6 +151,7 @@
     "size": "サイズ",
     "smartfeature": "フィーチャー/特長",
     "labels": "ブランド",
+    "colour": "カラー",
     "color": "カラー",
     "traveltype": "トラベルタイプ",
     "collection": "コレクション",
@@ -161,16 +167,16 @@
     "cool": "クールトーン",
     "warm": "ウォームトーン",
     "special": "Special",
-    "shopallcolour": "Shop all colours",
+    "shopallcolour": "すべて見る",
     "doublecoilzippers": "Double Coil Zippers",
     "easybrakesystem": "ブレーキシステム",
     "magnetic": "マグネットファスナー",
     "suspensionwheels": "サスペンションホイール",
-    "usbport": "USBポート",
-    "samsonite": "サムソナイトのスーツケース",
-    "samsoniteblack": "サムソナイト・ブラックレーベルのスーツケース",
-    "samsonitered": "サムソナイト・レッドのスーツケース",
-    "hartmann": "ハートマンのスーツケース",
+    "usbport": ["USBポート", "USBポート"],
+    "samsonite": ["サムソナイトのスーツケース", "サムソナイトのバックパック", "サムソナイトのバッグ"],
+    "samsoniteblack": ["サムソナイト・ブラックレーベルのスーツケース", "サムソナイト・ブラックレーベルのバックパック", "サムソナイト・ブラックレーベルのバッグ"],
+    "samsonitered": ["サムソナイト・レッドのスーツケース", "サムソナイト・レッドのバックパック", "サムソナイト・レッドのバッグ"],
+    "hartmann": ["ハートマンのスーツケース","ハートマンのバックパック", "ハートマンのバッグ"],
     "city": "都市",
     "adventure": "アドベンチャー",
     "beach": "ビーチ",
@@ -184,7 +190,66 @@
     "litebox": "ミンター",
     "paralux": "パラリュクス",
     "zipprix": "ジップリックスFT",
-    "proxis": "Proxis"
+    "proxis": "Proxis",
+    "businessbackpacks": "",
+    "casualbackpacks": "",
+    "forher": "",
+    "forkids": "",
+    "shopallbackpacks": "すべて見る",
+    "leather": "レザー",
+    "nylon": "ナイロン",
+    "polyester": "ポリエステル",
+    "woman": "ウィメンズ",
+    "RFIDPocket": "",
+    "features": "フィーチャー/特長",
+    "13inchlaptop": "Fit up to 13\" laptop",
+    "15inchlaptop": "Fit up to 15\" laptop",
+    "17inchlaptop": "Fit up to 17\" laptop",
+    "laptop": "対応PCサイズ",
+    "sefton": "Sefton",
+    "prodlx6": "Pro-Dlx 6",
+    "ecodiver": "Ecodiver",
+    "sammiesdream": "Sammies Dream",
+    "prudenceeco": "Prudence Eco",
+    "backpack-sub-limcollection": "サブリム",
+    "technos": "テクノス コンボ",
+    "hartmann-collection": "アルヴァーノ",
+    "audrina-collection": "オードリナ",
+    "samsonite-red-collection": "ゼットジップ",
+    "briefcasebags": "ブリーフケース",
+    "crossbodybags": "",
+    "dufflebags": "ダッフル",
+    "tote": "トート",
+    "2way3way": "2WAY／3WAY",
+    "shoulderbags": "ショルダーバッグ",
+    "shopallbags": "すべて見る",
+    "epid4": "エピッド 4",
+    "debonair5": "デボネア 5",
+    "blackdmx": "ホクストン",
+    "glendale": "グレンデール",
+    "referAFriend": "Refer a Friend",
+    "latest": "特集コンテンツ",
+    "about": "About Us",
+    "fathersday": "父の日に日々を彩るバッグを",
+    "mothersday": "",
+    "weddingandhoneymoon": "",
+    "yourbusinesslook": "",
+    "yourbackpacklook": "",
+    "lavishtravels": "",
+    "theartofpacking": "スーツケースのパッキング術",
+    "thebestbagsforeverytravelneed": "",
+    "goingbeyonddesign": "Beyond The Design",
+    "goingbeyondtesting": "Beyond The Average Test",
+    "vsseries": "ユニークなテストで耐久性を検証",
+    "firstsuitcase": "スーツケースの選び方",
+    "businessbags": "最新おすすめビジネスバッグ",
+    "unpackyourworld": "人生を豊かにする旅のスタイル",
+    "ourresponsiblejourney": "Our Responsible Journey",
+    "ourbrandstory": "サムソナイトブランドストーリー",
+    "friendsofsamsonite": "",
+    "discover-collection": "",
+    "browseourcollections": "",
+    "about-hartmann": "ハートマンブランドストーリー"
   },
   "minicart": {
     "emptymsg": "カートは空です。",

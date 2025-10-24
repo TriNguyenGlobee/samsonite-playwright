@@ -4,11 +4,11 @@ import { createHomePage } from "../../../src/factories/home.factory";
 import { delay, PageUtils, t } from "../../../utils/helpers/helpers";
 import { tests } from "../../../utils/helpers/localeTest";
 import { steps } from "../../../utils/helpers/localeStep";
-import { BrandLandingPage } from "../../../src/pages/implementing/productlistingpage/brandlanding.page";
+import { BrandLandingPage } from "../../../src/pages/delivery/productlistingpage/brandlandingpage/brandlanding.page";
 import { createCartPage } from "../../../src/factories/cart.factory";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
-import { AmericanTouristerPage } from "../../../src/pages/implementing/productlistingpage/americantourister.page";
+import { AmericanTouristerPage } from "../../../src/pages/delivery/productlistingpage/americantourister/americantourister.page";
 import { loadTestData } from "../../../utils/data"
 
 const testData = loadTestData();
