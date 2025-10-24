@@ -3,11 +3,10 @@ import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { lazyLoad, PageUtils, t, delay } from "../../../utils/helpers/helpers";
 import { tests } from "../../../utils/helpers/localeTest";
-import { steps } from "../../../utils/helpers/localeStep";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { createCartPage } from "../../../src/factories/cart.factory";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
-import { LuggagePage } from "../../../src/pages/implementing/productlistingpage/luggage.page";
+import { createLuggagePage } from "../../../src/factories/productlistingpage/luggage.factory";
 
 test.describe("Luggage Page", () => {
     test.beforeEach(async ({ basicAuthPage }) => {
@@ -22,7 +21,7 @@ test.describe("Luggage Page", () => {
         3. User can add product to cart
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -74,7 +73,7 @@ test.describe("Luggage Type", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -133,7 +132,7 @@ test.describe("Luggage Type", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -190,7 +189,7 @@ test.describe("Luggage Type", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -251,7 +250,7 @@ test.describe("Luggage Type", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -308,7 +307,7 @@ test.describe("Luggage Type", async () => {
         20. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -367,7 +366,7 @@ test.describe("Luggage Size", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -424,7 +423,7 @@ test.describe("Luggage Size", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -481,7 +480,7 @@ test.describe("Luggage Size", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -540,7 +539,7 @@ test.describe("Luggage Colours", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -597,7 +596,7 @@ test.describe("Luggage Colours", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -654,7 +653,7 @@ test.describe("Luggage Colours", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -711,7 +710,7 @@ test.describe("Luggage Colours", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -768,7 +767,7 @@ test.describe("Luggage Colours", async () => {
         20. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -827,7 +826,7 @@ test.describe("Luggage Smart feature", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -884,7 +883,7 @@ test.describe("Luggage Smart feature", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -941,7 +940,7 @@ test.describe("Luggage Smart feature", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -998,7 +997,7 @@ test.describe("Luggage Smart feature", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1055,7 +1054,7 @@ test.describe("Luggage Smart feature", async () => {
         20. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1063,7 +1062,7 @@ test.describe("Luggage Smart feature", async () => {
 
         await step("Go to USB port page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('smartfeature')}->${t.lv2MenuItem('usbport')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('smartfeature')}->${t.lv2MenuItem('usbport')[1]}`,
                 "Go to Luggage -> Smart Feature -> USB port"
             )
         })
@@ -1114,15 +1113,14 @@ test.describe("Luggage Labels/Brand", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to Samsonite page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonite')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonite')[0]}`,
                 "Go to Luggage -> Labels/Brand -> Samsonite"
             )
         })
@@ -1171,7 +1169,7 @@ test.describe("Luggage Labels/Brand", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1179,7 +1177,7 @@ test.describe("Luggage Labels/Brand", async () => {
 
         await step("Go to Samsonite black", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsoniteblack')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsoniteblack')[0]}`,
                 "Go to Luggage -> Labels/Brand -> Samsonite Black"
             )
         })
@@ -1228,7 +1226,7 @@ test.describe("Luggage Labels/Brand", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1236,7 +1234,7 @@ test.describe("Luggage Labels/Brand", async () => {
 
         await step("Go to Samsonite Red page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonitered')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('samsonitered')[0]}`,
                 "Go to Luggage -> Labels/Brand -> Samsonite Red"
             )
         })
@@ -1285,7 +1283,7 @@ test.describe("Luggage Labels/Brand", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1293,7 +1291,7 @@ test.describe("Luggage Labels/Brand", async () => {
 
         await step("Go to Hartmann page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('hartmann')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('labels')}->${t.lv2MenuItem('hartmann')[0]}`,
                 "Go to Luggage -> Labels/Brand -> Hartmann"
             )
         })
@@ -1344,7 +1342,7 @@ test.describe("Luggage travel type/destination", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1401,7 +1399,7 @@ test.describe("Luggage travel type/destination", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1458,7 +1456,7 @@ test.describe("Luggage travel type/destination", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1515,7 +1513,7 @@ test.describe("Luggage travel type/destination", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1578,7 +1576,7 @@ test.describe("Luggage Collection", async () => {
         4. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1636,7 +1634,7 @@ test.describe("Luggage Collection", async () => {
         8. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1693,7 +1691,7 @@ test.describe("Luggage Collection", async () => {
         12. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1750,7 +1748,7 @@ test.describe("Luggage Collection", async () => {
         16. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1807,7 +1805,7 @@ test.describe("Luggage Collection", async () => {
         20. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1864,7 +1862,7 @@ test.describe("Luggage Collection", async () => {
         24. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1921,7 +1919,7 @@ test.describe("Luggage Collection", async () => {
         28. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -1978,7 +1976,7 @@ test.describe("Luggage Collection", async () => {
         32. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)
@@ -2035,7 +2033,7 @@ test.describe("Luggage Collection", async () => {
         36. Go to the PDP
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
-        const luggagepage = new LuggagePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
         const minicartpage = createMinicartPage(basicAuthPage)

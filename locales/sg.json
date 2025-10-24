@@ -68,25 +68,30 @@
     "url": ["https://sssg.dev.samsonite-asia.com/luggage/", "https://sssg.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://sssg.dev.samsonite-asia.com/backpacks/", "https://sssg.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
-    "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://sssg.dev.samsonite-asia.com/bags/", "https://sssg.stg.samsonite-asia.com/bags/"]
   },
   "brandpage": {
     "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"]
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://sssg.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sssg.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "Official Website",
@@ -146,7 +151,8 @@
     "size": "Size",
     "smartfeature": "Smart feature",
     "labels": "Labels",
-    "color": "Colour",
+    "colour": "Colour",
+    "color": "Color",
     "traveltype": "Travel Type",
     "collection": "Collection",
     "hardside": "Hardside",
@@ -166,11 +172,11 @@
     "easybrakesystem": "Easy Brake System",
     "magnetic": "Magnetic Zippers",
     "suspensionwheels": "Suspension Wheels",
-    "usbport": "USB port",
-    "samsonite": "Samsonite",
-    "samsoniteblack": "Samsonite Black",
-    "samsonitered": "Samsonite Red",
-    "hartmann": "Hartmann",
+    "usbport": ["USB port", "USB Port"],
+    "samsonite": ["Samsonite", "Samsonite", "Samsonite"],
+    "samsoniteblack": ["Samsonite Black", "Samsonite Black", "Samsonite Black"],
+    "samsonitered": ["Samsonite Red", "Samsonite Red", "Samsonite Red"],
+    "hartmann": ["Hartmann"],
     "city": "City",
     "adventure": "Adventure",
     "beach": "ビーチ",
@@ -184,7 +190,66 @@
     "litebox": "ミンター",
     "paralux": "",
     "zipprix": "",
-    "proxis": "Proxis"
+    "proxis": "Proxis",
+    "businessbackpacks": "Business Backpacks",
+    "casualbackpacks": "Casual Backpacks",
+    "forher": "For Her",
+    "forkids": "For Kids",
+    "shopallbackpacks": "Shop all backpacks",
+    "leather": "レザー",
+    "nylon": "ナイロン",
+    "polyester": "ポリエステル",
+    "woman": "ウィメンズ",
+    "RFIDPocket": "RFID Pocket",
+    "features": "Features",
+    "13inchlaptop": "Fit up to 13\" laptop",
+    "15inchlaptop": "Fit up to 15\" laptop",
+    "17inchlaptop": "Fit up to 17\" laptop",
+    "laptop": "Laptop",
+    "sefton": "Sefton",
+    "prodlx6": "Pro-Dlx 6",
+    "ecodiver": "Ecodiver",
+    "sammiesdream": "Sammies Dream",
+    "prudenceeco": "Prudence Eco",
+    "backpack-sub-limcollection": "サブリム",
+    "technos": "テクノス コンボ",
+    "hartmann-collection": "アルヴァーノ",
+    "audrina-collection": "オードリナ",
+    "samsonite-red-collection": "ゼットジップ",
+    "briefcasebags": "Briefcase",
+    "crossbodybags": "Cross Body Bags",
+    "dufflebags": "Duffles",
+    "tote": "Totes",
+    "2way3way": "",
+    "shoulderbags": "",
+    "shopallbags": "Shop all bags",
+    "epid4": "エピッド 4",
+    "debonair5": "デボネア 5",
+    "blackdmx": "ホクストン",
+    "glendale": "グレンデール",
+    "referAFriend": "Refer a Friend",
+    "latest": "LATEST",
+    "about": "ABOUT SAMSONITE",
+    "fathersday": "Father's Day Gifts",
+    "mothersday": "Mother's Day Gifts",
+    "weddingandhoneymoon": "Wedding and Honeymoon",
+    "yourbusinesslook": "Your Business Look",
+    "yourbackpacklook": "Your Backpack Look",
+    "lavishtravels": "Lavish Travels",
+    "theartofpacking": "The Art of Packing",
+    "thebestbagsforeverytravelneed": "The Best Bags for every Travel Need",
+    "goingbeyonddesign": "Beyond The Design",
+    "goingbeyondtesting": "Beyond The Average Test",
+    "vsseries": "",
+    "firstsuitcase": "",
+    "businessbags": "",
+    "unpackyourworld": "",
+    "ourresponsiblejourney": "Our Responsible Journey",
+    "ourbrandstory": "Our Brand Story - Celebrating 115 Years of Heritage",
+    "friendsofsamsonite": "Friends of Samsonite",
+    "discover-collection": "COLLECTIONS",
+    "browseourcollections": "Browse Our Collections",
+    "about-hartmann": ""
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",

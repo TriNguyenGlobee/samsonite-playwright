@@ -3,11 +3,11 @@ import { createCartPage } from "../../../src/factories/cart.factory";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber, lazyLoad, delay } from "../../../utils/helpers/helpers";
+import { t, clickUntil, extractNumber, delay } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
-import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals.page";
+import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 
 test.describe("Empty cart after login", () => {
     let initialCartBadge = 0
