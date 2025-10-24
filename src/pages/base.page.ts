@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber, PageUtils, delay, splitString } from "../../utils/helpers/helpers";
+import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
@@ -159,17 +159,20 @@ export class BasePage {
         const menu1 = pathArray[0].trim();
         const menu2 = pathArray[1].trim();
         const menu3 = pathLength === 3 ? pathArray[2].trim() : null;
+        const escapedMenu1 = escapeXPathText(menu1!);
+        const escapedMenu2 = escapeXPathText(menu2!);
+        const escapedMenu3 = pathLength === 3 ? escapeXPathText(menu3!) : null;
 
-        const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]`);
+        const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
         await menu1Locator.first().hover();
         await page.waitForTimeout(3000);
 
         if (pathLength === 2) {
-            const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]`);
+            const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]`);
             await menu2Locator.click({ position: { x: 40, y: 15 } });
         } else if (pathLength === 3) {
-            const menu3Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())="${menu1}"]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())="${menu2}"]]//ul[@role="menu"]//li[contains(@class,"dropdown-item") and .//a[normalize-space(text())='${menu3}']]`);
+            const menu3Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]//ul[@role="menu"]//li[contains(@class,"dropdown-item") and .//a[normalize-space(text())=${escapedMenu3}]]`);
             await menu3Locator.click({ position: { x: 40, y: 15 } });
         }
         if (description) {

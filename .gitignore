@@ -10,7 +10,7 @@ playwright-report/
 blob-report/
 .playwright/
 .env
-test-env.ts
+test-env.test.ts
 
 # Allure-report
 allure-report/

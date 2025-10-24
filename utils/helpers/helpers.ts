@@ -127,14 +127,6 @@ export function isSorted(arr: number[] | string[], order: "asc" | "desc" = "asc"
   return order === "asc" ? isSortedAsc(arr) : isSortedDesc(arr);
 }
 
-export async function checkElementsVisible(elements: { name: string; locator: Locator }[]) {
-  for (const { name, locator } of elements) {
-    await test.step(`Check visibility of ${name}`, async () => {
-      await expect(locator, `Element "${name}" is not visible`).toBeVisible({ timeout: 5000 });
-    });
-  }
-}
-
 /**
  * Get a random element from an array
  * @param arr The array to select from
@@ -145,6 +137,11 @@ export function getRandomArrayElement<T>(arr: T[]): T {
   return arr[randomIndex];
 }
 
+/**
+ * Return a number extracted from a price string.
+ * @param priceText 
+ * @returns 
+ */
 export function extractNumber(priceText: string): number {
   const cleaned = priceText.replace(/[^0-9.,]/g, "");
   const normalized = cleaned.replace(/,/g, "");
@@ -152,7 +149,6 @@ export function extractNumber(priceText: string): number {
 
   return isNaN(value) ? 0 : value;
 }
-
 
 /**
  * type-safe type for key
@@ -179,7 +175,7 @@ export const t = {
   minicart: (key: keyof Translations['minicart']) => I18n.translations.minicart[key],
   cartpage: (key: keyof Translations['cartpage']) => I18n.translations.cartpage[key],
   PDP: (key: keyof Translations['PDP']) => I18n.translations.PDP[key],
-  wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key], 
+  wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key],
 };
 
 /**
@@ -197,10 +193,60 @@ export function maskEmail(email: string): string {
   return username.slice(0, 3) + '*****' + '@' + domain;
 }
 
+/**
+ * Return a random integer between min and max (inclusive)
+ * @param min 
+ * @param max 
+ * @returns 
+ */
 export function getRandomInt(min: number = 1, max: number = 10): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Return a safe XPath string-literal for text value.
+ * - If text contains both ' and " → return a valid concat(...) expression for XPath
+ * - If text only contains ' → wrap with "..."
+ * - If text only contains " → wrap with '...'
+ */
+export function escapeXPathText(text: string): string {
+  if (!text.includes("'")) {
+    return `'${text}'`;
+  }
+  if (!text.includes('"')) {
+    return `"${text}"`;
+  }
+
+  const segments = text.split("'");
+  const concatParts: string[] = [];
+
+  segments.forEach((seg, idx) => {
+    concatParts.push(`'${seg}'`);
+    if (idx < segments.length - 1) {
+      concatParts.push(`"'"`);
+    }
+  });
+
+  return `concat(${concatParts.join(", ")})`;
+}
+
+/**
+ * Return selected value in dropdown
+ * @param page 
+ * @param selector 
+ * @returns 
+ */
+export async function getDropdownValue(
+  page: Page,
+  selector: string | Locator,
+): Promise<string> {
+  const dropdown =
+    typeof selector === "string" ? page.locator(selector) : selector;
+
+  const selectedValue = await dropdown.inputValue();
+
+  return selectedValue
+}
 
 /**
  * **************************************************************************
@@ -231,7 +277,7 @@ export async function clickSidebarMenu(page: Page, menuPath: string) {
     const label = pathArray[i];
 
     // Find the menu at the current level within the current DOM scope.
-    const locator: Locator = currentScope.locator(`xpath=.//span[@class="title" and normalize-space(text())="${label}"]`);
+    const locator: Locator = currentScope.locator(`xpath =.//span[@class="title" and normalize-space(text())="${label}"]`);
 
     // Click on the menu at the current level
     await locator.first().click();
@@ -246,7 +292,7 @@ export async function clickSidebarMenu(page: Page, menuPath: string) {
 }
 
 /**
- * Combobox: have a input textbox below the dropdown option
+ * Combobox: have a input textbox below the combobox option
  * User can input text into textbox then click the displayed option row
  * @param {*} page 
  * @param {string : combobox name label} comboboxName 
@@ -271,6 +317,39 @@ export async function selectComboboxOption(page: Page, comboboxName: string, opt
   await profileValueOption.click();
 }
 
+/**
+ * Select an option below the dropdown
+ * @param page 
+ * @param selector 
+ * @param optionValueOrLabel 
+ * @param by 
+ */
+export async function selectDropdownOption(
+  page: Page,
+  selector: string | Locator,
+  optionValueOrLabel: string,
+  by: "value" | "label" = "value"
+): Promise<void> {
+  const dropdown =
+    typeof selector === "string" ? page.locator(selector) : selector;
+
+  await expect(dropdown).toBeVisible();
+
+  if (by === "value") {
+    await dropdown.selectOption({ value: optionValueOrLabel });
+  } else {
+    await dropdown.selectOption({ label: optionValueOrLabel });
+  }
+
+  const selectedValue = await dropdown.inputValue();
+  console.log(`Selected: ${selectedValue}`);
+}
+
+/**
+ * Close the modal if it is present on the page.
+ * @param page 
+ * @returns 
+ */
 export async function closeModalIfPresent(page: Page): Promise<void> {
   if (!page || page.isClosed()) return;
 
@@ -376,19 +455,29 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
   }
 }
 
+/**
+ * Close the PWP modal if it is present on the page.
+ * @param page 
+ */
 export async function handlePwpModalIfPresent(page: Page) {
-    const modal = page.locator('//div[contains(@class,"modal") and .//span[normalize-space(.)="Popup Tile PWP"]]');
-    const closeButton = modal.locator('xpath=.//button[contains(@class,"close")]');
+  const modal = page.locator('//div[contains(@class,"modal") and .//span[normalize-space(.)="Popup Tile PWP"]]');
+  const closeButton = modal.locator('xpath=.//button[contains(@class,"close")]');
 
-    await delay(2000)
+  await delay(2000)
 
-    if(await closeButton.count() > 0 && await closeButton.isVisible()) {
-        console.log("PWP Modal detected → Closing it...")
-        await closeButton.click()
-        await modal.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => { });
-    }
+  if (await closeButton.count() > 0 && await closeButton.isVisible()) {
+    console.log("PWP Modal detected → Closing it...")
+    await closeButton.click()
+    await modal.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => { });
+  }
 }
 
+/**
+ * Go to the bottom of the page by scrolling.
+ * @param page 
+ * @param distance 
+ * @param delay 
+ */
 export async function scrollToBottom(page: Page, distance: number = 100, delay: number = 100): Promise<void> {
   await page.evaluate(
     async ({ scrollDistance, scrollDelay }: { scrollDistance: number; scrollDelay: number }) => {
@@ -410,6 +499,10 @@ export async function scrollToBottom(page: Page, distance: number = 100, delay: 
   );
 }
 
+/**
+ * Lazy load products on the page by scrolling.
+ * @param page 
+ */
 export async function lazyLoad(page: Page) {
   const delayMs = 800;
   const maxScroll = 50;

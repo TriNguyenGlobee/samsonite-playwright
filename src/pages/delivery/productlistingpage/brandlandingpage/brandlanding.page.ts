@@ -1,7 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { BasePage } from "../../base.page";
-import { PageUtils, t } from "../../../../utils/helpers/helpers";
-import { Config } from "../../../../config/env.config";
+import { BasePage } from "../../../base.page";
+import { PageUtils } from "../../../../../utils/helpers/helpers";
 import { step } from "allure-js-commons";
 
 export class BrandLandingPage extends BasePage {

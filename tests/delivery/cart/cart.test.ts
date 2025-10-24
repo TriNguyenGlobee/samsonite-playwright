@@ -7,7 +7,7 @@ import { t, clickUntil, extractNumber, PageUtils } from "../../../utils/helpers/
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
-import { NewArrivalsPage } from "../../../src/pages/implementing/productlistingpage/newarrivals.page"
+import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 
 test.describe("Empty cart without login", () => {
     test(`

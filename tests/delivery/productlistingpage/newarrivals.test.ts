@@ -3,7 +3,6 @@ import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { lazyLoad, PageUtils, t, delay } from "../../../utils/helpers/helpers";
 import { tests } from "../../../utils/helpers/localeTest";
-import { steps } from "../../../utils/helpers/localeStep";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { createCartPage } from "../../../src/factories/cart.factory";

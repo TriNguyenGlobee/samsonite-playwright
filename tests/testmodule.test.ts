@@ -1,28 +1,14 @@
 import { test, expect } from "../src/fixtures/test-fixture";
-import { loadTestData } from "../utils/data";
+import { MyPage } from "../src/pages/implementing/mypage/mypage.page";
 import { step } from "allure-js-commons";
-import { createLoginPage } from '../src/factories/login.factory';
+import { createLoginPage } from "../src/factories/login.factory";
+import { tests } from "../utils/helpers/localeTest"
 import { selectDropdownOption, getDropdownValue } from "../utils/helpers/helpers";
-import { Config } from "../config/env.config";
+import { loadTestData } from "../utils/data";
 
-test.describe('Test modules', () => {
-    test('check fullscreen', async ({ page }) => {
-        await page.goto('about:blank');
-        const result = await page.evaluate(() => ({
-            screen: { width: screen.width, height: screen.height },
-            inner: { width: window.innerWidth, height: window.innerHeight },
-            outer: { width: window.outerWidth, height: window.outerHeight },
-        }));
-        console.log(result);
-    });
-
-    test('check load test data', async ({ page }) => {
-        const { carouselItems, hightlightCategoryItems, recommendedProductItems, campaignData } = loadTestData();
-
-        console.log(`href of 1st element: ${carouselItems[1].href}`);
-        console.log(`href of 1st element: ${carouselItems[1].href}`);
-    });
-
+test.describe("Test-module", () => {
+    const { carouselItems } = loadTestData();
+    
     test("Test-module:check action activities", async ({ basicAuthPage }) => {
         const loginPage = createLoginPage(basicAuthPage);
         const optionValue = "Miss"
