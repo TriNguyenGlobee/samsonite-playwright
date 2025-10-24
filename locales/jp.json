@@ -79,16 +79,19 @@
     "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "ourbrandstorypage": {
-    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"]
+    "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://ssjp.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "セール｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssjp.stg.samsonite-asia.com/sale/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "公式サイト",
@@ -223,7 +226,30 @@
     "epid4": "エピッド 4",
     "debonair5": "デボネア 5",
     "blackdmx": "ホクストン",
-    "glendale": "グレンデール"
+    "glendale": "グレンデール",
+    "referAFriend": "Refer a Friend",
+    "latest": "特集コンテンツ",
+    "about": "About Us",
+    "fathersday": "父の日に日々を彩るバッグを",
+    "mothersday": "",
+    "weddingandhoneymoon": "",
+    "yourbusinesslook": "",
+    "yourbackpacklook": "",
+    "lavishtravels": "",
+    "theartofpacking": "スーツケースのパッキング術",
+    "thebestbagsforeverytravelneed": "",
+    "goingbeyonddesign": "Beyond The Design",
+    "goingbeyondtesting": "Beyond The Average Test",
+    "vsseries": "ユニークなテストで耐久性を検証",
+    "firstsuitcase": "スーツケースの選び方",
+    "businessbags": "最新おすすめビジネスバッグ",
+    "unpackyourworld": "人生を豊かにする旅のスタイル",
+    "ourresponsiblejourney": "Our Responsible Journey",
+    "ourbrandstory": "サムソナイトブランドストーリー",
+    "friendsofsamsonite": "",
+    "discover-collection": "",
+    "browseourcollections": "",
+    "about-hartmann": "ハートマンブランドストーリー"
   },
   "minicart": {
     "emptymsg": "カートは空です。",
