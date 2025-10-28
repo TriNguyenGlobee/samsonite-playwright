@@ -1,19 +1,18 @@
-import { test, expect } from "../../../src/fixtures/test-fixture";
-import { MyPage } from "../../../src/pages/implementing/mypage/mypage.page";
+import { test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
-import { createLoginPage } from "../../../src/factories/login.factory";
 import { createHomePage } from "../../../src/factories/home.factory";
 import { GlobalNavFooterPage } from "../../../src/pages/delivery/home/global-nav-footer.page";
-import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep";
-import { selectDropdownOption, getDropdownValue, scrollToBottom, t, generateReadableTimeBasedId } from "../../../utils/helpers/helpers";
-import { loadTestData } from "../../../utils/data";
+import { scrollToBottom, t, generateReadableTimeBasedId } from "../../../utils/helpers/helpers";
+import { createLoginPage } from "../../../src/factories/login.factory";
+import { Config } from "../../../config/env.config";
 
 test.describe("Newsletter", () => {
-    const { carouselItems } = loadTestData();
-
     test.beforeEach(async ({ basicAuthPage }) => {
+        const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
+
         await scrollToBottom(basicAuthPage)
+        await globalnavfooterpage.footerLogo.scrollIntoViewIfNeeded()
     });
 
     test("1. Mailing list section displayed", async ({ basicAuthPage }) => {
@@ -81,9 +80,11 @@ test.describe("Newsletter", () => {
         const homepage = createHomePage(basicAuthPage);
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
         const email_suffix = generateReadableTimeBasedId()
-        const valid_email = "gloobetestaccount_" + email_suffix
+        const valid_email = "gloobeauto_" + email_suffix + "@mailinator.com"
         const subscribeMsg = t.globalnavfooter('createsuccess')
         const accountexistMsg = t.globalnavfooter('duplicateemail')
+        const createdmsg = basicAuthPage.locator(`//footer[@id="footer"]//div[contains(@class,"subscribe-msg accountcreated")]`)
+        const emailexistmsg = basicAuthPage.locator(`//footer[@id="footer"]//div[contains(@class,"subscribe-msg accountexists")]`)
 
         await step("Enter the invalid-email into the email textbox", async () => {
             await globalnavfooterpage.type(globalnavfooterpage.emailTextbox, valid_email)
@@ -94,7 +95,7 @@ test.describe("Newsletter", () => {
         })
 
         await step("Verify subscribe msg", async () => {
-            await globalnavfooterpage.assertText(globalnavfooterpage.subscribeMsg, subscribeMsg,
+            await globalnavfooterpage.assertText(createdmsg, subscribeMsg,
                 "Assert invalid-feedback: Account created success"
             )
         })
@@ -104,7 +105,7 @@ test.describe("Newsletter", () => {
         })
 
         await step("Verify subscribe msg", async () => {
-            await globalnavfooterpage.assertText(globalnavfooterpage.subscribeMsg, accountexistMsg,
+            await globalnavfooterpage.assertText(emailexistmsg, accountexistMsg,
                 "Assert invalid-feedback: Account exists"
             )
         })
@@ -157,16 +158,15 @@ test.describe("Footer links Groups", async () => {
 
     test("4. Support links groups", async ({ basicAuthPage }) => {
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
-        const warrantyURL = t.globalnavfooter('warrantyURL')[0] || t.globalnavfooter('warrantyURL')[1]
 
-        await steps(["sg"],"Verify that Delivery & Shipping link", async () => {
+        await steps(["sg"], "Verify that Delivery & Shipping link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Delivery & Shipping"),
                 t.globalnavfooter('deliveryandshippingURL'),
                 "Assert navigated URL when clicking Delivery & Shipping link", "middle"
             )
         })
 
-        await steps(["sg"],"Verify that Returns & Exchanges link", async () => {
+        await steps(["sg"], "Verify that Returns & Exchanges link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Returns & Exchanges"),
                 t.globalnavfooter('returnsandexchangesURL'),
                 "Assert navigated URL when clicking Returns & Exchanges link", "middle"
@@ -174,70 +174,70 @@ test.describe("Footer links Groups", async () => {
         })
 
         await step("Verify that Warranty link", async () => {
-            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Warranty"), warrantyURL,
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('warranty')), t.globalnavfooter('warrantyURL'),
                 "Assert navigated URL when clicking Warranty link", "middle"
             )
         })
 
-        await steps(["sg"],"Verify that Contact Us link", async () => {
+        await steps(["sg"], "Verify that Contact Us link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Contact Us"),
                 t.globalnavfooter('contactusURL'),
                 "Assert navigated URL when clicking Contact Us link", "middle"
             )
         })
 
-        await steps(["sg"],"Verify that Fake Website Alert link", async () => {
+        await steps(["sg"], "Verify that Fake Website Alert link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Fake Website Alert"),
                 t.globalnavfooter('fakewebsitealertURL'),
                 "Assert navigated URL when clicking Fake Website Alert link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that Repair link", async () => {
-            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Repair"),
+        await steps(["jp"], "Verify that Repair link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("修理について"),
                 t.globalnavfooter('repairURL'),
                 "Assert navigated URL when clicking Repair link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that Wecare service link", async () => {
+        await steps(["jp"], "Verify that Wecare service link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("WECAREについて"),
-                t.globalnavfooter('WECAREについて'),
+                t.globalnavfooter('WECAREについてURL'),
                 "Assert navigated URL when clicking Wecare service link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that FAQ link", async () => {
+        await steps(["jp"], "Verify that FAQ link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("商品についてのFAQ"),
-                t.globalnavfooter('faq'),
+                t.globalnavfooter('faqURL'),
                 "Assert navigated URL when clicking FAQ link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that FAQ Member link", async () => {
+        await steps(["jp"], "Verify that FAQ Member link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("メンバープログラムについてのFAQ"),
-                t.globalnavfooter('faqmember'),
+                t.globalnavfooter('faqmemberURL'),
                 "Assert navigated URL when clicking FAQ Member link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that TSA link", async () => {
+        await steps(["jp"], "Verify that TSA link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("TSAロック設定方法ついて"),
-                t.globalnavfooter('tsa'),
+                t.globalnavfooter('tsaURL'),
                 "Assert navigated URL when clicking TSA link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that Trackorder link", async () => {
+        await steps(["jp"], "Verify that Trackorder link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("注文状況を確認する"),
-                t.globalnavfooter('trackorder'),
+                t.globalnavfooter('trackorderURL'),
                 "Assert navigated URL when clicking Trackorder link", "middle"
             )
         })
 
-        await steps(["jp"],"Verify that inquiries link", async () => {
+        await steps(["jp"], "Verify that inquiries link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("お問い合わせ"),
-                t.globalnavfooter('inquiries'),
+                t.globalnavfooter('inquiriesURL'),
                 "Assert navigated URL when clicking inquiries link", "middle"
             )
         })
@@ -245,6 +245,173 @@ test.describe("Footer links Groups", async () => {
 
     test("5. Our Company links groups", async ({ basicAuthPage }) => {
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
-        
+
+        await steps(["sg", "jp"], "Verify that About Samsonite link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('aboutsamsonite')),
+                t.globalnavfooter('aboutsamsoniteURL'),
+                "Assert navigated URL when clicking About Samsonite link", "middle"
+            )
+        })
+
+        await steps(["sg", "jp"], "Verify that Careers link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('careers')),
+                t.globalnavfooter('careersURL'),
+                "Assert navigated URL when clicking Careers link", "middle"
+            )
+        })
+
+        await steps(["sg"], "Verify that Investor Relations link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Investor Relations"),
+                t.globalnavfooter('investorrelationsURL'),
+                "Assert navigated URL when clicking Investor Relations link", "middle"
+            )
+        })
+
+        await steps(["sg", "jp"], "Verify that Store and Service Centre Locator link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('store&services')),
+                t.globalnavfooter('store&serviceURL'),
+                "Assert navigated URL when clicking Store and Service Centre Locator link", "middle"
+            )
+        })
+
+        await steps(["sg", "jp"], "Verify that Sustainability link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('sustainability')),
+                t.globalnavfooter('sustainabilityURL'),
+                "Assert navigated URL when clicking Sustainability link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that Company profile link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("会社概要"),
+                t.globalnavfooter('companyURL'),
+                "Assert navigated URL when clicking Company profile link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that about Hartmann link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("ハートマンブランドストーリー"),
+                t.globalnavfooter('abouthartmannURL'),
+                "Assert navigated URL when clicking about Hartmann link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that News link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("ニュース"),
+                t.globalnavfooter('newsURL'),
+                "Assert navigated URL when clicking News", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that recruit info link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("採用情報"),
+                t.globalnavfooter('recruitinfoURL'),
+                "Assert navigated URL when clicking recruit info link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that Corporate customers link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("法人のお客様"),
+                t.globalnavfooter('corporatecustomersURL'),
+                "Assert navigated URL when clicking Corporate customers link", "middle"
+            )
+        })
+    })
+
+    test("6. Account links groups", async ({ basicAuthPage }) => {
+        const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
+        const loginpage = createLoginPage(basicAuthPage)
+
+        await steps(["sg"], "Verify that Track Order link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Track Order"),
+                t.globalnavfooter('trackorderURL'),
+                "Assert navigated URL when clicking Track Order link", "middle"
+            )
+        })
+
+        await steps(["sg"], "Verify that Friends of Samsonite link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Friends of Samsonite"),
+                t.globalnavfooter('friendsofsamsoniteURL'),
+                "Assert navigated URL when clicking Friends of Samsonite link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that Cart link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("カート"),
+                t.globalnavfooter('cartURL'),
+                "Assert navigated URL when clicking Cart link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that Order History link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("注文履歴"),
+                t.globalnavfooter('ordershistoryURL'),
+                "Assert navigated URL when clicking Order History link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that Refer a friend link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("お友達紹介"),
+                t.globalnavfooter('referralshowURL'),
+                "Assert navigated URL when clicking Refer a friend link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify that Membership link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("メンバーシップ特典"),
+                t.globalnavfooter('membershipURL'),
+                "Assert navigated URL when clicking Membership link", "middle"
+            )
+        })
+
+        await step("Go to login page", async () => {
+            await globalnavfooterpage.goToLoginRegisterPage()
+            await loginpage.login(Config.credentials.username, Config.credentials.password)
+        })
+
+        await steps(["sg", "jp"], "Verify that Sign In link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('signin')),
+                t.globalnavfooter('accountURL'),
+                "Assert navigated URL when clicking Sign In link", "middle"
+            )
+        })
+    })
+
+    test("7. Bottom navigation links", async ({ basicAuthPage }) => {
+        const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
+
+        await steps(["sg", "jp"], "Verify sitemap link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('sitemap')),
+                t.globalnavfooter('sitemapURL'),
+                "Assert navigated URL when clicking sitemap link", "middle"
+            )
+        })
+
+        await steps(["sg", "jp"], "Verify User agreement link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('useragreement')),
+                t.globalnavfooter('useragreementURL'),
+                "Assert navigated URL when clicking User agreement link", "middle"
+            )
+        })
+
+        await steps(["sg", "jp"], "Verify Privacy link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('privacy')),
+                t.globalnavfooter('privacyURL'),
+                "Assert navigated URL when clicking Privacy link", "middle"
+            )
+        })
+
+        await steps(["sg"], "Verify Personal Information Collection Statement link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Personal Information Collection Statement"),
+                t.globalnavfooter('personalinformationcollectionstatementURL'),
+                "Assert navigated URL when clicking Personal Information Collection Statement link", "middle"
+            )
+        })
+
+        await steps(["jp"], "Verify Applicablelaw link", async () => {
+            await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("特定商取引法に基づく表記"),
+                t.globalnavfooter('applicablelawURL'),
+                "Assert navigated URL when clicking Applicablelaw link", "middle"
+            )
+        })
     })
 })
