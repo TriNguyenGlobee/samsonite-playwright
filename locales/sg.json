@@ -278,5 +278,28 @@
   },
   "wishlist": {
     "title": "My Wishlist"
+  },
+  "globalnavfooter": {
+    "placeholder": "Your email address",
+    "completethisfield": "Please complete this field.",
+    "invalidemail": "The valid email format is \"xxx@email.com\". Please try again.",
+    "createsuccess": "Thanks for signing up! We'll be in touch.",
+    "duplicateemail": "It appears this email address is already subscribed.",
+    "support": "Support / FAQS",
+    "ourcompany": "Our Company",
+    "account": "Account",
+    "followus": "FOLLOW US",
+    "deliveryandshippingURL": "shipping-and-delivery",
+    "returnsandexchangesURL": "returns-and-exchanges",
+    "warrantyURL": ["warranty", "guarantee"],
+    "contactusURL": "contactus",
+    "fakewebsitealertURL": "fake-website-alert",
+    "repairURL": "",
+    "WECAREについて": "",
+    "faq": "",
+    "faqmember": "",
+    "tsa": "",
+    "trackorder": "",
+    "inquiries": ""
   }
 }

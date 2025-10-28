@@ -176,6 +176,7 @@ export const t = {
   cartpage: (key: keyof Translations['cartpage']) => I18n.translations.cartpage[key],
   PDP: (key: keyof Translations['PDP']) => I18n.translations.PDP[key],
   wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key],
+  globalnavfooter: (key: keyof Translations['globalnavfooter']) => I18n.translations.globalnavfooter[key],
 };
 
 /**

@@ -38,6 +38,7 @@ export class BasePage {
     readonly notifyMebutton: Locator;
     readonly addProdToCartButton: Locator;
     readonly underlay: Locator;
+    readonly footerLogo: Locator;
 
     protected testData: ReturnType<typeof loadTestData>;
 
@@ -73,6 +74,7 @@ export class BasePage {
         this.notifyMebutton = page.locator(`//button[normalize-space(text())="${t.homepage('notifyme')}"]`)
         this.addProdToCartButton = this.prodItem.locator(`xpath=.//button[normalize-space(text())="${t.homepage("addtocart")}"]`)
         this.underlay = page.locator(`//div[@class="underlay"]`)
+        this.footerLogo = page.locator(`//div[@class="footer-logo" and .//i]`)
 
         this.testData = loadTestData();
     }
@@ -465,13 +467,13 @@ export class BasePage {
         });
     }
 
-    async assertAttributeValue(locator: Locator, attributeName: string, value: string, description?: string) {
+    async assertAttributeValue(locator: Locator, attributeName: string, value: any, description?: string) {
         await step(description || "Assert Locator attribute value", async () => {
             expect(locator).toHaveAttribute(attributeName, value);
         })
     }
 
-    async assertText(locator: Locator, text: string, description?: string) {
+    async assertText(locator: Locator, text: any, description?: string) {
         await step(description || "Assert Locator text", async () => {
             expect(locator).toHaveText(text);
         })
@@ -606,7 +608,7 @@ export class BasePage {
         }
     }
 
-    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: string, description?: string, button: 'left' | 'middle' | 'right' = 'middle') {
+    async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: any, description?: string, button: 'left' | 'middle' | 'right' = 'middle') {
         await step(description || `Assert expected URL is: ${url}`, async () => {
             let link = locate.locator('xpath=.//a').first();
 

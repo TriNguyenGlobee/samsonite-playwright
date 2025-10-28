@@ -278,5 +278,28 @@
   },
   "wishlist": {
     "title": "ウィッシュリスト｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト"
+  },
+  "globalnavfooter": {
+    "placeholder": "メールアドレス",
+    "completethisfield": "メールアドレスを入力してください。",
+    "invalidemail": "有効なメードアドレスを入力してください。",
+    "createsuccess": "ご登録ありがとうございます。",
+    "duplicateemail": "ご登録済みのメールアドレスです。",
+    "support": "カスタマーサービス",
+    "ourcompany": "サムソナイトについて",
+    "account": "アカウント",
+    "followus": "ソーシャル",
+    "deliveryandshippingURL": "",
+    "returnsandexchangesURL": "",
+    "warrantyURL": ["warranty", "guarantee"],
+    "contactusURL": "",
+    "fakewebsitealertURL": "",
+    "repairURL": "repair",
+    "WECAREについて": "wecare-service",
+    "faq": "faq",
+    "faqmember": "membership",
+    "tsa": "tsa-instruction",
+    "trackorder": "trackorder",
+    "inquiries": "inquiries"
   }
 }
