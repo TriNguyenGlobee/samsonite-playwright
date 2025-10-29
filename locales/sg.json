@@ -331,5 +331,8 @@
     "sitemap": "Site Map",
     "useragreement": "User agreement",
     "privacy": "Privacy"
+  },
+  "checkoutpage": {
+    "guestcheckoutbutton": "Guest Checkout"
   }
 }

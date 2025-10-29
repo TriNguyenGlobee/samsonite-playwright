@@ -331,5 +331,8 @@
     "sitemap": "サイトマップ",
     "useragreement": "利用規約",
     "privacy": "プライバシーポリシー"
+  },
+  "checkoutpage": {
+    "guestcheckoutbutton": "会員登録せずに購入"
   }
 }

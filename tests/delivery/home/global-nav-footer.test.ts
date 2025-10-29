@@ -1,6 +1,5 @@
 import { test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
-import { createHomePage } from "../../../src/factories/home.factory";
 import { GlobalNavFooterPage } from "../../../src/pages/delivery/home/global-nav-footer.page";
 import { steps } from "../../../utils/helpers/localeStep";
 import { scrollToBottom, t, generateReadableTimeBasedId } from "../../../utils/helpers/helpers";
@@ -16,7 +15,6 @@ test.describe("Newsletter", () => {
     });
 
     test("1. Mailing list section displayed", async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage);
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
         const emailtxt_Placeholder = t.globalnavfooter('placeholder')
 
@@ -37,7 +35,6 @@ test.describe("Newsletter", () => {
     })
 
     test("2. Submit button without email address", async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage);
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
         const invalid_Feedback = t.globalnavfooter('completethisfield')
 
@@ -53,7 +50,6 @@ test.describe("Newsletter", () => {
     })
 
     test("3. Submit button with invalid-email address", async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage);
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
         const invalid_Email = "globeetest_invalidemail"
         const invalid_Feedback = t.globalnavfooter('invalidemail')
@@ -77,7 +73,6 @@ test.describe("Newsletter", () => {
         4. Account created success
         5. Duplicate subscription handling
         `, async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage);
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
         const email_suffix = generateReadableTimeBasedId()
         const valid_email = "gloobeauto_" + email_suffix + "@mailinator.com"
