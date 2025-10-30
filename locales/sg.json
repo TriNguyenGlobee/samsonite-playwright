@@ -34,7 +34,9 @@
     "popupInvalidEmailMsg": "The valid email format is \"xxx@email.com\". Please try again.",
     "popupRequireCaptchaMsg": "Google recaptcha request is invalid or malformed.",
     "popupSentEmailTitle": "Please check your email.",
-    "popupSentEmailContent": "A login link has been sent to your email."
+    "popupSentEmailContent": "A login link has been sent to your email.",
+    "dropdownMsg" : "Please select an item in the list",
+    "invalidPassMsg" : "Min. 8 characters"
   },
   "forgotpasswordpage": {
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",

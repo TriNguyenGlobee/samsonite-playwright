@@ -7,6 +7,6 @@ export function createLoginPage(page: Page): LoginPage {
   switch (process.env.LOCALE) {
     case 'sg': return new LoginSG(page);
     case 'jp': return new LoginJP(page);
-    default:   return new LoginJP(page);
+    default:   return new LoginPage(page);
   }
 }
