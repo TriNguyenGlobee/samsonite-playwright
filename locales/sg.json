@@ -11,7 +11,7 @@
     "out-of-stock": "No results available for this filter. Click Reset All to try again."
   },
   "loginpage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Sign In To Your Account | Samsonite Singapore",
     "singinTitle": "Sign in",
     "loginmsg": "Existing customer or House of Samsonite user",
     "usernamelabel": "Email / Username",
@@ -37,7 +37,7 @@
     "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Singapore",
     "pageTitle": "Forgot your password?",
     "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
     "emailTextbox": "Email",

@@ -1,8 +1,9 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t } from "../../../../utils/helpers/helpers";
+import { t, PageUtils } from "../../../../utils/helpers/helpers";
 import { Config } from "../../../../config/env.config";
-import { step } from "allure-js-commons";
+import { step, attachment } from "allure-js-commons";
+import { test } from "@playwright/test";
 
 export class ForgotPasswordPage extends BasePage {
     readonly logoImg: Locator;
@@ -29,24 +30,26 @@ export class ForgotPasswordPage extends BasePage {
     // 📦 Helpers
     // =========================
     async isForgotPasswordpageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page)
+
         try {
-            const expectedTitle = t.forgotpasswordpage('title');
-            await this.page.waitForFunction(
-                (expected) => document.title.includes(expected),
-                expectedTitle
-            );
             const title = await this.page.title();
-            if (!title.includes(t.forgotpasswordpage('title'))) {
-                await step(`Received title: ${title} - Expected title: ${t.forgotpasswordpage('title')}`, async () => {}); 
+            const expectedTitle = t.forgotpasswordpage('title')
+            const currentUrl = await this.page.url();
+            const expectedUrl = Config.baseURL + "passwordreset";
+
+            await test.step("Forgotpassword page data: ", async () => {
+                await attachment("Current Page Title", title, "text/plain");
+                await attachment("Expected Page Title", expectedTitle.toString(), "text/plain");
+                await attachment("Current URL", currentUrl, "text/plain");
+                await attachment("Expected URL", expectedUrl, "text/plain");
+            });
+
+            if (!expectedTitle.includes(title)) {
                 return false;
             }
 
-            const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "passwordreset";
-            if (!currentUrl.startsWith(expectedUrl)) {
-                await step(`Received URL: ${currentUrl} - Expected URL: ${expectedUrl}`, async () => {}); 
-                return false;
-            }
+            if (!currentUrl.startsWith(expectedUrl)) return false;
 
             const elementsToCheck = [
                 this.pageTitle,
