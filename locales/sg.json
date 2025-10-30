@@ -333,6 +333,17 @@
     "privacy": "Privacy"
   },
   "checkoutpage": {
-    "guestcheckoutbutton": "Guest Checkout"
+    "guestcheckoutbutton": "Guest Checkout",
+    "title": "Checkout | Samsonite Singapore",
+    "newsletter": "Please add me to Samsonite's mailing list.",
+    "terms": "Agree to",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "firstnameinvalidmsg": "Please complete this field.",
+    "lastnameinvalidmsg": "Please complete this field.",
+    "emailinvalidmsg": "Please complete this field.",
+    "phoneinvalidmsg": "Please complete this field."
   }
 }
