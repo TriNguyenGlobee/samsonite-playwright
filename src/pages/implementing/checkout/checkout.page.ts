@@ -54,12 +54,16 @@ export class CheckoutPage extends BasePage {
                 )
             }
 
-            if (data.newsletter) {
-                await this.clickCheckboxByLabel(page, t.checkoutpage('newsletter'))
+            if (!data.newsletter) {
+                await this.clickCheckboxByLabel(page, t.checkoutpage('newsletter'),
+                    `Need to click ${t.checkoutpage('newsletter')} checkbox: ${data.newsletter}`
+                )
             }
 
-            if (!data.terms) {
-                await this.clickCheckboxByLabel(page, t.checkoutpage('terms'))
+            if (data.terms) {
+                await this.clickCheckboxByLabel(page, t.checkoutpage('terms'),
+                    `Need to click ${t.checkoutpage('terms')} checkbox: ${data.terms}`
+                )
             }
         })
     }
@@ -116,7 +120,8 @@ export class CheckoutPage extends BasePage {
     // =========================
     async assertFeedbackMsg(page: Page, label: string, msg: string, description?: string) {
         await step(description || "Assert invalid feedback under fields", async () => {
-            const invalid_msg = this.customerDetailsSection.locator(`//label[normalize-space(text())="${label}"]/following-sibling::div[@class="invalid-feedback"]`)
+            const invalid_msg = this.customerDetailsSection.locator(`//label[normalize-space(text())="${label}"]/following-sibling::div[@class="invalid-feedback"]
+            |//div[normalize-space(@class)="customer-details-section"]//label[normalize-space(text())="${label}"]/parent::div//div[@class="invalid-feedback"]`)
 
             await this.assertText(invalid_msg, msg, `Invalid feedback under ${label} field should be: ${msg}`)
         })

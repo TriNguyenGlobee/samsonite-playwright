@@ -106,7 +106,7 @@ test.describe("Guest checkout", () => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
 
         await step("Fill your detail without phonenumber", async () => {
-            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, withoutEmail)
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, withoutPhone)
         })
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
@@ -120,7 +120,7 @@ test.describe("Guest checkout", () => {
 const withoutFirstName = {
     lastName: "globeeLastName",
     email: "globeetest@mailinator.com",
-    phone: "335595668",
+    phone: "83298647",
     newsletter: true,
     terms: true
 };
@@ -128,7 +128,7 @@ const withoutFirstName = {
 const withoutLastName = {
     firstName: "globeeFirstName",
     email: "globeetest@mailinator.com",
-    phone: "335595668",
+    phone: "83298647",
     newsletter: true,
     terms: true
 };
@@ -136,7 +136,15 @@ const withoutLastName = {
 const withoutEmail = {
     firstName: "globeeFirstName",
     lastName: "globeeLastName",
-    phone: "335595668",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+const withoutPhone = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
     newsletter: true,
     terms: true
 };
