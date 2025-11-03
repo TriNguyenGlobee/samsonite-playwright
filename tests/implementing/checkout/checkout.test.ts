@@ -126,24 +126,26 @@ test.describe("Guest checkout - Step 1", () => {
         const { checkoutFullData } = loadTestData();
 
         await step("Verify the initial step 1 status", async () => {
-            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), false)
+            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), false,
+                "Assert current step 1 status is Done: false"
+            )
         })
 
-        await step("Fill your detail without phonenumber", async () => {
+        await step("Fill your detail with full data", async () => {
             await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutFullData)
         })
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
 
-        await step("Verify the current step status", async () => {
-            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), false,
-                "Assert current step status is Done"
+        await step("Verify the current step 1 status", async () => {
+            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), true,
+                "Assert current step 1 status is Done: true"
             )
         })
     })
 });
 
-test.describe("Guest checkout - Step 1", async () => {
+test.describe("Guest checkout - Step 2", async () => {
     test.beforeEach(async ({ basicAuthPage }) => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
         const homepage = createHomePage(basicAuthPage)
@@ -194,4 +196,60 @@ test.describe("Guest checkout - Step 1", async () => {
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
     });
+
+    test(`
+        1. Back to Edit Step 1 by clicking Your Details Edit button
+        2. Go Edit Recipient Details form by clicking Recipient Details Edit button
+        3. Using my details as recipient details
+        `, async ({ basicAuthPage }) => {
+        const checkoutpage = new CheckoutPage(basicAuthPage)
+
+        await checkoutpage.click(checkoutpage.yourDetailsEditBtn,
+            "Clicking on Your Details Edit button"
+        )
+
+        await step("Verify the current step 1 status", async () => {
+            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), false,
+                "Assert current step 1 status is Done: false"
+            )
+        })
+
+        await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
+
+        await checkoutpage.click(checkoutpage.recipientDetailsEditBtn,
+            "Clicking on Recipient Details Edit button"
+        )
+
+        await step("Verify that Recipient section fields visible", async () => {
+            await checkoutpage.assertVisible(checkoutpage.recipientFirstName,
+                "Assert recipient firstname field is displayed"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.recipientLastName,
+                "Assert recipient lastname field is displayed"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.recipientPhone,
+                "Assert recipient phone field is displayed"
+            )
+        })
+
+        await checkoutpage.clickCheckbox(basicAuthPage, "My details and recipient details are the same.",
+            "Clicking on My details and recipient details are the same. checkbox"
+        )
+
+        await step("Verify that Recipient section fields hidden", async () => {
+            await checkoutpage.assertHidden(checkoutpage.recipientFirstName,
+                "Assert recipient firstname field is hidden"
+            )
+
+            await checkoutpage.assertHidden(checkoutpage.recipientLastName,
+                "Assert recipient lastname field is hidden"
+            )
+
+            await checkoutpage.assertHidden(checkoutpage.recipientPhone,
+                "Assert recipient phone field is hidden"
+            )
+        })
+    })
 })

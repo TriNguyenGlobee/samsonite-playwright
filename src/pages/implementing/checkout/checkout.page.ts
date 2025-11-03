@@ -18,7 +18,11 @@ export class CheckoutPage extends BasePage {
     readonly address1: Locator;
     readonly shippingContinueBtn: Locator;
     readonly yourDetailsEditBtn: Locator;
+    readonly recipientSection: Locator;
     readonly recipientDetailsEditBtn: Locator;
+    readonly recipientFirstName: Locator;
+    readonly recipientLastName: Locator;
+    readonly recipientPhone: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -34,7 +38,11 @@ export class CheckoutPage extends BasePage {
         this.address1 = this.shippingSection.locator(`xpath=.//input[@id="shippingAddressOne"]`)
         this.shippingContinueBtn = this.shippingSection.locator(`xpath=.//button[@type="submit"]`)
         this.yourDetailsEditBtn = page.locator(`//div[h4[normalize-space(text())="Your details"]]//span[normalize-space(text())="Edit"]`)
-        this.recipientDetailsEditBtn = page.locator(`//div[@class="single-shipping"]//div[h4[normalize-space(text())="Recipient Details"]]//span[normalize-space(text())="Edit"]`)
+        this.recipientSection = page.locator(`//div[@class="single-shipping"]`)
+        this.recipientDetailsEditBtn = this.recipientSection.locator(`xpath=.//div[h4[normalize-space(text())="Recipient Details"]]//span[normalize-space(text())="Edit"]`)
+        this.recipientFirstName = this.recipientSection.locator(`xpath=.//input[@id="shippingFirstName"]`)
+        this.recipientLastName = this.recipientSection.locator(`xpath=.//input[@id="shippingLastName"]`)
+        this.recipientPhone = this.recipientSection.locator(`xpath=.//input[@id="shippingPhoneNumber"]`)
     }
 
     // =========================
