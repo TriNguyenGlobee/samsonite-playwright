@@ -344,3 +344,44 @@ export const subMenuDataSamsoniteRed = [
         text: "Bags"
     }
 ]
+
+export const checkoutDataWithoutFirstName = {
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutLastName = {
+    firstName: "globeeFirstName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutEmail = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutPhone = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutFullData = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};

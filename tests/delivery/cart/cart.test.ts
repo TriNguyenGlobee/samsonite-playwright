@@ -90,7 +90,7 @@ test.describe("Add products to cart without login", () => {
             await newarrivalspage.logoImg.hover()
 
             await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+                await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
             })
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
@@ -189,7 +189,7 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Click on In-stock checkbox', async () => {
-            await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+            await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
         await step('Add multi products to cart', async () => {
@@ -294,7 +294,7 @@ test.describe("Add products to cart without login", () => {
             await newarrivalspage.logoImg.hover()
 
             await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+                await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
             })
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)

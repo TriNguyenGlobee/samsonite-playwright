@@ -33,7 +33,7 @@ test.describe("New Arrivals Page", () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -91,7 +91,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -148,7 +148,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -205,7 +205,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -262,7 +262,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -319,7 +319,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -377,7 +377,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -434,7 +434,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -491,7 +491,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -548,7 +548,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -605,7 +605,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await newarrivalspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 

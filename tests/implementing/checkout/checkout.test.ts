@@ -7,8 +7,9 @@ import { createCartPage } from "../../../src/factories/cart.factory";
 import { CheckoutLoginPage } from "../../../src/pages/implementing/checkout/checkoutlogin.page";
 import { step } from "allure-js-commons";
 import { CheckoutPage } from "../../../src/pages/implementing/checkout/checkout.page";
+import { loadTestData } from "../../../utils/data";
 
-test.describe("Guest checkout", () => {
+test.describe("Guest checkout - Step 1", () => {
     test.beforeEach(async ({ basicAuthPage }) => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
         const homepage = createHomePage(basicAuthPage)
@@ -21,7 +22,7 @@ test.describe("Guest checkout", () => {
             await newarrivalspage.logoImg.hover()
 
             await step('Click on In-stock checkbox', async () => {
-                await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+                await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
             })
         })
 
@@ -62,9 +63,10 @@ test.describe("Guest checkout", () => {
 
     test("2. Click Continue button without firstname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutDataWithoutFirstName } = loadTestData();
 
         await step("Fill your detail without firstname", async () => {
-            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, withoutFirstName)
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutDataWithoutFirstName)
         })
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
@@ -76,9 +78,10 @@ test.describe("Guest checkout", () => {
 
     test("3. Click Continue button without lastname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutDataWithoutLastName } = loadTestData();
 
         await step("Fill your detail without lastname", async () => {
-            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, withoutLastName)
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutDataWithoutLastName)
         })
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
@@ -90,9 +93,10 @@ test.describe("Guest checkout", () => {
 
     test("4. Click Continue button without email", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutDataWithoutEmail } = loadTestData();
 
         await step("Fill your detail without email", async () => {
-            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, withoutEmail)
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutDataWithoutEmail)
         })
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
@@ -104,9 +108,10 @@ test.describe("Guest checkout", () => {
 
     test("5. Click Continue button without phonenumber", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutDataWithoutPhone } = loadTestData();
 
         await step("Fill your detail without phonenumber", async () => {
-            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, withoutPhone)
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutDataWithoutPhone)
         })
 
         await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
@@ -115,36 +120,78 @@ test.describe("Guest checkout", () => {
             "Assert invalid msg under phonenumber field should be: Please complete this field."
         )
     })
+
+    test("6. Click Continue button with full data", async ({ basicAuthPage }) => {
+        const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutFullData } = loadTestData();
+
+        await step("Verify the initial step 1 status", async () => {
+            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), false)
+        })
+
+        await step("Fill your detail without phonenumber", async () => {
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutFullData)
+        })
+
+        await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
+
+        await step("Verify the current step status", async () => {
+            await checkoutpage.assertEqual(checkoutpage.isCheckoutStepDone("Your Details"), false,
+                "Assert current step status is Done"
+            )
+        })
+    })
 });
 
-const withoutFirstName = {
-    lastName: "globeeLastName",
-    email: "globeetest@mailinator.com",
-    phone: "83298647",
-    newsletter: true,
-    terms: true
-};
+test.describe("Guest checkout - Step 1", async () => {
+    test.beforeEach(async ({ basicAuthPage }) => {
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const homepage = createHomePage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const checkoutloginpage = new CheckoutLoginPage(basicAuthPage)
+        const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutFullData } = loadTestData();
 
-const withoutLastName = {
-    firstName: "globeeFirstName",
-    email: "globeetest@mailinator.com",
-    phone: "83298647",
-    newsletter: true,
-    terms: true
-};
+        await step('Go to New Arrivals', async () => {
+            await homepage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
 
-const withoutEmail = {
-    firstName: "globeeFirstName",
-    lastName: "globeeLastName",
-    phone: "83298647",
-    newsletter: true,
-    terms: true
-};
+            await step('Click on In-stock checkbox', async () => {
+                await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+            })
+        })
 
-const withoutPhone = {
-    firstName: "globeeFirstName",
-    lastName: "globeeLastName",
-    email: "globeetest@mailinator.com",
-    newsletter: true,
-    terms: true
-};
+        await step("Add a product to cart", async () => {
+            await Promise.all([
+                cartpage.addMultipleProductsToCart(1, "Add a in-stock product to cart"),
+                expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+            ]);
+
+        })
+
+        await step('Go to checkout login page', async () => {
+            await clickUntil(basicAuthPage, homepage.cartIcon, minicartpage.minicartRender, 'visible', {
+                delayMs: 500,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicartpage.click(minicartpage.checkoutButton,
+                "Click on Checkout button"
+            )
+        })
+
+        await step("Go to guest checkout page", async () => {
+            await checkoutloginpage.click(checkoutloginpage.guestcheckoutButton,
+                "Clicking on Guest checkout button"
+            )
+        })
+
+        await step("Fill your detail without phonenumber", async () => {
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutFullData)
+        })
+
+        await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
+    });
+})

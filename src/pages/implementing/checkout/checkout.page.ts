@@ -13,6 +13,12 @@ export class CheckoutPage extends BasePage {
     readonly emailTextbox: Locator;
     readonly phoneTextbox: Locator;
     readonly continueButton: Locator;
+    readonly shippingSection: Locator;
+    readonly postalCode: Locator;
+    readonly address1: Locator;
+    readonly shippingContinueBtn: Locator;
+    readonly yourDetailsEditBtn: Locator;
+    readonly recipientDetailsEditBtn: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -23,6 +29,12 @@ export class CheckoutPage extends BasePage {
         this.emailTextbox = this.customerDetailsSection.locator(`xpath=.//input[@id="billingEmail"]`)
         this.phoneTextbox = this.customerDetailsSection.locator(`xpath=.//input[@id="billingPhoneNumber"]`)
         this.continueButton = this.customerDetailsSection.locator(`xpath=.//button[@type="submit"]`)
+        this.shippingSection = page.locator(`//div[@class="shipping-section"]`)
+        this.postalCode = this.shippingSection.locator(`xpath=.//input[@id="shippingZipCode"]`)
+        this.address1 = this.shippingSection.locator(`xpath=.//input[@id="shippingAddressOne"]`)
+        this.shippingContinueBtn = this.shippingSection.locator(`xpath=.//button[@type="submit"]`)
+        this.yourDetailsEditBtn = page.locator(`//div[h4[normalize-space(text())="Your details"]]//span[normalize-space(text())="Edit"]`)
+        this.recipientDetailsEditBtn = page.locator(`//div[@class="single-shipping"]//div[h4[normalize-space(text())="Recipient Details"]]//span[normalize-space(text())="Edit"]`)
     }
 
     // =========================
@@ -55,13 +67,13 @@ export class CheckoutPage extends BasePage {
             }
 
             if (!data.newsletter) {
-                await this.clickCheckboxByLabel(page, t.checkoutpage('newsletter'),
+                await this.clickCheckbox(page, t.checkoutpage('newsletter'),
                     `Need to click ${t.checkoutpage('newsletter')} checkbox: ${data.newsletter}`
                 )
             }
 
             if (data.terms) {
-                await this.clickCheckboxByLabel(page, t.checkoutpage('terms'),
+                await this.clickCheckbox(page, t.checkoutpage('terms'),
                     `Need to click ${t.checkoutpage('terms')} checkbox: ${data.terms}`
                 )
             }
@@ -114,6 +126,17 @@ export class CheckoutPage extends BasePage {
             return false;
         }
     }
+
+    async isCheckoutStepDone(stepName: string) {
+        const iconStatus = this.page.locator(`//div[@class="step-wrapper" and .//div[normalize-space(text())="${stepName}"]]//i`)
+
+        return await iconStatus.evaluate((el) => {
+            const before = window.getComputedStyle(el, "::before");
+            const content = before.getPropertyValue("content");
+            return content && content !== "none" && content !== '""';
+        });
+    }
+
 
     // =========================
     // ✅ Assertions

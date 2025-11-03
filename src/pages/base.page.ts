@@ -298,7 +298,7 @@ export class BasePage {
         })
     }
 
-    async clickCheckboxByLabel(page: Page, labelText: string, description?: string) {
+    async clickCheckbox(page: Page, labelText: string, description?: string) {
         await step(description || `Click on the checkbox label "${labelText}"`, async () => {
             const labelLocator = page.locator(
                 `xpath=(//label[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //a[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]])`
