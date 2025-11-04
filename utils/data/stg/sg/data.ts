@@ -385,3 +385,8 @@ export const checkoutFullData = {
     newsletter: true,
     terms: true
 };
+
+export const checkoutShippingData = {
+    postcode: "951111",
+    address1: "65 XASSSERRR"
+}

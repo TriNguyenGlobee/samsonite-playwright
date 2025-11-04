@@ -133,7 +133,7 @@ export class BasePage {
         }
 
         await menuItemLocator.scrollIntoViewIfNeeded();
-        await menuItemLocator.click(); 
+        await menuItemLocator.click();
 
         await PageUtils.waitForPageLoad(this.page);
         await PageUtils.waitForDomAvailable(this.page);
@@ -304,10 +304,15 @@ export class BasePage {
                 `xpath=(//label[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //a[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]])`
             );
 
-            const target = labelLocator.last();
+            let target = labelLocator.last();
+
+            if (await labelLocator.first().isVisible()) {
+                target = labelLocator.first();
+            }
+
             await PageUtils.waitForPageLoad(page)
             await target.scrollIntoViewIfNeeded();
-            
+
             await Promise.all([
                 target.click({ position: { x: 7, y: 7 } }),
                 this.underlay.waitFor({ state: 'hidden', timeout: 10000 })

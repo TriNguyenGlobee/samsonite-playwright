@@ -14,8 +14,9 @@ export class CheckoutPage extends BasePage {
     readonly phoneTextbox: Locator;
     readonly continueButton: Locator;
     readonly shippingSection: Locator;
-    readonly postalCode: Locator;
-    readonly address1: Locator;
+    readonly postalCodeTxt: Locator;
+    readonly address1Txt: Locator;
+    readonly unitnumberTxt: Locator;
     readonly shippingContinueBtn: Locator;
     readonly yourDetailsEditBtn: Locator;
     readonly recipientSection: Locator;
@@ -23,6 +24,7 @@ export class CheckoutPage extends BasePage {
     readonly recipientFirstName: Locator;
     readonly recipientLastName: Locator;
     readonly recipientPhone: Locator;
+    readonly recipientContinueBtn: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -33,9 +35,10 @@ export class CheckoutPage extends BasePage {
         this.emailTextbox = this.customerDetailsSection.locator(`xpath=.//input[@id="billingEmail"]`)
         this.phoneTextbox = this.customerDetailsSection.locator(`xpath=.//input[@id="billingPhoneNumber"]`)
         this.continueButton = this.customerDetailsSection.locator(`xpath=.//button[@type="submit"]`)
-        this.shippingSection = page.locator(`//div[@class="shipping-section"]`)
-        this.postalCode = this.shippingSection.locator(`xpath=.//input[@id="shippingZipCode"]`)
-        this.address1 = this.shippingSection.locator(`xpath=.//input[@id="shippingAddressOne"]`)
+        this.shippingSection = page.locator(`//div[@class="shipping-section"]//div[@class="single-shipping"]`)
+        this.postalCodeTxt = this.shippingSection.locator(`xpath=.//input[@id="shippingZipCode"]`)
+        this.address1Txt = this.shippingSection.locator(`xpath=.//input[@id="shippingAddressOne"]`)
+        this.unitnumberTxt = this.shippingSection.locator(`xpath=.//input[@id="shippingAddressTwo"]`)
         this.shippingContinueBtn = this.shippingSection.locator(`xpath=.//button[@type="submit"]`)
         this.yourDetailsEditBtn = page.locator(`//div[h4[normalize-space(text())="Your details"]]//span[normalize-space(text())="Edit"]`)
         this.recipientSection = page.locator(`//div[@class="single-shipping"]`)
@@ -43,6 +46,7 @@ export class CheckoutPage extends BasePage {
         this.recipientFirstName = this.recipientSection.locator(`xpath=.//input[@id="shippingFirstName"]`)
         this.recipientLastName = this.recipientSection.locator(`xpath=.//input[@id="shippingLastName"]`)
         this.recipientPhone = this.recipientSection.locator(`xpath=.//input[@id="shippingPhoneNumber"]`)
+        this.recipientContinueBtn = this.recipientSection.locator(`xpath=.//button[@type="submit"]`)
     }
 
     // =========================
@@ -85,6 +89,29 @@ export class CheckoutPage extends BasePage {
                     `Need to click ${t.checkoutpage('terms')} checkbox: ${data.terms}`
                 )
             }
+        })
+    }
+
+    async fillRecipientDetilsForm(page: Page, data: RecipientDetails, description?: string): Promise<void> {
+        await step(description || "Fill recipient details detail", async () => {
+            if (data.postcode) {
+                await this.type(this.postalCodeTxt, data.postcode,
+                    `Fill firstname textbox: ${data.postcode}`
+                )
+            }
+
+            if (data.address1) {
+                await this.type(this.address1Txt, data.address1,
+                    `Fill firstname textbox: ${data.address1}`
+                )
+            }
+
+            if (data.unitnumber) {
+                await this.type(this.unitnumberTxt, data.unitnumber,
+                    `Fill firstname textbox: ${data.unitnumber}`
+                )
+            }
+
         })
     }
 
@@ -135,16 +162,28 @@ export class CheckoutPage extends BasePage {
         }
     }
 
-    async isCheckoutStepDone(stepName: string) {
-        const iconStatus = this.page.locator(`//div[@class="step-wrapper" and .//div[normalize-space(text())="${stepName}"]]//i`)
+    async isCheckoutStepDone(stepName: string): Promise<boolean> {
+        const locator = this.page.locator(
+            `//div[@class="step-wrapper" and .//div[normalize-space(text())="${stepName}"]]//i`
+        );
 
-        return await iconStatus.evaluate((el) => {
-            const before = window.getComputedStyle(el, "::before");
-            const content = before.getPropertyValue("content");
-            return content && content !== "none" && content !== '""';
+        if (await locator.count() === 0) return false;
+
+        return await locator.first().evaluate((el) => {
+            const before = window.getComputedStyle(el, '::before');
+            let content = before.getPropertyValue('content') || '';
+            const display = before.getPropertyValue('display');
+            const visibility = before.getPropertyValue('visibility');
+
+            content = content.replace(/^"(.*)"$/, '$1').trim();
+
+            const hasContent = content !== '' && content.toLowerCase() !== 'none';
+            const isDisplayed = display !== 'none';
+            const isVisible = visibility !== 'hidden' && visibility !== 'collapse';
+
+            return Boolean(hasContent && isDisplayed && isVisible);
         });
     }
-
 
     // =========================
     // ✅ Assertions
@@ -168,3 +207,9 @@ export type CheckoutYourDetailLoad = {
     newsletter?: boolean;
     terms?: boolean;
 };
+
+export type RecipientDetails = {
+    postcode?: string;
+    address1?: string;
+    unitnumber?: string;
+}
