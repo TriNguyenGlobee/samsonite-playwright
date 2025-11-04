@@ -331,5 +331,19 @@
     "sitemap": "サイトマップ",
     "useragreement": "利用規約",
     "privacy": "プライバシーポリシー"
+  },
+  "checkoutpage": {
+    "guestcheckoutbutton": "会員登録せずに購入",
+    "title": "商品購入｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
+    "newsletter": "新商品、クーポン、イベント情報をいち早くメールでお知らせします",
+    "terms": "プライバシーポリシー",
+    "firstname": "名",
+    "lastname": "姓",
+    "email": "Eメール",
+    "phone": "電話番号",
+    "firstnameinvalidmsg": "この項目を入力してください。",
+    "lastnameinvalidmsg": "この項目を入力してください。",
+    "emailinvalidmsg": "この項目を入力してください。",
+    "phoneinvalidmsg": "この項目を入力してください。"
   }
 }

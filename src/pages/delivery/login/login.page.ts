@@ -1,8 +1,9 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { step } from "allure-js-commons";
+import { step, attachment } from "allure-js-commons";
 import { Config } from "../../../../config/env.config";
 import { PageUtils, maskEmail, t } from "../../../../utils/helpers/helpers";
+import { test } from "@playwright/test";
 
 export abstract class LoginPage extends BasePage {
     readonly signinTitle: Locator;
@@ -80,12 +81,12 @@ export abstract class LoginPage extends BasePage {
             await this.click(this.signInButton, "Click login button");
         });
 
-        await this.signInButton.waitFor( { state: 'hidden', timeout: 10000 } );
-        
+        await this.signInButton.waitFor({ state: 'hidden', timeout: 10000 });
+
         await PageUtils.waitForDomAvailable(this.page);
         await PageUtils.waitForPageLoad(this.page);
 
-        
+
     }
 
     async loginByGoogleAccount(googleUsername: string, googlePassword: string) {
@@ -163,24 +164,27 @@ export abstract class LoginPage extends BasePage {
     // 📦 Helpers
     // =========================
     async isLoginPageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page)
+
         try {
-            const expectedTitle = t.loginpage('title');
-            await this.page.waitForFunction(
-                (expected) => document.title.includes(expected),
-                expectedTitle
-            );
             const title = await this.page.title();
-            if (!title.includes(t.loginpage('title'))) {
-                await step(`Received title: ${title} - Expected title: ${t.loginpage('title')}`, async () => { })
+            const expectedTitle = t.loginpage('title')
+            const currentUrl = await this.page.url();
+            const expectedUrl = Config.baseURL + "login";
+
+            await test.step("Login page data: ", async () => {
+                await attachment("Current Page Title", title, "text/plain");
+                await attachment("Expected Page Title", expectedTitle.toString(), "text/plain");
+                await attachment("Current URL", currentUrl, "text/plain");
+                await attachment("Expected URL", expectedUrl, "text/plain");
+            });
+
+            if (!expectedTitle.includes(title)) {
                 return false;
             }
 
-            const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "login";
-            if (!currentUrl.startsWith(expectedUrl)) {
-                await step(`Received URL: ${currentUrl} - Expected URL: ${expectedUrl}`, async () => { })
-                return false;
-            }
+            if (!currentUrl.startsWith(expectedUrl)) return false;
+
             const elementsToCheck = [
                 this.signinTitle,
                 this.loginmsg,

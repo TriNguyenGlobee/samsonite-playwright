@@ -33,7 +33,7 @@ test.describe("Luggage Page", () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -91,7 +91,7 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
 
             await lazyLoad(basicAuthPage)
@@ -150,7 +150,7 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -208,7 +208,7 @@ test.describe("Luggage Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await luggagepage.productTableShow.isVisible()) {
-                await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -268,7 +268,7 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -325,7 +325,7 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -384,7 +384,7 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -441,7 +441,7 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -498,7 +498,7 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -557,7 +557,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -614,7 +614,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -671,7 +671,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -728,7 +728,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -785,7 +785,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -844,7 +844,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -901,7 +901,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -958,7 +958,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1015,7 +1015,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1072,7 +1072,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1130,7 +1130,7 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1187,7 +1187,7 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1244,7 +1244,7 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1301,7 +1301,7 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1360,7 +1360,7 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1417,7 +1417,7 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1474,7 +1474,7 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1532,7 +1532,7 @@ test.describe("Luggage travel type/destination", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await luggagepage.productTableShow.isVisible()) {
-                await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1595,7 +1595,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1652,7 +1652,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1709,7 +1709,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1766,7 +1766,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1823,7 +1823,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1880,7 +1880,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1937,7 +1937,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1994,7 +1994,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -2051,7 +2051,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 

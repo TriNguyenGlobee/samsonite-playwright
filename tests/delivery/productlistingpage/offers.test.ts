@@ -42,7 +42,7 @@ test.describe("Offers Page", () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await offerspage.productTableShow.isVisible()) {
-                await offerspage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await offerspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");

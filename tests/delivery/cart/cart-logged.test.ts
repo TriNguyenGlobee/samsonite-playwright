@@ -132,7 +132,7 @@ test.describe("Add products to cart after login", () => {
             await newarrivalspage.logoImg.hover()
 
             await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+                await homePage.clickCheckbox(loggedInPage, `${t.homepage('in-stock')}`)
 
                 await delay(500)
             })
@@ -229,7 +229,7 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Click on In-stock checkbox', async () => {
-            await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+            await homePage.clickCheckbox(loggedInPage, `${t.homepage('in-stock')}`)
         })
 
         await step('Add multi products to cart', async () => {
@@ -330,7 +330,7 @@ test.describe("Add products to cart after login", () => {
             await newarrivalspage.logoImg.hover()
 
             await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckboxByLabel(loggedInPage, `${t.homepage('in-stock')}`)
+                await homePage.clickCheckbox(loggedInPage, `${t.homepage('in-stock')}`)
             })
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)

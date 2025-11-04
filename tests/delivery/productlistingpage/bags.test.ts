@@ -33,7 +33,7 @@ test.describe("Bags Page", () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -91,7 +91,7 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
 
             await lazyLoad(basicAuthPage)
@@ -150,7 +150,7 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -208,7 +208,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -269,7 +269,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -330,7 +330,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -391,7 +391,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -452,7 +452,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -513,7 +513,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -574,7 +574,7 @@ test.describe("Bags Type", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -634,7 +634,7 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -692,7 +692,7 @@ test.describe("Bags Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -748,7 +748,7 @@ test.describe("Bags Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -805,7 +805,7 @@ test.describe("Bags Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -862,7 +862,7 @@ test.describe("Bags Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -921,7 +921,7 @@ test.describe("Bags Labels/Brand", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -981,7 +981,7 @@ test.describe("Bags Labels/Brand", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1042,7 +1042,7 @@ test.describe("Bags Labels/Brand", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1103,7 +1103,7 @@ test.describe("Bags Labels/Brand", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1165,7 +1165,7 @@ test.describe("Bags laptop", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1224,7 +1224,7 @@ test.describe("Bags laptop", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1283,7 +1283,7 @@ test.describe("Bags laptop", async () => {
 
         await step("Click In-stock checkbox", async () => {
             if (await bagsPage.productTableShow.isVisible()) {
-                await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                     "Checking the In-stock checkbox")
             } else {
                 test.skip(true, "Product table not visible, skipping the test.");
@@ -1344,7 +1344,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1401,7 +1401,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1458,7 +1458,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1515,7 +1515,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1572,7 +1572,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1629,7 +1629,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1686,7 +1686,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 
@@ -1743,7 +1743,7 @@ test.describe("Bags Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckboxByLabel(basicAuthPage, t.homepage('in-stock'),
+            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
                 "Checking the In-stock checkbox")
         })
 

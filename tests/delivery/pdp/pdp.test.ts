@@ -23,7 +23,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         await step('Click on In-stock checkbox', async () => {
-            await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+            await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
         prodName = await homepage.getProdName(prodIndex)
@@ -133,7 +133,7 @@ test.describe("Breadcrumb", () => {
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         await step('Click on In-stock checkbox', async () => {
-            await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+            await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
         prodCollection = (await homepage.getProdCollection(prodIndex)).trim()
@@ -176,7 +176,7 @@ test.describe("PDP extra features", () => {
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         await step('Click on In-stock checkbox', async () => {
-            await homepage.clickCheckboxByLabel(basicAuthPage, `${t.homepage('in-stock')}`)
+            await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
         })
 
         await lazyLoad(basicAuthPage)
