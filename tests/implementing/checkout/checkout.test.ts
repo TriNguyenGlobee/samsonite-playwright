@@ -55,7 +55,7 @@ test.describe("Guest checkout - Step 1", () => {
 
     test(`
         1. Guest checkout screen is displayed
-        2. Click Continue button without firstname
+        2. Click Step 1 Continue button without firstname
         `, async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutFirstName } = loadTestData();
@@ -65,7 +65,7 @@ test.describe("Guest checkout - Step 1", () => {
         })
     })
 
-    test("2. Click Continue button without firstname", async ({ basicAuthPage }) => {
+    test("2. Click Step 1 Continue button without firstname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutFirstName } = loadTestData();
 
@@ -80,7 +80,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("3. Click Continue button without lastname", async ({ basicAuthPage }) => {
+    test("3. Click Step 1 Continue button without lastname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutLastName } = loadTestData();
 
@@ -95,7 +95,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("4. Click Continue button without email", async ({ basicAuthPage }) => {
+    test("4. Click Step 1 Continue button without email", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutEmail } = loadTestData();
 
@@ -110,7 +110,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("5. Click Continue button without phonenumber", async ({ basicAuthPage }) => {
+    test("5. Click Step 1 Continue button without phonenumber", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutPhone } = loadTestData();
 
@@ -125,7 +125,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("6. Click Continue button with full data", async ({ basicAuthPage }) => {
+    test("6. Click Step 1 Continue button with full data", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutFullData } = loadTestData();
 
@@ -201,7 +201,7 @@ test.describe("Guest checkout - Step 2", async () => {
             await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutFullData)
         })
 
-        await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
+        await checkoutpage.click(checkoutpage.continueButton, "Click on Step 1 Continue button")
     });
 
     test(`
@@ -222,24 +222,24 @@ test.describe("Guest checkout - Step 2", async () => {
         })
 
         await step("Verify step 1 fields visible", async () => {
-            await checkoutpage.assertVisible(checkoutpage.firstNameTextbox, 
+            await checkoutpage.assertVisible(checkoutpage.firstNameTextbox,
                 "Assert the firstname textbox is visible"
             )
 
-            await checkoutpage.assertVisible(checkoutpage.lastNameTextbox, 
+            await checkoutpage.assertVisible(checkoutpage.lastNameTextbox,
                 "Assert the lastname textbox is visible"
             )
 
-            await checkoutpage.assertVisible(checkoutpage.emailTextbox, 
+            await checkoutpage.assertVisible(checkoutpage.emailTextbox,
                 "Assert the email textbox is visible"
             )
 
-            await checkoutpage.assertVisible(checkoutpage.phoneTextbox, 
+            await checkoutpage.assertVisible(checkoutpage.phoneTextbox,
                 "Assert the phone number textbox is visible"
             )
         })
 
-        await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
+        await checkoutpage.click(checkoutpage.continueButton, "Click Step 1 on Continue button")
 
         await checkoutpage.click(checkoutpage.recipientDetailsEditBtn,
             "Clicking on Recipient Details Edit button"
@@ -282,7 +282,7 @@ test.describe("Guest checkout - Step 2", async () => {
         })
 
         await step("Click on continue button", async () => {
-            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on Continue button")
+            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on Step 2 Continue button")
             await PageUtils.waitForPageLoad(basicAuthPage)
         })
 
@@ -303,6 +303,7 @@ test.describe("Guest checkout - Step 3", async () => {
         const checkoutloginpage = new CheckoutLoginPage(basicAuthPage)
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutFullData } = loadTestData();
+        const { checkoutShippingData } = loadTestData();
 
         await step('Go to New Arrivals', async () => {
             await homepage.clickMenuItem('newarrivals')
@@ -343,12 +344,126 @@ test.describe("Guest checkout - Step 3", async () => {
             await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutFullData)
         })
 
-        await checkoutpage.click(checkoutpage.continueButton, "Click on Continue button")
+        await checkoutpage.click(checkoutpage.continueButton, "Click on Step 1 Continue button")
+
+        await step("Fill recipient info", async () => {
+            await checkoutpage.fillRecipientDetilsForm(basicAuthPage, checkoutShippingData)
+        })
+
+        await step("Click on continue button", async () => {
+            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on Step 2 Continue button")
+            await PageUtils.waitForPageLoad(basicAuthPage)
+        })
     });
 
     test(`
-
+        1. Back to Step 1 by clicking Your Details Edit button
+        2. Go Edit Recipient Details form by clicking Recipient Details Edit button
+        3. No payment method selected as default
+        4. Continue button is displayed after selecting a payment method
+        5. Go to step 4 by clicking continue button
         `, async ({ basicAuthPage }) => {
- 
+        const checkoutpage = new CheckoutPage(basicAuthPage)
+
+        await step("Click Your Details Edit button", async () => {
+            await delay(500)
+
+            await checkoutpage.click(checkoutpage.yourDetailsEditBtn,
+                "Clicking on Your Details Edit button"
+            )
+        })
+
+        await step("Verify step 1 fields visible", async () => {
+            await checkoutpage.assertVisible(checkoutpage.firstNameTextbox,
+                "Assert the firstname textbox is visible"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.lastNameTextbox,
+                "Assert the lastname textbox is visible"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.emailTextbox,
+                "Assert the email textbox is visible"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.phoneTextbox,
+                "Assert the phone number textbox is visible"
+            )
+        })
+
+        await checkoutpage.click(checkoutpage.continueButton, "Click on step 1 Continue button")
+
+        await step("Click on step 2 continue button", async () => {
+            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on step 2 Continue button")
+            await PageUtils.waitForPageLoad(basicAuthPage)
+        })
+
+        await checkoutpage.click(checkoutpage.recipientDetailsEditBtn,
+            "Clicking on Recipient Details Edit button"
+        )
+
+        await step("Verify that Recipient section fields visible", async () => {
+            await checkoutpage.assertVisible(checkoutpage.recipientFirstName,
+                "Assert recipient firstname field is displayed"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.recipientLastName,
+                "Assert recipient lastname field is displayed"
+            )
+
+            await checkoutpage.assertVisible(checkoutpage.recipientPhone,
+                "Assert recipient phone field is displayed"
+            )
+        })
+
+        await checkoutpage.clickCheckbox(basicAuthPage, "My details and recipient details are the same.",
+            "Clicking on My details and recipient details are the same. checkbox"
+        )
+
+        await step("Verify that No payment method selected as default", async () => {
+            await checkoutpage.assertAttributeValue(checkoutpage.visaIcon, "aria-selected", "false",
+                "Assert that visa method isn't selected "
+            )
+
+            await checkoutpage.assertAttributeValue(checkoutpage.masterIcon, "aria-selected", "false",
+                "Assert that mastercard method isn't selected "
+            )
+
+            await checkoutpage.assertAttributeValue(checkoutpage.paypalIcon, "aria-selected", "false",
+                "Assert that paypal method isn't selected "
+            )
+
+            await checkoutpage.assertAttributeValue(checkoutpage.atomeIcon, "aria-selected", "false",
+                "Assert that atome method isn't selected "
+            )
+
+            await checkoutpage.assertAttributeValue(checkoutpage.googlepayIcon, "aria-selected", "false",
+                "Assert that googlepay method isn't selected "
+            )
+
+            await checkoutpage.assertHidden(checkoutpage.recipientContinueBtn,
+                "Assert the Recipient Continue button is hidden"
+            )
+        })
+        await checkoutpage.pause()
+        await step("Select paypal payment method", async () => {
+            await checkoutpage.click(checkoutpage.paypalIcon, "Select papal payment method")
+        })
+
+        await step("Verify recipient continue button is displayed", async () => {
+            await checkoutpage.assertVisible(checkoutpage.recipientContinueBtn,
+                "Assert the Recipient Continue button is displayed"
+            )
+        })
+
+        await step("Click recipient continue button", async () => {
+            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on recipient continue button")
+        })
+
+        await step("Verify the current step 3 status", async () => {
+            await checkoutpage.assertEqual(await checkoutpage.isCheckoutStepDone("Payment"), true,
+                "Assert current step 3 status is Done: true"
+            )
+        })
     })
 })
