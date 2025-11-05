@@ -54,7 +54,18 @@
     "email": "Email",
     "password": "Password (at least 8 characters)",
     "confirmpassword": "Confirm Password",
-    "getnewsrequest": "Please add me to Samsonite's mailing list."
+    "getnewsrequest": "Please add me to Samsonite's mailing list.",
+    "titlemsg": "Please select an item in the list",
+    "fnamemsg": "Please fill out this field.",
+    "lnamemsg": "Please fill out this field.",
+    "phonemsg": "Please fill out this field.",
+    "emailmsg": "Please fill out this field.",
+    "passmsg": "Please fill out this field.",
+    "confirmpassmsg": "Please fill out this field.",
+    "poplicymsg": "Please check this box if you want to proceed.",
+    "notmatchmsg":"Does not match the password",
+    "dobmsg":"Please select an item in the list"
+
   },
   "membershippage": {
     "title": ""

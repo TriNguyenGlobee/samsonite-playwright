@@ -25,7 +25,20 @@ export class RegisterPage extends BasePage {
     readonly termsConditionLabel: Locator;
     readonly termsConditionCheckboxEn: Locator;
     readonly termsConditionCheckboxJp: Locator;
-    readonly createAccountButton: Locator;
+    readonly createAccountButtonEn: Locator;
+
+    //tam added
+    readonly titleMsg: Locator;
+    readonly fNameMsg: Locator;
+    readonly lNameMsg: Locator;
+    readonly phoneMsg: Locator;
+    readonly dobMsg: Locator;
+    readonly emailMsg: Locator;
+    readonly passwordMsg: Locator;
+    readonly confirmPasswordMsg: Locator;
+    readonly policyMsg: Locator;
+    readonly titleDropdown: Locator;
+    readonly NotMatchMsg: Locator
 
     constructor(page: Page) {
         super(page);
@@ -49,7 +62,19 @@ export class RegisterPage extends BasePage {
         this.termsConditionLabel = page.locator(``);
         this.termsConditionCheckboxEn = page.locator(`//label[@for="accept-terms-condition" and normalize-space(.)="Agree to Privacy Policy, User Agreement and Personal Information Collection Statement."]`);
         this.termsConditionCheckboxJp = page.locator(`//label[span[normalize-space(text())="会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"]]`);
-        this.createAccountButton = page.locator(``);
+        //tam added
+        this.createAccountButtonEn = page.locator(`//button[@type='submit' and contains(text(),"Create Account")]`);
+        this.titleMsg = page.locator('//div[contains(text(), "Please select an item in the list")]')
+        this.fNameMsg = page.locator('//input[@id="registration-form-fname"]/following-sibling::div[contains(text(),"Please fill out this field.")]')
+        this.lNameMsg = page.locator('//input[@id="registration-form-lname"]/following-sibling::div[contains(text(),"Please fill out this field.")]')
+        this.phoneMsg = page.locator('//input[@id="registration-form-phone"]/following-sibling::div[contains(text(),"Please fill out this field.")]')
+        this.emailMsg = page.locator('//input[@id="registration-form-email"]/following-sibling::div[contains(text(),"Please fill out this field.")]')
+        this.passwordMsg = page.locator('//input[@id="registration-form-password"]/following-sibling::div[contains(text(),"Please fill out this field.")]')
+        this.confirmPasswordMsg = page.locator('//input[@id="registration-form-password-confirm"]/following-sibling::div[contains(text(),"Please fill out this field.")]')
+        this.policyMsg = page.locator('//div[contains(text(), "Please check this box if you want to proceed")]')
+        this.titleDropdown = page.locator('//select[@id="registration-form-title"]')
+        this.NotMatchMsg = page.locator('//input[@id="registration-form-password-confirm"]/following-sibling::div[contains(text(),"Does not match the password")]')
+        this.dobMsg = page.locator('//div[contains(@class, "row birth-date")]//div[contains(text(), "Please select an item in the list")]')
     }
 
     // =========================
@@ -87,7 +112,9 @@ export class RegisterPage extends BasePage {
                 this.passwordTextbox,
                 this.confirmPasswordTextbox,
                 this.getNewsRegisterLabel,
-                this.termsConditionCheckboxJp
+                this.termsConditionCheckboxJp,
+                //tam added
+                this.createAccountButtonEn
             ];
             for (const locator of elementsToCheck) {
                 if (!locator.isVisible()) {
@@ -104,8 +131,140 @@ export class RegisterPage extends BasePage {
         }
     }
 
+    //Tam Added
+    async clickCreateAccountButton(){
+        await this.createAccountButtonEn.click();
+    }
+
+     async submitWithoutTitle(){
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@123')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+async submitWithoutFirtname(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@123')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+async submitWithoutLastname(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@123')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+ async submitWithoutPhone(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@123')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+ async submitWithouEmail(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@123')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+async submitWithouPassword(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('')
+        await this.confirmPasswordTextbox.fill('Globee@123')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+async submitWithInvalidCP(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.dayDropdown.selectOption('12')
+        await this.monthDropdown.selectOption('12')
+        await this.yearDropdown.selectOption('2002')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@1234')
+        await this.termsConditionCheckboxEn.check()
+
+        await this.createAccountButtonEn.click();
+}
+
+async submitWithoutDOB(){
+        await this.titleDropdown.selectOption('Mr.')
+        await this.firstNameTextbox.fill('Dev Globee')
+        await this.lastNameTextbox.fill('Test')
+        await this.phoneNumberTextbox.fill('80001000')
+        await this.emailTexbox.fill('globeetesting+123@gmail.com')
+        await this.passwordTextbox.fill('Globee@123')
+        await this.confirmPasswordTextbox.fill('Globee@1234')
+        await this.termsConditionCheckboxEn.check()
+        await this.dayDropdown.selectOption('')
+        await this.monthDropdown.selectOption('')
+        await this.yearDropdown.selectOption('')
+
+        await this.createAccountButtonEn.click();
+}
     // =========================
     // ✅ Assertions
     // =========================
+
 
 }
