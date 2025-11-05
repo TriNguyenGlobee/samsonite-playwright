@@ -13,3 +13,13 @@ export function loadTestData() {
     throw new Error(`Test data not found for ENV=${ENV}, LOCALE=${LOCALE}. Path tried: ${dataPath}`);
   }
 }
+export function registerCustomerDetailLoad() {
+  const dataPath = path.resolve(__dirname, `${ENV}/${LOCALE}/data.ts`);
+
+  try {
+    const data = require(dataPath);
+    return data;
+  } catch (err) {
+    throw new Error(`Test data not found for ENV=${ENV}, LOCALE=${LOCALE}. Path tried: ${dataPath}`);
+  }
+}

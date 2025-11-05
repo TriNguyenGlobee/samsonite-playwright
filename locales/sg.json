@@ -47,6 +47,7 @@
     "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
     "pageTitle": "Create Account",
     "customerdetailslabel": "Customer details",
+    "titlelabel": "Title",
     "lastname": "Last Name",
     "firstname": "First Name",
     "phonenumber": "Phone Number",
@@ -55,9 +56,17 @@
     "password": "Password (at least 8 characters)",
     "confirmpassword": "Confirm Password",
     "getnewsrequest": "Please add me to Samsonite's mailing list.",
-    "dropdownMsg": "Please select an item in the list",
+    "requiretitlemsg": "Please select an item in the list",
+    "invalidDOBMsg": "Please select an item in the list",
     "createaccountbtn": "Create Account",
-    "passwordMsg": "Min. 8 characters"
+    "invalidpasswordlimitMsg": "Min. 8 characters",
+    "invalidconfirmpasswordlimitMsg": "Min. 8 characters",
+    "requireemailmsg": "Please fill out this field.",
+    "requirefirstnamemsg": "Please fill out this field.",
+    "requirelastnamemsg": "Please fill out this field.",
+    "requirephonemsg": "Please fill out this field.",
+    "requirepwmsg": "Please fill out this field.",
+    "requireconfirmpwmsg": "Please fill out this field."
   },
   "membershippage": {
     "title": ""

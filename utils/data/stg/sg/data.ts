@@ -344,3 +344,114 @@ export const subMenuDataSamsoniteRed = [
         text: "Bags"
     }
 ]
+export const checkoutWithoutData = {
+}
+export const checkoutWithoutFirstName = {
+    title: "Miss",
+    lastName: "Globee",
+    phone: "99999999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetest@yopmail.com",
+    password: "Globee@123",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithoutLastName = {
+    title: "Miss",
+    firstName: "Globee",
+    phone: "99999999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetest@yopmail.com",
+    password: "Globee@123",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithoutPhone = {
+    title: "Miss",
+    firstName: "Globee",
+    lastName: "Globee",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetest@yopmail.com",
+    password: "Globee@123",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithoutDOB = {
+    title: "Miss",
+    firstName: "Globee",
+    lastName: "Globee",
+    phone: "99999999",
+    email: "globeetest@yopmail.com",
+    password: "Globee@123",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithoutEmail = {
+    title: "Miss",
+    firstName: "Test",
+    lastName: "Globee",
+    phone: "99999999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    password: "Globee@123",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithoutPassword = {
+    title: "Miss",
+    firstName: "Globee",
+    lastName: "Globee",
+    phone: "99999999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetest@yopmail.com",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithoutConfirmPassword = {
+    title: "Miss",
+    firstName: "Globee",
+    lastName: "Globee",
+    phone: "99999999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetest@yopmail.com",
+    password: "Globee@123",
+    termsCondition: true
+}
+export const checkoutWithInValidPassword = {
+    title: "Miss",
+    firstName: "Globee",
+    lastName: "Globee",
+    phone: "99999999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetest@yopmail.com",
+    password: "1",
+    confirmPassword: "1",
+    termsCondition: true
+}
+
+export const checkoutWithFullData = {
+    title: "Miss",
+    firstName: "Globee",
+    lastName: "Globee",
+    phone: "98007999",
+    day: "1",
+    month: "1",
+    year: "2000",
+    email: "globeetestsssg_0511_1@yopmail.com",
+    password: "Globee@123",
+    confirmPassword: "Globee@123",
+    termsCondition: true
+}

@@ -27,14 +27,14 @@ export class RegisterPage extends BasePage {
     readonly termsConditionCheckboxJp: Locator;
     readonly createAccountButton: Locator;
     readonly titleDropdown: Locator;
-    readonly titleMsg: Locator;
-    readonly firstNameMsg: Locator;
-    readonly lastNameMsg: Locator;
-    readonly phoneNumberMsg: Locator;
-    readonly dateOfBirthMsg: Locator;
-    readonly emailMsg: Locator;
-    readonly passwordMsg: Locator;
-    readonly confirmpasswordMsg: Locator;
+    readonly titleTextBoxMsg: Locator;
+    readonly firstNameTextBoxMsg: Locator;
+    readonly lastNameTextBoxMsg: Locator;
+    readonly phoneNumberTextBoxMsg: Locator;
+    readonly dateOfBirthTextBoxMsg: Locator;
+    readonly emailTextBoxMsg: Locator;
+    readonly passwordTextBoxMsg: Locator;
+    readonly confirmpasswordTextBoxMsg: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -60,19 +60,69 @@ export class RegisterPage extends BasePage {
         this.termsConditionCheckboxJp = page.locator(`//label[span[normalize-space(text())="会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"]]`);
         this.createAccountButton = page.locator(`//button[@type="submit" and normalize-space(text())="${t.registerpage('createaccountbtn')}"]`);
         this.titleDropdown = page.locator('//select[@id="registration-form-title"]');
-        this.titleMsg = page.locator('//select[@id="registration-form-title"]//following-sibling::div[@class="invalid-feedback"]');
-        this.firstNameMsg = page.locator('//input[@id="registration-form-fname"]//following-sibling::div[@class="invalid-feedback"]');
-        this.lastNameMsg = page.locator ('//input[@id="registration-form-lname"]//following-sibling::div[@class="invalid-feedback"]');
-        this.phoneNumberMsg = page.locator('//input[@id="registration-form-phone"]//following-sibling::div[@class="invalid-feedback"]');
-        this.dateOfBirthMsg = page.locator('//input[@id="dob-combining"]//following-sibling::div[@class="invalid-feedback"]');
-        this.emailMsg = page.locator('//input[@id="registration-form-email"]//following-sibling::div[@class="invalid-feedback"]');
-        this.passwordMsg = page.locator('//input[@id="registration-form-password"]//following-sibling::div[@class="invalid-feedback"]');
-        this.confirmpasswordMsg = page.locator('//input[@id="registration-form-password-confirm"]//following-sibling::div[@class="invalid-feedback"]');
+        this.titleTextBoxMsg = page.locator('//select[@id="registration-form-title"]//following-sibling::div[@class="invalid-feedback"]');
+        this.firstNameTextBoxMsg = page.locator('//input[@id="registration-form-fname"]//following-sibling::div[@class="invalid-feedback"]');
+        this.lastNameTextBoxMsg = page.locator('//input[@id="registration-form-lname"]//following-sibling::div[@class="invalid-feedback"]');
+        this.phoneNumberTextBoxMsg = page.locator('//input[@id="registration-form-phone"]//following-sibling::div[@class="invalid-feedback"]');
+        this.dateOfBirthTextBoxMsg = page.locator('//input[@id="dob-combining"]//following-sibling::div[@class="invalid-feedback"]');
+        this.emailTextBoxMsg = page.locator('//input[@id="registration-form-email"]//following-sibling::div[@class="invalid-feedback"]');
+        this.passwordTextBoxMsg = page.locator('//input[@id="registration-form-password"]//following-sibling::div[@class="invalid-feedback"]');
+        this.confirmpasswordTextBoxMsg = page.locator('//input[@id="registration-form-password-confirm"]//following-sibling::div[@class="invalid-feedback"]');
     }
 
     // =========================
     // 🚀 Actions
     // =========================
+    async fillCustomerDetailsForm(page: Page, data: registerCustomerDetailLoad, description?: string): Promise<void> {
+        await step(description || "Fill customer detail form", async () => {
+
+            if (data.title) {
+                await this.titleDropdown.selectOption(data.title);
+            }
+
+            if (data.firstName) {
+                await this.type(this.firstNameTextbox, data.firstName, `Fill firstname: ${data.firstName}`);
+            }
+
+            if (data.lastName) {
+                await this.type(this.lastNameTextbox, data.lastName, `Fill lastname: ${data.lastName}`);
+            }
+
+            if (data.phone) {
+                await this.type(this.phoneNumberTextbox, data.phone, `Fill phone number: ${data.phone}`);
+            }
+
+            if (data.day) {
+                await this.dayDropdown.selectOption(data.day);
+            }
+
+            if (data.month) {
+                await this.monthDropdown.selectOption(data.month);
+            }
+
+            if (data.year) {
+                await this.yearDropdown.selectOption(data.year);
+            }
+
+            if (data.email) {
+                await this.type(this.emailTexbox, data.email, `Fill email: ${data.email}`);
+            }
+
+            if (data.password) {
+                await this.type(this.passwordTextbox, data.password, `Fill password`);
+            }
+
+            if (data.confirmPassword) {
+                await this.type(this.confirmPasswordTextbox, data.confirmPassword, `Fill confirm password`);
+            }
+
+            if (data.termsCondition) {
+                await this.termsConditionCheckboxEn.check();
+            }
+
+            await this.click(this.createAccountButton, "Click create account button");
+        });
+    }
 
 
     // =========================
@@ -121,47 +171,29 @@ export class RegisterPage extends BasePage {
             return false;
         }
     }
-    async register(title:string, firstname:string, lastname:string, phonenumber:string, day:string, month:string, year:string, email:string, password:string, confirmpassword: string){
-        await step(`Select title: ${title}`, async () => {
-            await this.titleDropdown.selectOption(title);
-        });
-        await step(`Type first name: ${firstname}`, async () => {
-            await this.type(this.firstNameTextbox, firstname, "Type first name");
-        });
-        await step(`Type last name: ${lastname}`, async () => {
-            await this.type(this.lastNameTextbox, lastname, "Type last name");
-        });
-        await step(`Type phone number: ${phonenumber}`, async () => {
-            await this.type(this.phoneNumberTextbox, phonenumber, "Type phone number");
-        });
-        await step(`Select day: ${day}`, async () => {
-            await this.dayDropdown.selectOption(day);
-        });
-        await step(`Select month: ${month}`, async () => {
-            await this.monthDropdown.selectOption(month);
-        });
-        await step(`Select year: ${year}`, async () => {
-            await this.yearDropdown.selectOption(year);
-        });
-        await step(`Type email: ${email}`, async () => {
-            await this.type(this.emailTexbox, email, "Type email");
-        });
-        await step(`Type password: ${password}`, async () => {
-            await this.type(this.passwordTextbox, password, "Type password");
-        });
-        await step(`Type confirm password: ${confirmpassword}`, async () => {
-            await this.type(this.confirmPasswordTextbox, confirmpassword, "Type confirm password");
-        });
-        await step(`Check termsCondition`, async () => {
-            await this.termsConditionCheckboxEn.check();
-        });
-        await step(`Click create account button`, async () => {
-            await this.click(this.createAccountButton, "Click create account button");
-        });
+
+// =========================
+// ✅ Assertions
+// =========================
+    async assertFeedbackMsg(page: Page, label: string, msg: string, description?: string) {
+        await step(description || "Assert invalid feedback under fields", async () => {
+            const invalid_msg = this.page.locator(`//div[label[normalize-space(text())="${label}"]]//input/following-sibling::div[@class="invalid-feedback"]`)
+            await this.assertText(invalid_msg, msg, `Invalid feedback under ${label} field should be: ${msg}`)
+        })
     }
-
-    // =========================
-    // ✅ Assertions
-    // =========================
-
 }
+
+export type registerCustomerDetailLoad = {
+    title?: string;
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+    day?: string;
+    month?: string;
+    year?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+    termsCondition?: boolean;
+};
+
