@@ -32,9 +32,10 @@ test.describe("Register with negative case", () => {
         const { checkoutWithoutData } = registerCustomerDetailLoad();
         await step("Fill your detail without data", async () => {
             await registerPage.fillCustomerDetailsForm(basicAuthPage, checkoutWithoutData)
-        })
+        });
         await registerPage.click(registerPage.createAccountButton, "Click on Create Account button")
-        await registerPage.assertFeedbackMsg(basicAuthPage, t.registerpage('email'), t.registerpage('requireemailmsg'),
+        await step ("Verify Feedback Msg displayed under fields correctly", async () => {
+            await registerPage.assertFeedbackMsg(basicAuthPage, t.registerpage('email'), t.registerpage('requireemailmsg'),
             "Assert invalid msg under email field should be: Please fill out this field.")
         await registerPage.assertFeedbackMsg(basicAuthPage, t.registerpage('firstname'), t.registerpage('requirefirstnamemsg'),
             "Assert invalid msg under firstname field should be: Please fill out this field.")
@@ -46,6 +47,7 @@ test.describe("Register with negative case", () => {
             "Assert invalid msg under password field should be: Please fill out this field.")
         await registerPage.assertFeedbackMsg(basicAuthPage, t.registerpage('confirmpassword'), t.registerpage('requireconfirmpwmsg'),
             "Assert invalid msg under confirmpassword field should be: Please fill out this field.")
+        });
     });
     test("3. Click Create account button without first name", async ({ basicAuthPage }) => {
         const registerPage = new RegisterPage(basicAuthPage)
