@@ -316,6 +316,11 @@ test.describe("Footer links Groups", async () => {
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
         const loginpage = createLoginPage(basicAuthPage)
 
+        await step("Login with valid account", async () => {
+            await globalnavfooterpage.goToLoginRegisterPage()
+            await loginpage.login(Config.credentials.username, Config.credentials.password)
+        })
+
         await steps(["sg"], "Verify that Track Order link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Track Order"),
                 t.globalnavfooter('trackorderURL'),
@@ -356,11 +361,6 @@ test.describe("Footer links Groups", async () => {
                 t.globalnavfooter('membershipURL'),
                 "Assert navigated URL when clicking Membership link", "middle"
             )
-        })
-
-        await step("Go to login page", async () => {
-            await globalnavfooterpage.goToLoginRegisterPage()
-            await loginpage.login(Config.credentials.username, Config.credentials.password)
         })
 
         await steps(["sg", "jp"], "Verify that Sign In link", async () => {

@@ -1,8 +1,8 @@
 export const carouselItems = [
-    { href: 'newsdetail?id=news-samsonite-jp-2025-10-01-jet-biz3-campaign', hasImage: true },
+    { href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim-khaki/', hasImage: true },
+    { href: 'newsdetail?id=news-samsonite-jp-2025-11-01-epid4-campaign', hasImage: true },
+    { href: 'search?q=suede&srule=predictive-search-sorting&lang=ja_JP', hasImage: true },
     { href: 'https://ssjp.stg.samsonite-asia.com/paralux/', hasImage: true },
-    { href: 'newsdetail?id=news-samsonite-jp-2025-10-01-richmond2-campaign', hasImage: true },
-    { href: 'search?q=hartmann-tweed&srule=predictive-search-sorting&lang=ja_JP', hasImage: true },
 ];
 
 export const hightlightCategoryItems = [
@@ -20,20 +20,20 @@ export const recommendedProductItems = [
 
 export const campaignData = [
     {
-        href: "/newsdetail?id=news-samsonite-jp-2025-08-13-evoaz-campaign",
-        rightSideTitleText: "EVOA Z 限定色シルバーと新モデルをチェック",
+        href: "https://ssjp.stg.samsonite-asia.com/samsonite/c-lite/spinner55exp/aluminium/ss-141368-1004.html",
+        rightSideTitleText: "C-LITE 限定色アルミニウムをチェック",
         hasImage: true
     }
 ]
 
 // --- New Arrivals ---
 export const newArrivalsItem = [
-    { text: 'ジェットビズ3 115周年限定モデル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/jet_biz3/2way_bag_exp-115/black/ss-158122-1041.html' },
-    { text: 'パラリュクス', href: 'https://ssjp.stg.samsonite-asia.com/samsonite/paralux-hs/spinner55exp/midnight-navy/ss-156523-1552.html' },
+    { text: 'サブリム限定モデル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim-khaki/' },
+    { text: 'スエードぺブル', href: 'https://ssjp.stg.samsonite-asia.com/search?q=suede&srule=predictive-search-sorting&lang=ja_JP' },
+    { text: 'モダス', href: "https://ssjp.stg.samsonite-asia.com/samsonite/modus/spinner69exp/ivory/ss-160039-1451.html" },
     { text: 'エスプルム', href: "https://ssjp.stg.samsonite-asia.com/search?q=esplum&srule=predictive-search-sorting&lang=ja_JP" },
-    { text: 'ハートマンツイード', href: "https://ssjp.stg.samsonite-asia.com/search?q=hartmann-tweed&srule=predictive-search-sorting&lang=ja_JP" },
+    { text: 'パラリュクス', href: "https://ssjp.stg.samsonite-asia.com/samsonite/paralux-hs/spinner67exp/midnight-navy/ss-156525-1552.html" },
     { text: 'リッチモンド 2', href: "https://ssjp.stg.samsonite-asia.com/search?q=richmond2&srule=predictive-search-sorting&lang=ja_JP" },
-    { text: 'サブリム115周年限定モデル', href: "https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim115/" },
     { text: 'すべて見る', href: "https://ssjp.stg.samsonite-asia.com/new-arrivals/" }
 ]
 
