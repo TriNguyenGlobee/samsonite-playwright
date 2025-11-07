@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t } from "../../../../utils/helpers/helpers";
+import { selectComboboxOption, selectDropdownOption, t } from "../../../../utils/helpers/helpers";
 import { Config } from "../../../../config/env.config";
 import { step } from "allure-js-commons";
 
@@ -26,6 +26,17 @@ export class RegisterPage extends BasePage {
     readonly termsConditionCheckboxEn: Locator;
     readonly termsConditionCheckboxJp: Locator;
     readonly createAccountButton: Locator;
+    readonly titleDropdown: Locator;
+    readonly titleMsg: Locator;
+    readonly firstNameMsg: Locator;
+    readonly lastNameMsg: Locator;
+    readonly phoneNumberMsg: Locator;
+    readonly dateOfBirthMsg: Locator;
+    readonly emailMsg: Locator;
+    readonly passwordMsg: Locator;
+    readonly confirmpasswordMsg: Locator;
+    readonly termsConditionMsg: Locator;
+
 
     constructor(page: Page) {
         super(page);
@@ -49,9 +60,19 @@ export class RegisterPage extends BasePage {
         this.termsConditionLabel = page.locator(``);
         this.termsConditionCheckboxEn = page.locator(`//label[@for="accept-terms-condition" and normalize-space(.)="Agree to Privacy Policy, User Agreement and Personal Information Collection Statement."]`);
         this.termsConditionCheckboxJp = page.locator(`//label[span[normalize-space(text())="会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"]]`);
-        this.createAccountButton = page.locator(``);
-    }
+        this.createAccountButton = page.locator('//button[@type="submit" and contains(., "Create Account")]');
+        this.titleDropdown = page.locator('//select[@id="registration-form-title"]');
+        this.titleMsg = page.locator('//select[@id="registration-form-title"]//following-sibling::div[@class="invalid-feedback"]');
+        this.firstNameMsg = page.locator('//input[@id="registration-form-fname"]//following-sibling::div[@class="invalid-feedback"]');
+        this.lastNameMsg = page.locator ('//input[@id="registration-form-lname"]//following-sibling::div[@class="invalid-feedback"]');
+        this.phoneNumberMsg = page.locator('//input[@id="registration-form-phone"]//following-sibling::div[@class="invalid-feedback"]');
+        this.dateOfBirthMsg = page.locator('//input[@id="dob-combining"]//following-sibling::div[@class="invalid-feedback"]');
+        this.emailMsg = page.locator('//input[@id="registration-form-email"]//following-sibling::div[@class="invalid-feedback"]');
+        this.passwordMsg = page.locator('//input[@id="registration-form-password"]//following-sibling::div[@class="invalid-feedback"]');
+        this.confirmpasswordMsg = page.locator('//input[@id="registration-form-password-confirm"]//following-sibling::div[@class="invalid-feedback"]');
+        this.termsConditionMsg = page.locator('//label[@for="accept-terms-condition"]/following-sibling::div[@class="invalid-feedback"]');
 
+    }
     // =========================
     // 🚀 Actions
     // =========================
@@ -104,8 +125,29 @@ export class RegisterPage extends BasePage {
         }
     }
 
+    async selectDateOfBirth (day: string, month: string, year: string){
+        await selectDropdownOption(this.page, this.dayDropdown, day);
+        await selectDropdownOption(this.page, this.monthDropdown, month);
+        await selectDropdownOption(this.page, this.yearDropdown, year);
+    }
+
+    async fillValidData (){
+        await selectDropdownOption (this.page, this.titleDropdown, 'Miss');
+        await this.type(this.firstNameTextbox, 'Stg first name');
+        await this.type(this.lastNameTextbox, 'stg last name');
+        await this.type(this.phoneNumberTextbox, '85000123');
+        await this.selectDateOfBirth('10', '10', '1999');
+        await this.type(this.emailTexbox, `stg-test${Date.now()}@yopmail.com`);
+        await this.type(this.passwordTextbox, 'Globee@123');
+        await this.type(this.confirmPasswordTextbox, 'Globee@123');
+        await this.clickCheckboxByLabel(this.page, 'Agree to Privacy Policy, User Agreement and Personal Information Collection Statement.');
+    }
+
+    async clickCreateAccountButton (){
+        await this.click(this.createAccountButton);
+    }
+
     // =========================
     // ✅ Assertions
     // =========================
-
 }
