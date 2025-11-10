@@ -13,16 +13,19 @@ export class CartPageSG extends CartPage {
     async getShippingDiscount(): Promise<string> {
         const shippingDiscount_1 = this.page.locator(`(//div[contains(@class,"cart-page")]//span[@class="applied-promotion-discount"])[1]`)
         const shippingDiscount_2 = this.page.locator(`(//div[contains(@class,"cart-page")]//span[@class="applied-promotion-discount"])[2]`)
-        let shipingDiscount_1_num: number
-        let shipingDiscount_2_num: number
+        let shippingDiscount_1_num: number
+        let shippingDiscount_2_num: number
 
-        shipingDiscount_1_num = await extractNumber((await shippingDiscount_1.innerText()).trim())
+        shippingDiscount_1_num = await extractNumber((await shippingDiscount_1.innerText()).trim())
+
+        console.log(`shippingDiscount_1_num: ${shippingDiscount_1_num}`)
 
         if (await shippingDiscount_2.isVisible()) {
-            shipingDiscount_2_num = await extractNumber((await shippingDiscount_2.innerText()).trim())
-        }
+            shippingDiscount_2_num = await extractNumber((await shippingDiscount_2.innerText()).trim())
+            console.log(`shippingDiscount_1_num: ${shippingDiscount_1_num}`)
+        } else shippingDiscount_2_num = 0 
 
-        return (shipingDiscount_1_num + shipingDiscount_2_num!).toString()
+        return (shippingDiscount_1_num + shippingDiscount_2_num!).toString()
     }
 
     // =========================

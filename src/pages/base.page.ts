@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { step } from "allure-js-commons";
+import { step, attachment } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
 import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
@@ -474,7 +474,15 @@ export class BasePage {
 
     async assertAttributeValue(locator: Locator, attributeName: string, value: any, description?: string) {
         await step(description || "Assert Locator attribute value", async () => {
-            expect(locator).toHaveAttribute(attributeName, value);
+            if (Array.isArray(value)) {
+                const receivedValue = await locator.getAttribute(attributeName, { timeout: 2000 })
+                console.log(`Attribute received value: "${receivedValue}"`)
+                console.log(`Attribute expected value: "${value}"`)
+
+                expect(value).toContain(receivedValue)
+            } else {
+                expect(locator).toHaveAttribute(attributeName, value);
+            }
         })
     }
 

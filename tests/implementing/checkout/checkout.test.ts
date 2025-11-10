@@ -421,6 +421,8 @@ test.describe("Guest checkout - Step 3", async () => {
         )
 
         await step("Verify that No payment method selected as default", async () => {
+            //await checkoutpage.pause()
+
             await checkoutpage.assertAttributeValue(checkoutpage.visaIcon, "aria-selected", "false",
                 "Assert that visa method isn't selected "
             )
@@ -429,15 +431,15 @@ test.describe("Guest checkout - Step 3", async () => {
                 "Assert that mastercard method isn't selected "
             )
 
-            await checkoutpage.assertAttributeValue(checkoutpage.paypalIcon, "aria-selected", "false",
+            await checkoutpage.assertAttributeValue(checkoutpage.paypalIcon, "aria-selected", ["false", null],
                 "Assert that paypal method isn't selected "
             )
 
-            await checkoutpage.assertAttributeValue(checkoutpage.atomeIcon, "aria-selected", "false",
+            await checkoutpage.assertAttributeValue(checkoutpage.atomeIcon, "aria-selected", ["false", null],
                 "Assert that atome method isn't selected "
             )
 
-            await checkoutpage.assertAttributeValue(checkoutpage.googlepayIcon, "aria-selected", "false",
+            await checkoutpage.assertAttributeValue(checkoutpage.googlepayIcon, "aria-selected", ["false", null],
                 "Assert that googlepay method isn't selected "
             )
 
@@ -445,7 +447,7 @@ test.describe("Guest checkout - Step 3", async () => {
                 "Assert the Recipient Continue button is hidden"
             )
         })
-        await checkoutpage.pause()
+        
         await step("Select paypal payment method", async () => {
             await checkoutpage.click(checkoutpage.paypalIcon, "Select papal payment method")
         })

@@ -204,13 +204,13 @@ test.describe("Add products to cart without login", () => {
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
         const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
-        //console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}` )
+        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}` )
 
         const firstMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
         const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
 
-        //console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}` )
+        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}` )
 
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const totalPrice = await extractNumber(await minicart.getTotalPrice());

@@ -20,9 +20,12 @@ export class MinicartPageSG extends MinicartPage {
 
         shippingDiscount_1_num = await extractNumber((await shippingDiscount_1.innerText()).trim())
 
+        console.log(`shippingDiscount_1_num: ${shippingDiscount_1_num}`)
+
         if (await shippingDiscount_2.isVisible()) {
             shippingDiscount_2_num = await extractNumber((await shippingDiscount_2.innerText()).trim())
-        }
+            console.log(`shippingDiscount_2_num: ${shippingDiscount_2_num}`)
+        } else shippingDiscount_2_num = 0
 
         return (shippingDiscount_1_num + shippingDiscount_2_num!).toString()
     }
