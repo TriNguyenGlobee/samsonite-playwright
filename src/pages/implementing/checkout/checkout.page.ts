@@ -25,6 +25,11 @@ export class CheckoutPage extends BasePage {
     readonly recipientLastName: Locator;
     readonly recipientPhone: Locator;
     readonly recipientContinueBtn: Locator;
+    readonly visaIcon: Locator;
+    readonly masterIcon: Locator;
+    readonly paypalIcon: Locator;
+    readonly atomeIcon: Locator;
+    readonly googlepayIcon: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -47,6 +52,11 @@ export class CheckoutPage extends BasePage {
         this.recipientLastName = this.recipientSection.locator(`xpath=.//input[@id="shippingLastName"]`)
         this.recipientPhone = this.recipientSection.locator(`xpath=.//input[@id="shippingPhoneNumber"]`)
         this.recipientContinueBtn = this.recipientSection.locator(`xpath=.//button[@type="submit"]`)
+        this.visaIcon = page.locator(`//li[@data-method-id="CREDIT_CARD" and @data-card-type="Visa"]//a`)
+        this.masterIcon = page.locator(`//li[@data-method-id="CREDIT_CARD" and @data-card-type="MasterCard"]//a`)
+        this.paypalIcon = page.locator(`//li[@data-method-id="PayPal"]//a`)
+        this.atomeIcon = page.locator(`//li[@data-method-id="ATOME_PAYMENT"]//a`)
+        this.googlepayIcon = page.locator(`//li[@data-method-id="DW_GOOGLE_PAY"]//a`)
     }
 
     // =========================

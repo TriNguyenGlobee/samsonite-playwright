@@ -26,7 +26,7 @@ export class GlobalNavFooterPage extends BasePage {
         this.supportLinksGroups = this.navFooter.locator(`xpath=.//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('support')}"]`)
         this.ourcompanyLinksGroups = this.navFooter.locator(`xpath=.//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('ourcompany')}"]`)
         this.accountLinksGroups = this.navFooter.locator(`xpath=.//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('account')}"]`)
-        this.followusLinksGroups = this.navFooter.locator(`xpath=.//div[contains(@class,"col-12 col-sm-3")]//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('followus')}"]|//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('followus')}"]`)
+        this.followusLinksGroups = this.navFooter.locator(`xpath=.//div[@class="col-12 col-sm-7 row"]//div[contains(@class,"col-12 col-sm-3")]//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('followus')}"]|//div[@class="col-12 col-sm-7 row"]//div[@class="content-asset" and .//h5]//div[normalize-space(text())="${t.globalnavfooter('followus')}"]`)
         this.copyright = this.navFooter.locator(`xpath=.//div[@class="footer-copyright"]`)
     }
 
