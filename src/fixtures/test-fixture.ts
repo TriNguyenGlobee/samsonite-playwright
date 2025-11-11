@@ -43,7 +43,7 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
 
-    await stopWatchdog().catch(() => { });
+    await stopWatchdog()
     await page.close({ runBeforeUnload: false }).catch(() => { });
     await context.close().catch(() => { });
   },
@@ -78,7 +78,7 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
 
-    await stopWatchdog().catch(() => { });
+    await stopWatchdog()
     await page.close({ runBeforeUnload: false }).catch(() => { });
     await context.close().catch(() => { });
   },

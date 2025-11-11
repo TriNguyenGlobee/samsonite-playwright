@@ -2,8 +2,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 // Environment name
-export type EnvironmentName = 'dev' | 'stg' | 'prod';
-export type Locale = 'sg' | 'jp';
+export type EnvironmentName = 'dev' | 'stg';
+export type Locale = 'sg' | 'jp' | 'tw';
 
 interface Credentials {
     username: string;
@@ -43,6 +43,17 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             },
             basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
             basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
+        },
+        tw: {
+            baseURL: 'https://sstw.dev.samsonite-asia.com/',
+            credentials: {
+                username: process.env.DEV_USERNAME_TW as string,
+                password: process.env.DEV_PASSWORD_TW as string,
+                gg_username: process.env.DEV_GG_USERNAME_TW as string,
+                gg_password: process.env.DEV_GG_PASSWORD_TW as string
+            },
+            basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
+            basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
         }
 
     },
@@ -68,30 +79,17 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             },
             basicAuthUser: process.env.STG_BASIC_AUTH_USER,
             basicAuthPass: process.env.STG_BASIC_AUTH_PASS,
-        }
-    },
-    prod: {
-        sg: {
-            baseURL: 'https://www.samsonite.com.sg/',
-            credentials: {
-                username: process.env.PROD_USERNAME_SG as string,
-                password: process.env.PROD_PASSWORD_SG as string,
-                gg_username: process.env.PROD_GG_USERNAME_SG as string,
-                gg_password: process.env.PROD_GG_PASSWORD_SG as string
-            },
-            basicAuthUser: process.env.PROD_BASIC_AUTH_USER,
-            basicAuthPass: process.env.PROD_BASIC_AUTH_PASS,
         },
-        jp: {
-            baseURL: 'https://www.samsonite.co.jp/',
+        tw: {
+            baseURL: 'https://sstw.stg.samsonite-asia.com/',
             credentials: {
-                username: process.env.PROD_USERNAME_JP as string,
-                password: process.env.PROD_PASSWORD_JP as string,
-                gg_username: process.env.PROD_GG_USERNAME_JP as string,
-                gg_password: process.env.PROD_GG_PASSWORD_JP as string
+                username: process.env.STG_USERNAME_TW as string,
+                password: process.env.STG_PASSWORD_TW as string,
+                gg_username: process.env.STG_GG_USERNAME_TW as string,
+                gg_password: process.env.STG_GG_PASSWORD_TW as string
             },
-            basicAuthUser: process.env.PROD_BASIC_AUTH_USER,
-            basicAuthPass: process.env.PROD_BASIC_AUTH_PASS,
+            basicAuthUser: process.env.STG_BASIC_AUTH_USER,
+            basicAuthPass: process.env.STG_BASIC_AUTH_PASS,
         }
     }
 };

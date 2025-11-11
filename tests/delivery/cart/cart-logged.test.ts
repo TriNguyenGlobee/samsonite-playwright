@@ -221,7 +221,7 @@ test.describe("Add products to cart after login", () => {
         const cartpage = createCartPage(loggedInPage)
         const newarrivalspage = new NewArrivalsPage(loggedInPage)
 
-        const prodIndexes = [1, 2, 1];
+        const prodIndexes = [1, 2, 3];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
@@ -321,7 +321,7 @@ test.describe("Add products to cart after login", () => {
         const cartpage = createCartPage(loggedInPage)
         const newarrivalspage = new NewArrivalsPage(loggedInPage)
 
-        const prodIndexes = [1, 2, 1];
+        const prodIndexes = [1, 2, 3];
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 

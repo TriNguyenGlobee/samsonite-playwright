@@ -353,107 +353,41 @@ export async function selectDropdownOption(
  * @returns 
  */
 export async function closeModalIfPresent(page: Page): Promise<void> {
-  if (!page || page.isClosed()) return;
-
-  const isJPDev = process.env.LOCALE === "jp" && process.env.ENV === "dev";
-
   const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
   const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
   const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
+  const backDropLaleBtn = page.locator('//div[@id="staticBackdrop"]//button[@aria-label="Close"]')
 
   const modalsToCheck = [
     {
-      name: "Signup Modal",
+      name: 'Signup Modal',
       locator: modalCloseBtn.first(),
-      useJsClick: true,
-      containerSelector: "#staticBackdrop",
     },
     {
-      name: "Intent Cart Modal",
+      name: 'Intent Cart Modal',
       locator: intentCartCloseBtn.first(),
-      useJsClick: false,
-      containerSelector: "#mcp-exit-intent-cart",
     },
     {
-      name: "Popup Container",
+      name: 'Popup Container',
       locator: popupContainerBtn.first(),
-      useJsClick: false,
-      containerSelector: ".popup-container",
+    },
+    {
+      name: 'Back Drop Label',
+      locator: backDropLaleBtn.first(),
     },
   ];
 
   for (const modal of modalsToCheck) {
-    const { name, locator, useJsClick, containerSelector } = modal;
-
-    if (page.isClosed()) return;
-
-    let isAttached = false;
-    try {
-      isAttached = await locator.evaluate((el) => !!el).catch(() => false);
-    } catch {
-      continue;
-    }
-    if (!isAttached) continue;
-
-    const isVisible = await locator.isVisible().catch(() => false);
-    if (!isVisible) continue;
-
-    console.log(`${name} detected → Closing it...`);
-
-    try {
-      if (useJsClick && isJPDev) {
-        await page.evaluate(() => {
-          const btn = document.querySelector(".close-signup-popup") as HTMLElement | null;
-          btn?.click();
-        });
-      } else {
-        const maxRetries = 2;
-        for (let attempt = 1; attempt <= maxRetries; attempt++) {
-          try {
-            await locator.click();
-
-            await page.waitForSelector('//div[@id="staticBackdrop"]', {
-              state: 'hidden',
-              timeout: 5000,
-            });
-
-            console.log(`Signup Modal closed after ${attempt} attempt(s).`);
-            break;
-          } catch (e) {
-            if (attempt < maxRetries) {
-              console.log(`Signup Modal still visible (attempt ${attempt}), retrying...`);
-            } else {
-              console.warn("Signup Modal could not be closed after 3 attempts.", e);
-            }
-          }
-        }
-      }
-
-      await Promise.race([
-        page.waitForSelector(containerSelector, { state: "hidden", timeout: 3000 }).catch(() => { }),
-        page.waitForSelector(containerSelector, { state: "detached", timeout: 3000 }).catch(() => { }),
-        page.waitForFunction(
-          (sel) => {
-            const modal = document.querySelector(sel);
-            if (!modal) return true;
-            const style = getComputedStyle(modal);
-            return (
-              style.display === "none" ||
-              style.opacity === "0" ||
-              (modal.classList.contains("fade") && !modal.classList.contains("show"))
-            );
-          },
-          containerSelector,
-          { timeout: 3000 }
-        ).catch(() => { }),
-      ]);
-    } catch (err) {
-      if (/Target page.*closed/i.test(String(err))) {
-        console.log(`[closeModalIfPresent] ${name}: Page closed — safe to ignore`);
-        return;
-      }
-      console.warn(`[closeModalIfPresent] Failed to close ${name}:`, err);
-    }
+    const isVisible = await modal.locator.isVisible().catch(() => false);
+    if (isVisible) {
+      console.log(`${modal.name} detected → Closing it...`);
+      await modal.locator.click().catch((e) => {
+        console.warn(`Failed to click close for ${modal.name}:`, e);
+      });
+      await modal.locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
+        console.warn(`${modal.name} did not detach in time`);
+      });
+    } else {}
   }
 }
 

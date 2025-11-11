@@ -395,20 +395,23 @@ export class BasePage {
 
     async getProdCollection(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="product-collection"]`)
-
-        return (await prod.innerText()).trim()
+        const prodCollection = (await prod.innerText()).trim()
+        console.log(`Product collection: ${prodCollection}`)
+        return prodCollection
     }
 
     async getProdName(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
-
-        return (await prod.innerText()).trim()
+        const prodName = (await prod.innerText()).trim()
+        console.log(`Product Name: ${prodName}`)
+        return prodName
     }
 
     async getProdPrice(index: number): Promise<string> {
         const prod = this.page.locator(`(//div[@class="product"])[${index}]//span[@class="value"]`)
-
-        return (await prod.innerText()).trim()
+        const prodPrice = (await prod.innerText()).trim()
+        console.log(`Product Price: ${prodPrice}`)
+        return prodPrice
     }
 
     async getCartBadgeValue(): Promise<number> {

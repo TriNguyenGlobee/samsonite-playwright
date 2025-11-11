@@ -4,6 +4,7 @@ import { step } from "allure-js-commons";
 import { t, PageUtils, clickUntil, delay, handlePwpModalIfPresent } from "../../../../utils/helpers/helpers";
 
 export abstract class CartPage extends BasePage {
+    readonly logoImg: Locator;
     readonly removeProductButton: Locator;
     readonly pageTitle: Locator;
     readonly emptymsg: Locator;
@@ -21,9 +22,12 @@ export abstract class CartPage extends BasePage {
     readonly giftCheckbox: Locator;
     readonly addGiftButton: Locator;
     readonly removeGiftServiceButton: Locator;
+    readonly selectAddonItenModal: Locator;
+    readonly selectAddonItenModalBtn: Locator;
 
     constructor(page: Page) {
         super(page);
+        this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.removeProductButton = page.locator(`//div[contains(@class,"cart-page")]//div[@class="line-item-header"]//div[not(contains(@class,"hidden"))]//button[span]`)
         this.pageTitle = page.locator('//div[contains(@class,"title")]//h1');
         this.emptymsg = page.locator('//div[contains(@class,"cart-empty")]//h2')
@@ -41,6 +45,8 @@ export abstract class CartPage extends BasePage {
         this.giftCheckbox = this.giftPopup.locator(`xpath=.//label[@for="isGift"]`)
         this.addGiftButton = this.giftPopup.locator(`xpath=.//button[contains(@class,"add-gift")]`)
         this.removeGiftServiceButton = this.prodGiftRow.locator(`xpath=.//button[contains(@class,"remove-gift")]`)
+        this.selectAddonItenModal = page.locator(`//div[@class="modal-content" and .//span[text()="選擇加價購商品"]]`)
+        this.selectAddonItenModalBtn = this.selectAddonItenModal.locator(`xpath=.//button[@data-dismiss="modal"]`)
     }
 
     // =========================
@@ -89,6 +95,7 @@ export abstract class CartPage extends BasePage {
 
         for (const i of indices) {
             await PageUtils.waitForPageLoad(this.page)
+            
             const addButton = this.page.locator(`(//div[contains(@class,"product-tile")]//button[normalize-space(text())="${t.homepage('addtocart')}"])[${i}]`);
 
             await addButton.scrollIntoViewIfNeeded()
