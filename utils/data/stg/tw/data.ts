@@ -1,354 +1,376 @@
 export const carouselItems = [
-    { href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim-khaki/', hasImage: true },
-    { href: 'newsdetail?id=news-samsonite-jp-2025-11-01-epid4-campaign', hasImage: true },
-    { href: 'search?q=suede&srule=predictive-search-sorting&lang=ja_JP', hasImage: true },
-    { href: 'https://ssjp.stg.samsonite-asia.com/paralux/', hasImage: true },
+    { href: 'https://sstw.stg.samsonite-asia.com/2025-double-11/', hasImage: true },
+    { href: 'https://sstw.stg.samsonite-asia.com/2025-going-beyond-testing/', hasImage: true },
+    { href: 'https://sstw.stg.samsonite-asia.com/samsonite-red/toiis-ocean/spinner-55/20-fo-exp/ss-159411-1775.html', hasImage: true },
+    { href: 'https://sstw.stg.samsonite-asia.com/paralux/', hasImage: true },
+    { href: 'https://sstw.stg.samsonite-asia.com/2025-samsonite-red-fw25/', hasImage: true },
+    { href: 'https://sstw.stg.samsonite-asia.com/samsonite-lite-geo/', hasImage: true },
 ];
 
 export const hightlightCategoryItems = [
-    { href: 'https://ssjp.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'スーツケースを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'BACKPACKS', underText: 'バックパックを見る' },
-    { href: 'https://ssjp.stg.samsonite-asia.com/bags/', hasImage: true, aboveText: 'BAGS', underText: 'バッグを見る' },
+    { href: 'https://sstw.stg.samsonite-asia.com/bags/for-her/', hasImage: true, aboveText: '女性包款', underText: '簡約時尚' },
+    { href: 'https://sstw.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: '行李箱', underText: '自信出行' },
+    { href: 'https://sstw.stg.samsonite-asia.com/backpack/', hasImage: true, aboveText: '背包', underText: '實用機能' },
 ];
 
 export const recommendedProductItems = [
-    { buttonText: 'おすすめ', divClass: 'product-pills-1' },
-    { buttonText: '新着', divClass: 'product-pills-2' },
-    { buttonText: 'For Her', divClass: 'product-pills-3' },
-    { buttonText: 'For Him', divClass: 'product-pills-4' }
+    { buttonText: '新品上市', divClass: 'product-pills-1' },
+    { buttonText: '最受歡迎', divClass: 'product-pills-2' },
+    { buttonText: '女性包款', divClass: 'product-pills-3' },
+    { buttonText: '男性包款', divClass: 'product-pills-4' }
 ];
 
 export const campaignData = [
     {
-        href: "https://ssjp.stg.samsonite-asia.com/samsonite/c-lite/spinner55exp/aluminium/ss-141368-1004.html",
-        rightSideTitleText: "C-LITE 限定色アルミニウムをチェック",
+        href: "https://sstw.stg.samsonite-asia.com/2025-evoa-z-collection/",
+        rightSideTitleText: "EVOA Z",
         hasImage: true
     }
 ]
 
 // --- New Arrivals ---
 export const newArrivalsItem = [
-    { text: 'サブリム限定モデル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim-khaki/' },
-    { text: 'スエードぺブル', href: 'https://ssjp.stg.samsonite-asia.com/search?q=suede&srule=predictive-search-sorting&lang=ja_JP' },
-    { text: 'モダス', href: "https://ssjp.stg.samsonite-asia.com/samsonite/modus/spinner69exp/ivory/ss-160039-1451.html" },
-    { text: 'エスプルム', href: "https://ssjp.stg.samsonite-asia.com/search?q=esplum&srule=predictive-search-sorting&lang=ja_JP" },
-    { text: 'パラリュクス', href: "https://ssjp.stg.samsonite-asia.com/samsonite/paralux-hs/spinner67exp/midnight-navy/ss-156525-1552.html" },
-    { text: 'リッチモンド 2', href: "https://ssjp.stg.samsonite-asia.com/search?q=richmond2&srule=predictive-search-sorting&lang=ja_JP" },
-    { text: 'すべて見る', href: "https://ssjp.stg.samsonite-asia.com/new-arrivals/" }
+    { text: 'PARALUX', href: 'https://sstw.stg.samsonite-asia.com/paralux/' },
+    { text: 'EVOA Z', href: 'https://sstw.stg.samsonite-asia.com/samsonite/evoa-z/spinner-69/25-exp/ss-151101-1041.html' },
+    { text: 'ZIPPRIX', href: 'https://sstw.stg.samsonite-asia.com/samsonite/zipprix-ft/spinner-55/20-exp-ft/ss-154681-1596.html' },
+    { text: 'RED SS25', href: '/new-arrivals-red-ss25/' },
+    { text: 'C-LITE', href: 'https://sstw.stg.samsonite-asia.com/search?q=c-lite&srule=predictive-search-sorting&lang=zh_TW' },
+    { text: 'UNIMAX', href: '/new-arrivals-unimax/' },
+    { text: 'PRO-DLX 6', href: '/new-arrivals-pro-dlx6/' },
+    { text: '查看所有新品', href: 'https://sstw.stg.samsonite-asia.com/new-arrivals/' }
 ]
 
 // --- luggage-type ---
 export const typeItems = [
-    { text: 'ハード', href: '/luggage/type/hard/' },
-    { text: 'ソフト', href: '/luggage/type/soft/' },
-    { text: 'アルミ', href: '/luggage/type/aluminium/' },
-    { text: 'トランク', href: '/luggage/type/trunk/' },
-    { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/luggage/' }
+    { text: '硬箱', href: '/luggage/hardside/' },
+    { text: '軟箱', href: '/luggage/softside/' },
+    { text: '鋁框箱', href: '/luggage/aluminium/' },
+    { text: '查看所有行李箱', href: 'https://sstw.stg.samsonite-asia.com/luggage/' }
 ];
 
 // --- luggage-size ---
 export const sizeItems = [
-    { text: 'キャビン／機内持込 1〜3泊', href: 'https://ssjp.stg.samsonite-asia.com/luggage/機内持込' },
-    { text: 'ミディアム（中型）4〜6泊', href: 'https://ssjp.stg.samsonite-asia.com/luggage/ミディアム' },
-    { text: 'ラージ（大型）1週間以上', href: 'https://ssjp.stg.samsonite-asia.com/luggage/ラージ' }
+    { text: '小型 (18-21吋)', href: 'https://sstw.stg.samsonite-asia.com/luggage/登機' },
+    { text: '中型 (24-26吋)', href: 'https://sstw.stg.samsonite-asia.com/luggage/中型' },
+    { text: '大型 (27-30吋)', href: 'https://sstw.stg.samsonite-asia.com/luggage/大型' }
 ];
 
 // --- luggage-color ---
 export const colorItems = [
     {
-        text: 'モノトーン',
-        href: 'https://ssjp.stg.samsonite-asia.com/luggage/グレー_シルバー_ブラック_ホワイト'
+        text: '單色系',
+        href: 'https://sstw.stg.samsonite-asia.com/luggage/灰色_白色_銀色_黑色'
     },
     {
-        text: 'クールトーン',
-        href: 'https://ssjp.stg.samsonite-asia.com/luggage/グリーン_ネイビー_パープル_ブルー'
+        text: '冷色調',
+        href: 'https://sstw.stg.samsonite-asia.com/luggage/海軍藍色_紫色_綠色_藍色'
     },
     {
-        text: 'ウォームトーン',
-        href: 'https://ssjp.stg.samsonite-asia.com/luggage/イエロー_オレンジ_ピンク_レッド'
+        text: '暖色調',
+        href: 'https://sstw.stg.samsonite-asia.com/luggage/橙色_米啡色_粉紅色_紅色_黃色'
     },
     {
-        text: 'Special',
-        href: '/%E3%82%B9%E3%83%BC%E3%83%84%E3%82%B1%E3%83%BC%E3%82%B9/%E3%82%AB%E3%83%A9%E3%83%BC/special/'
+        text: '印花',
+        href: '/luggage/special/'
+    },
+    {
+        text: '查看所有顏色',
+        href: '/luggage/luggage-all-color/'
     }
 ];
 
 // --- luggage-smart-feature ---
 export const smartFeatureItems = [
     {
-        text: 'サスペンションホイール',
-        href: '/luggage/smart-feature/suspension-wheels/'
+        text: '雙層防盜拉鍊',
+        href: '/luggage-double-coil-zippers/'
     },
     {
-        text: 'ブレーキシステム',
-        href: '/luggage/smart-feature/easy-brake-system/'
+        text: '手控煞車',
+        href: '/luggage-easy-brake-system/'
     },
     {
-        text: 'マグネットファスナー',
-        href: '/luggage/smart-feature/magnetic-zippers/'
+        text: '磁性拉鍊',
+        href: '/luggage/magnetic-zippers/'
     },
     {
-        text: 'USBポート',
-        href: '/luggage/smart-feature/usb-port/'
+        text: '專利減震懸掛輪',
+        href: '/luggage/suspension-wheels/'
+    },
+    {
+        text: 'USB 充電接口',
+        href: '/luggage/usb-port/'
     }
 ];
 
 // --- luggage-brand ---
 export const brandItems = [
     {
-        text: 'サムソナイトのスーツケース',
-        href: '/luggage/brand/samsonite/'
+        text: 'Samsonite',
+        href: '/luggage/brand-samsonite/'
     },
     {
-        text: 'サムソナイト・ブラックレーベルのスーツケース',
-        href: '/luggage/brand/samsonite-black/'
+        text: 'Samsonite Black',
+        href: '/luggage/brand-samsonite-black/'
     },
     {
-        text: 'サムソナイト・レッドのスーツケース',
-        href: '/luggage/brand/samsonite-red/'
-    },
-    {
-        text: 'ハートマンのスーツケース',
-        href: '/luggage/brand/hartmann/'
-    }
-];
-
-// --- luggage-destination ---
-export const destinationItems = [
-    {
-        text: '都市',
-        href: '/luggage/destination/city/'
-    },
-    {
-        text: 'ビーチ',
-        href: '/luggage/destination/beach/'
-    },
-    {
-        text: 'アドベンチャー',
-        href: '/luggage/destination/adventure/'
-    },
-    {
-        text: 'ビジネス',
-        href: '/luggage/destination/business/'
+        text: 'Samsonite Red',
+        href: '/luggage/brand-samsonite-red/'
     }
 ];
 
 // --- luggage-collection ---
 export const collectionItems = [
     {
-        text: 'パラリュクス',
-        href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%83%91%E3%83%A9%E3%83%AA%E3%83%A5%E3%82%AF%E3%82%B9/'
+        text: 'C-LITE',
+        href: '/luggage-collection-c-lite/'
     },
     {
-        text: 'シーライト',
-        href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%82%B7%E3%83%BC%E3%83%A9%E3%82%A4%E3%83%88/'
+        text: 'MINTER',
+        href: '/luggage-collection-minter/'
     },
     {
-        text: 'ミンター',
-        href: 'https://ssjp.stg.samsonite-asia.com/search?q=minter&srule=predictive-search-sorting&lang=ja_JP'
+        text: 'EVOA Z',
+        href: '/luggage-collection-evoa-z/'
     },
     {
-        text: 'ジップリックスFT',
-        href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%82%B8%E3%83%83%E3%83%97%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9ft/'
+        text: 'UNIMAX',
+        href: '/luggage-collection-unimax/'
     },
     {
-        text: 'リッチモンド 2',
-        href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%83%AA%E3%83%83%E3%83%81%E3%83%A2%E3%83%B3%E3%83%89-2/'
-    },
-    {
-        text: 'COLLECTIONS',
-        href: 'https://ssjp.stg.samsonite-asia.com/search?cid=collection'
+        text: 'UPSCAPE',
+        href: '/luggage-collection-upscape/'
     }
 ];
 
 // --- backpack-type ---
 export const typeItemsBP = [
-    { text: 'レザー', href: '/backpack/type/leather/' },
-    { text: 'ナイロン', href: '/backpack/type/nylon/' },
-    { text: 'ポリエステル', href: '/backpack/type/polyester/' },
-    { text: 'ウィメンズ', href: "https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=bag&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アクエリアス%7Cアルヴァーノ%7Cカリッサ+エヴォ%7Cツイードぺブル%7Cハートマンリザーブ%7Cムーヴ+5.0&start=0&sz=18&useNewPLP=true"},
-    { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/' }
+    { text: '商務包款', href: '/backpacks/business/' },
+    { text: '休閒包款', href: '/backpacks/casual-backpacks/' },
+    { text: '女性包款', href: '/backpacks/for-her/' },
 ];
 
 // --- backpack-color ---
 export const colorItemsBP = [
-    { text: 'モノトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/その他_グレー_ブラック' },
-    { text: 'クールトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/グリーン_ネイビー_パープル_ブルー' },
-    { text: 'ウォームトーン', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/オレンジ_ピンク' }
+    { text: '單色系', href: 'https://sstw.stg.samsonite-asia.com/backpack/灰色_白色_銀色_黑色' },
+    { text: '冷色調', href: 'https://sstw.stg.samsonite-asia.com/backpack/海軍藍色_紫色_綠色_藍色' },
+    { text: '暖色調', href: 'https://sstw.stg.samsonite-asia.com/backpack/橙色_米啡色_粉紅色_紅色_黃色' },
+    { text: '印花', href: '/backpack/special/' },
+    { text: '查看所有顏色', href: '/backpack/all-color/' }
 ];
 
 // --- backpack-smart-function ---
 export const smartFunctionItemsBP = [
-    { text: 'USBポート', href: '/backpack/smart-function/usb-port/' }
+    { text: 'USB 充電接口', href: '/backpack/usb-port/' }
 ];
 
 // --- backpack-brand ---
 export const brandItemsBP = [
-    { text: 'サムソナイトのバックパック', href: '/backpack/brand/samsonite/' },
-    { text: 'サムソナイト・ブラックレーベルのバックパック', href: '/backpack/brand/samsonite-black/' },
-    { text: 'サムソナイト・レッドのバックパック', href: '/backpack/brand/samsonite-red/' },
-    { text: 'ハートマンのバックパック', href: '/backpack/brand/hartmann/' }
+    { text: 'Samsonite', href: '/backpack/brand-samsonite/' },
+    { text: 'Samsonite Red', href: '/backpack/brand-samsonite-red/' }
 ];
 
 // --- backpack-laptop ---
 export const laptopItemsBP = [
-    { text: 'Fit up to 13" laptop', href: '/backpacks/fit-up-to-13-laptop/' },
-    { text: 'Fit up to 15" laptop', href: '/backpacks/fit-up-to-15-laptop/' },
-    { text: 'Fit up to 17" laptop', href: '/backpacks/fit-up-to-17-laptop/' }
+    { text: 'Fit up to 13" laptop', href: '/backpacks/fit-up-to-13%22-laptop/' },
+    { text: 'Fit up to 15" laptop', href: '/backpacks/fit-up-to-15%22-laptop/' },
+    { text: 'Fit up to 17" laptop', href: '/backpacks/fit-up-to-17%22-laptop/' }
 ];
 
 // --- backpack-collection ---
 export const collectionItemsBP = [
-    { text: 'サブリム', href: 'https://ssjp.stg.samsonite-asia.com/backpack/collection/sub-lim/' },
-    { text: 'テクノス コンボ', href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%83%86%E3%82%AF%E3%83%8E%E3%82%B9-%E3%82%B3%E3%83%B3%E3%83%9C/' },
-    { text: 'アルヴァーノ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アルヴァーノ&start=0&sz=18&useNewPLP=true' },
-    { text: 'オードリナ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=オードリナ&start=0&sz=18&useNewPLP=true' },
-    { text: 'ゼットジップ', href: 'https://ssjp.stg.samsonite-asia.com/backpacks/?cgid=backpack&expandable=false&instock=false&page=0&prefn1=collection&prefv1=ゼットジップ&start=0&sz=18&useNewPLP=true' },
+    { text: 'SEFTON', href: '/backpack-collection-sefton/' },
+    { text: 'PRO-DLX 6', href: '/backpack-collection-pro-dlx-6/' },
+    { text: 'XBR 2.0', href: '/backpack-collection-xbr2.0/' },
+    { text: 'ZALIA 3', href: '/backpack-collection-zalia3/' }
 ];
 
 // --- bag-type ---
 export const typeItemsB = [
-    { text: 'ブリーフケース', href: '/bags/type/briefcase/' },
-    { text: '2WAY／3WAY', href: '/bags/type/2-way/' },
-    { text: 'レザー', href: '/bags/type/leather/' },
-    { text: 'トート', href: '/bags/type/tote/' },
-    { text: 'ショルダーバッグ', href: '/bags/type/shoulder-bag/' },
-    { text: 'ダッフル', href: '/bags/type/duffles/' },
-    { text: 'ウィメンズ', href: "https://ssjp.stg.samsonite-asia.com/bags/?cgid=bag&expandable=false&instock=false&page=0&prefn1=collection&prefv1=アクエリアス%7Cアルヴァーノ%7Cカリッサ+エヴォ%7Cツイードぺブル%7Cハートマンリザーブ%7Cムーヴ+5.0&start=0&sz=18&useNewPLP=true" },
-    { text: 'すべて見る', href: 'https://ssjp.stg.samsonite-asia.com/bags/' }
+    { text: 'Briefcase', href: '/bags/briefcase/' },
+    { text: 'Cross Body Bags', href: '/bags/cross-body-bags/' },
+    { text: 'Duffles', href: '/bags/duffle/' },
+    { text: 'Totes', href: '/bags/totes/' },
+    { text: 'For Her', href: '/bags/for-her/' },
+    { text: 'Shop all bags', href: 'https://sssg.stg.samsonite-asia.com/bags/' }
 ];
 
 // --- bag-color ---
 export const colorItemsB = [
-    { text: 'モノトーン', href: 'https://ssjp.stg.samsonite-asia.com/bags/グレー_ブラック_ホワイト' },
-    { text: 'クールトーン', href: 'https://ssjp.stg.samsonite-asia.com/bags/グリーン_ネイビー_ブルー' },
-    { text: 'ウォームトーン', href: 'https://ssjp.stg.samsonite-asia.com/bags/オレンジ_ピンク_レッド' },
-    { text: 'すべて見る', href: '/bags/color/all/' }
+    { text: 'Mono', href: 'https://sssg.stg.samsonite-asia.com/bags/black_grey_white' },
+    { text: 'Cool', href: 'https://sssg.stg.samsonite-asia.com/bags/blue_green_navy' },
+    { text: 'Warm', href: 'https://sssg.stg.samsonite-asia.com/bags/beige_orange_pink_red_yellow' },
+    { text: 'Shop all colours', href: '/bags/bags-all-color/' }
 ];
 
 // --- bag-brand ---
 export const brandItemsB = [
-    { text: 'サムソナイトのバッグ', href: '/bags/brand/samsonite/' },
-    { text: 'サムソナイト・ブラックレーベルのバッグ', href: '/bags/brand/samsonite-black/' },
-    { text: 'サムソナイト・レッドのバッグ', href: '/bags/brand/samsonite-red/' },
-    { text: 'ハートマンのバッグ', href: '/bags/brand/hartmann/' }
+    { text: 'Samsonite', href: '/bags/brand-samsonite/' },
+    { text: 'Samsonite Black', href: '/bags/brand-samsonite-black/' },
+    { text: 'Samsonite Red', href: '/bags/brand-samsonite-red/' }
 ];
 
 // --- bag-laptop ---
 export const laptopItemsB = [
-    { text: 'Fit up to 13" laptop', href: '/bags/fit-up-to-13-laptop/' },
-    { text: 'Fit up to 15" laptop', href: '/bags/fit-up-to-15-laptop/' },
-    { text: 'Fit up to 17" laptop', href: '/bags/fit-up-to-17-laptop/' }
+    { text: 'Fit up to 13" laptop', href: '/bags/fit-up-to-13%22-laptop/' },
+    { text: 'Fit up to 15" laptop', href: '/bags/fit-up-to-15%22-laptop/' },
+    { text: 'Fit up to 17" laptop', href: '/bags/fit-up-to-17%22-laptop/' }
 ];
 
 // --- bag-collection ---
 export const collectionItemsB = [
-    { text: 'サブリム', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim/' },
-    { text: 'エピッド 4', href: '/bags/collection/epid-4/' },
-    { text: 'デボネア 5', href: 'https://ssjp.stg.samsonite-asia.com/bags/?cgid=bag&expandable=false&instock=false&page=3&prefn1=collection&prefv1=デボネア+5&sz=18&useNewPLP=true' },
-    { text: 'ホクストン', href: 'https://ssjp.stg.samsonite-asia.com/bags/?cgid=bag&expandable=false&instock=false&page=1&prefn1=collection&prefv1=ホクストン&start=0&sz=18&useNewPLP=true' },
-    { text: 'グレンデール', href: '/bags/collection/glendale/' },
+    { text: 'Prudence Eco', href: '/bags/collection/prudence-eco/' },
+    { text: 'Pro-Dlx 6', href: '/bags/collection/pro-dlx-6/' },
+    { text: 'Sammies Dream', href: '/bags/collection/sammies-dream/' },
 ];
 
 export const brandItemsBR = [
-    { text: 'サムソナイト商品一覧', href: '/brand/samsonite/' },
-    { text: 'サムソナイト・ブラックレーベル商品一覧', href: '/brand/samsonite-black/' },
-    { text: 'サムソナイト・レッド商品一覧', href: '/brand/samsonite-red/' },
-    { text: 'ハートマン商品一覧', href: '/brand/hartmann/' },
-    { text: 'American Tourister', href: 'https://www.americantourister.jp/' }
+    { text: 'Samsonite BLACK LABEL', href: 'https://sssg.stg.samsonite-asia.com/black/' },
+    { text: 'Samsonite', href: 'https://sssg.stg.samsonite-asia.com/samsonite/' },
+    { text: 'Samsonite RED', href: 'https://sssg.stg.samsonite-asia.com/red/' }
 ];
 
 // --- discover-article ---
 export const articleItems = [
-    { text: 'Beyond The Design', href: 'https://ssjp.stg.samsonite-asia.com/2025-going-beyond-design/' },
-    { text: 'Beyond The Average Test', href: 'https://ssjp.stg.samsonite-asia.com/2025-going-beyond-testing/' },
-    { text: '父の日に日々を彩るバッグを', href: 'https://ssjp.stg.samsonite-asia.com/fathers-day-gifts.html' },
-    { text: 'ユニークなテストで耐久性を検証', href: 'https://ssjp.stg.samsonite-asia.com/vs-series/' },
-    { text: 'スーツケースの選び方', href: 'https://ssjp.stg.samsonite-asia.com/first_suitcase.html' },
-    { text: 'スーツケースのパッキング術', href: 'https://ssjp.stg.samsonite-asia.com/category-landing/packing/' },
-    { text: '最新おすすめビジネスバッグ', href: 'https://ssjp.stg.samsonite-asia.com/category-landing/business-bags/' },
-    { text: '人生を豊かにする旅のスタイル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-unpack-your-world_mcguffin/unpack-your-world.html' }
+    { text: `Father's Day Gifts`, href: 'https://sssg.stg.samsonite-asia.com/fathers-day-gifts.html' },
+    { text: `Mother's Day Gifts`, href: 'https://sssg.stg.samsonite-asia.com/mothers-day-gifts.html' },
+    { text: 'Wedding and Honeymoon', href: 'https://sssg.stg.samsonite-asia.com/wedding-and-honeymoon.html' },
+    { text: 'Your Business Look', href: 'https://sssg.stg.samsonite-asia.com/your-business-look.html' },
+    { text: 'Your Backpack Look', href: 'https://sssg.stg.samsonite-asia.com/your-backpack-look.html' },
+    { text: 'Lavish Travels', href: 'https://sssg.stg.samsonite-asia.com/lavish-travels.html' },
+    { text: 'The Art of Packing', href: 'https://sssg.stg.samsonite-asia.com/art-of-packing.html' },
+    { text: 'The Best Bags for every Travel Need', href: 'https://sssg.stg.samsonite-asia.com/best-bags.html' },
+    { text: 'Discover All', href: 'https://sssg.stg.samsonite-asia.com/discover-all' }
 ];
 
 // --- discover-about-Samsonite ---
 export const aboutSamsoniteItems = [
-    { text: 'サムソナイトブランドストーリー', href: 'https://ssjp.stg.samsonite-asia.com/brand-story.html' },
-    { text: 'ハートマンブランドストーリー', href: 'https://ssjp.stg.samsonite-asia.com/about-hartmann.html' },
-    { text: 'Our Responsible Journey', href: 'https://ssjp.stg.samsonite-asia.com/sustainability.html' }
+    { text: 'Beyond The Design', href: 'https://sssg.stg.samsonite-asia.com/2025-going-beyond-design/' },
+    { text: 'Beyond The Average Test', href: 'https://sssg.stg.samsonite-asia.com/2025-going-beyond-testing/' },
+    { text: 'Our Brand Story - Celebrating 115 Years of Heritage', href: 'https://sssg.stg.samsonite-asia.com/brand-story.html' },
+    { text: 'Friends of Samsonite', href: 'https://sssg.stg.samsonite-asia.com/2021-friends-of-samsonite.html' },
+    { text: 'Our Responsible Journey', href: 'https://sssg.stg.samsonite-asia.com/sustainability.html' }
 ];
+
+// --- discover-collections ---
+export const aboutCollections = [
+    { text: 'Browse Our Collections', href: 'https://sssg.stg.samsonite-asia.com/collection/' }
+];
+
+// --- offers-Refer a friend ---
+export const referAFriend = [
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/referralshow",
+        text: "Refer a Friend"
+    }
+]
+
+// --- offers-Top10Picks ---
+export const top10picks = [
+    {
+        hasImage: false,
+        href: "https://sssg.stg.samsonite-asia.com/2025-top-10-picks/",
+        text: "Top 10 Picks"
+    }
+]
 
 export const subMenuDataSamsonite = [
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/luggage/type/hard/?prefn1=brand&prefv1=Samsonite%20Black%20Label%7CSamsonite",
-        text: "Hardcase"
+        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite",
+        text: "Luggage"
     },
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/luggage/type/soft/",
-        text: "Softcase"
+        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite",
+        text: "Backpacks"
+    },
+    {
+        hasImage: true,
+        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite",
+        text: "Bags"
     }
 ]
 
 export const subMenuDataSamsoniteBlack = [
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/bags/type/briefcase/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
-        text: "Briefcase"
+        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "BRIEFCASES"
     },
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/luggage/brand/samsonite-black/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
         text: "Luggage"
     },
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/backpack/brand/samsonite-black/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
         text: "Backpacks"
     }
 ]
 
-export const subMenuDataHartmann = [
+export const subMenuDataSamsoniteRed = [
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/luggage/brand/hartmann/",
-        text: "Travel"
+        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Luggage"
     },
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/backpack/brand/hartmann/",
-        text: "Backpack"
+        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Backpacks"
     },
     {
         hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/bags/brand/hartmann/",
-        text: "Bag"
-    },
-    {
-        hasImage: true,
-        href: "https://ssjp.stg.samsonite-asia.com/accessories/?prefn1=brand&prefv1=Hartmann",
-        text: "Accessory"
+        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "Bags"
     }
 ]
 
-export const brandInfoSamsonite = {
-    toptile: "All-time favourite",
-    title: "The world’s first luggage choice for 100 years",
-    content: "サムソナイトは100年の長きにわたり、変わりゆく人々のライフスタイルや旅行者のニーズに応え、機能的でありながらもデザイン性の高い製品を開発しています。",
-    href: "#product-list-campaign"
-}
+export const checkoutDataWithoutFirstName = {
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
 
-export const brandInfoSamsoniteBlack = {
-    toptile: "Boarding Now",
-    title: "Calling all discerning frequent flyers",
-    content: "100年以上の歴史をもつ、“サムソナイト”のラグジュアリーブランド“サムソナイト・ブラックレーベル”は、上質な日常や旅のスタイルにこだわりを持つトラベラーおよびビジネスマンに向けたプレミアムブランドです。",
-    href: "#product-list-campaign"
-}
+export const checkoutDataWithoutLastName = {
+    firstName: "globeeFirstName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
 
-export const brandInfoSamsoniteRed = {
-    toptile: "Ready, set, go",
-    title: "Stylish luggage for those on the move",
-    content: `デザインはトレンドを纏いながらも、余計な装飾を削ぎ落としシンプルで合わせやすく、高い基準で選び抜かれた素材、工場で丁寧に生産されています。
-                        気がつけば、日常のあらゆるシーンに溶け込んでいる、そんなリラックスしたいつも使いたくなるバッグをサムソナイト・レッド は目指しています。`,
-    href: "#product-list-campaign"
+export const checkoutDataWithoutEmail = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutPhone = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutFullData = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutShippingData = {
+    postcode: "951111",
+    address1: "65 XASSSERRR"
 }
