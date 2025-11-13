@@ -65,30 +65,40 @@
   },
   "newarrivalspage": {
     "title": "新品上市 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sstw.stg.samsonite-asia.com/new-arrivals/"]
+    "url": [
+      "https://sstw.stg.samsonite-asia.com/new-arrivals/"
+    ]
   },
   "luggagepage": {
     "title": "行李箱 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sstw.stg.samsonite-asia.com/luggage/"]
+    "url": [
+      "https://sstw.stg.samsonite-asia.com/luggage/"
+    ]
   },
   "backpackspage": {
     "title": "所有後背包 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sstw.stg.samsonite-asia.com/backpack/"]
+    "url": [
+      "https://sstw.stg.samsonite-asia.com/backpack/"
+    ]
   },
   "bagspage": {
     "title": "所有包袋 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sstw.stg.samsonite-asia.com/bag/"]
+    "url": [
+      "https://sstw.stg.samsonite-asia.com/bag/"
+    ]
   },
   "accessories": {
     "title": "所有配件 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sstw.stg.samsonite-asia.com/accessories/"]
+    "url": "https://sstw.stg.samsonite-asia.com/accessories/"
   },
   "brandpage": {
     "title": "品牌系列 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
     "url": "https://sstw.stg.samsonite-asia.com/brand/"
   },
   "ourbrandstorypage": {
-    "title": ["關於品牌 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0"],
+    "title": [
+      "關於品牌 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0"
+    ],
     "url": "https://sstw.stg.samsonite-asia.com/discover/"
   },
   "ginzaflagshipstore": {
@@ -182,11 +192,21 @@
     "easybrakesystem": "手控煞車",
     "magnetic": "磁性拉鍊",
     "suspensionwheels": "專利減震懸掛輪",
-    "usbport": ["USB 充電接口"],
-    "samsonite": ["Samsonite"],
-    "samsoniteblack": ["Samsonite Black"],
-    "samsonitered": ["Samsonite Red"],
-    "hartmann": ["Hartmann"],
+    "usbport": [
+      "USB 充電接口"
+    ],
+    "samsonite": [
+      "Samsonite"
+    ],
+    "samsoniteblack": [
+      "Samsonite Black"
+    ],
+    "samsonitered": [
+      "Samsonite Red"
+    ],
+    "hartmann": [
+      "Hartmann"
+    ],
     "city": "City",
     "adventure": "Adventure",
     "beach": "ビーチ",
@@ -317,51 +337,65 @@
     "ourcompany": "關於我們",
     "account": "會員帳戶",
     "followus": "獲得第一手資訊",
+    "deliveryandshipping": "送貨方式",
     "deliveryandshippingURL": "shipping-and-delivery",
+    "returnsandexchanges": "退貨與退款",
     "returnsandexchangesURL": "returns-and-exchanges",
     "warrantyURL": "warranty",
     "servicecenterURL": "service-center",
-    "contactusURL": "contactus",
+    "contactus": "聯絡我們",
+    "contactusURL": "contact-us",
     "contact-usURL": "contact-us",
+    "fakewebsitealert": "提防偽冒網站",
     "fakewebsitealertURL": "fake-website-alert",
     "repairURL": "",
+    "WECARE": "售後維修服務",
+    "WECAREについてURL": "service-center",
     "howtocleanyourluggageURL": "how-to-clean-your-luggage",
+    "faq": "常見問題",
     "faqURL": "faq",
     "faqmemberURL": "",
+    "tsa": "TSA鎖頭設定",
     "tsaURL": "tsa-lock",
+    "trackorder": "訪客購買 - 訂單查詢",
     "trackorderURL": "trackorder",
     "inquiriesURL": "",
     "aboutsamsoniteURL": "brand-story",
     "careersURL": "CX",
+    "investorrelations": "投資者關係",
     "investorrelationsURL": "https://corporate.samsonite.com/en/home.html",
     "store&serviceURL": "stores",
     "zh": "zh",
     "sustainabilityURL": "sustainability",
-    "aboutsamsonite": "About Samsonite",
+    "aboutsamsonite": "品牌故事",
     "store&services": "Store and Service Centre Locator",
-    "careers": "Careers",
+    "careers": "人才招募",
     "abouthartmannURL": "",
     "newsURL": "",
     "recruitinfoURL": "",
     "corporatecustomersURL": "",
-    "sustainability": "Sustainability",
+    "sustainability": "可持續發展",
     "companyURL": "company",
     "accountURL": "account",
     "friendsofsamsoniteURL": "member-terms-conditions",
     "cartURL": "cart",
     "ordershistoryURL": "orders",
-    "signin": "Sign In",
+    "signin": "登入",
     "referralshowURL": "",
     "membershipURL": "MembershipPrivilegePage",
     "sitemapURL": "sitemap",
     "useragreementURL": "user-agreement",
     "privacyURL": "privacy-policy",
+    "personalinformationcollectionstatement": "個人資料收集",
     "personalinformationcollectionstatementURL": "personal-information-collection-statement",
     "applicablelawURL": "applicablelaw",
     "warranty": "Warranty",
-    "sitemap": "Site Map",
-    "useragreement": "User agreement",
-    "privacy": "Privacy"
+    "sitemap": "網站地圖",
+    "useragreement": "使用者條款",
+    "privacy": "隱私權政策",
+    "cleanLuggageURL": "how-to-clean-your-luggage",
+    "salesoutlets": "銷售據點",
+    "salesoutletsURL": "showMap"
   },
   "checkoutpage": {
     "guestcheckoutbutton": "以訪客身份繼續購買",

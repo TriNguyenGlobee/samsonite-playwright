@@ -75,6 +75,10 @@
     "title": "バッグ｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
     "url": ["https://ssjp.dev.samsonite-asia.com/bags/","https://ssjp.stg.samsonite-asia.com/bags/"]
   },
+  "accessories": {
+    "title": "所有配件 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://sstw.stg.samsonite-asia.com/accessories/"
+  },
   "brandpage": {
     "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
@@ -293,11 +297,15 @@
     "returnsandexchangesURL": "",
     "warrantyURL": "guarantee",
     "contactusURL": "",
+    "fakewebsitealert": "",
     "fakewebsitealertURL": "",
     "repairURL": "repair",
+    "WECARE": "WECAREについて",
     "WECAREについてURL": "wecare-service",
+    "faq": "商品についてのFAQ",
     "faqURL": "faq",
     "faqmemberURL": "faq-sub-nav-group-3",
+    "tsa": "TSAロック設定方法ついて",
     "tsaURL": "tsa-instruction",
     "trackorderURL": "trackorder",
     "inquiriesURL": "inquiries",
@@ -330,7 +338,10 @@
     "warranty": "保証について",
     "sitemap": "サイトマップ",
     "useragreement": "利用規約",
-    "privacy": "プライバシーポリシー"
+    "privacy": "プライバシーポリシー",
+    "cleanLuggageURL": "how-to-clean-your-luggage",
+    "salesoutlets": "",
+    "salesoutletsURL": ""
   },
   "checkoutpage": {
     "guestcheckoutbutton": "会員登録せずに購入",

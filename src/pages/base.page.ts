@@ -19,6 +19,7 @@ export class BasePage {
     readonly discoverMenuItem: Locator;
     readonly friendsOfSamsoniteMenuItem: Locator;
     readonly saleMenuItem: Locator;
+    readonly accessoriesMenuItem: Locator;
     readonly rightNavbar: Locator;
     readonly searchIcon: Locator;
     readonly wishlistIcon: Locator;
@@ -56,6 +57,7 @@ export class BasePage {
         this.ginzaFlagshipStore = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="銀座 旗艦店"]`);
         this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('friendofsamsonite')}"]`);
         this.saleMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="セール"]');
+        this.accessoriesMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="旅行配件"]`)
         this.rightNavbar = page.locator('//div[contains(@class,"right navbar-header")]');
         this.searchIcon = this.rightNavbar.locator('xpath=.//button[i[contains(@class,"search")]]');
         this.wishlistIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"heart")]]');

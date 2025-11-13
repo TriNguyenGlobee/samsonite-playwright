@@ -164,6 +164,7 @@ export const t = {
   backpackspage: (key: keyof Translations['backpackspage']) => I18n.translations.backpackspage[key],
   bagspage: (key: keyof Translations['bagspage']) => I18n.translations.bagspage[key],
   brandpage: (key: keyof Translations['brandpage']) => I18n.translations.brandpage[key],
+  accessories: (key: keyof Translations['accessories']) => I18n.translations.accessories[key],
   ourbrandstorypage: (key: keyof Translations['ourbrandstorypage']) => I18n.translations.ourbrandstorypage[key],
   ginzaflagshipstore: (key: keyof Translations['ginzaflagshipstore']) => I18n.translations.ginzaflagshipstore[key],
   sale: (key: keyof Translations['sale']) => I18n.translations.sale[key],

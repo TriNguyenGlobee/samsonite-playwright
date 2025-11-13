@@ -187,20 +187,19 @@ export const collectionItemsBP = [
 
 // --- bag-type ---
 export const typeItemsB = [
-    { text: 'Briefcase', href: '/bags/briefcase/' },
-    { text: 'Cross Body Bags', href: '/bags/cross-body-bags/' },
-    { text: 'Duffles', href: '/bags/duffle/' },
-    { text: 'Totes', href: '/bags/totes/' },
-    { text: 'For Her', href: '/bags/for-her/' },
-    { text: 'Shop all bags', href: 'https://sssg.stg.samsonite-asia.com/bags/' }
+    { text: '公事包', href: '/bags/briefcase/' },
+    { text: '斜背包', href: '/bags/cross-body-bags/' },
+    { text: '斜肩包', href: '/bags/sling/' },
+    { text: '托特包', href: '/bags/totes/' },
+    { text: '女性包款', href: '/bags/for-her/' }
 ];
 
 // --- bag-color ---
 export const colorItemsB = [
-    { text: 'Mono', href: 'https://sssg.stg.samsonite-asia.com/bags/black_grey_white' },
-    { text: 'Cool', href: 'https://sssg.stg.samsonite-asia.com/bags/blue_green_navy' },
-    { text: 'Warm', href: 'https://sssg.stg.samsonite-asia.com/bags/beige_orange_pink_red_yellow' },
-    { text: 'Shop all colours', href: '/bags/bags-all-color/' }
+    { text: '單色系', href: 'https://sstw.stg.samsonite-asia.com/bag/灰色_白色_銀色_黑色' },
+    { text: '冷色調', href: 'https://sstw.stg.samsonite-asia.com/bag/海軍藍色_紫色_綠色_藍色' },
+    { text: '暖色調', href: 'https://sstw.stg.samsonite-asia.com/bag/海軍藍色_紫色_綠色_藍色' },
+    { text: '查看所有顏色', href: '/bags/bags-all-color/' }
 ];
 
 // --- bag-brand ---
@@ -219,42 +218,39 @@ export const laptopItemsB = [
 
 // --- bag-collection ---
 export const collectionItemsB = [
-    { text: 'Prudence Eco', href: '/bags/collection/prudence-eco/' },
-    { text: 'Pro-Dlx 6', href: '/bags/collection/pro-dlx-6/' },
-    { text: 'Sammies Dream', href: '/bags/collection/sammies-dream/' },
+    { text: 'MARSTON', href: '/bag-collection-marston/' },
+    { text: 'JEFFERSON', href: '/bag-collection-jefferson/' },
+    { text: 'MOVE 4.0', href: '/bag-collection-move-4/' },
 ];
 
 export const brandItemsBR = [
-    { text: 'Samsonite BLACK LABEL', href: 'https://sssg.stg.samsonite-asia.com/black/' },
-    { text: 'Samsonite', href: 'https://sssg.stg.samsonite-asia.com/samsonite/' },
-    { text: 'Samsonite RED', href: 'https://sssg.stg.samsonite-asia.com/red/' }
+    { text: 'Samsonite Black', href: 'https://sstw.stg.samsonite-asia.com/black/' },
+    { text: 'Samsonite', href: 'https://sstw.stg.samsonite-asia.com/samsonite/' },
+    { text: 'Samsonite Red', href: 'https://sstw.stg.samsonite-asia.com/red/' }
 ];
 
 // --- discover-article ---
 export const articleItems = [
-    { text: `Father's Day Gifts`, href: 'https://sssg.stg.samsonite-asia.com/fathers-day-gifts.html' },
-    { text: `Mother's Day Gifts`, href: 'https://sssg.stg.samsonite-asia.com/mothers-day-gifts.html' },
-    { text: 'Wedding and Honeymoon', href: 'https://sssg.stg.samsonite-asia.com/wedding-and-honeymoon.html' },
-    { text: 'Your Business Look', href: 'https://sssg.stg.samsonite-asia.com/your-business-look.html' },
-    { text: 'Your Backpack Look', href: 'https://sssg.stg.samsonite-asia.com/your-backpack-look.html' },
-    { text: 'Lavish Travels', href: 'https://sssg.stg.samsonite-asia.com/lavish-travels.html' },
-    { text: 'The Art of Packing', href: 'https://sssg.stg.samsonite-asia.com/art-of-packing.html' },
-    { text: 'The Best Bags for every Travel Need', href: 'https://sssg.stg.samsonite-asia.com/best-bags.html' },
-    { text: 'Discover All', href: 'https://sssg.stg.samsonite-asia.com/discover-all' }
+    { text: `Father's Day Gifts`, href: 'https://sstw.stg.samsonite-asia.com/fathers-day-gifts.html' },
+    { text: `Mother's Day Gifts`, href: 'https://sstw.stg.samsonite-asia.com/mothers-day-gifts.html' },
+    { text: 'Family-Friendly Travels', href: 'https://sstw.stg.samsonite-asia.com/family-friendly-travels.html' },
+    { text: 'Wedding and Honeymoon', href: 'https://sstw.stg.samsonite-asia.com/wedding-and-honeymoon.html' },
+    { text: 'Travel Hard, Travel Smart', href: 'https://sstw.stg.samsonite-asia.com/travel-hard-travel-smart.html' },
+    { text: 'Your Business Look', href: 'https://sstw.stg.samsonite-asia.com/your-business-look.html' },
+    { text: '查看所有熱門主題', href: 'https://sstw.stg.samsonite-asia.com/discover-all' }
 ];
 
 // --- discover-about-Samsonite ---
 export const aboutSamsoniteItems = [
-    { text: 'Beyond The Design', href: 'https://sssg.stg.samsonite-asia.com/2025-going-beyond-design/' },
-    { text: 'Beyond The Average Test', href: 'https://sssg.stg.samsonite-asia.com/2025-going-beyond-testing/' },
-    { text: 'Our Brand Story - Celebrating 115 Years of Heritage', href: 'https://sssg.stg.samsonite-asia.com/brand-story.html' },
-    { text: 'Friends of Samsonite', href: 'https://sssg.stg.samsonite-asia.com/2021-friends-of-samsonite.html' },
-    { text: 'Our Responsible Journey', href: 'https://sssg.stg.samsonite-asia.com/sustainability.html' }
+    { text: '超越一般設計', href: 'https://sstw.stg.samsonite-asia.com/2025-going-beyond-design/' },
+    { text: '超越一般測試', href: 'https://sstw.stg.samsonite-asia.com/2025-going-beyond-testing/' },
+    { text: '我們的品牌故事—慶祝115年的傳承歷史', href: 'https://sstw.stg.samsonite-asia.com/brand-story.html' },
+    { text: '我們的責任旅程', href: 'https://sstw.stg.samsonite-asia.com/sustainability.html' }
 ];
 
 // --- discover-collections ---
 export const aboutCollections = [
-    { text: 'Browse Our Collections', href: 'https://sssg.stg.samsonite-asia.com/collection/' }
+    { text: '瀏覽商品', href: 'https://sstw.stg.samsonite-asia.com/collection/' }
 ];
 
 // --- offers-Refer a friend ---
@@ -275,57 +271,70 @@ export const top10picks = [
     }
 ]
 
+// --- accessories-type ---
+export const typeItemAS = [
+    { text: '旅行配件', href: '/accessories/travel-accessories/' },
+    { text: '查看所有配件', href: 'https://sstw.stg.samsonite-asia.com/accessories/' }
+]
+
+// --- accessories-color ---
+export const colorItemAS = [
+    { text: '單色系', href: 'https://sstw.stg.samsonite-asia.com/accessories/灰色_白色_銀色_黑色' },
+    { text: '冷色調', href: 'https://sstw.stg.samsonite-asia.com/accessories/海軍藍色_紫色_綠色_藍色' },
+    { text: '查看所有顏色', href: '/accessories-all-color/' }
+]
+
 export const subMenuDataSamsonite = [
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite",
-        text: "Luggage"
+        href: "https://sstw.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite",
+        text: "行李箱"
     },
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite",
-        text: "Backpacks"
+        href: "https://sstw.stg.samsonite-asia.com/backpack/?prefn1=brand&prefv1=Samsonite",
+        text: "後背包"
     },
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite",
-        text: "Bags"
+        href: "https://sstw.stg.samsonite-asia.com/bag/?prefn1=brand&prefv1=Samsonite",
+        text: "其他包款"
     }
 ]
 
 export const subMenuDataSamsoniteBlack = [
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
-        text: "BRIEFCASES"
+        href: "https://sstw.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "行李箱"
     },
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
-        text: "Luggage"
+        href: "https://sstw.stg.samsonite-asia.com/backpack/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "後背包"
     },
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
-        text: "Backpacks"
+        href: "https://sstw.stg.samsonite-asia.com/bag/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "其他包款"
     }
 ]
 
 export const subMenuDataSamsoniteRed = [
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Red",
-        text: "Luggage"
+        href: "https://sstw.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "行李箱"
     },
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Red",
-        text: "Backpacks"
+        href: "https://sstw.stg.samsonite-asia.com/backpack/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "後背包"
     },
     {
         hasImage: true,
-        href: "https://sssg.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Red",
-        text: "Bags"
+        href: "https://sstw.stg.samsonite-asia.com/bag/?prefn1=brand&prefv1=Samsonite%20Red",
+        text: "其他包款"
     }
 ]
 
