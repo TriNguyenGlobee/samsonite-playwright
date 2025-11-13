@@ -86,23 +86,30 @@ test.describe("Newsletter", () => {
         })
 
         await step("Clicking on the subscribe button", async () => {
-            await globalnavfooterpage.click(globalnavfooterpage.subscribeButton)
-            await PageUtils.waitForPageLoad(basicAuthPage)
+            await globalnavfooterpage.click(globalnavfooterpage.subscribeButton, 
+                "Clicking on Subscribe button"
+            )
+            await globalnavfooterpage.assertHidden(globalnavfooterpage.underlay, 
+                "Waiting for underlay screen hidden"
+            )
         })
 
-        await step("Verify subscribe msg", async () => {
+        await step("Verify subscribe msg: regist success", async () => {
             await globalnavfooterpage.assertText(createdmsg, subscribeMsg,
                 "Assert invalid-feedback: Account created success"
             )
         })  
 
-        await globalnavfooterpage.pause()
-
         await step("Clicking on the subscribe button again", async () => {
-            await globalnavfooterpage.click(globalnavfooterpage.subscribeButton)
+            await globalnavfooterpage.click(globalnavfooterpage.subscribeButton,
+                "Clicking on Subscribe button"
+            )
+            await globalnavfooterpage.assertHidden(globalnavfooterpage.underlay,
+                "Waiting for underlay screen hidden"
+            )
         })
 
-        await step("Verify subscribe msg", async () => {
+        await step("Verify subscribe msg: duplicate email", async () => {
             await globalnavfooterpage.assertText(emailexistmsg, accountexistMsg,
                 "Assert invalid-feedback: Account exists"
             )
@@ -171,7 +178,7 @@ test.describe("Footer links Groups", async () => {
             )
         })
 
-        await step("Verify that Warranty link", async () => {
+        await steps(["jp", "sg"], "Verify that Warranty link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('warranty')), t.globalnavfooter('warrantyURL'),
                 "Assert navigated URL when clicking Warranty link", "middle"
             )

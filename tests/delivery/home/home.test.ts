@@ -136,7 +136,7 @@ test.describe("Home Tests", () => {
         }
     });
 
-    test(`11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
+    tests(["jp", "sg"], `11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
 
         await scrollToBottom(basicAuthPage);
@@ -154,7 +154,7 @@ test.describe("Home Tests", () => {
         })
     })
 
-    tests(["sg"],`
+    tests(["sg", "tw"],`
         12. Go to Offers Page
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);

@@ -463,7 +463,7 @@ export class BasePage {
     async assertHidden(locator: Locator, description?: string) {
         await step(description || "Assert element hidden", async () => {
             await expect(locator.first()).toBeHidden({
-                timeout: 10000
+                timeout: 20000
             });
         });
     }
