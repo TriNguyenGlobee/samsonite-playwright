@@ -146,6 +146,8 @@ export abstract class CartPage extends BasePage {
 
                         await expect(this.minicartRender).toBeVisible({ timeout: 10000 })
 
+                        await this.hover(addButton)
+
                         await this.minicartRender.waitFor({ state: 'hidden', timeout: 10000 });
 
                         added++;

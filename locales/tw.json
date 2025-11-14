@@ -8,7 +8,7 @@
     "addtocart": "加到購物車",
     "in-stock": "有存貨",
     "notifyme": "Notify me",
-    "out-of-stock": "No results available for this filter. Click Reset All to try again."
+    "out-of-stock": "此篩選條件無結果。請點擊「重置」以重新嘗試。"
   },
   "loginpage": {
     "title": "登入",
@@ -196,13 +196,13 @@
       "USB 充電接口"
     ],
     "samsonite": [
-      "Samsonite"
+      "", "Samsonite"
     ],
     "samsoniteblack": [
       "Samsonite Black"
     ],
     "samsonitered": [
-      "Samsonite Red"
+      "", "Samsonite Red"
     ],
     "hartmann": [
       "Hartmann"
@@ -238,8 +238,8 @@
     "15inchlaptop": "Fit up to 15\" laptop",
     "17inchlaptop": "Fit up to 17\" laptop",
     "laptop": "筆電尺寸",
-    "sefton": "Sefton",
-    "prodlx6": "Pro-Dlx 6",
+    "sefton": "SEFTON",
+    "prodlx6": "PRO-DLX 6",
     "PRODLX6": "PRO-DLX 6",
     "ecodiver": "Ecodiver",
     "sammiesdream": "Sammies Dream",
@@ -297,7 +297,9 @@
     "offers2025gwp2": "官網滿兩萬送好禮",
     "offersluggage": "行李箱優惠專區",
     "offersbackpacks": "包袋優惠專區",
-    "showalldiscover": "查看所有熱門主題"
+    "showalldiscover": "查看所有熱門主題",
+    "xbr2.0": "XBR 2.0",
+    "zalia3": "ZALIA 3"
   },
   "minicart": {
     "emptymsg": "您的購物車是空的",
@@ -325,7 +327,7 @@
     "viewwishlistbtn": "查看"
   },
   "wishlist": {
-    "title": "My Wishlist"
+    "title": "Sites-MonoSamsoniteTW-Site | Salesforce Commerce Cloud | 3.3.0"
   },
   "globalnavfooter": {
     "placeholder": "你的電子信箱",

@@ -19,7 +19,7 @@ export class OffersPageTW extends OffersPage {
                 await attachment("Current Page Title", title, "text/plain");
                 await attachment("Expected Page Title", t.offers('title'), "text/plain");
                 await attachment("Current URL", currentUrl, "text/plain");
-                await attachment("Expected URL", expectedUrl, "text/plain");
+                await attachment("Expected URL TW", expectedUrl, "text/plain");
             });
 
             if (!title.includes(t.offers('title'))) {

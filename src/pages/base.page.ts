@@ -68,7 +68,7 @@ export class BasePage {
         this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
         this.cartBadge = this.cartIcon.locator('xpath=.//span[@class="minicart-quantity"]');
         this.viewCartButton = page.locator(`//div[@id="miniCartModal"]//a[contains(text(),"View Cart")]`)
-        this.prodItem = page.locator(`//div[@class="product"]`);
+        this.prodItem = page.locator(`//div[@class="product-grid row"]//div[@class="product"]`);
         this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
         this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[normalize-space(@class)="product-tile"]`)
         this.productTableShow = page.locator(`//div[@class="product-grid row"]`)
@@ -166,6 +166,8 @@ export class BasePage {
         const escapedMenu1 = escapeXPathText(menu1!);
         const escapedMenu2 = escapeXPathText(menu2!);
         const escapedMenu3 = pathLength === 3 ? escapeXPathText(menu3!) : null;
+
+        await page.waitForTimeout(1000);
 
         const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
@@ -289,7 +291,7 @@ export class BasePage {
         await step(description || `Click on product at index ${prodIndex}`, async () => {
             await PageUtils.waitForDomAvailable(this.page)
             await this.click(this.prodItem.nth(prodIndex - 1), `Click on product at index ${prodIndex}`)
-            await PageUtils.waitForPageLoad(this.page)
+            await PageUtils.waitForPageLoad(this.page, 20000)
         })
     }
 
@@ -396,21 +398,21 @@ export class BasePage {
     }
 
     async getProdCollection(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="product-collection"]`)
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//div[@class="product-collection"]`)
         const prodCollection = (await prod.innerText()).trim()
         console.log(`Product collection: ${prodCollection}`)
         return prodCollection
     }
 
     async getProdName(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
         const prodName = (await prod.innerText()).trim()
         console.log(`Product Name: ${prodName}`)
         return prodName
     }
 
     async getProdPrice(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product"])[${index}]//span[@class="value"]`)
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//span[@class="value"]`)
         const prodPrice = (await prod.innerText()).trim()
         console.log(`Product Price: ${prodPrice}`)
         return prodPrice

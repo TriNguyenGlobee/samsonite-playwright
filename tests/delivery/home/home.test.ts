@@ -12,6 +12,7 @@ import { MembershipPage } from "../../../src/pages/delivery/home/membership.page
 import { scrollToBottom } from "../../../utils/helpers/helpers";
 import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
 import { createHomePage } from "../../../src/factories/home.factory"
+import { createOffersPage } from "../../../src/factories/productlistingpage/offers.factory";
 import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Home Tests", () => {
@@ -158,7 +159,7 @@ test.describe("Home Tests", () => {
         12. Go to Offers Page
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
-        const offerspage = new OffersPage(basicAuthPage)
+        const offerspage = createOffersPage(basicAuthPage)
 
         await step("Go to Labels Page", async () => {
             await homePage.clickMenuItem("offers");
