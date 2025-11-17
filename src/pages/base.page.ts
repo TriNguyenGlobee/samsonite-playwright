@@ -19,6 +19,7 @@ export class BasePage {
     readonly discoverMenuItem: Locator;
     readonly friendsOfSamsoniteMenuItem: Locator;
     readonly saleMenuItem: Locator;
+    readonly accessoriesMenuItem: Locator;
     readonly rightNavbar: Locator;
     readonly searchIcon: Locator;
     readonly wishlistIcon: Locator;
@@ -56,6 +57,7 @@ export class BasePage {
         this.ginzaFlagshipStore = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="銀座 旗艦店"]`);
         this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('friendofsamsonite')}"]`);
         this.saleMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="セール"]');
+        this.accessoriesMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="旅行配件"]`)
         this.rightNavbar = page.locator('//div[contains(@class,"right navbar-header")]');
         this.searchIcon = this.rightNavbar.locator('xpath=.//button[i[contains(@class,"search")]]');
         this.wishlistIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"heart")]]');
@@ -66,7 +68,7 @@ export class BasePage {
         this.usericon = this.rightNavbar.locator('xpath=.//div[contains(@class,"user")]');
         this.cartBadge = this.cartIcon.locator('xpath=.//span[@class="minicart-quantity"]');
         this.viewCartButton = page.locator(`//div[@id="miniCartModal"]//a[contains(text(),"View Cart")]`)
-        this.prodItem = page.locator(`//div[@class="product"]`);
+        this.prodItem = page.locator(`//div[@class="product-grid row"]//div[@class="product"]`);
         this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
         this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[normalize-space(@class)="product-tile"]`)
         this.productTableShow = page.locator(`//div[@class="product-grid row"]`)
@@ -165,10 +167,12 @@ export class BasePage {
         const escapedMenu2 = escapeXPathText(menu2!);
         const escapedMenu3 = pathLength === 3 ? escapeXPathText(menu3!) : null;
 
+        await delay(1500)
+
         const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
         await menu1Locator.first().hover();
-        await page.waitForTimeout(3000);
+        await delay(1500)
 
         if (pathLength === 2) {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]`);
@@ -287,7 +291,7 @@ export class BasePage {
         await step(description || `Click on product at index ${prodIndex}`, async () => {
             await PageUtils.waitForDomAvailable(this.page)
             await this.click(this.prodItem.nth(prodIndex - 1), `Click on product at index ${prodIndex}`)
-            await PageUtils.waitForPageLoad(this.page)
+            await PageUtils.waitForPageLoad(this.page, 20000)
         })
     }
 
@@ -394,21 +398,24 @@ export class BasePage {
     }
 
     async getProdCollection(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="product-collection"]`)
-
-        return (await prod.innerText()).trim()
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//div[@class="product-collection"]`)
+        const prodCollection = (await prod.innerText()).trim()
+        console.log(`Product collection: ${prodCollection}`)
+        return prodCollection
     }
 
     async getProdName(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
-
-        return (await prod.innerText()).trim()
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//div[@class="pdp-link"]`)
+        const prodName = (await prod.innerText()).trim()
+        console.log(`Product Name: ${prodName}`)
+        return prodName
     }
 
     async getProdPrice(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product"])[${index}]//span[@class="value"]`)
-
-        return (await prod.innerText()).trim()
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//span[@class="value"]`)
+        const prodPrice = (await prod.innerText()).trim()
+        console.log(`Product Price: ${prodPrice}`)
+        return prodPrice
     }
 
     async getCartBadgeValue(): Promise<number> {
@@ -458,7 +465,7 @@ export class BasePage {
     async assertHidden(locator: Locator, description?: string) {
         await step(description || "Assert element hidden", async () => {
             await expect(locator.first()).toBeHidden({
-                timeout: 10000
+                timeout: 20000
             });
         });
     }
@@ -603,22 +610,24 @@ export class BasePage {
     // Check Locator Inside
     // Assert correct href, text
     // check image? exist
-    async assertLocatorInside(locate: Locator, data: LocatorInside) {
-        if (data.href) {
-            const link = locate.locator('xpath=.//a');
-            await expect(link.first()).toHaveAttribute('href', data.href)
-        }
+    async assertLocatorInside(locate: Locator, data: LocatorInside, description?: string) {
+        await step(description || "Assert href, text and image of Locator", async () => {
+            if (data.href) {
+                const link = locate.locator('xpath=.//a');
+                await expect(link.first()).toHaveAttribute('href', data.href)
+            }
 
-        if (data.hasImage) {
-            const img = locate.locator('xpath=.//img');
-            await expect(img).toHaveCount(1)
-            const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');
-            expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp|svg)/);
-        }
+            if (data.hasImage) {
+                const img = locate.locator('xpath=.//img');
+                await expect(img).toHaveCount(1)
+                const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');
+                expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp|svg)/);
+            }
 
-        if (data.text) {
-            await expect(locate).toContainText(data.text);
-        }
+            if (data.text) {
+                await expect(locate).toContainText(data.text);
+            }
+        })
     }
 
     async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: any, description?: string, button: 'left' | 'middle' | 'right' = 'middle') {

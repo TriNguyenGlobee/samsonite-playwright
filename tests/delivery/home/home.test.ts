@@ -12,6 +12,7 @@ import { MembershipPage } from "../../../src/pages/delivery/home/membership.page
 import { scrollToBottom } from "../../../utils/helpers/helpers";
 import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
 import { createHomePage } from "../../../src/factories/home.factory"
+import { createOffersPage } from "../../../src/factories/productlistingpage/offers.factory";
 import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Home Tests", () => {
@@ -136,7 +137,7 @@ test.describe("Home Tests", () => {
         }
     });
 
-    test(`11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
+    tests(["jp", "sg"], `11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
 
         await scrollToBottom(basicAuthPage);
@@ -154,11 +155,11 @@ test.describe("Home Tests", () => {
         })
     })
 
-    tests(["sg"],`
+    tests(["sg", "tw"],`
         12. Go to Offers Page
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
-        const offerspage = new OffersPage(basicAuthPage)
+        const offerspage = createOffersPage(basicAuthPage)
 
         await step("Go to Labels Page", async () => {
             await homePage.clickMenuItem("offers");

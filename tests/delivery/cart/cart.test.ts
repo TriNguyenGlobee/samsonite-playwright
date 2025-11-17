@@ -3,7 +3,7 @@ import { createMinicartPage } from '../../../src/factories/minicart.factory'
 import { createCartPage } from '../../../src/factories/cart.factory'
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber, PageUtils } from "../../../utils/helpers/helpers";
+import { t, clickUntil, extractNumber, PageUtils, delay } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
@@ -27,7 +27,15 @@ test.describe("Empty cart without login", () => {
             await expect(minicartPage.emptyCartMsg).toHaveText(t.minicart('emptymsg'))
             await expect(minicartPage.startShoppingButton).toBeVisible()
             await expect(minicartPage.exploreByCategoryText).toBeVisible()
+
+        })
+
+        await steps(["sg", "jp"], "Verify footer category item amount", async () => {
             expect(await minicartPage.footerCategoryItem.count()).toBe(3)
+        })
+
+        await steps(["tw"], "Verify footer category item amount", async () => {
+            expect(await minicartPage.footerCategoryItem.count()).toBe(4)
         })
 
         await step("Click Shopping Cart button", async () => {
@@ -92,6 +100,11 @@ test.describe("Add products to cart without login", () => {
             await step('Click on In-stock checkbox', async () => {
                 await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
             })
+        })
+
+        await step("Get product collection", async () => {
+            await cartpage.assertHidden(cartpage.underlay)
+
             prodCollection = await cartpage.getProdCollection(prodIndex)
             prodName = await cartpage.getProdName(prodIndex)
         })
@@ -181,7 +194,7 @@ test.describe("Add products to cart without login", () => {
         const cartpage = createCartPage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 1];
+        const prodIndexes = [1, 2, 3];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
@@ -204,13 +217,13 @@ test.describe("Add products to cart without login", () => {
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
         const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
-        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}` )
+        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}`)
 
         const firstMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
         const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
 
-        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}` )
+        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}`)
 
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
@@ -285,7 +298,7 @@ test.describe("Add products to cart without login", () => {
         const cartpage = createCartPage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 1];
+        const prodIndexes = [1, 2, 3];
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 

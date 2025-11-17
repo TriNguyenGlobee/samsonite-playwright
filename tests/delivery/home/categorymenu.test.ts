@@ -10,6 +10,7 @@ import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offer
 import { createHomePage } from "../../../src/factories/home.factory"
 import { PageUtils } from "../../../utils/helpers/helpers";
 import { steps } from "../../../utils/helpers/localeStep"
+import { AccessoriesPage } from "../../../src/pages/delivery/productlistingpage/accessories/accessories.page";
 
 test.describe("Category Menu", () => {
     test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {
@@ -21,16 +22,18 @@ test.describe("Category Menu", () => {
         const brandpage = createBrandPage(basicAuthPage);
         const ourbrandstorypage = createOurBrandStoryPage(basicAuthPage);
         const offerspage = new OffersPage(basicAuthPage);
+        const accessoriespage = new AccessoriesPage(basicAuthPage);
 
         await step("Hover over 'New Arrivals' menu", async () => {
-            await PageUtils.waitForPageLoad(basicAuthPage, 2000)
+            await PageUtils.waitForPageLoad(basicAuthPage, 5000)
+            await PageUtils.waitForDomAvailable(basicAuthPage, 3000)
             await homePage.hover(homePage.newArrivalsMenuItem);
         });
 
         await step("Verify that all categories under 'New Arrivals' are displayed", async () => {
             await newarrivalspage.assertNewArrivalsListItems(basicAuthPage);
         });
-
+        
         await step("Hover over 'Luggage' menu", async () => {
             await homePage.hover(homePage.luggageMenuItem);
         });
@@ -79,5 +82,12 @@ test.describe("Category Menu", () => {
             await offerspage.assertOffersListItems(basicAuthPage);
         });
 
+        await steps(["tw"], "Hover over 'Accessories' menu", async () => {
+            await homePage.hover(homePage.accessoriesMenuItem);
+        });
+
+        await steps(["tw"], "Verify that all categories under 'Accessories' are displayed", async () => {
+            await accessoriespage.assertAccesoriesListItems(basicAuthPage)
+        });
     });
 });

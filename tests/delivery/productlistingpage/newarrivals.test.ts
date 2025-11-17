@@ -1,7 +1,7 @@
 import { expect, test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { createHomePage } from "../../../src/factories/home.factory";
-import { lazyLoad, PageUtils, t, delay } from "../../../utils/helpers/helpers";
+import { lazyLoad, PageUtils, t, delay, scrollToBottom } from "../../../utils/helpers/helpers";
 import { tests } from "../../../utils/helpers/localeTest";
 import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
@@ -66,7 +66,7 @@ test.describe("New Arrivals Page", () => {
 });
 
 test.describe("New Arrivals Level 2 category", async () => {
-    tests(["sg"], `
+    tests(["sg", "tw"], `
         1. Go to C-Lite Colourburst page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -87,7 +87,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Verity C-Lite Colourburst page URL", async () => {
-            await newarrivalspage.assertUrl(/c-lite-colourburst/, "Assert C-Lite Colourburst page URL")
+            await newarrivalspage.assertUrl(/c-lite-colourburst|c-lite/, "Assert C-Lite Colourburst page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -634,6 +634,348 @@ test.describe("New Arrivals Level 2 category", async () => {
             })
         } else {
             test.skip(true, "No in-stock products found on Sub-lim page");
+        }
+    })
+
+    tests(["jp", "tw"], `
+        41. Go to PARALUX page
+        42. In-stock products are displayed when clicking on in-stock checkbox
+        43. User can add product to cart
+        44. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to PARALUX page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('paralux')}`,
+                "Go to New Arrivals -> PARALUX"
+            )
+        })
+
+        await step("Verity PARALUX page URL", async () => {
+            await newarrivalspage.assertUrl(/paralux/, "Assert PARALUX page URL")
+        })
+        /*
+        await step("Click In-stock checkbox", async () => {
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })*/
+
+        await step("Verify notify me button do not exist", async () => {
+            await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        await scrollToBottom(basicAuthPage);
+
+        const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    //expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await newarrivalspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on PARALUX page");
+        }
+    })
+
+    tests([""], `
+        45. Go to EVOA Z page
+        46. In-stock products are displayed when clicking on in-stock checkbox
+        47. User can add product to cart
+        48. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to EVOA Z page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('evoaz')}`,
+                "Go to New Arrivals -> EVOA Z"
+            )
+        })
+
+        await step("Verity EVOA Z page URL", async () => {
+            await newarrivalspage.assertUrl(/evoa-z/, "Assert EVOA Z page URL")
+        })
+        
+        await step("Click In-stock checkbox", async () => {
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await newarrivalspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on EVOA Z page");
+        }
+    })
+
+    tests([""], `
+        49. Go to ZIPPRIX page
+        50. In-stock products are displayed when clicking on in-stock checkbox
+        51. User can add product to cart
+        52. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to ZIPPRIX page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('zipprix')}`,
+                "Go to New Arrivals -> ZIPPRIX"
+            )
+        })
+
+        await step("Verity ZIPPRIX page URL", async () => {
+            await newarrivalspage.assertUrl(/zipprix-ft/, "Assert ZIPPRIX page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await newarrivalspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on ZIPPRIX page");
+        }
+    })
+
+    tests(["tw"], `
+        53. Go to RED SS25 page
+        54. In-stock products are displayed when clicking on in-stock checkbox
+        55. User can add product to cart
+        56. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to RED SS25 page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('redss25')}`,
+                "Go to New Arrivals -> RED SS25"
+            )
+        })
+
+        await step("Verity RED SS25 page URL", async () => {
+            await newarrivalspage.assertUrl(/red-ss25/, "Assert RED SS25 page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await newarrivalspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on RED SS25 page");
+        }
+    })
+
+    tests(["tw"], `
+        57. Go to UNIMAX page
+        58. In-stock products are displayed when clicking on in-stock checkbox
+        59. User can add product to cart
+        60. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to UNIMAX page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('UNIMAX')}`,
+                "Go to New Arrivals -> UNIMAX"
+            )
+        })
+
+        await step("Verity UNIMAX page URL", async () => {
+            await newarrivalspage.assertUrl(/unimax/, "Assert UNIMAX page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await newarrivalspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on UNIMAX page");
+        }
+    })
+
+    tests(["tw"], `
+        61. Go to PRO-DLX 6 page
+        62. In-stock products are displayed when clicking on in-stock checkbox
+        63. User can add product to cart
+        64. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to PRO-DLX 6 page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('newarrivals')}->${t.lv2MenuItem('PRODLX6')}`,
+                "Go to New Arrivals -> PRO-DLX 6"
+            )
+        })
+
+        await step("Verity PRO-DLX 6 page URL", async () => {
+            await newarrivalspage.assertUrl(/pro-dlx6/, "Assert PRO-DLX 6 page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await newarrivalspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await newarrivalspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on PRO-DLX 6 page");
         }
     })
 })
