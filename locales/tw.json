@@ -160,7 +160,7 @@
     "brand-samsoniteRed": "Samsonite Red",
     "brand-hartmann": "Hartmann",
     "brand-americantourister": "American Tourister",
-    "C-Lite-Colourburst": "C-Lite Colourburst",
+    "C-Lite-Colourburst": "C-LITE",
     "Relyon": "Relyon",
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
@@ -196,28 +196,18 @@
     "easybrakesystem": "手控煞車",
     "magnetic": "磁性拉鍊",
     "suspensionwheels": "專利減震懸掛輪",
-    "usbport": [
-      "USB 充電接口"
-    ],
-    "samsonite": [
-      "", "Samsonite"
-    ],
-    "samsoniteblack": [
-      "Samsonite Black"
-    ],
-    "samsonitered": [
-      "", "Samsonite Red"
-    ],
-    "hartmann": [
-      "Hartmann"
-    ],
+    "usbport": ["USB 充電接口", "USB 充電接口"],
+    "samsonite": ["Samsonite", ""],
+    "samsoniteblack": ["Samsonite Black"],
+    "samsonitered": ["Samsonite Red", ""],
+    "hartmann": ["Hartmann"],
     "city": "City",
     "adventure": "Adventure",
     "beach": "ビーチ",
     "business": "Business",
-    "C-Lite": "C-Lite",
+    "C-Lite": "C-LITE",
     "C-LITE": "C-LITE",
-    "Unimax": "Unimax",
+    "Unimax": "UNIMAX",
     "UNIMAX": "UNIMAX",
     "73H": "73H",
     "SBL Richmond II": "SBL Richmond II",
@@ -303,7 +293,8 @@
     "offersbackpacks": "包袋優惠專區",
     "showalldiscover": "查看所有熱門主題",
     "xbr2.0": "XBR 2.0",
-    "zalia3": "ZALIA 3"
+    "zalia3": "ZALIA 3",
+    "discoverall": "查看所有熱門主題"
   },
   "minicart": {
     "emptymsg": "您的購物車是空的",

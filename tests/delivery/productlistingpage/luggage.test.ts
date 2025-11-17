@@ -380,7 +380,7 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Verity Cabin/small size page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(cabin|機内持込)\/?$/, "Assert Cabin/small URL")
+            await luggagepage.assertUrl(/luggage\/(cabin|機内持込|登機)\/?$/, "Assert Cabin/small URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -437,7 +437,7 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Verity Softside type URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(medium|ミディアム)\/?$/, "Assert Medium size page URL")
+            await luggagepage.assertUrl(/luggage\/(medium|ミディアム|中型)\/?$/, "Assert Medium size page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -494,7 +494,7 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Verity Large size page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(large|ラージ)\/?$/, "Assert Large size page URL")
+            await luggagepage.assertUrl(/luggage\/(large|ラージ|大型)\/?$/, "Assert Large size page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -553,7 +553,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Verity Mono color page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(black_grey_silver_white|グレー_シルバー_ブラック_ホワイト)\/?$/, "Assert Mono colours page URL")
+            await luggagepage.assertUrl(/luggage\/(black_grey_silver_white|グレー_シルバー_ブラック_ホワイト|灰色_白色_銀色_黑色)\/?$/, "Assert Mono colours page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -610,7 +610,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Verity Softside type URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(blue_green_navy|グリーン_ネイビー_パープル_ブルー)\/?$/, "Assert Cool Color page URL")
+            await luggagepage.assertUrl(/luggage\/(blue_green_navy|グリーン_ネイビー_パープル_ブルー|海軍藍色_紫色_綠色_藍色)\/?$/, "Assert Cool Color page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -666,8 +666,8 @@ test.describe("Luggage Colours", async () => {
             )
         })
 
-        await step("Verity Large size page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(beige_orange_pink_red_yellow|イエロー_オレンジ_ピンク_レッド)\/?$/, "Assert Warm color page URL")
+        await step("Verity Warm colours page URL", async () => {
+            await luggagepage.assertUrl(/luggage\/(beige_orange_pink_red_yellow|イエロー_オレンジ_ピンク_レッド|橙色_米啡色_粉紅色_紅色_黃色)\/?$/, "Assert Warm color page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -703,7 +703,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "tw"], `
         13. Go to Shop all colours page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -724,7 +724,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Verity Large size page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/colour\/shop-all-colours\/?$/, "Assert Shop all colours page URL")
+            await luggagepage.assertUrl(/luggage\/(colour\/shop-all-colours|luggage-all-color)\/?$/, "Assert Shop all colours page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -760,7 +760,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    tests(["jp"], `
+    tests(["jp", "tw"], `
         17. Go to Special color page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -781,7 +781,7 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Verity Large size page URL", async () => {
-            await luggagepage.assertUrl(/スーツケース\/カラー\/special\/?$/, "Assert Special colours page URL")
+            await luggagepage.assertUrl(/((スーツケース\/カラー\/special)|(luggage\/special))?$/, "Assert Special colours page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -819,7 +819,7 @@ test.describe("Luggage Colours", async () => {
 })
 
 test.describe("Luggage Smart feature", async () => {
-    tests(["sg"], `
+    tests(["sg", "tw"], `
         1. Go to Double Coil Zippers page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -840,7 +840,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Double Coil Zippers page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/smart-feature\/(double-coil-zippers)\/?$/, "Assert Double Coil Zippers page URL")
+            await luggagepage.assertUrl(/(luggage\/smart-feature\/double-coil-zippers)|(luggage-double-coil-zippers)\/?$/, "Assert Double Coil Zippers page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -897,7 +897,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Easy brake system page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/smart-feature\/(easy-brake-system)\/?$/, "Assert Easy brake system page URL")
+            await luggagepage.assertUrl(/(luggage\/smart-feature\/easy-brake-system)|(luggage-easy-brake-system)\/?$/, "Assert Easy brake system page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1506,7 +1506,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    test(`
+    tests(["sg", "jp"], `
         13. Go to Business page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1591,7 +1591,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Collection C-Lite page URL", async () => {
-            await luggagepage.assertUrl(/(collection\/c-lite|collection\/シーライト)\/?$/, "Assert Collection C-Lite page URL")
+            await luggagepage.assertUrl(/(collection\/c-lite|collection\/シーライト)|(luggage-collection-c-lite)\/?$/, "Assert Collection C-Lite page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1627,7 +1627,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "tw"], `
         5. Go to Unimax page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1648,7 +1648,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Adventure page URL", async () => {
-            await luggagepage.assertUrl(/(collection\/unimax)\/?$/, "Assert Unimax page URL")
+            await luggagepage.assertUrl(/(collection\/unimax)|(luggage-collection-unimax)\/?$/, "Assert Unimax page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1741,7 +1741,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    test(`
+    tests(["sg", "jp"], `
         13. Go to Richmond II page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1855,7 +1855,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["jp"], `
+    tests(["jp", "tw"], `
         21. Go to Minter page
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart
@@ -1876,7 +1876,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity Minter page URL", async () => {
-            await luggagepage.assertUrl(/minter/, "Assert Minter page URL")
+            await luggagepage.assertUrl(/minter|(luggage-collection-minter)/, "Assert Minter page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -2080,6 +2080,120 @@ test.describe("Luggage Collection", async () => {
             })
         } else {
             test.skip(true, "No in-stock products found on Zipprix page");
+        }
+    })
+
+    tests(["tw"], `
+        37. Go to EVOA Z page
+        38. In-stock products are displayed when clicking on in-stock checkbox
+        39. User can add product to cart
+        40. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to EVOA Z page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('evoaz')}`,
+                "Go to Luggage -> Collection -> EVOA Z"
+            )
+        })
+
+        await step("Verity EVOA Z page URL", async () => {
+            await luggagepage.assertUrl(/(collection\/ジップリックスft)|luggage-collection-evoa-z\/?$/, "Assert EVOA Z page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on EVOA Z page");
+        }
+    })
+
+    tests(["tw"], `
+        41. Go to UPSCAPE page
+        42. In-stock products are displayed when clicking on in-stock checkbox
+        43. User can add product to cart
+        44. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to UPSCAPE page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('upscape')}`,
+                "Go to Luggage -> Collection -> UPSCAPE"
+            )
+        })
+
+        await step("Verity UPSCAPE page URL", async () => {
+            await luggagepage.assertUrl(/(collection\/ジップリックスft)|luggage-collection-upscape\/?$/, "Assert UPSCAPE page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on UPSCAPE page");
         }
     })
 })
