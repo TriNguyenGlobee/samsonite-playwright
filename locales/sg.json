@@ -80,7 +80,11 @@
     "url": "https://sstw.stg.samsonite-asia.com/accessories/"
   },
   "brandpage": {
-    "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "luggage": "Luggage",
+    "backpacks": "Backpacks",
+    "bags": "Bags",
+    "briefcase": ""
   },
   "ourbrandstorypage": {
     "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"],
@@ -223,6 +227,7 @@
     "briefcasebags": "Briefcase",
     "crossbodybags": "Cross Body Bags",
     "dufflebags": "Duffles",
+    "slingbags": "",
     "tote": "Totes",
     "2way3way": "",
     "shoulderbags": "",

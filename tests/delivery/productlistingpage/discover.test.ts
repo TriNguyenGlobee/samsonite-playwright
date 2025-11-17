@@ -44,7 +44,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg"],`
+    tests(["sg", "tw"],`
         2. Go to Mothers day gifts page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -62,7 +62,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg"],`
+    tests(["sg", "tw"],`
         3. Go to Wedding and honeymoon page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -80,7 +80,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg"],`
+    tests(["sg", "tw"],`
         4. Go to Your Business Look page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)

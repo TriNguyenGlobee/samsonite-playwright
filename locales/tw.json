@@ -93,7 +93,11 @@
   },
   "brandpage": {
     "title": "品牌系列 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sstw.stg.samsonite-asia.com/brand/"
+    "url": "https://sstw.stg.samsonite-asia.com/brand/",
+    "luggage": "行李箱",
+    "backpacks": "後背包",
+    "bags": "其他包款",
+    "briefcase": ""
   },
   "ourbrandstorypage": {
     "title": [
@@ -152,8 +156,8 @@
   },
   "lv2MenuItem": {
     "brand-samsonite": "Samsonite",
-    "brand-samsoniteBlack": "Samsonite BLACK LABEL",
-    "brand-samsoniteRed": "Samsonite RED",
+    "brand-samsoniteBlack": "Samsonite Black",
+    "brand-samsoniteRed": "Samsonite Red",
     "brand-hartmann": "Hartmann",
     "brand-americantourister": "American Tourister",
     "C-Lite-Colourburst": "C-Lite Colourburst",
@@ -172,7 +176,7 @@
     "smartfeature": "特色功能",
     "labels": "品牌系列",
     "colour": "顏色",
-    "color": "Color",
+    "color": "顏色",
     "traveltype": "Travel Type",
     "collection": "推薦系列",
     "hardside": "硬箱",

@@ -21,7 +21,7 @@ export class CartPageTW extends CartPage {
 
             await this.click(addButton, `Add product at index ${i} to cart`)
 
-            await delay(1000)
+            await delay(1500)
 
             await handlePwpModalIfPresent(this.page);
 
@@ -68,6 +68,8 @@ export class CartPageTW extends CartPage {
                         await delay(300);
 
                         await this.click(addButton, `Add product at index ${index} to cart`);
+
+                        await delay(1500)
 
                         await handlePwpModalIfPresent(this.page);
 

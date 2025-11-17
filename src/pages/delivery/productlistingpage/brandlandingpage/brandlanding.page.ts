@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../../base.page";
-import { PageUtils } from "../../../../../utils/helpers/helpers";
+import { PageUtils, t } from "../../../../../utils/helpers/helpers";
 import { step } from "allure-js-commons";
 
 export class BrandLandingPage extends BasePage {
@@ -14,6 +14,7 @@ export class BrandLandingPage extends BasePage {
     readonly ssn_bl_briefcaseMenu: Locator;
     readonly ssn_bl_luggageMenu: Locator;
     readonly ssn_bl_backpacksMenu: Locator;
+    readonly ssn_bl_bagsMenu: Locator;
     readonly ssn_red_bagsMenu: Locator;
     readonly travelHartmannMenu: Locator;
     readonly backpackHartmannMenu: Locator;
@@ -31,13 +32,14 @@ export class BrandLandingPage extends BasePage {
         this.activeBanner = page.locator(`//div[@class="firstly-content"]//div[@class="owl-stage"]//div[@class="owl-item active"]`)
         this.ssn_hardcaseMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[@class="row no-gutters" and .//a[text()="Hardcase"]]`)
         this.ssn_softcaseMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-4"]//div[@class="row no-gutters" and .//a[text()="Softcase"]]`)
-        this.ssn_luggageMenu = page.locator(`//div[contains(@class,"cat-item") and .//h3[text()="Luggage"]]`)
-        this.ssn_backpacksMenu = page.locator(`//div[contains(@class,"cat-item") and .//h3[text()="Backpacks"]]`)
-        this.ssn_bagsMenu = page.locator(`//div[contains(@class,"cat-item") and .//h3[text()="Bags"]]`)
-        this.ssn_bl_briefcaseMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="BRIEFCASES"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Briefcase"]])`)
-        this.ssn_bl_luggageMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="Luggage"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Luggage"]])`)
-        this.ssn_bl_backpacksMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="Backpacks"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Backpacks"]])`)
-        this.ssn_red_bagsMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="Bags"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="Bags"]])`)
+        this.ssn_luggageMenu = page.locator(`//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('luggage')}"]]`)
+        this.ssn_backpacksMenu = page.locator(`//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('backpacks')}"]]`)
+        this.ssn_bagsMenu = page.locator(`//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('bags')}"]]`)
+        this.ssn_bl_briefcaseMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('briefcase')}"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="${t.brandpage('briefcase')}"]])`)
+        this.ssn_bl_luggageMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('luggage')}"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="${t.brandpage('luggage')}"]])`)
+        this.ssn_bl_backpacksMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('backpacks')}"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="${t.brandpage('backpacks')}"]])`)
+        this.ssn_bl_bagsMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('bags')}"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="${t.brandpage('bags')}"]])`)
+        this.ssn_red_bagsMenu = page.locator(`(//div[contains(@class,"cat-item") and .//h3[text()="${t.brandpage('bags')}"]] | //div[@class="col-4"]//div[contains(@class,"row no-gutters") and .//a[text()="${t.brandpage('bags')}"]])`)
         this.travelHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Travel"]]`)
         this.backpackHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Backpack"]]`)
         this.bagHartmannMenu = page.locator(`//div[@class="secondary-content"]//div[@class="col-6 col-md-3" and .//a[text()="Bag"]]`)

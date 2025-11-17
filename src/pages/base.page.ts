@@ -167,12 +167,12 @@ export class BasePage {
         const escapedMenu2 = escapeXPathText(menu2!);
         const escapedMenu3 = pathLength === 3 ? escapeXPathText(menu3!) : null;
 
-        await page.waitForTimeout(1000);
+        await delay(1500)
 
         const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
         await menu1Locator.first().hover();
-        await page.waitForTimeout(3000);
+        await delay(1500)
 
         if (pathLength === 2) {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]`);
@@ -610,22 +610,24 @@ export class BasePage {
     // Check Locator Inside
     // Assert correct href, text
     // check image? exist
-    async assertLocatorInside(locate: Locator, data: LocatorInside) {
-        if (data.href) {
-            const link = locate.locator('xpath=.//a');
-            await expect(link.first()).toHaveAttribute('href', data.href)
-        }
+    async assertLocatorInside(locate: Locator, data: LocatorInside, description?: string) {
+        await step(description || "Assert href, text and image of Locator", async () => {
+            if (data.href) {
+                const link = locate.locator('xpath=.//a');
+                await expect(link.first()).toHaveAttribute('href', data.href)
+            }
 
-        if (data.hasImage) {
-            const img = locate.locator('xpath=.//img');
-            await expect(img).toHaveCount(1)
-            const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');
-            expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp|svg)/);
-        }
+            if (data.hasImage) {
+                const img = locate.locator('xpath=.//img');
+                await expect(img).toHaveCount(1)
+                const srcAttr = await img.getAttribute('src') || await img.getAttribute('data-src');
+                expect(srcAttr).toMatch(/.+\.(jpg|jpeg|png|webp|svg)/);
+            }
 
-        if (data.text) {
-            await expect(locate).toContainText(data.text);
-        }
+            if (data.text) {
+                await expect(locate).toContainText(data.text);
+            }
+        })
     }
 
     async assertNavigatedURLByClickLocator(page: Page, locate: Locator, url: any, description?: string, button: 'left' | 'middle' | 'right' = 'middle') {

@@ -999,8 +999,6 @@ test.describe("Backpacks Labels/Brand", async () => {
 
         const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
 
-        await backpackspage.pause()
-
         if (!isInStockProdNotExist) {
             await step("Verify user can add product to cart if In-stock product exist", async () => {
                 await lazyLoad(basicAuthPage)

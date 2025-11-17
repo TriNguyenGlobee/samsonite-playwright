@@ -80,7 +80,11 @@
     "url": "https://sstw.stg.samsonite-asia.com/accessories/"
   },
   "brandpage": {
-    "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
+    "title": "全商品一覧｜サムソナイト(Samsonite)公式オンラインストア | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0",
+    "luggage": "Luggage",
+    "backpacks": "Backpacks",
+    "bags": "",
+    "briefcase": "Briefcase"
   },
   "ourbrandstorypage": {
     "title": ["ブランドストーリー｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0","Brand Story | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"],
@@ -223,6 +227,7 @@
     "briefcasebags": "ブリーフケース",
     "crossbodybags": "",
     "dufflebags": "ダッフル",
+    "slingbags": "",
     "tote": "トート",
     "2way3way": "2WAY／3WAY",
     "shoulderbags": "ショルダーバッグ",
