@@ -3,12 +3,14 @@ import { OurBrandStoryPage }  from '../../pages/delivery/productlistingpage/ourb
 import { OurBrandStoryPageSG }  from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-sg.page';
 import { OurBrandStoryPageJP }  from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-jp.page';
 import { OurBrandStoryPageTW } from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-tw.page';
+import { OurBrandStoryPagePH } from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-ph.page';
 
 export function createOurBrandStoryPage(page: Page): OurBrandStoryPage {
   switch (process.env.LOCALE) {
     case 'sg': return new OurBrandStoryPageSG(page);
     case 'jp': return new OurBrandStoryPageJP(page);
     case 'tw': return new OurBrandStoryPageTW(page);
+    case 'ph': return new OurBrandStoryPagePH(page);
     default:   return new OurBrandStoryPageJP(page);
   }
 }

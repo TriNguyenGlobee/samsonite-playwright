@@ -113,6 +113,8 @@ export abstract class MinicartPage extends BasePage {
 
     abstract getShippingDiscount(): Promise<string> 
 
+    abstract getAmountFooterCategoryItems(): Promise<number>
+
     // =========================
     // ✅ Assertions
     // =========================

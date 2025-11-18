@@ -11,6 +11,8 @@ export class MinicartPageJP extends MinicartPage {
     // =========================
     async getShippingDiscount(): Promise<string> {return "0"}
 
+    async getAmountFooterCategoryItems(): Promise<number> {return 3}
+
     // =========================
     // ✅ Assertions
     // =========================

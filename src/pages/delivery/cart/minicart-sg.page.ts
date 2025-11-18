@@ -30,6 +30,8 @@ export class MinicartPageSG extends MinicartPage {
         return (shippingDiscount_1_num + shippingDiscount_2_num!).toString()
     }
 
+    async getAmountFooterCategoryItems(): Promise<number> {return 3}
+    
     // =========================
     // ✅ Assertions
     // =========================

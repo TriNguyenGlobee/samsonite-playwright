@@ -3,7 +3,7 @@ dotenv.config();
 
 // Environment name
 export type EnvironmentName = 'dev' | 'stg';
-export type Locale = 'sg' | 'jp' | 'tw';
+export type Locale = 'sg' | 'jp' | 'tw' | 'ph';
 
 interface Credentials {
     username: string;
@@ -54,6 +54,17 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
             },
             basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
             basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
+        },
+        ph: {
+            baseURL: 'https://ssph.dev.samsonite-asia.com/',
+            credentials: {
+                username: process.env.DEV_USERNAME_PH as string,
+                password: process.env.DEV_PASSWORD_PH as string,
+                gg_username: process.env.DEV_GG_USERNAME_PH as string,
+                gg_password: process.env.DEV_GG_PASSWORD_PH as string
+            },
+            basicAuthUser: process.env.DEV_BASIC_AUTH_USER,
+            basicAuthPass: process.env.DEV_BASIC_AUTH_PASS,
         }
 
     },
@@ -87,6 +98,17 @@ const environments: Record<EnvironmentName, Record<Locale, EnvironmentConfig>> =
                 password: process.env.STG_PASSWORD_TW as string,
                 gg_username: process.env.STG_GG_USERNAME_TW as string,
                 gg_password: process.env.STG_GG_PASSWORD_TW as string
+            },
+            basicAuthUser: process.env.STG_BASIC_AUTH_USER,
+            basicAuthPass: process.env.STG_BASIC_AUTH_PASS,
+        },
+        ph: {
+            baseURL: 'https://ssph.stg.samsonite-asia.com/',
+            credentials: {
+                username: process.env.STG_USERNAME_PH as string,
+                password: process.env.STG_PASSWORD_PH as string,
+                gg_username: process.env.STG_GG_USERNAME_PH as string,
+                gg_password: process.env.STG_GG_PASSWORD_PH as string
             },
             basicAuthUser: process.env.STG_BASIC_AUTH_USER,
             basicAuthPass: process.env.STG_BASIC_AUTH_PASS,

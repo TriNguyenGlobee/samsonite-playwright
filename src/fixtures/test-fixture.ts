@@ -4,6 +4,7 @@ import { Config } from "../../config/env.config";
 import { createLoginPage } from "../factories/login.factory";
 import { startModalWatchdog } from "../../utils/helpers/modalWatchdog";
 import { getLocales } from "../../utils/helpers/localeHelper";
+import { PageUtils } from "../../utils/helpers/helpers";
 
 type MyFixtures = {
   user: { username: string; password: string };
@@ -66,6 +67,7 @@ export const test = base.extend<MyFixtures>({
 
     await step("Go to Main Page", async () => {
       await page.goto(Config.baseURL, { waitUntil: "domcontentloaded" });
+      await PageUtils.waitForDomAvailable(page)
     });
 
     await step("Go to login page", async () => {

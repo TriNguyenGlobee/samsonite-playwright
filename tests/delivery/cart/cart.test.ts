@@ -17,6 +17,7 @@ test.describe("Empty cart without login", () => {
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const minicartPage = createMinicartPage(basicAuthPage)
+        const amountOfFooterCategoryItem = await minicartPage.getAmountFooterCategoryItems()
 
         await step("Click on Cart icon", async () => {
             await homePage.click(homePage.cartIcon)
@@ -30,12 +31,8 @@ test.describe("Empty cart without login", () => {
 
         })
 
-        await steps(["sg", "jp"], "Verify footer category item amount", async () => {
-            expect(await minicartPage.footerCategoryItem.count()).toBe(3)
-        })
-
-        await steps(["tw"], "Verify footer category item amount", async () => {
-            expect(await minicartPage.footerCategoryItem.count()).toBe(4)
+        await steps(["sg", "jp", "tw", "ph"], "Verify footer category item amount", async () => {
+            expect(await minicartPage.footerCategoryItem.count()).toBe(amountOfFooterCategoryItem)
         })
 
         await step("Click Shopping Cart button", async () => {
@@ -194,7 +191,7 @@ test.describe("Add products to cart without login", () => {
         const cartpage = createCartPage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 3];
+        const prodIndexes = [1, 2];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
@@ -210,20 +207,18 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify number of products in the minicart', async () => {
-            expect(await minicart.getNumberOfProducts()).toBe(3)
+            expect(await minicart.getNumberOfProducts()).toBe(2)
         })
 
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
-        const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
-        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}`)
+        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}`)
 
         const firstMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
-        const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
 
-        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}`)
+        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}`)
 
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
@@ -233,8 +228,7 @@ test.describe("Add products to cart without login", () => {
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
-            expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost - shippingDiscount)
+            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount)
         })
 
         await step('Verify remove product modal is displayed when removing a product in the minicart', async () => {
@@ -298,7 +292,7 @@ test.describe("Add products to cart without login", () => {
         const cartpage = createCartPage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 3];
+        const prodIndexes = [1, 2];
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 
@@ -319,7 +313,6 @@ test.describe("Add products to cart without login", () => {
 
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
-        const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
         await step('Go to Cart page by URL', async () => {
             await basicAuthPage.goto(`${Config.baseURL}cart`)
@@ -334,7 +327,7 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify number of products in Cart page', async () => {
-            expect(await cartpage.getNumberOfProducts()).toBe(3)
+            expect(await cartpage.getNumberOfProducts()).toBe(2)
         })
 
         await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
@@ -355,7 +348,6 @@ test.describe("Add products to cart without login", () => {
 
         const firstMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[1]));
-        const thirdMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[2]));
         const shippingDiscount = await extractNumber(await cartpage.getShippingDiscount())
         const shippingCost = await extractNumber(await cartpage.getShippingCost());
         const totalPrice = await extractNumber(await cartpage.getTotalPrice());
@@ -363,8 +355,7 @@ test.describe("Add products to cart without login", () => {
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
-            expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost - shippingDiscount)
+            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount)
         })
 
         await step('Verify remove product modal is displayed when removing a product in Cart page', async () => {

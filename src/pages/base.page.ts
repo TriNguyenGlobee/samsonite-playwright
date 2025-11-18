@@ -167,12 +167,12 @@ export class BasePage {
         const escapedMenu2 = escapeXPathText(menu2!);
         const escapedMenu3 = pathLength === 3 ? escapeXPathText(menu3!) : null;
 
-        await delay(1500)
+        await delay(3000)
 
         const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
         await menu1Locator.first().hover();
-        await delay(1500)
+        await delay(500)
 
         if (pathLength === 2) {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]`);
