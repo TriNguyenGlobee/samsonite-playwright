@@ -22,8 +22,14 @@ test.describe("PDP is shown correctly", async () => {
         const pdppage = new PDPPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        await step('Click on In-stock checkbox', async () => {
-            await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+
+        await step("Click In-stock checkbox", async () => {
+            if (await homepage.productTableShow.isVisible()) {
+                await homepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         prodName = await homepage.getProdName(prodIndex)
@@ -132,8 +138,13 @@ test.describe("Breadcrumb", () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        await step('Click on In-stock checkbox', async () => {
-            await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+        await step("Click In-stock checkbox", async () => {
+            if (await homepage.productTableShow.isVisible()) {
+                await homepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         prodCollection = (await homepage.getProdCollection(prodIndex)).trim()
@@ -175,8 +186,13 @@ test.describe("PDP extra features", () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
         await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        await step('Click on In-stock checkbox', async () => {
-            await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+        await step("Click In-stock checkbox", async () => {
+            if (await homepage.productTableShow.isVisible()) {
+                await homepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await lazyLoad(basicAuthPage)

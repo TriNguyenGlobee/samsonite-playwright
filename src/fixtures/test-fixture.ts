@@ -4,7 +4,7 @@ import { Config } from "../../config/env.config";
 import { createLoginPage } from "../factories/login.factory";
 import { startModalWatchdog } from "../../utils/helpers/modalWatchdog";
 import { getLocales } from "../../utils/helpers/localeHelper";
-import { PageUtils } from "../../utils/helpers/helpers";
+import { delay, PageUtils } from "../../utils/helpers/helpers";
 
 type MyFixtures = {
   user: { username: string; password: string };
@@ -71,6 +71,7 @@ export const test = base.extend<MyFixtures>({
     });
 
     await step("Go to login page", async () => {
+      await delay(1500)
       await loginPage.goToLoginRegisterPage();
     });
 

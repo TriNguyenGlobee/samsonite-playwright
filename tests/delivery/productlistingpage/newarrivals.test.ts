@@ -7,6 +7,7 @@ import { NewArrivalsPage } from "../../../src/pages/delivery/productlistingpage/
 import { createMinicartPage } from "../../../src/factories/minicart.factory";
 import { createCartPage } from "../../../src/factories/cart.factory";
 import { PDPPage } from "../../../src/pages/delivery/pdp/pdp.page";
+import { steps } from "../../../utils/helpers/localeStep";
 
 test.describe("New Arrivals Page", () => {
     test.beforeEach(async ({ basicAuthPage }) => {
@@ -637,7 +638,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["jp", "tw"], `
+    tests(["jp", "tw", "ph"], `
         41. Go to PARALUX page
         42. In-stock products are displayed when clicking on in-stock checkbox
         43. User can add product to cart
@@ -666,7 +667,7 @@ test.describe("New Arrivals Level 2 category", async () => {
                 "Checking the In-stock checkbox")
         })*/
 
-        await step("Verify notify me button do not exist", async () => {
+        await steps(["jp", "tw"], "Verify notify me button do not exist", async () => {
             await newarrivalspage.assertHidden(newarrivalspage.notifyMebutton,
                 "Assert the In-stock products are displayed only"
             )
@@ -677,7 +678,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         const isInStockProdExist = await newarrivalspage.noAvailableProdMsg.isVisible()
 
         if (!isInStockProdExist) {
-            await step("Verify user can add product to cart if In-stock product exist", async () => {
+            await steps(["jp", "tw"], "Verify user can add product to cart if In-stock product exist", async () => {
                 await Promise.all([
                     cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
                     //expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
@@ -685,7 +686,7 @@ test.describe("New Arrivals Level 2 category", async () => {
 
             })
 
-            await step("Verify user can go to PDP", async () => {
+            await steps(["jp", "tw"], "Verify user can go to PDP", async () => {
                 await newarrivalspage.selectProdByIndex(1, "Select the first product")
                 expect(await pdppage.isPDPPageDisplayed()).toBe(true)
             })

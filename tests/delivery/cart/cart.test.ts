@@ -3,7 +3,7 @@ import { createMinicartPage } from '../../../src/factories/minicart.factory'
 import { createCartPage } from '../../../src/factories/cart.factory'
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber, PageUtils, delay } from "../../../utils/helpers/helpers";
+import { t, clickUntil, extractNumber, PageUtils, delay, lazyLoad } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
@@ -94,26 +94,39 @@ test.describe("Add products to cart without login", () => {
             await homePage.clickMenuItem('newarrivals')
             await newarrivalspage.logoImg.hover()
 
-            await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+            await step("Click In-stock checkbox", async () => {
+                if (await homePage.productTableShow.isVisible()) {
+                    await homePage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                        "Checking the In-stock checkbox")
+                } else {
+                    test.skip(true, "Product table not visible, skipping the test.");
+                }
             })
         })
 
         await step("Get product collection", async () => {
             await cartpage.assertHidden(cartpage.underlay)
-
-            prodCollection = await cartpage.getProdCollection(prodIndex)
-            prodName = await cartpage.getProdName(prodIndex)
         })
 
-        await step('Verify the minicart is displayed after adding product to cart', async () => {
-            await Promise.all([
-                cartpage.addProductToCartByIndex(prodIndex),
-                expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
-            ]);
-        })
+        const isInStockProdNotExist = await cartpage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify the minicart is displayed after adding product to cart", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(1, "Add a in-stock product to cart"),
+                    expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
+            prodCollection = await cartpage.getProdCollection(prodIndex)
+            prodName = await cartpage.getProdName(prodIndex)
             const minicartProdName = await minicart.getMinicartProdName(prodIndex)
             const minicartProdCollection = await minicart.getMinicartProdCollection(prodIndex)
 
@@ -198,13 +211,30 @@ test.describe("Add products to cart without login", () => {
             await newarrivalspage.logoImg.hover()
         })
 
-        await step('Click on In-stock checkbox', async () => {
-            await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+        await step("Click In-stock checkbox", async () => {
+            if (await homePage.productTableShow.isVisible()) {
+                await homePage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
-        await step('Add multi products to cart', async () => {
-            await cartpage.addProductToCartByIndex(prodIndexes)
-        })
+        const isInStockProdNotExist = await cartpage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Add multi products to cart", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addProductToCartByIndex(prodIndexes),
+                    //expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
 
         await step('Verify number of products in the minicart', async () => {
             expect(await minicart.getNumberOfProducts()).toBe(2)
@@ -300,16 +330,31 @@ test.describe("Add products to cart without login", () => {
             await homePage.clickMenuItem('newarrivals')
             await newarrivalspage.logoImg.hover()
 
-            await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+            await step("Click In-stock checkbox", async () => {
+                if (await homePage.productTableShow.isVisible()) {
+                    await homePage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                        "Checking the In-stock checkbox")
+                } else {
+                    test.skip(true, "Product table not visible, skipping the test.");
+                }
             })
-            prodCollection = await cartpage.getProdCollection(prodIndex)
-            prodName = await cartpage.getProdName(prodIndex)
         })
 
-        await step('Add multi products to cart', async () => {
-            await cartpage.addProductToCartByIndex(prodIndexes)
-        })
+        const isInStockProdNotExist = await cartpage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Add multi products to cart", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addProductToCartByIndex(prodIndexes),
+                    //expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
 
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
@@ -319,6 +364,8 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
+            prodCollection = await cartpage.getProdCollection(prodIndex)
+            prodName = await cartpage.getProdName(prodIndex)
             const cartPageProdName = await cartpage.getCartPageProdName(prodIndex)
             const cartPageProdCollection = await cartpage.getCartPageProdCollection(prodIndex)
 

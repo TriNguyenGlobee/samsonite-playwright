@@ -13,10 +13,10 @@ export const hightlightCategoryItems = [
 ];
 
 export const recommendedProductItems = [
-    { buttonText: 'New In', divClass: 'product-pills-1' },
-    { buttonText: 'Best Sellers', divClass: 'product-pills-2' },
-    { buttonText: 'For Her', divClass: 'product-pills-3' },
-    { buttonText: 'For Him', divClass: 'product-pills-4' }
+    { buttonText: 'NEW IN', divClass: 'product-pills-1' },
+    { buttonText: 'BEST SELLERS', divClass: 'product-pills-2' },
+    { buttonText: 'FOR HER', divClass: 'product-pills-3' },
+    { buttonText: 'FOR HIM', divClass: 'product-pills-4' }
 ];
 
 export const campaignData = [
@@ -35,15 +35,15 @@ export const newArrivalsItem = [
 
 // --- luggage-type ---
 export const typeItems = [
-    { text: 'Hardside', href: '/luggage/hardside/' },
-    { text: 'Softside', href: '/luggage/softside/' },
+    { text: 'Hardside', href: '/luggage/type/hardside/' },
+    { text: 'Softside', href: '/luggage/type/softside/' },
     { text: 'Aluminium', href: '/luggage/aluminium/' },
     { text: 'Shop all luggage', href: 'https://ssph.stg.samsonite-asia.com/luggage/' }
 ];
 
 // --- luggage-size ---
 export const sizeItems = [
-    { text: 'Cabin/Small', href: 'https://ssph.stg.samsonite-asia.com/luggage/cabin' },
+    { text: 'Cabin', href: 'https://ssph.stg.samsonite-asia.com/luggage/cabin' },
     { text: 'Medium', href: 'https://ssph.stg.samsonite-asia.com/luggage/medium' },
     { text: 'Large', href: 'https://ssph.stg.samsonite-asia.com/luggage/large' }
 ];
@@ -63,8 +63,12 @@ export const colorItems = [
         href: 'https://ssph.stg.samsonite-asia.com/luggage/beige_orange_pink_red_yellow'
     },
     {
+        text: 'Special',
+        href: '/luggage/special/'
+    },
+    {
         text: 'Shop all colours',
-        href: '/luggage/colour/shop-all-colours/'
+        href: '/luggage/luggage-all-color/'
     }
 ];
 
@@ -72,11 +76,11 @@ export const colorItems = [
 export const smartFeatureItems = [
     {
         text: 'Double Coil Zippers',
-        href: '/luggage/smart-feature/double-coil-zippers/'
+        href: '/luggage/features/double-coil-zippers/'
     },
     {
         text: 'Easy Brake System',
-        href: '/luggage/smart-feature/easy-brake-system/'
+        href: '/luggage/features/easy-brake-system/'
     },
     {
         text: 'Magnetic Zippers',
@@ -87,7 +91,7 @@ export const smartFeatureItems = [
         href: '/luggage/suspension-wheels/'
     },
     {
-        text: 'USB port',
+        text: 'USB Port',
         href: '/luggage/usb-port/'
     },
     {
@@ -168,7 +172,7 @@ export const colorItemsBP = [
     { text: 'Mono', href: 'https://ssph.stg.samsonite-asia.com/backpacks/black_grey_silver_white' },
     { text: 'Cool', href: 'https://ssph.stg.samsonite-asia.com/backpacks/blue_green_navy_purple' },
     { text: 'Warm', href: 'https://ssph.stg.samsonite-asia.com/backpacks/beige_orange_pink_red_yellow' },
-    { text: 'Shop all colours', href: '/backpacks/colour/shop-all-colours/' }
+    { text: 'Shop all colours', href: '/backpack/all-color/' }
 ];
 
 // --- backpack-smart-function ---
@@ -193,7 +197,7 @@ export const laptopItemsBP = [
 // --- backpack-collection ---
 export const collectionItemsBP = [
     { text: 'Spectrolite', href: '/backpacks/collection/spectrolite/' },
-    { text: 'Pro-Dlx 6', href: '/backpacks/collection/pro-dlx-6/' }
+    { text: 'Pro-DLX 6', href: '/backpacks/collection/pro-dlx-6/' }
 ];
 
 // --- bag-type ---
@@ -234,21 +238,21 @@ export const collectionItemsB = [
 ];
 
 export const brandItemsBR = [
-    { text: 'Samsonite BLACK LABEL', href: 'https://ssph.stg.samsonite-asia.com/black/' },
+    { text: 'Samsonite BLACK LABEL', href: 'https://ssph.stg.samsonite-asia.com/samsonite-black/' },
     { text: 'Samsonite', href: 'https://ssph.stg.samsonite-asia.com/samsonite/' },
-    { text: 'Samsonite RED', href: 'https://ssph.stg.samsonite-asia.com/red/' }
+    { text: 'Samsonite RED', href: 'https://ssph.stg.samsonite-asia.com/samsonite-red/' }
 ];
 
 // --- discover-article ---
 export const articleItems = [
     { text: `Father's Day Gifts`, href: 'https://ssph.stg.samsonite-asia.com/fathers-day-gifts.html' },
     { text: `Mother's Day Gifts`, href: 'https://ssph.stg.samsonite-asia.com/mothers-day-gifts.html' },
+    { text: 'Family-Friendly Travels', href: 'https://ssph.stg.samsonite-asia.com/family-friendly-travels.html' },
     { text: 'Wedding and Honeymoon', href: 'https://ssph.stg.samsonite-asia.com/wedding-and-honeymoon.html' },
+    { text: 'Travel Hard, Travel Smart', href: 'https://ssph.stg.samsonite-asia.com/travel-hard-travel-smart.html' },
     { text: 'Your Business Look', href: 'https://ssph.stg.samsonite-asia.com/your-business-look.html' },
     { text: 'Your Backpack Look', href: 'https://ssph.stg.samsonite-asia.com/your-backpack-look.html' },
     { text: 'Lavish Travels', href: 'https://ssph.stg.samsonite-asia.com/lavish-travels.html' },
-    { text: 'Family-Friendly Travels', href: 'https://ssph.stg.samsonite-asia.com/family-friendly-travels.html' },
-    { text: 'Travel Hard, Travel Smart', href: 'https://ssph.stg.samsonite-asia.com/travel-hard-travel-smart.html' },
     { text: 'Discover All', href: 'https://ssph.stg.samsonite-asia.com/discover-all' }
 ];
 
@@ -280,6 +284,21 @@ export const top10picks = [
         href: "https://ssph.stg.samsonite-asia.com/2025-top-10-picks/",
         text: "Top 10 Picks"
     }
+]
+
+// --- accessories-type ---
+export const typeItemAS = [
+    { text: 'Travel accessories', href: '/accessories/travel-accessories/' },
+    { text: 'Wallet', href: '/accessories/wallet/' },
+    { text: 'Shop all accessories', href: 'https://ssph.stg.samsonite-asia.com/accessories/' }
+]
+
+// --- accessories-color ---
+export const colorItemAS = [
+    { text: 'Mono', href: 'https://ssph.stg.samsonite-asia.com/accessories/black_grey_white' },
+    { text: 'Cool', href: 'https://ssph.stg.samsonite-asia.com/accessories/blue_green_navy' },
+    { text: 'Warm', href: 'https://ssph.stg.samsonite-asia.com/accessories/beige_orange_pink_red_yellow' },
+    { text: 'Shop all colours', href: '/accessories/accessories-all-color/' }
 ]
 
 export const subMenuDataSamsonite = [
