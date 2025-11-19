@@ -1016,7 +1016,7 @@ test.describe("Bags Labels/Brand", async () => {
         }
     })
 
-    test(`
+    tests(["sg", "jp", "tw"], `
         5. Go to Samsonite black page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1319,7 +1319,7 @@ test.describe("Bags laptop", async () => {
         }
     })
 
-    test(`
+    tests(["sg", "jp", "tw"], `
         9. Go to 17" laptop page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart

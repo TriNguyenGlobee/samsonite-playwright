@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import sg from '../locales/sg.json';
 
-export type Locale = 'sg' | 'jp' | 'tw';
-const defaultLocale: Locale = 'jp';
+export type Locale = 'sg' | 'jp' | 'tw' | 'ph';
+const defaultLocale: Locale = 'sg';
 const currentLocale: Locale = (process.env.LOCALE as Locale) || defaultLocale;
 
 const localesDir = path.join(__dirname, '..', 'locales');

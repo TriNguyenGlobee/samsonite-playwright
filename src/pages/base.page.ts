@@ -57,7 +57,7 @@ export class BasePage {
         this.ginzaFlagshipStore = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="銀座 旗艦店"]`);
         this.friendsOfSamsoniteMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('friendofsamsonite')}"]`);
         this.saleMenuItem = this.headerNavBar.locator('xpath=.//a[normalize-space(text())="セール"]');
-        this.accessoriesMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="旅行配件"]`)
+        this.accessoriesMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('accessories')}"]`)
         this.rightNavbar = page.locator('//div[contains(@class,"right navbar-header")]');
         this.searchIcon = this.rightNavbar.locator('xpath=.//button[i[contains(@class,"search")]]');
         this.wishlistIcon = this.rightNavbar.locator('xpath=.//a[i[contains(@class,"heart")]]');
@@ -167,12 +167,12 @@ export class BasePage {
         const escapedMenu2 = escapeXPathText(menu2!);
         const escapedMenu3 = pathLength === 3 ? escapeXPathText(menu3!) : null;
 
-        await delay(1500)
+        await delay(3000)
 
         const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
         await menu1Locator.first().hover();
-        await delay(1500)
+        await delay(500)
 
         if (pathLength === 2) {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]`);
@@ -575,9 +575,18 @@ export class BasePage {
             lis = ul.locator('xpath=.//li[@class="category-level-2 dropdown-item"]');
         }
 
-        await step('Assert number of level 2 menu items', async () => {
-            expect(lis, `<ul> ${ulClass ?? 'root'} should have ${items.length} <li>`).toHaveCount(items.length);
-        })
+        await step('Assert number of visible level 2 menu items', async () => {
+            const count = await lis.count();
+
+            let visibleCount = 0;
+            for (let i = 0; i < count; i++) {
+                if (await lis.nth(i).isVisible()) {
+                    visibleCount++;
+                }
+            }
+
+            expect(visibleCount,`<ul> ${ulClass ?? 'root'} should have ${items.length} visible <li>`).toBe(items.length);
+        });
 
         for (let i = 0; i < items.length; i++) {
             const li = lis.nth(i);

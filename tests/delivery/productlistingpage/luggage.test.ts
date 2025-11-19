@@ -87,7 +87,7 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Verity Hardside type URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(?:type\/hard|hardside)\/?$/, "Assert Hardside type URL")
+            await luggagepage.assertUrl(/luggage\/(?:type\/hard|hardside|type\/hardside)\/?$/, "Assert Hardside type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -146,7 +146,7 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Verity Softside type URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(?:type\/soft|softside)\/?$/, "Assert Softside type URL")
+            await luggagepage.assertUrl(/luggage\/(?:type\/soft|softside|type\/softside)\/?$/, "Assert Softside type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -819,7 +819,7 @@ test.describe("Luggage Colours", async () => {
 })
 
 test.describe("Luggage Smart feature", async () => {
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "ph"], `
         1. Go to Double Coil Zippers page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -840,7 +840,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Double Coil Zippers page URL", async () => {
-            await luggagepage.assertUrl(/(luggage\/smart-feature\/double-coil-zippers)|(luggage-double-coil-zippers)\/?$/, "Assert Double Coil Zippers page URL")
+            await luggagepage.assertUrl(/(luggage\/(smart-feature|features)\/double-coil-zippers)|(luggage-double-coil-zippers)\/?$/, "Assert Double Coil Zippers page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -897,7 +897,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Easy brake system page URL", async () => {
-            await luggagepage.assertUrl(/(luggage\/smart-feature\/easy-brake-system)|(luggage-easy-brake-system)\/?$/, "Assert Easy brake system page URL")
+            await luggagepage.assertUrl(/(luggage\/(smart-feature|features)\/easy-brake-system)|(luggage-easy-brake-system)\/?$/, "Assert Easy brake system page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1569,7 +1569,7 @@ test.describe("Luggage travel type/destination", async () => {
 })
 
 test.describe("Luggage Collection", async () => {
-    test(`
+    tests(["sg", "jp", "tw"], `
         1. Go to Collection C-Lite page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1627,7 +1627,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "ph"], `
         5. Go to Unimax page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1741,7 +1741,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg", "jp"], `
+    tests(["sg", "jp", "ph"], `
         13. Go to Richmond II page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1798,7 +1798,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "ph"], `
         17. Go to Proxis page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -1855,7 +1855,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["jp", "tw"], `
+    tests(["jp", "tw", "ph"], `
         21. Go to Minter page
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart

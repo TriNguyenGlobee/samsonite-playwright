@@ -82,11 +82,11 @@ test.describe("Category Menu", () => {
             await offerspage.assertOffersListItems(basicAuthPage);
         });
 
-        await steps(["tw"], "Hover over 'Accessories' menu", async () => {
+        await steps(["tw", "ph"], "Hover over 'Accessories' menu", async () => {
             await homePage.hover(homePage.accessoriesMenuItem);
         });
 
-        await steps(["tw"], "Verify that all categories under 'Accessories' are displayed", async () => {
+        await steps(["tw", "ph"], "Verify that all categories under 'Accessories' are displayed", async () => {
             await accessoriespage.assertAccesoriesListItems(basicAuthPage)
         });
     });

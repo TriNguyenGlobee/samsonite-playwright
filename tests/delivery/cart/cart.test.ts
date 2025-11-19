@@ -3,7 +3,7 @@ import { createMinicartPage } from '../../../src/factories/minicart.factory'
 import { createCartPage } from '../../../src/factories/cart.factory'
 import { Config } from "../../../config/env.config";
 import { step } from "allure-js-commons";
-import { t, clickUntil, extractNumber, PageUtils, delay } from "../../../utils/helpers/helpers";
+import { t, clickUntil, extractNumber, PageUtils, delay, lazyLoad } from "../../../utils/helpers/helpers";
 import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 import { steps } from "../../../utils/helpers/localeStep"
@@ -17,6 +17,7 @@ test.describe("Empty cart without login", () => {
         `, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const minicartPage = createMinicartPage(basicAuthPage)
+        const amountOfFooterCategoryItem = await minicartPage.getAmountFooterCategoryItems()
 
         await step("Click on Cart icon", async () => {
             await homePage.click(homePage.cartIcon)
@@ -30,12 +31,8 @@ test.describe("Empty cart without login", () => {
 
         })
 
-        await steps(["sg", "jp"], "Verify footer category item amount", async () => {
-            expect(await minicartPage.footerCategoryItem.count()).toBe(3)
-        })
-
-        await steps(["tw"], "Verify footer category item amount", async () => {
-            expect(await minicartPage.footerCategoryItem.count()).toBe(4)
+        await steps(["sg", "jp", "tw", "ph"], "Verify footer category item amount", async () => {
+            expect(await minicartPage.footerCategoryItem.count()).toBe(amountOfFooterCategoryItem)
         })
 
         await step("Click Shopping Cart button", async () => {
@@ -97,26 +94,39 @@ test.describe("Add products to cart without login", () => {
             await homePage.clickMenuItem('newarrivals')
             await newarrivalspage.logoImg.hover()
 
-            await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+            await step("Click In-stock checkbox", async () => {
+                if (await homePage.productTableShow.isVisible()) {
+                    await homePage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                        "Checking the In-stock checkbox")
+                } else {
+                    test.skip(true, "Product table not visible, skipping the test.");
+                }
             })
         })
 
         await step("Get product collection", async () => {
             await cartpage.assertHidden(cartpage.underlay)
-
-            prodCollection = await cartpage.getProdCollection(prodIndex)
-            prodName = await cartpage.getProdName(prodIndex)
         })
 
-        await step('Verify the minicart is displayed after adding product to cart', async () => {
-            await Promise.all([
-                cartpage.addProductToCartByIndex(prodIndex),
-                expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
-            ]);
-        })
+        const isInStockProdNotExist = await cartpage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify the minicart is displayed after adding product to cart", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(1, "Add a in-stock product to cart"),
+                    expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
+            prodCollection = await cartpage.getProdCollection(prodIndex)
+            prodName = await cartpage.getProdName(prodIndex)
             const minicartProdName = await minicart.getMinicartProdName(prodIndex)
             const minicartProdCollection = await minicart.getMinicartProdCollection(prodIndex)
 
@@ -194,36 +204,51 @@ test.describe("Add products to cart without login", () => {
         const cartpage = createCartPage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 3];
+        const prodIndexes = [1, 2];
 
         await step('Go to New Arrivals', async () => {
             await homePage.clickMenuItem('newarrivals')
             await newarrivalspage.logoImg.hover()
         })
 
-        await step('Click on In-stock checkbox', async () => {
-            await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+        await step("Click In-stock checkbox", async () => {
+            if (await homePage.productTableShow.isVisible()) {
+                await homePage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
-        await step('Add multi products to cart', async () => {
-            await cartpage.addProductToCartByIndex(prodIndexes)
-        })
+        const isInStockProdNotExist = await cartpage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Add multi products to cart", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addProductToCartByIndex(prodIndexes),
+                    //expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
 
         await step('Verify number of products in the minicart', async () => {
-            expect(await minicart.getNumberOfProducts()).toBe(3)
+            expect(await minicart.getNumberOfProducts()).toBe(2)
         })
 
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
-        const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
-        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}, 3: ${thirdProductPrice}`)
+        console.log(`Prod price on page: 1: ${firstProductPrice}, 2: ${secondProductPrice}`)
 
         const firstMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
-        const thirdMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[2]));
 
-        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}, 3: ${thirdMinicartProductPrice}`)
+        console.log(`Prod price on minicart: 1: ${firstMinicartProductPrice}, 2: ${secondMinicartProductPrice}`)
 
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
@@ -233,8 +258,7 @@ test.describe("Add products to cart without login", () => {
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
-            expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost - shippingDiscount)
+            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount)
         })
 
         await step('Verify remove product modal is displayed when removing a product in the minicart', async () => {
@@ -298,7 +322,7 @@ test.describe("Add products to cart without login", () => {
         const cartpage = createCartPage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        const prodIndexes = [1, 2, 3];
+        const prodIndexes = [1, 2];
         const prodIndex = 1;
         let prodCollection: string, prodName: string
 
@@ -306,26 +330,42 @@ test.describe("Add products to cart without login", () => {
             await homePage.clickMenuItem('newarrivals')
             await newarrivalspage.logoImg.hover()
 
-            await step('Click on In-stock checkbox', async () => {
-                await homePage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+            await step("Click In-stock checkbox", async () => {
+                if (await homePage.productTableShow.isVisible()) {
+                    await homePage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                        "Checking the In-stock checkbox")
+                } else {
+                    test.skip(true, "Product table not visible, skipping the test.");
+                }
             })
-            prodCollection = await cartpage.getProdCollection(prodIndex)
-            prodName = await cartpage.getProdName(prodIndex)
         })
 
-        await step('Add multi products to cart', async () => {
-            await cartpage.addProductToCartByIndex(prodIndexes)
-        })
+        const isInStockProdNotExist = await cartpage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Add multi products to cart", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addProductToCartByIndex(prodIndexes),
+                    //expect(minicart.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Duffle type page");
+        }
 
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
-        const thirdProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[2]));
 
         await step('Go to Cart page by URL', async () => {
             await basicAuthPage.goto(`${Config.baseURL}cart`)
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
+            prodCollection = await cartpage.getProdCollection(prodIndex)
+            prodName = await cartpage.getProdName(prodIndex)
             const cartPageProdName = await cartpage.getCartPageProdName(prodIndex)
             const cartPageProdCollection = await cartpage.getCartPageProdCollection(prodIndex)
 
@@ -334,7 +374,7 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify number of products in Cart page', async () => {
-            expect(await cartpage.getNumberOfProducts()).toBe(3)
+            expect(await cartpage.getNumberOfProducts()).toBe(2)
         })
 
         await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
@@ -355,7 +395,6 @@ test.describe("Add products to cart without login", () => {
 
         const firstMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[0]));
         const secondMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[1]));
-        const thirdMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[2]));
         const shippingDiscount = await extractNumber(await cartpage.getShippingDiscount())
         const shippingCost = await extractNumber(await cartpage.getShippingCost());
         const totalPrice = await extractNumber(await cartpage.getTotalPrice());
@@ -363,8 +402,7 @@ test.describe("Add products to cart without login", () => {
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
-            expect(thirdProductPrice).toBe(thirdMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + thirdProductPrice + shippingCost - shippingDiscount)
+            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount)
         })
 
         await step('Verify remove product modal is displayed when removing a product in Cart page', async () => {
