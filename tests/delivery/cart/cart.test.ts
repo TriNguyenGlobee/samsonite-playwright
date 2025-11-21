@@ -359,13 +359,14 @@ test.describe("Add products to cart without login", () => {
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
 
+        prodCollection = await cartpage.getProdCollection(prodIndex)
+        prodName = await cartpage.getProdName(prodIndex)
+
         await step('Go to Cart page by URL', async () => {
             await basicAuthPage.goto(`${Config.baseURL}cart`)
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
-            prodCollection = await cartpage.getProdCollection(prodIndex)
-            prodName = await cartpage.getProdName(prodIndex)
             const cartPageProdName = await cartpage.getCartPageProdName(prodIndex)
             const cartPageProdCollection = await cartpage.getCartPageProdCollection(prodIndex)
 

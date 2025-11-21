@@ -87,7 +87,7 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Verity Briefcase Bags type URL", async () => {
-            await bagsPage.assertUrl(/bags\/(briefcase|type\/briefcase)\/?$/, "Assert Briefcase Bags type URL")
+            await bagsPage.assertUrl(/bags\/(briefcase|type\/briefcase|briefcases)\/?$/, "Assert Briefcase Bags type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -125,7 +125,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "au"], `
         5. Go to Cross Body bags Type
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -146,7 +146,7 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Verity Cross Body Bags type URL", async () => {
-            await bagsPage.assertUrl(/bags\/(cross-body-bags)\/?$/, "Assert Cross Body Bags type URL")
+            await bagsPage.assertUrl(/bags\/(cross-body-bags|crossbody-bags)\/?$/, "Assert Cross Body Bags type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -182,7 +182,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "jp"], `
+    tests(["sg", "jp", "au"], `
         9. Go to Duffle Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -203,7 +203,7 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Verity Duffle type URL", async () => {
-            await bagsPage.assertUrl(/bags\/(duffle|type\/duffles)\/?$/, "Assert Duffle type URL")
+            await bagsPage.assertUrl(/bags\/(duffle|type\/duffles|duffles)\/?$/, "Assert Duffle type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -609,7 +609,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "jp"], `
+    tests(["sg", "jp", "au"], `
         37. Go to Shop all bags
         38. In-stock products are displayed when clicking on in-stock checkbox
         39. User can add product to cart
@@ -729,7 +729,7 @@ test.describe("Bags Type", async () => {
 })
 
 test.describe("Bags Colours", async () => {
-    test(`
+    tests(["jp", "ph", "sg", "tw"], `
         1. Go to Mono color page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -784,7 +784,7 @@ test.describe("Bags Colours", async () => {
         }
     })
 
-    test(`
+    tests(["jp", "ph", "sg", "tw"], `
         5. Go to Cool color page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -841,7 +841,7 @@ test.describe("Bags Colours", async () => {
         }
     })
 
-    test(`
+    tests(["jp", "ph", "sg", "tw"], `
         9. Go to Warm color page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -919,7 +919,7 @@ test.describe("Bags Colours", async () => {
         })
 
         await step("Verity Large size page URL", async () => {
-            await bagsPage.assertUrl(/bags\/(shop-all-colours\/?$|bags-all-color)/, "Assert Shop all colours page URL")
+            await bagsPage.assertUrl(/bags\/(shop-all-colours\/?$|bags-all-color|more-colours)/, "Assert Shop all colours page URL")
         })
 
         await step("Click In-stock checkbox", async () => {

@@ -4,6 +4,7 @@ import { BrandPageSG }  from '../../pages/delivery/productlistingpage/brand/bran
 import { BrandPageJP }  from '../../pages/delivery/productlistingpage/brand/brand-jp.page';
 import { BrandPageTW } from '../../pages/delivery/productlistingpage/brand/brand-tw.page';
 import { BrandPagePH } from '../../pages/delivery/productlistingpage/brand/brand-ph.page';
+import { BrandPageAU } from '../../pages/delivery/productlistingpage/brand/brand-au.page';
 
 export function createBrandPage(page: Page): BrandPage {
   switch (process.env.LOCALE) {
@@ -11,6 +12,7 @@ export function createBrandPage(page: Page): BrandPage {
     case 'jp': return new BrandPageJP(page);
     case 'tw': return new BrandPageTW(page);
     case 'ph': return new BrandPagePH(page);
+    case 'au': return new BrandPageAU(page);
     default:   return new BrandPageJP(page);
   }
 }

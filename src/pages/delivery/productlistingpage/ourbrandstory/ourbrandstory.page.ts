@@ -13,6 +13,9 @@ export abstract class OurBrandStoryPage extends BasePage {
     readonly discoverSamsonite: Locator;
     readonly discoverLatest: Locator;
     readonly discoverCollection: Locator;
+    readonly discoverMaterials: Locator;
+    readonly discoverServices: Locator;
+    readonly discoverDiscover: Locator;
 
     protected testData: ReturnType<typeof loadTestData>;
 
@@ -24,6 +27,9 @@ export abstract class OurBrandStoryPage extends BasePage {
         this.discoverLatest = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-latest")]');
         this.discoverSamsonite = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-about-samsonite")]');
         this.discoverCollection = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-collection")]');
+        this.discoverMaterials = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-collections")]');
+        this.discoverServices = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-service")]');
+        this.discoverDiscover = this.baseLocator.locator('//ul[contains(@class,"dropdown-discover-latest")]');
 
         this.testData = loadTestData();
     }

@@ -16,6 +16,7 @@ export abstract class LuggagePage extends BasePage {
     readonly luggageBrand: Locator;
     readonly luggageDestination: Locator;
     readonly luggageCollection: Locator;
+    readonly luggageAttribute: Locator;
 
     protected testData: ReturnType<typeof loadTestData>;
 
@@ -28,6 +29,7 @@ export abstract class LuggagePage extends BasePage {
         this.luggageColor = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-color")]`);
         this.luggageSmartFeature = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-smart-feature")]`);
         this.luggageBrand = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-brand")]`);
+        this.luggageAttribute = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-attribute")]`);
         this.luggageDestination = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-destination")]`);
         this.luggageCollection = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-luggage-collection")]`);
 

@@ -15,7 +15,7 @@ test.describe("Campaign Underway Section", () => {
 
         const homePage = createHomePage(basicAuthPage);
         const leftSideColumn = basicAuthPage.locator('//div[contains(@class,"magazine-carousel-column-desktop")]//div[contains(@class,"magazine-main-image placeholder-glow")]')
-        const rightSideTitle = basicAuthPage.locator(`//div[@class="magazine-title"]`)
+        const rightSideTitle = basicAuthPage.locator(`//div[contains(@class,"magazine-carousel-column-desktop")]//div[@class="magazine-title"]`)
 
         await scrollToBottom(basicAuthPage);
 
