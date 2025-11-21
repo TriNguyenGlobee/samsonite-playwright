@@ -6,7 +6,7 @@ import { attachment } from "allure-js-commons";
 import { test } from "@playwright/test";
 import { loadTestData } from "../../../../../utils/data";
 
-export class AccessoriesPage extends BasePage {
+export abstract class AccessoriesPage extends BasePage {
     readonly logoImg: Locator;
     readonly baseLocator: Locator;
     readonly accessoriesType: Locator;

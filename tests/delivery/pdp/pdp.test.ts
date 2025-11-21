@@ -159,13 +159,18 @@ test.describe("Breadcrumb", () => {
         `, async ({ basicAuthPage }) => {
         const pdppage = new PDPPage(basicAuthPage)
         const breadcrumbFirstItem = pdppage.breadcrumbItem.first()
-        const breadcrumbSecondItem = pdppage.breadcrumbItem.nth(1)
+        let breadcrumbSecondItem = pdppage.breadcrumbItem.nth(1)
         const breadcrumbItemURL = await pdppage.getLocatorURL(breadcrumbFirstItem)
-        const breadcrumbProdName = (await pdppage.getText(breadcrumbSecondItem))?.trim()
+        let breadcrumbProdName = (await pdppage.getText(breadcrumbSecondItem))?.trim()
 
         await step("Click on breadcrumb item and verify the navigated URL", async () => {
             await pdppage.assertNavigatedURLByClickLocator(basicAuthPage, breadcrumbFirstItem, breadcrumbItemURL!)
         });
+
+        await steps(["au"], "Updating the breadscrumb second item", async () => {
+            breadcrumbSecondItem = pdppage.breadcrumbItem.nth(2)
+            breadcrumbProdName = (await pdppage.getText(breadcrumbSecondItem))?.trim()
+        })
 
         if (process.env.ENV === "dev") {
             await step("Verify the breadcrumb-product name", async () => {

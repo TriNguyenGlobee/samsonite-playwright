@@ -10,7 +10,7 @@ import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offer
 import { createHomePage } from "../../../src/factories/home.factory"
 import { PageUtils } from "../../../utils/helpers/helpers";
 import { steps } from "../../../utils/helpers/localeStep"
-import { AccessoriesPage } from "../../../src/pages/delivery/productlistingpage/accessories/accessories.page";
+import { createAccessoriesPage } from "../../../src/factories/productlistingpage/accessories.factory";
 
 test.describe("Category Menu", () => {
     test("1. All level 2 categories are displayed", async ({ basicAuthPage }) => {
@@ -22,7 +22,7 @@ test.describe("Category Menu", () => {
         const brandpage = createBrandPage(basicAuthPage);
         const ourbrandstorypage = createOurBrandStoryPage(basicAuthPage);
         const offerspage = new OffersPage(basicAuthPage);
-        const accessoriespage = new AccessoriesPage(basicAuthPage);
+        const accessoriespage = createAccessoriesPage(basicAuthPage);
 
         await step("Hover over 'New Arrivals' menu", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage, 5000)
@@ -58,11 +58,11 @@ test.describe("Category Menu", () => {
             await bagspage.assertBagsListItems(basicAuthPage);
         });
 
-        await step("Hover over 'Brand' menu", async () => {
+        await steps(["jp", "ph", "sg", "tw"], "Hover over 'Brand' menu", async () => {
             await homePage.hover(homePage.labelsMenuItem);
         });
 
-        await step("Verify that all categories under 'Brand' are displayed", async () => {
+        await steps(["jp", "ph", "sg", "tw"], "Verify that all categories under 'Brand' are displayed", async () => {
             await brandpage.assertBrandItems(basicAuthPage);
         });
 
@@ -82,11 +82,11 @@ test.describe("Category Menu", () => {
             await offerspage.assertOffersListItems(basicAuthPage);
         });
 
-        await steps(["tw", "ph"], "Hover over 'Accessories' menu", async () => {
+        await steps(["tw", "ph", "au"], "Hover over 'Accessories' menu", async () => {
             await homePage.hover(homePage.accessoriesMenuItem);
         });
 
-        await steps(["tw", "ph"], "Verify that all categories under 'Accessories' are displayed", async () => {
+        await steps(["tw", "ph", "au"], "Verify that all categories under 'Accessories' are displayed", async () => {
             await accessoriespage.assertAccesoriesListItems(basicAuthPage)
         });
     });

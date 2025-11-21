@@ -2,6 +2,7 @@ import { test } from "../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { loadTestData } from "../../../utils/data";
 import { createHomePage } from "../../../src/factories/home.factory"
+import { tests } from "../../../utils/helpers/localeTest";
 
 test.describe("Banner Activity", () => {
     const { carouselItems } = loadTestData();
@@ -24,7 +25,7 @@ test.describe("Banner Activity", () => {
 
     });
 
-    test(`4. Click dot button to navigate banner`, async ({ basicAuthPage }) => {
+    tests(["jp", "ph", "sg", "tw"], `4. Click dot button to navigate banner`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const carousel = basicAuthPage.locator('//div[contains(@class,"homepage-banner-carouselregion")]');
 
@@ -33,7 +34,7 @@ test.describe("Banner Activity", () => {
         });
     });
 
-    test(`5. Click banner to navigate to correct URL`, async ({ basicAuthPage }) => {
+    tests(["jp", "ph", "sg", "tw"], `5. Click banner to navigate to correct URL`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const carousel = '//div[contains(@class,"homepage-banner-carouselregion")]';
 

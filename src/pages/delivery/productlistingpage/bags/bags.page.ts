@@ -14,6 +14,7 @@ export abstract class BagsPage extends BasePage {
     readonly bagBrand: Locator;
     readonly bagLaptop: Locator;
     readonly bagCollection: Locator;
+    readonly bagAttribute: Locator;
 
     protected testData: ReturnType<typeof loadTestData>;
 
@@ -26,6 +27,7 @@ export abstract class BagsPage extends BasePage {
         this.bagBrand = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-bag-brand")]`);
         this.bagLaptop = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-bag-laptop")]`);
         this.bagCollection = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-bag-collection")]`);
+        this.bagAttribute = this.baseLocator.locator(`xpath=.//ul[contains(@class,"dropdown-bag-attribute")]`)
 
         this.testData = loadTestData();
     }
