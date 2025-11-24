@@ -99,7 +99,7 @@ test.describe("Samsonite Brand Landing Page", () => {
         })
     });
 
-    test(`
+    tests(["jp", "sg", "tw", "ph"],`
         6. Products list table is displayed
         7. User can add product to cart
         8. Go to the PDP
@@ -223,7 +223,7 @@ test.describe("Samsonite Black Brand Landing Page", () => {
         })
     });
 
-    test(`
+    tests(["jp", "sg", "tw", "ph"],`
         6. Products list table is displayed
         7. User can add product to cart
         8. Go to the PDP
@@ -327,7 +327,7 @@ test.describe("Samsonite Red Brand Landing Page", () => {
         })
     });
 
-    test(`
+    tests(["jp", "sg", "tw", "ph"], `
         6. Products list table is displayed
         7. User can add product to cart
         8. Go to the PDP

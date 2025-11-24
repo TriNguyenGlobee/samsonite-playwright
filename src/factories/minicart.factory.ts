@@ -4,6 +4,7 @@ import { MinicartPageJP } from '../../src/pages/delivery/cart/minicart-jp.page'
 import { MinicartPageSG } from '../../src/pages/delivery/cart/minicart-sg.page'
 import { MinicartPageTW } from '../pages/delivery/cart/minicart-tw.page';
 import { MinicartPagePH } from '../pages/delivery/cart/minicart-ph.page';
+import { MinicartPageAU } from '../pages/delivery/cart/minicart-au.page';
 
 export function createMinicartPage(page: Page): MinicartPage {
   switch (process.env.LOCALE) {
@@ -11,6 +12,7 @@ export function createMinicartPage(page: Page): MinicartPage {
     case 'jp': return new MinicartPageJP(page);
     case 'tw': return new MinicartPageTW(page);
     case 'ph': return new MinicartPagePH(page);
+    case 'au': return new MinicartPageAU(page);
     default:   return new MinicartPageJP(page);
   }
 }

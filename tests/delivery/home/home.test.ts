@@ -10,7 +10,7 @@ import { GinzaFlagshipStorePage } from "../../../src/pages/delivery/productlisti
 import { SalePage } from "../../../src/pages/delivery/productlistingpage/sale/sale.page";
 import { MembershipPage } from "../../../src/pages/delivery/home/membership.page";
 import { scrollToBottom } from "../../../utils/helpers/helpers";
-import { OffersPage } from "../../../src/pages/delivery/productlistingpage/offers/offers.page";
+import { steps } from "../../../utils/helpers/localeStep";
 import { createHomePage } from "../../../src/factories/home.factory"
 import { createOffersPage } from "../../../src/factories/productlistingpage/offers.factory";
 import { tests } from "../../../utils/helpers/localeTest"
@@ -83,11 +83,11 @@ test.describe("Home Tests", () => {
         const brandpage = createBrandPage(basicAuthPage);
         const ourbrandstorypage = createOurBrandStoryPage(basicAuthPage);
 
-        await step("Go to Labels Page", async () => {
+        await steps(["jp", "ph", "sg", "tw"], "Go to Labels Page", async () => {
             await homePage.clickMenuItem("label");
         });
 
-        await step("Verify that the Labels page is displayed", async () => {
+        await steps(["jp", "ph", "sg", "tw"], "Verify that the Labels page is displayed", async () => {
             expect(await brandpage.isBrandPageDisplayed()).toBe(true);
         })
 

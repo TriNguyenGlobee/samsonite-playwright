@@ -32,7 +32,7 @@ export default defineConfig({
     reporter: [
         ['list'],
         ['allure-playwright', {
-            outputFolder: 'allure-results',
+            resultsDir: process.env.ALLURE_RESULTS_DIR || 'allure-results',
             stdout: true,
             stderr: false
         }],
