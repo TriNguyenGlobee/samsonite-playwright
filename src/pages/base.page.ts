@@ -179,6 +179,8 @@ export class BasePage {
             await menu2Locator.click({ position: { x: 40, y: 15 } });
         } else if (pathLength === 3) {
             const menu3Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]//ul[@role="menu"]//li[contains(@class,"dropdown-item") and .//a[normalize-space(text())=${escapedMenu3}]]`);
+            await menu3Locator.hover({ position: { x: 40, y: 15 } })
+            await delay(500)
             await menu3Locator.click({ position: { x: 40, y: 15 } });
         }
         if (description) {
@@ -187,6 +189,8 @@ export class BasePage {
 
         await PageUtils.waitForPageLoad(page);
         await PageUtils.waitForDomAvailable(page);
+
+        await delay(2000)
     }
 
     /**
@@ -585,7 +589,7 @@ export class BasePage {
                 }
             }
 
-            expect(visibleCount,`<ul> ${ulClass ?? 'root'} should have ${items.length} visible <li>`).toBe(items.length);
+            expect(visibleCount, `<ul> ${ulClass ?? 'root'} should have ${items.length} visible <li>`).toBe(items.length);
         });
 
         for (let i = 0; i < items.length; i++) {

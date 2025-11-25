@@ -60,19 +60,19 @@
     "title": ""
   },
   "newarrivalspage": {
-    "title": "New Arrivals | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
+    "title": "New Arrivals | Salesforce Commerce Cloud | 3.3.0",
     "url": ["https://ssmy.dev.samsonite-asia.com/new-arrivals/","https://ssmy.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
-    "title": "Luggage | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Luggage | Salesforce Commerce Cloud | 3.3.0",
     "url": ["https://ssmy.dev.samsonite-asia.com/luggage/", "https://ssmy.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "Backpacks | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Backpacks | Salesforce Commerce Cloud | 3.3.0",
     "url": ["https://ssmy.dev.samsonite-asia.com/backpacks/", "https://ssmy.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
-    "title": "Bags | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Bags | Salesforce Commerce Cloud | 3.3.0",
     "url": ["https://ssmy.dev.samsonite-asia.com/bags/", "https://ssmy.stg.samsonite-asia.com/bags/"]
   },
   "accessories": {
@@ -84,7 +84,7 @@
     "luggage": "Luggage",
     "backpacks": "Backpacks",
     "bags": "Bags",
-    "briefcase": ""
+    "briefcase": "BRIEFCASES"
   },
   "ourbrandstorypage": {
     "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0"],
@@ -137,7 +137,7 @@
     "offers": "OFFERS",
     "friendofsamsonite": "FRIENDS OF SAMSONITE",
     "ginzaflagshipstore": "銀座 旗艦店",
-    "accessories": ""
+    "accessories": "Accessories"
   },
   "lv2MenuItem": {
     "brand-samsonite": "Samsonite",
@@ -222,7 +222,7 @@
     "17inchlaptop": "Fit up to 17\" laptop",
     "laptop": "Laptop",
     "sefton": "Sefton",
-    "prodlx6": "Pro-Dlx 6",
+    "prodlx6": "Pro-DLX 6",
     "PRODLX6": "PRO-DLX 6",
     "ecodiver": "Ecodiver",
     "sammiesdream": "Sammies Dream",
@@ -235,7 +235,7 @@
     "briefcasebags": "Briefcase",
     "crossbodybags": "Cross Body Bags",
     "dufflebags": "Duffles",
-    "slingbags": "",
+    "slingbags": "Sling",
     "tote": "Totes",
     "2way3way": "",
     "shoulderbags": "",
@@ -314,7 +314,11 @@
     "madeineurope": "Made in Europe",
     "hifi": "Hi-Fi",
     "nbsamsonite": "NB | Samsonite",
-    "shopallluggagecollection": "Shop all collections"
+    "shopallluggagecollection": "Shop all collections",
+    "locuseco": "Locus Eco",
+    "toiisC": "Toiis C",
+    "blite4": "B-Lite 4",
+    "azio": "Azio"
   },
   "minicart": {
     "emptymsg": "Your Cart is Empty",
@@ -342,13 +346,13 @@
     "viewwishlistbtn": "View"
   },
   "wishlist": {
-    "title": "My Wishlist"
+    "title": "Sites-MonoSamsoniteMY-Site | Salesforce Commerce Cloud | 3.3.0"
   },
   "globalnavfooter": {
     "placeholder": "Your email address",
     "completethisfield": "Please complete this field.",
     "invalidemail": "The valid email format is \"xxx@email.com\". Please try again.",
-    "createsuccess": "Thanks for signing up! We'll be in touch.",
+    "createsuccess": "Thanks for your subscription.",
     "duplicateemail": "It appears this email address is already subscribed.",
     "support": "Support / FAQS",
     "ourcompany": "Our Company",

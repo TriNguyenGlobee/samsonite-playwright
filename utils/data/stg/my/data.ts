@@ -1,5 +1,5 @@
 export const carouselItems = [
-    { href: '', hasImage: true },
+    { hasImage: true },
     { href: 'https://ssmy.stg.samsonite-asia.com/festive-gifting-2025/', hasImage: true },
     { href: 'https://ssmy.stg.samsonite-asia.com/paralux/', hasImage: true },
     { href: 'https://ssmy.stg.samsonite-asia.com/bundle-deal/', hasImage: true },
@@ -199,7 +199,7 @@ export const laptopItemsBP = [
 
 // --- backpack-collection ---
 export const collectionItemsBP = [
-    { text: 'Pro-Dlx 6', href: '/backpacks/collection/pro-dlx-6/' },
+    { text: 'Pro-DLX 6', href: '/backpacks/collection/pro-dlx-6/' },
     { text: 'Prudence Eco', href: '/backpacks/collection/prudence-eco/' },
     { text: 'Sefton', href: '/backpacks/collection/sefton/' },
     { text: 'Locus Eco', href: '/backpacks/collection/locus-eco/' },
@@ -265,7 +265,7 @@ export const aboutSamsoniteItems = [
     { text: 'Beyond The Design', href: 'https://ssmy.stg.samsonite-asia.com/2025-going-beyond-design/' },
     { text: 'Beyond The Average Test', href: 'https://ssmy.stg.samsonite-asia.com/2025-going-beyond-testing/' },
     { text: 'Our Brand Story - Celebrating 115 Years of Heritage', href: 'https://ssmy.stg.samsonite-asia.com/brand-story.html' },
-    { text: 'Friends of Samsonite', href: 'https://ssmy.stg.samsonite-asia.com/2021-friends-of-samsonite.html' },
+    { text: 'Friends of Samsonite', href: 'https://ssmy.stg.samsonite-asia.com/friends-of-samsonite.html' },
     { text: 'Our Responsible Journey', href: 'https://ssmy.stg.samsonite-asia.com/sustainability.html' }
 ];
 
@@ -330,6 +330,11 @@ export const subMenuDataSamsonite = [
 export const subMenuDataSamsoniteBlack = [
     {
         hasImage: true,
+        href: "https://ssmy.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
+        text: "BRIEFCASES"
+    }  ,
+    {
+        hasImage: true,
         href: "https://ssmy.stg.samsonite-asia.com/luggage/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
         text: "Luggage"
     },
@@ -337,12 +342,7 @@ export const subMenuDataSamsoniteBlack = [
         hasImage: true,
         href: "https://ssmy.stg.samsonite-asia.com/backpacks/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
         text: "Backpacks"
-    },
-    {
-        hasImage: true,
-        href: "https://ssmy.stg.samsonite-asia.com/bags/?prefn1=brand&prefv1=Samsonite%20Black%20Label",
-        text: "BRIEFCASES"
-    }  
+    }
 ]
 
 export const subMenuDataSamsoniteRed = [

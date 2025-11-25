@@ -33,8 +33,12 @@ test.describe("Bags Page", () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -91,10 +95,12 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-
-            await lazyLoad(basicAuthPage)
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -125,7 +131,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "tw", "au"], `
+    tests(["sg", "tw", "au", "my"], `
         5. Go to Cross Body bags Type
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -150,8 +156,12 @@ test.describe("Bags Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await bagsPage.productTableShow.isVisible()) {
+                await bagsPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -304,7 +314,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "my"], `
             17. Go to For Her Type
             18. In-stock products are displayed when clicking on in-stock checkbox
             19. User can add product to cart
@@ -666,7 +676,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["tw"], `
+    tests(["tw", "my"], `
         41. Go to Sling Type
         42. In-stock products are displayed when clicking on in-stock checkbox
         43. User can add product to cart

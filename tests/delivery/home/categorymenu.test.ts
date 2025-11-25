@@ -58,11 +58,11 @@ test.describe("Category Menu", () => {
             await bagspage.assertBagsListItems(basicAuthPage);
         });
 
-        await steps(["jp", "ph", "sg", "tw"], "Hover over 'Brand' menu", async () => {
+        await steps(["jp", "ph", "sg", "tw", "my"], "Hover over 'Brand' menu", async () => {
             await homePage.hover(homePage.labelsMenuItem);
         });
 
-        await steps(["jp", "ph", "sg", "tw"], "Verify that all categories under 'Brand' are displayed", async () => {
+        await steps(["jp", "ph", "sg", "tw", "my"], "Verify that all categories under 'Brand' are displayed", async () => {
             await brandpage.assertBrandItems(basicAuthPage);
         });
 
@@ -82,11 +82,11 @@ test.describe("Category Menu", () => {
             await offerspage.assertOffersListItems(basicAuthPage);
         });
 
-        await steps(["tw", "ph", "au"], "Hover over 'Accessories' menu", async () => {
+        await steps(["tw", "ph", "au", "my"], "Hover over 'Accessories' menu", async () => {
             await homePage.hover(homePage.accessoriesMenuItem);
         });
 
-        await steps(["tw", "ph", "au"], "Verify that all categories under 'Accessories' are displayed", async () => {
+        await steps(["tw", "ph", "au", "my"], "Verify that all categories under 'Accessories' are displayed", async () => {
             await accessoriespage.assertAccesoriesListItems(basicAuthPage)
         });
     });
