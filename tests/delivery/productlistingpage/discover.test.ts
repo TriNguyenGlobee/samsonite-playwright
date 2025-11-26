@@ -26,7 +26,7 @@ test.describe("Discover/Our Brand Story Page", () => {
 });
 
 test.describe("Discover sub-categories", async () => {
-    test(`
+    tests(["au", "jp", "ph", "sg", "tw"], `
         1. Go to Fathers day gifts page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -44,7 +44,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "tw", "ph"], `
+    tests(["sg", "tw", "ph", "my"], `
         2. Go to Mothers day gifts page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -80,7 +80,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "tw", "ph"], `
+    tests(["sg", "tw", "ph", "my"], `
         4. Go to Your Business Look page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -98,7 +98,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "ph"], `
+    tests(["sg", "ph", "my"], `
         5. Go to Your Backpack Look page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -116,7 +116,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "ph"], `
+    tests(["sg", "ph", "my"], `
         6. Go to Lavish Travels page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -170,7 +170,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["jp", "sg", "tw", "ph", "au"], `
+    tests(["jp", "sg", "tw", "ph", "au", "my"], `
         9. Go to Beyond The Design page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -183,7 +183,7 @@ test.describe("Discover sub-categories", async () => {
             )
         })
 
-        await steps(["sg", "tw", "au"], "Go to Beyond The Design type", async () => {
+        await steps(["sg", "tw", "au", "my"], "Go to Beyond The Design type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('discover')}->${t.lv2MenuItem('about')}->${t.lv2MenuItem('goingbeyonddesign')}`,
                 "Discover -> About -> Going Beyond Design"
@@ -195,7 +195,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["jp", "sg", "tw", "ph", "au"], `
+    tests(["jp", "sg", "tw", "ph", "au", "my"], `
         10. Go to Beyond The Average Test page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -208,7 +208,7 @@ test.describe("Discover sub-categories", async () => {
             )
         })
 
-        await steps(["sg", "tw", "ph", "au"], "Go to Beyond The Average Test type", async () => {
+        await steps(["sg", "tw", "ph", "au", "my"], "Go to Beyond The Average Test type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('discover')}->${t.lv2MenuItem('about')}->${t.lv2MenuItem('goingbeyondtesting')}`,
                 "Discover -> About -> Going Beyond Testing"
@@ -310,7 +310,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "jp", "tw"], `
+    tests(["sg", "jp", "tw", "my"], `
         16. Go to Brand story page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -328,7 +328,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg"], `
+    tests(["sg", "my"], `
         17. Go to Friends of Samsonite page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -346,7 +346,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "tw", "ph"], `
+    tests(["sg", "tw", "ph", "my"], `
         18. Go to Browse Our Collections page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)

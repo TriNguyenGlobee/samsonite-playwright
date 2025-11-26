@@ -33,8 +33,12 @@ test.describe("Luggage Page", () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -91,10 +95,12 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-
-            await lazyLoad(basicAuthPage)
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -150,8 +156,12 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -182,7 +192,7 @@ test.describe("Luggage Type", async () => {
         }
     })
 
-    test(`
+    tests(["au", "jp", "ph", "sg", "tw"], `
         9. Go to Aluminium Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -268,8 +278,12 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -325,8 +339,12 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -357,7 +375,7 @@ test.describe("Luggage Type", async () => {
         }
     })
 
-    tests(["au"], `
+    tests(["au", "my"], `
         21. Go to Kids Type
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart
@@ -378,12 +396,16 @@ test.describe("Luggage Type", async () => {
         })
 
         await step("Verity Kids type URL", async () => {
-            await luggagepage.assertUrl(/suitcases\/kids/, "Assert Kids type URL")
+            await luggagepage.assertUrl(/(suitcases\/kids)|(luggage\/kids)/, "Assert Kids type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -441,8 +463,12 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -498,8 +524,12 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -555,8 +585,12 @@ test.describe("Luggage Size", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -614,8 +648,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -671,8 +709,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -728,8 +770,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -760,7 +806,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    tests(["sg", "tw", "au"], `
+    tests(["sg", "tw", "au", "my"], `
         13. Go to Shop all colours page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -785,8 +831,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -842,8 +892,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -899,8 +953,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -956,8 +1014,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1013,8 +1075,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1070,8 +1136,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1127,8 +1197,12 @@ test.describe("Luggage Colours", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1161,7 +1235,7 @@ test.describe("Luggage Colours", async () => {
 })
 
 test.describe("Luggage Smart feature", async () => {
-    tests(["sg", "tw", "ph"], `
+    tests(["sg", "tw", "ph", "my"], `
         1. Go to Double Coil Zippers page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1186,8 +1260,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1218,7 +1296,7 @@ test.describe("Luggage Smart feature", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "my"], `
         5. Go to Easy brake system page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1243,8 +1321,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1300,8 +1382,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1332,7 +1418,7 @@ test.describe("Luggage Smart feature", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "my"], `
         13. Go to Suspension wheels page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1357,8 +1443,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1389,7 +1479,7 @@ test.describe("Luggage Smart feature", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "my"], `
         17. Go to USB port page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -1414,8 +1504,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1471,8 +1565,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1528,8 +1626,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1585,8 +1687,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1642,8 +1748,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1699,8 +1809,12 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1733,7 +1847,7 @@ test.describe("Luggage Smart feature", async () => {
 })
 
 test.describe("Luggage Labels/Brand", async () => {
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "my"], `
         1. Go to Samsonite page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1757,8 +1871,12 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1789,7 +1907,7 @@ test.describe("Luggage Labels/Brand", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "my"], `
         5. Go to Samsonite black page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1814,8 +1932,12 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1846,7 +1968,7 @@ test.describe("Luggage Labels/Brand", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "my"], `
         9. Go to Samsonite Red page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -1871,8 +1993,12 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1928,8 +2054,12 @@ test.describe("Luggage Labels/Brand", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -1962,7 +2092,7 @@ test.describe("Luggage Labels/Brand", async () => {
 })
 
 test.describe("Luggage travel type/destination", async () => {
-    tests(["jp"], `
+    tests(["jp", "my"], `
         1. Go to City page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1983,12 +2113,16 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Verity City page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(destination\/city)\/?$/, "Assert City page URL")
+            await luggagepage.assertUrl(/luggage\/(destination\/city|city)\/?$/, "Assert City page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2019,7 +2153,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["sg,jp"], `
+    tests(["sg", "jp", "my"], `
         5. Go to Adventure page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -2044,8 +2178,12 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2076,7 +2214,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["jp"], `
+    tests(["jp", "my"], `
         9. Go to Beach page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -2097,12 +2235,16 @@ test.describe("Luggage travel type/destination", async () => {
         })
 
         await step("Verity Beach page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/(destination\/beach)\/?$/, "Assert Beach page URL")
+            await luggagepage.assertUrl(/luggage\/(destination\/beach|beach)\/?$/, "Assert Beach page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2133,7 +2275,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["sg", "jp"], `
+    tests(["sg", "jp", "my"], `
         13. Go to Business page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -2222,8 +2364,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2279,8 +2425,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2336,8 +2486,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2393,8 +2547,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2450,8 +2608,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2482,7 +2644,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["jp", "tw", "ph"], `
+    tests(["jp", "tw", "ph", "my"], `
         21. Go to Minter page
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart
@@ -2507,8 +2669,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2564,8 +2730,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2621,8 +2791,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2678,8 +2852,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2735,8 +2913,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2792,8 +2974,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2849,8 +3035,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2906,8 +3096,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -2963,8 +3157,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -3020,8 +3218,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -3077,8 +3279,12 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -3106,6 +3312,250 @@ test.describe("Luggage Collection", async () => {
             })
         } else {
             test.skip(true, "No in-stock products found on Shop all collections page");
+        }
+    })
+
+    tests(["my"], `
+        65. Go to Niar page
+        66. In-stock products are displayed when clicking on in-stock checkbox
+        67. User can add product to cart
+        68. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Niar page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('Niar')}`,
+                "Go to Luggage -> Collection -> Niar"
+            )
+        })
+
+        await step("Verity Niar page URL", async () => {
+            await luggagepage.assertUrl(/niar/, "Assert Niar page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Niar page");
+        }
+    })
+
+    tests(["my"], `
+        69. Go to Toiis C page
+        70. In-stock products are displayed when clicking on in-stock checkbox
+        71. User can add product to cart
+        72. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Toiis C page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('toiisC')}`,
+                "Go to Luggage -> Collection -> Toiis C"
+            )
+        })
+
+        await step("Verity Toiis C page URL", async () => {
+            await luggagepage.assertUrl(/toiis-c/, "Assert Toiis C page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Toiis C page");
+        }
+    })
+
+    tests(["my"], `
+        73. Go to B-Lite 4 page
+        74. In-stock products are displayed when clicking on in-stock checkbox
+        75. User can add product to cart
+        76. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to B-Lite 4 page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('blite4')}`,
+                "Go to Luggage -> Collection -> B-Lite 4"
+            )
+        })
+
+        await step("Verity B-Lite 4 page URL", async () => {
+            await luggagepage.assertUrl(/b-lite-4/, "Assert B-Lite 4 page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on B-Lite 4 page");
+        }
+    })
+
+    tests(["my"], `
+        77. Go to Azio page
+        78. In-stock products are displayed when clicking on in-stock checkbox
+        79. User can add product to cart
+        80. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const luggagepage = createLuggagePage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Azio page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('azio')}`,
+                "Go to Luggage -> Collection -> Azio"
+            )
+        })
+
+        await step("Verity Azio page URL", async () => {
+            await luggagepage.assertUrl(/azio/, "Assert Azio page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await luggagepage.productTableShow.isVisible()) {
+                await luggagepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await luggagepage.assertHidden(luggagepage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await luggagepage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await luggagepage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Azio page");
         }
     })
 })

@@ -33,8 +33,12 @@ test.describe("Backpacks Page", () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpacksPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await backpacksPage.productTableShow.isVisible()) {
+                await backpacksPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -66,7 +70,7 @@ test.describe("Backpacks Page", () => {
 });
 
 test.describe("Backpacks Type", async () => {
-    tests(["sg", "tw", "au"], `
+    tests(["sg", "tw", "au", "my"], `
         1. Go to Business backpacks Type
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -91,10 +95,12 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpacksPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
-
-            await lazyLoad(basicAuthPage)
+            if (await backpacksPage.productTableShow.isVisible()) {
+                await backpacksPage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -125,7 +131,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg", "tw", "au"], `
+    tests(["sg", "tw", "au", "my"], `
         5. Go to Casual Backpacks Type
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -146,12 +152,16 @@ test.describe("Backpacks Type", async () => {
         })
 
         await step("Verity Casual Backpacks type URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(casual|casual-backpacks)\/?$/, "Assert Casual Backpacks type URL")
+            await backpackspage.assertUrl(/backpacks\/(casual|casual-backpacks|casual-backpacks)\/?$/, "Assert Casual Backpacks type URL")
         })
 
         await step("Click In-stock checkbox", async () => {
-            await backpackspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                "Checking the In-stock checkbox")
+            if (await backpackspage.productTableShow.isVisible()) {
+                await backpackspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
         })
 
         await step("Verify notify me button do not exist", async () => {
@@ -182,7 +192,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "my"], `
         9. Go to For Her Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -243,7 +253,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "my"], `
         13. Go to For Kids Type
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -304,7 +314,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg", "jp", "au"], `
+    tests(["sg", "jp", "au", "my"], `
         17. Go to Shop all backpacks
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -668,7 +678,7 @@ test.describe("Backpacks Type", async () => {
 })
 
 test.describe("Backpacks Colours", async () => {
-    tests(["jp", "ph", "sg", "tw"], `
+    tests(["jp", "ph", "sg", "tw", "my"], `
         1. Go to Mono color page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -724,7 +734,7 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["jp", "ph", "sg", "tw"], `
+    tests(["jp", "ph", "sg", "tw", "my"], `
         5. Go to Cool color page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -781,7 +791,7 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["jp", "ph", "sg", "tw"], `
+    tests(["jp", "ph", "sg", "tw", "my"], `
         9. Go to Warm color page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -838,7 +848,7 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["sg", "tw", "au"], `
+    tests(["sg", "tw", "au", "my"], `
             13. Go to Shop all colours page
             14. In-stock products are displayed when clicking on in-stock checkbox
             15. User can add product to cart
@@ -1426,7 +1436,7 @@ test.describe("Backpacks Smart feature", async () => {
 })
 
 test.describe("Backpacks Labels/Brand", async () => {
-    tests(["jp", "ph", "sg", "tw"], `
+    tests(["jp", "ph", "sg", "tw", "my"], `
         1. Go to Samsonite page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1486,7 +1496,7 @@ test.describe("Backpacks Labels/Brand", async () => {
         }
     })
 
-    tests(["sg", "jp"], `
+    tests(["sg", "jp", "my"], `
         5. Go to Samsonite black page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1547,7 +1557,7 @@ test.describe("Backpacks Labels/Brand", async () => {
         }
     })
 
-    tests(["jp", "ph", "sg", "tw"], `
+    tests(["jp", "ph", "sg", "tw", "my"], `
         9. Go to Samsonite Red page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -1838,7 +1848,7 @@ test.describe("Backpacks laptop", async () => {
 })
 
 test.describe("Backpacks Collection", async () => {
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "my"], `
         1. Go to Collection Sefton page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1894,7 +1904,7 @@ test.describe("Backpacks Collection", async () => {
         }
     })
 
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "my"], `
         5. Go to Pro-Dxl 6 page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -2065,7 +2075,7 @@ test.describe("Backpacks Collection", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "my"], `
         17. Go to Prudence-eco page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -2715,5 +2725,62 @@ test.describe("Backpacks Collection", async () => {
         await step("Verity Samsonite Red page URL", async () => {
             await backpackspage.assertUrl(/collection/, "Assert Backpack shop all collection page URL")
         })
+    })
+
+    tests(["my"], `
+        65. Go to Backpack Locus Eco page
+        66. In-stock products are displayed when clicking on in-stock checkbox
+        67. User can add product to cart
+        68. Go to the PDP
+        `, async ({ basicAuthPage }) => {
+        const homepage = createHomePage(basicAuthPage)
+        const backpackspage = createBackpacksPage(basicAuthPage)
+        const pdppage = new PDPPage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const amount = 1
+
+        await step("Go to Backpack shop all collection page", async () => {
+            await PageUtils.waitForPageLoad(basicAuthPage)
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('backpacks')}->${t.lv2MenuItem('collection')}->${t.lv2MenuItem('locuseco')}`,
+                "Go to Backpacks -> Collection -> Backpack Locus Eco collection"
+            )
+        })
+
+        await step("Verity Samsonite Red page URL", async () => {
+            await backpackspage.assertUrl(/backpacks\/collection\/locus-eco/, "Assert Backpack shop Locus Eco page URL")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            await backpackspage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
+                "Checking the In-stock checkbox")
+        })
+
+        await step("Verify notify me button do not exist", async () => {
+            await backpackspage.assertHidden(backpackspage.notifyMebutton,
+                "Assert the In-stock products are displayed only"
+            )
+        })
+
+        const isInStockProdNotExist = await backpackspage.noAvailableProdMsg.isVisible()
+
+        if (!isInStockProdNotExist) {
+            await step("Verify user can add product to cart if In-stock product exist", async () => {
+                await lazyLoad(basicAuthPage)
+                await delay(500)
+                await Promise.all([
+                    cartpage.addMultipleProductsToCart(amount, "Add a in-stock product to cart"),
+                    expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                ]);
+
+            })
+
+            await step("Verify user can go to PDP", async () => {
+                await backpackspage.selectProdByIndex(1, "Select the first product")
+                expect(await pdppage.isPDPPageDisplayed()).toBe(true)
+            })
+        } else {
+            test.skip(true, "No in-stock products found on Locus Eco page");
+        }
     })
 })

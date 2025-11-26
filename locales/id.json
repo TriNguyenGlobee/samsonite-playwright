@@ -1,6 +1,6 @@
 {
   "homepage": {
-    "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Samsonite Malaysia | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
     "trackOder": "Track Order",
     "loginRegister": "Login/Register",
     "myaccount": "My account",
@@ -11,7 +11,7 @@
     "out-of-stock": "No results available for this filter. Click Reset All to try again."
   },
   "loginpage": {
-    "title": "Sign In To Your Account | Samsonite Singapore",
+    "title": "Sign In To Your Account | Samsonite Malaysia",
     "singinTitle": "Sign in",
     "loginmsg": "Existing customer or House of Samsonite user",
     "usernamelabel": "Email / Username",
@@ -37,7 +37,7 @@
     "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
-    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Singapore",
+    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Malaysia",
     "pageTitle": "Forgot your password?",
     "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
     "emailTextbox": "Email",
@@ -60,46 +60,46 @@
     "title": ""
   },
   "newarrivalspage": {
-    "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/new-arrivals/","https://sssg.stg.samsonite-asia.com/new-arrivals/"]
+    "title": "New Arrivals | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssid.dev.samsonite-asia.com/new-arrivals/","https://ssid.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
-    "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/luggage/", "https://sssg.stg.samsonite-asia.com/luggage/"]
+    "title": "Luggage | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssid.dev.samsonite-asia.com/luggage/", "https://ssid.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/backpacks/", "https://sssg.stg.samsonite-asia.com/backpacks/"]
+    "title": "Backpacks | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssid.dev.samsonite-asia.com/backpacks/", "https://ssid.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
-    "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/bags/", "https://sssg.stg.samsonite-asia.com/bags/"]
+    "title": "Bags | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssid.dev.samsonite-asia.com/bags/", "https://ssid.stg.samsonite-asia.com/bags/"]
   },
   "accessories": {
     "title": "所有配件 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
     "url": "https://sstw.stg.samsonite-asia.com/accessories/"
   },
   "brandpage": {
-    "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Labels | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
     "luggage": "Luggage",
     "backpacks": "Backpacks",
     "bags": "Bags",
-    "briefcase": ""
+    "briefcase": "BRIEFCASES"
   },
   "ourbrandstorypage": {
-    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"],
-    "url": "https://sssg.stg.samsonite-asia.com/our-brand-story/"
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://ssid.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.stg.samsonite-asia.com/sale/"
+    "title": "Sale | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssid.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.stg.samsonite-asia.com/special-offers/"
+    "title": "Special Offers | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssid.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "Official Website",
@@ -137,7 +137,7 @@
     "offers": "OFFERS",
     "friendofsamsonite": "FRIENDS OF SAMSONITE",
     "ginzaflagshipstore": "銀座 旗艦店",
-    "accessories": ""
+    "accessories": "Accessories"
   },
   "lv2MenuItem": {
     "brand-samsonite": "Samsonite",
@@ -145,7 +145,7 @@
     "brand-samsoniteRed": "Samsonite RED",
     "brand-hartmann": "Hartmann",
     "brand-americantourister": "American Tourister",
-    "C-Lite-Colourburst": "C-Lite Colourburst",
+    "C-Lite-Colourburst": "C-Lite",
     "Relyon": "Relyon",
     "SBL-Signature": "SBL Signature",
     "Audrina": "Audrina",
@@ -158,10 +158,10 @@
     "sub-lim": "サブリム115周年限定モデル",
     "type": "Type",
     "size": "Size",
-    "smartfeature": "Smart feature",
+    "smartfeature": "Features",
     "labels": "Labels",
     "colour": "Colour",
-    "color": "Color",
+    "color": "Colour",
     "traveltype": "Travel Type",
     "collection": "Collection",
     "hardside": "Hardside",
@@ -192,7 +192,7 @@
     "hartmann": ["Hartmann"],
     "city": "City",
     "adventure": "Adventure",
-    "beach": "ビーチ",
+    "beach": "Beach",
     "business": "Business",
     "C-Lite": "C-Lite",
     "Unimax": "Unimax",
@@ -200,9 +200,9 @@
     "73H": "73H",
     "SBL Richmond II": "SBL Richmond II",
     "Niar": "Niar",
-    "minter": "パラリュクス",
+    "minter": "Minter",
     "litebox": "ミンター",
-    "paralux": "",
+    "paralux": "Paralux",
     "zipprix": "",
     "proxis": "Proxis",
     "businessbackpacks": "Business Backpacks",
@@ -222,7 +222,7 @@
     "17inchlaptop": "Fit up to 17\" laptop",
     "laptop": "Laptop",
     "sefton": "Sefton",
-    "prodlx6": "Pro-Dlx 6",
+    "prodlx6": "Pro-DLX 6",
     "PRODLX6": "PRO-DLX 6",
     "ecodiver": "Ecodiver",
     "sammiesdream": "Sammies Dream",
@@ -235,7 +235,7 @@
     "briefcasebags": "Briefcase",
     "crossbodybags": "Cross Body Bags",
     "dufflebags": "Duffles",
-    "slingbags": "",
+    "slingbags": "Sling",
     "tote": "Totes",
     "2way3way": "",
     "shoulderbags": "",
@@ -304,7 +304,7 @@
     "personalisation": "Personalisation",
     "proxisspacelaunch": "Proxis Space Launch",
     "onetreeplanted": "One Tree Planted",
-    "kids": "Kids",
+    "kids": "For Kids",
     "red": "Red",
     "white": "White",
     "premium": "Premium",
@@ -330,7 +330,7 @@
     "removecancelbutton": "Cancel"
   },
   "cartpage": {
-    "title": "Shopping Cart | Samsonite Singapore",
+    "title": "Shopping Cart | Samsonite Malaysia",
     "pageTitle": "Your Cart",
     "emptymsg": "Your Shopping Cart is Empty",
     "checkoutbutton": "Checkout",
@@ -346,13 +346,13 @@
     "viewwishlistbtn": "View"
   },
   "wishlist": {
-    "title": "My Wishlist"
+    "title": "Sites-MonoSamsoniteMY-Site | Salesforce Commerce Cloud | 3.3.0"
   },
   "globalnavfooter": {
     "placeholder": "Your email address",
     "completethisfield": "Please complete this field.",
     "invalidemail": "The valid email format is \"xxx@email.com\". Please try again.",
-    "createsuccess": "Thanks for signing up! We'll be in touch.",
+    "createsuccess": "Thanks for your subscription.",
     "duplicateemail": "It appears this email address is already subscribed.",
     "support": "Support / FAQS",
     "ourcompany": "Our Company",
@@ -416,7 +416,7 @@
   },
   "checkoutpage": {
     "guestcheckoutbutton": "Guest Checkout",
-    "title": "Checkout | Samsonite Singapore",
+    "title": "Checkout | Samsonite Malaysia",
     "newsletter": "Please add me to Samsonite's mailing list.",
     "terms": "Agree to",
     "firstname": "First Name",

@@ -6,6 +6,7 @@ import { BackpacksPageTW }  from '../../pages/delivery/productlistingpage/backpa
 import { BackpacksPagePH }  from '../../pages/delivery/productlistingpage/backpacks/backpacks-ph.page';
 import { BackpacksPageAU }  from '../../pages/delivery/productlistingpage/backpacks/backpacks-au.page';
 import { BackpacksPageMY } from '../../pages/delivery/productlistingpage/backpacks/backpacks-my.page';
+import { BackpacksPageID } from '../../pages/delivery/productlistingpage/backpacks/backpacks-id.page';
 
 export function createBackpacksPage(page: Page): BackpacksPage {
   switch (process.env.LOCALE) {
@@ -15,6 +16,7 @@ export function createBackpacksPage(page: Page): BackpacksPage {
     case 'ph': return new BackpacksPagePH(page);
     case 'au': return new BackpacksPageAU(page);
     case 'my': return new BackpacksPageMY(page);
+    case 'id': return new BackpacksPageID(page);
     default:   return new BackpacksPageJP(page);
   }
 }

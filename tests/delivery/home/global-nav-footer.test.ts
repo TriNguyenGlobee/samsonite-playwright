@@ -164,34 +164,34 @@ test.describe("Footer links Groups", async () => {
     test("4. Support links groups", async ({ basicAuthPage }) => {
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
 
-        await steps(["sg", "tw"], "Verify that Delivery & Shipping link", async () => {
+        await steps(["sg", "tw", "my"], "Verify that Delivery & Shipping link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('deliveryandshipping')),
                 t.globalnavfooter('deliveryandshippingURL'),
                 "Assert navigated URL when clicking Delivery & Shipping link", "middle"
             )
         })
 
-        await steps(["sg"], "Verify that Returns & Exchanges link", async () => {
+        await steps(["sg", "my"], "Verify that Returns & Exchanges link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel("Returns & Exchanges"),
                 t.globalnavfooter('returnsandexchangesURL'),
                 "Assert navigated URL when clicking Returns & Exchanges link", "middle"
             )
         })
 
-        await steps(["jp", "sg"], "Verify that Warranty link", async () => {
+        await steps(["jp", "sg", "my"], "Verify that Warranty link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('warranty')), t.globalnavfooter('warrantyURL'),
                 "Assert navigated URL when clicking Warranty link", "middle"
             )
         })
 
-        await steps(["sg", "tw"], "Verify that Contact Us link", async () => {
+        await steps(["sg", "tw", "my"], "Verify that Contact Us link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('contactus')),
                 t.globalnavfooter('contactusURL'),
                 "Assert navigated URL when clicking Contact Us link", "middle"
             )
         })
 
-        await steps(["sg", "tw"], "Verify that Fake Website Alert link", async () => {
+        await steps(["sg", "tw", "my"], "Verify that Fake Website Alert link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('fakewebsitealert')),
                 t.globalnavfooter('fakewebsitealertURL'),
                 "Assert navigated URL when clicking Fake Website Alert link", "middle"
@@ -258,21 +258,21 @@ test.describe("Footer links Groups", async () => {
     test("5. Our Company links groups", async ({ basicAuthPage }) => {
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
 
-        await steps(["sg", "jp", "tw"], "Verify that About Samsonite link", async () => {
+        await steps(["sg", "jp", "tw", "my"], "Verify that About Samsonite link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('aboutsamsonite')),
                 t.globalnavfooter('aboutsamsoniteURL'),
                 "Assert navigated URL when clicking About Samsonite link", "middle"
             )
         })
 
-        await steps(["sg", "jp", "tw"], "Verify that Careers link", async () => {
+        await steps(["sg", "jp", "tw", "my"], "Verify that Careers link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('careers')),
                 t.globalnavfooter('careersURL'),
                 "Assert navigated URL when clicking Careers link", "middle"
             )
         })
 
-        await steps(["sg", "tw"], "Verify that Investor Relations link", async () => {
+        await steps(["sg", "tw", "my"], "Verify that Investor Relations link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('investorrelations')),
                 t.globalnavfooter('investorrelationsURL'),
                 "Assert navigated URL when clicking Investor Relations link", "middle"
@@ -286,7 +286,7 @@ test.describe("Footer links Groups", async () => {
             )
         })
 
-        await steps(["sg", "jp", "tw"], "Verify that Sustainability link", async () => {
+        await steps(["sg", "jp", "tw", "my"], "Verify that Sustainability link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('sustainability')),
                 t.globalnavfooter('sustainabilityURL'),
                 "Assert navigated URL when clicking Sustainability link", "middle"
@@ -345,7 +345,7 @@ test.describe("Footer links Groups", async () => {
             await loginpage.login(Config.credentials.username, Config.credentials.password)
         })
 
-        await steps(["sg", "tw"], "Verify that Track Order link", async () => {
+        await steps(["sg", "tw", "my"], "Verify that Track Order link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('trackorder')),
                 t.globalnavfooter('trackorderURL'),
                 "Assert navigated URL when clicking Track Order link", "middle"
@@ -398,28 +398,28 @@ test.describe("Footer links Groups", async () => {
     test("7. Bottom navigation links", async ({ basicAuthPage }) => {
         const globalnavfooterpage = new GlobalNavFooterPage(basicAuthPage)
 
-        await steps(["sg", "jp", "tw"], "Verify sitemap link", async () => {
+        await steps(["sg", "jp", "tw", "my"], "Verify sitemap link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('sitemap')),
                 t.globalnavfooter('sitemapURL'),
                 "Assert navigated URL when clicking sitemap link", "middle"
             )
         })
 
-        await steps(["sg", "jp", "tw"], "Verify User agreement link", async () => {
+        await steps(["sg", "jp", "tw", "my"], "Verify User agreement link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('useragreement')),
                 t.globalnavfooter('useragreementURL'),
                 "Assert navigated URL when clicking User agreement link", "middle"
             )
         })
 
-        await steps(["sg", "jp", "tw"], "Verify Privacy link", async () => {
+        await steps(["sg", "jp", "tw", "my"], "Verify Privacy link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('privacy')),
                 t.globalnavfooter('privacyURL'),
                 "Assert navigated URL when clicking Privacy link", "middle"
             )
         })
 
-        await steps(["sg", "tw"], "Verify Personal Information Collection Statement link", async () => {
+        await steps(["sg", "tw", "my"], "Verify Personal Information Collection Statement link", async () => {
             await globalnavfooterpage.assertNavigatedURLByClickLocator(basicAuthPage, await globalnavfooterpage.getLinksGroupsLocatorByLabel(t.globalnavfooter('personalinformationcollectionstatement')),
                 t.globalnavfooter('personalinformationcollectionstatementURL'),
                 "Assert navigated URL when clicking Personal Information Collection Statement link", "middle"

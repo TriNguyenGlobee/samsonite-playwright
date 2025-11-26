@@ -6,6 +6,7 @@ import { LoginTW } from '../pages/delivery/login/login-tw.page';
 import { LoginPH } from '../pages/delivery/login/login-ph.page';
 import { LoginAU } from '../pages/delivery/login/login-au.page';
 import { LoginMY } from '../pages/delivery/login/login-my.page';
+import { LoginID } from '../pages/delivery/login/login-id.page';
 
 export function createLoginPage(page: Page): LoginPage {
   switch (process.env.LOCALE) {
@@ -15,6 +16,7 @@ export function createLoginPage(page: Page): LoginPage {
     case 'ph': return new LoginPH(page);
     case 'au': return new LoginAU(page);
     case 'my': return new LoginMY(page);
+    case 'id': return new LoginID(page);
     default:   return new LoginJP(page);
   }
 }

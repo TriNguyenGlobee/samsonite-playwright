@@ -67,7 +67,7 @@ test.describe("New Arrivals Page", () => {
 });
 
 test.describe("New Arrivals Level 2 category", async () => {
-    tests(["sg", "tw"], `
+    tests(["sg", "tw", "my"], `
         1. Go to C-Lite Colourburst page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -124,7 +124,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "my"], `
         5. Go to Relyon page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -238,7 +238,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["sg"], `
+    tests(["sg", "my"], `
         13. Go to Audrina page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -352,7 +352,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["sg","jp"], `
+    tests(["sg","jp", "my"], `
         21. Go to Shop all new arrivals page
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart
@@ -638,7 +638,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["jp", "tw", "ph"], `
+    tests(["jp", "tw", "ph", "my"], `
         41. Go to PARALUX page
         42. In-stock products are displayed when clicking on in-stock checkbox
         43. User can add product to cart

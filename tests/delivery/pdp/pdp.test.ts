@@ -21,7 +21,13 @@ test.describe("PDP is shown correctly", async () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
 
-        await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        await steps(["au", "jp", "ph", "sg", "tw"], "Go to New Arrivals Page", async () => {
+            await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        })
+
+        await steps(["my"], "Go to Luggage Page", async () => {
+            await homepage.clickMenuItem('luggage', "Go to Luggage page")
+        })
 
         await step("Click In-stock checkbox", async () => {
             if (await homepage.productTableShow.isVisible()) {
@@ -137,7 +143,14 @@ test.describe("Breadcrumb", () => {
         const homepage = createHomePage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        await steps(["au", "jp", "ph", "sg", "tw"], "Go to New Arrivals Page", async () => {
+            await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        })
+
+        await steps(["my"], "Go to Luggage Page", async () => {
+            await homepage.clickMenuItem('luggage', "Go to Luggage page")
+        })
+
         await step("Click In-stock checkbox", async () => {
             if (await homepage.productTableShow.isVisible()) {
                 await homepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
@@ -190,7 +203,14 @@ test.describe("PDP extra features", () => {
         const homepage = createHomePage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        await steps(["au", "jp", "ph", "sg", "tw"], "Go to New Arrivals Page", async () => {
+            await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
+        })
+
+        await steps(["my"], "Go to Luggage Page", async () => {
+            await homepage.clickMenuItem('luggage', "Go to Luggage page")
+        })
+        
         await step("Click In-stock checkbox", async () => {
             if (await homepage.productTableShow.isVisible()) {
                 await homepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
