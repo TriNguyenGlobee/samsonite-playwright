@@ -6,6 +6,7 @@ import { OurBrandStoryPageTW } from '../../pages/delivery/productlistingpage/our
 import { OurBrandStoryPagePH } from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-ph.page';
 import { OurBrandStoryPageAU } from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-au.page';
 import { OurBrandStoryPageMY } from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-my.page';
+import { OurBrandStoryPageID } from '../../pages/delivery/productlistingpage/ourbrandstory/ourbrandstory-id.page';
 
 export function createOurBrandStoryPage(page: Page): OurBrandStoryPage {
   switch (process.env.LOCALE) {
@@ -15,6 +16,7 @@ export function createOurBrandStoryPage(page: Page): OurBrandStoryPage {
     case 'ph': return new OurBrandStoryPagePH(page);
     case 'au': return new OurBrandStoryPageAU(page);
     case 'my': return new OurBrandStoryPageMY(page);
+    case 'id': return new OurBrandStoryPageID(page);
     default:   return new OurBrandStoryPageJP(page);
   }
 }

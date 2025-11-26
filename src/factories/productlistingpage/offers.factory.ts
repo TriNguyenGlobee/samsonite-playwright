@@ -5,6 +5,7 @@ import { OffersPageJP } from '../../pages/delivery/productlistingpage/offers/off
 import { OffersPagePH } from '../../pages/delivery/productlistingpage/offers/offers-ph.page';
 import { OffersPageAU } from '../../pages/delivery/productlistingpage/offers/offers-au.page';
 import { OffersPageMY } from '../../pages/delivery/productlistingpage/offers/offers-my.page';
+import { OffersPageID } from '../../pages/delivery/productlistingpage/offers/offers-id.page';
 
 export function createOffersPage(page: Page): OffersPage {
   switch (process.env.LOCALE) {
@@ -13,6 +14,7 @@ export function createOffersPage(page: Page): OffersPage {
     case 'ph': return new OffersPagePH(page);
     case 'au': return new OffersPageAU(page);
     case 'my': return new OffersPageMY(page);
+    case 'id': return new OffersPageID(page);
     default: return new OffersPageJP(page);
   }
 }

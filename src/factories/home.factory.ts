@@ -6,6 +6,7 @@ import { HomePageTW } from '../pages/delivery/home/home-tw.page';
 import { HomePagePH } from '../pages/delivery/home/home-ph.page';
 import { HomePageAU } from '../pages/delivery/home/home-au.page';
 import { HomePageMY } from '../pages/delivery/home/home-my.page';
+import { HomePageID } from '../pages/delivery/home/home-id.page';
 
 export function createHomePage(page: Page): HomePage {
   switch (process.env.LOCALE) {
@@ -15,6 +16,7 @@ export function createHomePage(page: Page): HomePage {
     case 'ph': return new HomePagePH(page);
     case 'au': return new HomePageAU(page);
     case 'my': return new HomePageMY(page);
+    case 'id': return new HomePageID(page);
     default:   return new HomePageJP(page);
   }
 }

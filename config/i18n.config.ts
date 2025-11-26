@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import sg from '../locales/sg.json';
 
-export type Locale = 'sg' | 'jp' | 'tw' | 'ph' | 'au' | 'my';
+export type Locale = 'sg' | 'jp' | 'tw' | 'ph' | 'au' | 'my' | 'id';
 const defaultLocale: Locale = 'sg';
 const currentLocale: Locale = (process.env.LOCALE as Locale) || defaultLocale;
 

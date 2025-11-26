@@ -567,6 +567,8 @@ export class BasePage {
             checkPictureTag?: boolean;
         }
     ) {
+        await delay(2000)
+
         const { twoLinksPerLi = true, lastItemIsTextOnly = false, checkPictureTag = true } = options ?? {};
 
         const ul = ulClass
@@ -580,6 +582,7 @@ export class BasePage {
         }
 
         await step('Assert number of visible level 2 menu items', async () => {
+            await delay(2000)
             const count = await lis.count();
 
             let visibleCount = 0;

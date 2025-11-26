@@ -61,19 +61,19 @@
   },
   "newarrivalspage": {
     "title": "New Arrivals | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssmy.dev.samsonite-asia.com/new-arrivals/","https://ssmy.stg.samsonite-asia.com/new-arrivals/"]
+    "url": ["https://ssid.dev.samsonite-asia.com/new-arrivals/","https://ssid.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
     "title": "Luggage | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssmy.dev.samsonite-asia.com/luggage/", "https://ssmy.stg.samsonite-asia.com/luggage/"]
+    "url": ["https://ssid.dev.samsonite-asia.com/luggage/", "https://ssid.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
     "title": "Backpacks | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssmy.dev.samsonite-asia.com/backpacks/", "https://ssmy.stg.samsonite-asia.com/backpacks/"]
+    "url": ["https://ssid.dev.samsonite-asia.com/backpacks/", "https://ssid.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
     "title": "Bags | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssmy.dev.samsonite-asia.com/bags/", "https://ssmy.stg.samsonite-asia.com/en/bag/"]
+    "url": ["https://ssid.dev.samsonite-asia.com/bags/", "https://ssid.stg.samsonite-asia.com/bags/"]
   },
   "accessories": {
     "title": "所有配件 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
@@ -88,18 +88,18 @@
   },
   "ourbrandstorypage": {
     "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0"],
-    "url": "https://ssmy.stg.samsonite-asia.com/our-brand-story/"
+    "url": "https://ssid.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
     "title": "Sale | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssmy.stg.samsonite-asia.com/sale/"
+    "url": "https://ssid.stg.samsonite-asia.com/sale/"
   },
   "offers": {
     "title": "Special Offers | Samsonite Malaysia | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssmy.stg.samsonite-asia.com/special-offers/"
+    "url": "https://ssid.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "Official Website",
