@@ -1,12 +1,11 @@
 import { BackpacksPage } from "./backpacks.page";
 import { Page, expect } from "@playwright/test";
-import { delay } from "../../../../../utils/helpers/helpers";
+import { t, PageUtils, delay } from "../../../../../utils/helpers/helpers";
+import { Config } from "../../../../../config/env.config";
+import { attachment } from "allure-js-commons";
+import { test } from "@playwright/test";
 
 export class BackpacksPageID extends BackpacksPage {
-
-    // =========================
-    // ✅ Assertions
-    // =========================
 
     // =========================
     // ✅ Assertions
@@ -62,6 +61,37 @@ export class BackpacksPageID extends BackpacksPage {
         await this.assertItemsListForCategoryMenu(this.baseLocator, 'backpack-collection', collectionItemsBP, {
             twoLinksPerLi: false
         });
+    }
+
+    // =========================
+    // 📦 Helpers
+    // =========================
+    async isBackpacksPageDisplayed(): Promise<boolean> {
+        await PageUtils.waitForDomAvailable(this.page)
+        try {
+            const title = await this.page.title();
+            const currentUrl = await this.page.url();
+            const expectedUrl = Config.baseURL + "en/backpack/";
+            const expectedTitle = t.backpackspage('title').toString();
+
+            await test.step("Backpacks page data: ", async () => {
+                await attachment("Current Page Title", title, "text/plain");
+                await attachment("Expected Page Title", expectedTitle, "text/plain");
+                await attachment("Current URL", currentUrl, "text/plain");
+                await attachment("Expected URL", expectedUrl, "text/plain");
+            });
+
+            if (!title.includes(expectedTitle)) {
+                return false;
+            }
+
+            if (!currentUrl.startsWith(expectedUrl)) return false;
+
+            return true;
+        } catch (error) {
+            console.error('Error checking backpacks page:', error);
+            return false;
+        }
     }
 
 }

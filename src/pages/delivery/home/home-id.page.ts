@@ -64,10 +64,10 @@ export class HomePageID extends HomePage {
 
     async assertWhyShopWithUsContent(): Promise<void> {
         await test.step("why shop with us section data: ", async () => {
-            await attachment("Official website", t.whyshopwithus('officialwebsite'), "text/plain");
-            await attachment("Security shopping", t.whyshopwithus('securityShop'), "text/plain");
-            await attachment("Gift", t.whyshopwithus('fastdelivery'), "text/plain");
-            await attachment("Warranty", t.whyshopwithus('fullcollection'), "text/plain");
+            await attachment("115 Years of Innovation", t.whyshopwithus('officialwebsite'), "text/plain");
+            await attachment("Fast, Secure Payment and Delivery", t.whyshopwithus('securityShop'), "text/plain");
+            await attachment("115 Years of Innovation", t.whyshopwithus('fastdelivery'), "text/plain");
+            await attachment("World of Choice", t.whyshopwithus('fullcollection'), "text/plain");
         });
 
         await this.assertLocatorInside(this.withUsOfficalSite, {

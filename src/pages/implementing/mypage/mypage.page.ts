@@ -46,7 +46,12 @@ export class MyPage extends BasePage {
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "account";
+            let expectedUrl = Config.baseURL + "account";
+
+            if (process.env.LOCALE == "id") {
+                expectedUrl = Config.baseURL + "en/account";
+            }
+
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             const elementsToCheck = [

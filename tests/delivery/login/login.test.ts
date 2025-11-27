@@ -11,7 +11,7 @@ import { createHomePage } from "../../../src/factories/home.factory"
 import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Login Screen", () => {
-    tests(["jp", "sg"],
+    test(
         `
         1. Login page is displayed 
         2. Passwordreset screen is displayed
@@ -70,8 +70,7 @@ test.describe("Login Screen", () => {
 });
 
 test.describe('Login by normal email', () => {
-    tests(["jp","sg"]
-        ,`1. Login success`, async ({ basicAuthPage }) => {
+    test(`1. Login success`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
         const loginPage = createLoginPage(basicAuthPage);
         const myPage = new MyPage(basicAuthPage);
@@ -89,7 +88,7 @@ test.describe('Login by normal email', () => {
         });
     });
 
-    tests(["jp","sg"],`
+    test(`
         2. Login with invalid email
         3. Login with wrong account
         4. Login with empty email and password
@@ -160,7 +159,7 @@ test.describe('Login by normal email', () => {
 });
 
 test.describe("Login with email link", () => {
-    tests(["jp","sg"],`
+    test(`
         1. SIGN IN WITH EMAIL LINK Popup is displayed
         2. Clicking Send Login Link button without inputing anythings
         3. Clicking Send Login Link button with invalid email

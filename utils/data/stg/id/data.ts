@@ -7,9 +7,9 @@ export const carouselItems = [
 ];
 
 export const hightlightCategoryItems = [
-    { href: 'https://ssid.stg.samsonite-asia.com/en/bag/', hasImage: true, aboveText: 'Ladies Bags', underText: 'For her Convenience' },
-    { href: 'https://ssid.stg.samsonite-asia.com/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'Travel with Confidence' },
-    { href: 'https://ssid.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'Backpacks', underText: 'Carry Functionally' },
+    { href: 'https://ssid.stg.samsonite-asia.com/en/bags/for-her/', hasImage: true, aboveText: 'Ladies Bags', underText: 'For her Convenience' },
+    { href: 'https://ssid.stg.samsonite-asia.com/en/luggage/', hasImage: true, aboveText: 'Luggage', underText: 'Travel with Confidence' },
+    { href: 'https://ssid.stg.samsonite-asia.com/en/backpack/', hasImage: true, aboveText: 'Backpacks', underText: 'Carry Functionally' },
 ];
 
 export const recommendedProductItems = [

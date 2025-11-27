@@ -18,7 +18,7 @@ export class ForgotPasswordPage extends BasePage {
         this.pageTitle = page.locator(`//div[@class="title-contain"][h1[normalize-space(text())="${t.forgotpasswordpage('pageTitle')}"]]`);
         this.instructionMsg = page.locator(`//div[@class="request-password-body"][p[normalize-space(text())="${t.forgotpasswordpage('instructionMsg')}"]]`);
         this.emailTextbox = page.locator(`//div[label[normalize-space(text())="${t.forgotpasswordpage('emailTextbox')}"]]//input`);
-        this.submitButton = page.locator(`//button[normalize-space(text())="${t.forgotpasswordpage('submitbutton')}"]`);
+        this.submitButton = page.locator(`//div[@class="send-email-btn"]//button[normalize-space(text())="${t.forgotpasswordpage('submitbutton')}"]`);
     }
 
     // =========================
@@ -36,7 +36,11 @@ export class ForgotPasswordPage extends BasePage {
             const title = await this.page.title();
             const expectedTitle = t.forgotpasswordpage('title')
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "passwordreset";
+            let expectedUrl = Config.baseURL + "passwordreset";
+
+            if (process.env.LOCALE == "id") {
+                expectedUrl = Config.baseURL + "en/passwordreset";
+            }
 
             await test.step("Forgotpassword page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");

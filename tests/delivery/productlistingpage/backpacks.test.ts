@@ -70,7 +70,7 @@ test.describe("Backpacks Page", () => {
 });
 
 test.describe("Backpacks Type", async () => {
-    tests(["sg", "tw", "au", "my"], `
+    tests(["sg", "tw", "au", "my", "id"], `
         1. Go to Business backpacks Type
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -131,7 +131,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg", "tw", "au", "my"], `
+    tests(["sg", "tw", "au", "my", "id"], `
         5. Go to Casual Backpacks Type
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -192,7 +192,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg", "tw", "my"], `
+    tests(["sg", "tw", "my", "id"], `
         9. Go to For Her Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -314,7 +314,7 @@ test.describe("Backpacks Type", async () => {
         }
     })
 
-    tests(["sg", "jp", "au", "my"], `
+    tests(["sg", "jp", "au", "my", "id"], `
         17. Go to Shop all backpacks
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -678,7 +678,7 @@ test.describe("Backpacks Type", async () => {
 })
 
 test.describe("Backpacks Colours", async () => {
-    tests(["jp", "ph", "sg", "tw", "my"], `
+    tests(["jp", "ph", "sg", "tw", "my", "id"], `
         1. Go to Mono color page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -698,7 +698,7 @@ test.describe("Backpacks Colours", async () => {
         })
 
         await step("Verity Mono color page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(black_grey_silver_white|その他_グレー_ブラック)|backpack\/灰色_白色_銀色_黑色\/?$/, "Assert Mono colours page URL")
+            await backpackspage.assertUrl(/(backpacks\/black_grey_silver_white|その他_グレー_ブラック)|(backpack\/灰色_白色_銀色_黑色|black_grey_silver_white)\/?$/, "Assert Mono colours page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -734,7 +734,7 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["jp", "ph", "sg", "tw", "my"], `
+    tests(["jp", "ph", "sg", "tw", "my", "id"], `
         5. Go to Cool color page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -755,7 +755,7 @@ test.describe("Backpacks Colours", async () => {
         })
 
         await step("Verity Softside type URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(blue_green_navy_purple|グリーン_ネイビー_パープル_ブルー)|backpack\/海軍藍色_紫色_綠色_藍色\/?$/, "Assert Cool Color page URL")
+            await backpackspage.assertUrl(/(backpacks\/blue_green_navy_purple|グリーン_ネイビー_パープル_ブルー)|(backpack\/海軍藍色_紫色_綠色_藍色|blue_green_navy_purple)\/?$/, "Assert Cool Color page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -791,7 +791,7 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["jp", "ph", "sg", "tw", "my"], `
+    tests(["jp", "ph", "sg", "tw", "my", "id"], `
         9. Go to Warm color page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -812,7 +812,7 @@ test.describe("Backpacks Colours", async () => {
         })
 
         await step("Verity Large size page URL", async () => {
-            await backpackspage.assertUrl(/backpacks\/(beige_orange_pink_red_yellow|オレンジ_ピンク)|backpack\/橙色_米啡色_粉紅色_紅色_黃色\/?$/, "Assert Warm color page URL")
+            await backpackspage.assertUrl(/(backpacks\/beige_orange_pink_red_yellow|オレンジ_ピンク)|(backpack\/橙色_米啡色_粉紅色_紅色_黃色|beige_orange_pink_red_yellow)\/?$/, "Assert Warm color page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -848,7 +848,7 @@ test.describe("Backpacks Colours", async () => {
         }
     })
 
-    tests(["sg", "tw", "au", "my"], `
+    tests(["sg", "tw", "au", "my", "id"], `
             13. Go to Shop all colours page
             14. In-stock products are displayed when clicking on in-stock checkbox
             15. User can add product to cart
@@ -1436,7 +1436,7 @@ test.describe("Backpacks Smart feature", async () => {
 })
 
 test.describe("Backpacks Labels/Brand", async () => {
-    tests(["jp", "ph", "sg", "tw", "my"], `
+    tests(["jp", "ph", "sg", "tw", "my", "id"], `
         1. Go to Samsonite page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1496,7 +1496,7 @@ test.describe("Backpacks Labels/Brand", async () => {
         }
     })
 
-    tests(["sg", "jp", "my"], `
+    tests(["sg", "jp", "my", "id"], `
         5. Go to Samsonite black page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1557,7 +1557,7 @@ test.describe("Backpacks Labels/Brand", async () => {
         }
     })
 
-    tests(["jp", "ph", "sg", "tw", "my"], `
+    tests(["jp", "ph", "sg", "tw", "my", "id"], `
         9. Go to Samsonite Red page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -1848,7 +1848,7 @@ test.describe("Backpacks laptop", async () => {
 })
 
 test.describe("Backpacks Collection", async () => {
-    tests(["sg", "tw", "my"], `
+    tests(["sg", "tw", "my", "id"], `
         1. Go to Collection Sefton page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart

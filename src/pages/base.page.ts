@@ -111,6 +111,7 @@ export class BasePage {
 
     async goBack(pageName: string) {
         await step(`Goback to ${pageName} page`, async () => {
+            await delay(500)
             await this.page.goBack();
         });
     }
@@ -323,38 +324,13 @@ export class BasePage {
 
             await Promise.all([
                 target.click({ position: { x: 7, y: 7 } }),
-                this.underlay.waitFor({ state: 'hidden', timeout: 10000 })
+                this.underlay.waitFor({ state: 'hidden', timeout: 20000 })
             ]);
             await delay(5000);
-            /*
-            const MAX_RETRIES = 3;
-            let attempt = 0;
-            let isChecked = false;
 
-            while (attempt < MAX_RETRIES) {
-                attempt++;
-
-                await target.click({ position: { x: 5, y: 5 } });
-                await delay(5000);
-
-                const inputLocator = target.locator('input[type="checkbox"]');
-                if (await inputLocator.count()) {
-                    isChecked = await inputLocator.isChecked();
-                } else {
-                    isChecked = await target.getAttribute('class').then(cls => cls?.includes('selected') || false);
-                }
-
-                if (isChecked) {
-                    //console.log(`Checkbox "${labelText}" is checked after ${attempt} attempt(s).`);
-                    break;
-                }
-
-                //console.log(`Checkbox "${labelText}" not checked (attempt ${attempt}), retrying...`);
-            }
-            await expect(isChecked, `Checkbox "${labelText}" should be checked after ${MAX_RETRIES} attempts.`).toBeTruthy();
-            */
             await PageUtils.waitForPageLoad(page)
             await PageUtils.waitForDomAvailable(page)
+
             await delay(2000)
         });
     }
