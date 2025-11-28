@@ -7,6 +7,7 @@ import { MinicartPagePH } from '../pages/delivery/cart/minicart-ph.page';
 import { MinicartPageAU } from '../pages/delivery/cart/minicart-au.page';
 import { MinicartPageMY } from '../pages/delivery/cart/minicart-my.page';
 import { MinicartPageID } from '../pages/delivery/cart/minicart-id.page';
+import { MinicartPageNZ } from '../pages/delivery/cart/minicart-nz.page';
 
 export function createMinicartPage(page: Page): MinicartPage {
   switch (process.env.LOCALE) {
@@ -17,6 +18,7 @@ export function createMinicartPage(page: Page): MinicartPage {
     case 'au': return new MinicartPageAU(page);
     case 'my': return new MinicartPageMY(page);
     case 'id': return new MinicartPageID(page);
+    case 'nz': return new MinicartPageNZ(page);
     default:   return new MinicartPageJP(page);
   }
 }

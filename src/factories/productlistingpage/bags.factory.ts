@@ -7,6 +7,7 @@ import { BagsPagePH } from '../../pages/delivery/productlistingpage/bags/bags-ph
 import { BagsPageAU } from '../../pages/delivery/productlistingpage/bags/bags-au.page';
 import { BagsPageMY } from '../../pages/delivery/productlistingpage/bags/bags-my.page';
 import { BagsPageID } from '../../pages/delivery/productlistingpage/bags/bags-id.page';
+import { BagsPageNZ } from '../../pages/delivery/productlistingpage/bags/bags-nz.page';
 
 export function createBagsPage(page: Page): BagsPage {
   switch (process.env.LOCALE) {
@@ -17,6 +18,7 @@ export function createBagsPage(page: Page): BagsPage {
     case 'au': return new BagsPageAU(page);
     case 'my': return new BagsPageMY(page);
     case 'id': return new BagsPageID(page);
+    case 'nz': return new BagsPageNZ(page);
     default:   return new BagsPageJP(page);
   }
 }

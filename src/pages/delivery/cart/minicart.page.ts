@@ -62,6 +62,7 @@ export abstract class MinicartPage extends BasePage {
                 await delay(500)
                 await this.click(this.removeProdModalConfirmButton, 'Confirm remove product')
                 await this.waitFor(this.removeProductModal, 'hidden')
+                await this.waitFor(this.minicartRender, 'hidden')
             })
         }
 

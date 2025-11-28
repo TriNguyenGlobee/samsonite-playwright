@@ -82,11 +82,11 @@ test.describe("Category Menu", () => {
             await offerspage.assertOffersListItems(basicAuthPage);
         });
         
-        await steps(["tw", "ph", "au", "my", "id"], "Hover over 'Accessories' menu", async () => {
+        await steps(["tw", "ph", "au", "my", "id", "nz"], "Hover over 'Accessories' menu", async () => {
             await homePage.hover(homePage.accessoriesMenuItem);
         });
 
-        await steps(["tw", "ph", "au", "my", "id"], "Verify that all categories under 'Accessories' are displayed", async () => {
+        await steps(["tw", "ph", "au", "my", "id", "nz"], "Verify that all categories under 'Accessories' are displayed", async () => {
             await accessoriespage.assertAccesoriesListItems(basicAuthPage)
         });
     });
