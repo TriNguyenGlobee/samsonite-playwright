@@ -354,41 +354,57 @@ export async function selectDropdownOption(
  * @returns 
  */
 export async function closeModalIfPresent(page: Page): Promise<void> {
-  const modalCloseBtn = page.locator('//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]');
-  const intentCartCloseBtn = page.locator('//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]');
-  const popupContainerBtn = page.locator('//div[@class="popup-container"]//button[@class="close-btn"]');
-  const backDropLaleBtn = page.locator('//div[@id="staticBackdrop"]//button[@aria-label="Close"]')
+  if (page.isClosed()) return;
 
-  const modalsToCheck = [
-    {
-      name: 'Signup Modal',
-      locator: modalCloseBtn.first(),
-    },
-    {
-      name: 'Intent Cart Modal',
-      locator: intentCartCloseBtn.first(),
-    },
-    {
-      name: 'Popup Container',
-      locator: popupContainerBtn.first(),
-    },
-    {
-      name: 'Back Drop Label',
-      locator: backDropLaleBtn.first(),
-    },
+  const selectors = [
+    { name: 'Signup Modal', sel: '//div[@id="staticBackdrop"]//button[contains(@class,"close-signup-popup")]' },
+    { name: 'Intent Cart Modal', sel: '//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]' },
+    { name: 'Popup Container', sel: '//div[@class="popup-container"]//button[@class="close-btn"]' },
+    { name: 'Back Drop Label', sel: '//div[@id="staticBackdrop"]//button[@aria-label="Close"]' },
   ];
 
-  for (const modal of modalsToCheck) {
-    const isVisible = await modal.locator.isVisible().catch(() => false);
-    if (isVisible) {
-      console.log(`${modal.name} detected → Closing it...`);
-      await modal.locator.click().catch((e) => {
-        console.warn(`Failed to click close for ${modal.name}:`, e);
-      });
-      await modal.locator.waitFor({ state: 'detached', timeout: 5000 }).catch(() => {
-        console.warn(`${modal.name} did not detach in time`);
-      });
-    } else {}
+  for (const modal of selectors) {
+    if (page.isClosed()) return;
+
+    const loc = page.locator(modal.sel).first();
+    let isVisible = false;
+
+    try {
+      isVisible = await loc.isVisible();
+    } catch {
+      return;
+    }
+
+    if (!isVisible) continue;
+
+    console.log(`${modal.name} detected → Closing`);
+
+    try {
+      await page.evaluate((selector) => {
+        const el = document.evaluate(
+          selector,
+          document,
+          null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null
+        ).singleNodeValue as HTMLElement;
+
+        if (el) el.click();
+      }, modal.sel);
+    } catch {
+      return;
+    }
+
+    for (let i = 0; i < 10; i++) {
+      if (page.isClosed()) return;
+      try {
+        const stillVisible = await loc.isVisible().catch(() => false);
+        if (!stillVisible) break;
+      } catch {
+        break;
+      }
+      await new Promise(r => setTimeout(r, 200));
+    }
   }
 }
 

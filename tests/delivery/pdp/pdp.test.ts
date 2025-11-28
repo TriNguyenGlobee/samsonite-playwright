@@ -21,7 +21,7 @@ test.describe("PDP is shown correctly", async () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
 
-        await steps(["au", "jp", "ph", "sg", "tw"], "Go to New Arrivals Page", async () => {
+        await steps(["au", "jp", "ph", "sg", "tw", "id"], "Go to New Arrivals Page", async () => {
             await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         })
 
@@ -143,7 +143,7 @@ test.describe("Breadcrumb", () => {
         const homepage = createHomePage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        await steps(["au", "jp", "ph", "sg", "tw"], "Go to New Arrivals Page", async () => {
+        await steps(["au", "jp", "ph", "sg", "tw", "id"], "Go to New Arrivals Page", async () => {
             await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         })
 
@@ -203,7 +203,7 @@ test.describe("PDP extra features", () => {
         const homepage = createHomePage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        await steps(["au", "jp", "ph", "sg", "tw"], "Go to New Arrivals Page", async () => {
+        await steps(["au", "jp", "ph", "sg", "tw", "id"], "Go to New Arrivals Page", async () => {
             await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         })
 

@@ -35,13 +35,13 @@ export class RegisterPage extends BasePage {
         this.customerDetailsLabel = page.locator(`//div[h4[normalize-space(text())="${t.registerpage('customerdetailslabel')}"]]`);
         this.lastNameTextbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('lastname')}"]]//input`);
         this.firstNameTextbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('firstname')}"]]//input`);
-        this.phoneNumberTextbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('phonenumber')}"]]//input`);
+        this.phoneNumberTextbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('phonenumber')}"]]//input[not(@type="hidden")]`);
         this.dateOfBirthLabel = page.locator(`//div[label[normalize-space(text())="${t.registerpage('dateofbirth')}"]]`);
         this.yearDropdown = page.locator(`//select[@id="year"]`);
         this.monthDropdown = page.locator(`//select[@name="month"]`);
         this.dayDropdown = page.locator(`//select[@id="day"]`);
         this.genderDropdown = page.locator(`//select[@id="gender"]`);
-        this.emailTexbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('email')}"]]//input`);
+        this.emailTexbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('email')}"]]//input[@id="registration-form-email"]`);
         this.passwordTextbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('password')}"]]//input`);
         this.confirmPasswordTextbox = page.locator(`//div[label[normalize-space(text())="${t.registerpage('confirmpassword')}"]]//input`);
         this.getNewsRegisterLabel = page.locator(`//label[span[normalize-space(text())="${t.registerpage('getnewsrequest')}"]]`);
@@ -68,7 +68,12 @@ export class RegisterPage extends BasePage {
             }
 
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "register";
+            let expectedUrl = Config.baseURL + "register";
+
+            if (process.env.LOCALE == "id") {
+                expectedUrl = Config.baseURL + "en/register";
+            }
+
             if (!currentUrl.startsWith(expectedUrl)) return false;
 
             const elementsToCheck = [

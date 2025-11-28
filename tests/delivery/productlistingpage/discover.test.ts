@@ -26,7 +26,7 @@ test.describe("Discover/Our Brand Story Page", () => {
 });
 
 test.describe("Discover sub-categories", async () => {
-    tests(["au", "jp", "ph", "sg", "tw"], `
+    tests(["au", "jp", "ph", "sg", "tw", "id"], `
         1. Go to Fathers day gifts page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -170,7 +170,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["jp", "sg", "tw", "ph", "au", "my"], `
+    tests(["jp", "sg", "tw", "ph", "au", "my", "id"], `
         9. Go to Beyond The Design page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -183,7 +183,7 @@ test.describe("Discover sub-categories", async () => {
             )
         })
 
-        await steps(["sg", "tw", "au", "my"], "Go to Beyond The Design type", async () => {
+        await steps(["sg", "tw", "au", "my", "id"], "Go to Beyond The Design type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('discover')}->${t.lv2MenuItem('about')}->${t.lv2MenuItem('goingbeyonddesign')}`,
                 "Discover -> About -> Going Beyond Design"
@@ -195,7 +195,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["jp", "sg", "tw", "ph", "au", "my"], `
+    tests(["jp", "sg", "tw", "ph", "au", "my", "id"], `
         10. Go to Beyond The Average Test page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -208,7 +208,7 @@ test.describe("Discover sub-categories", async () => {
             )
         })
 
-        await steps(["sg", "tw", "ph", "au", "my"], "Go to Beyond The Average Test type", async () => {
+        await steps(["sg", "tw", "ph", "au", "my", "id"], "Go to Beyond The Average Test type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('discover')}->${t.lv2MenuItem('about')}->${t.lv2MenuItem('goingbeyondtesting')}`,
                 "Discover -> About -> Going Beyond Testing"
@@ -310,7 +310,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "jp", "tw", "my"], `
+    tests(["sg", "jp", "tw", "my", "id"], `
         16. Go to Brand story page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -346,7 +346,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "tw", "ph", "my"], `
+    tests(["sg", "tw", "ph", "my", "id"], `
         18. Go to Browse Our Collections page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -382,7 +382,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["tw"], `
+    tests(["tw", "id"], `
         20. Go to Family-Friendly Travels page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -418,7 +418,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "tw", "au"], `
+    tests(["sg", "tw", "au", "id"], `
         22. Go to Discover All page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -432,7 +432,7 @@ test.describe("Discover sub-categories", async () => {
         })
 
         await step("Verity Mothers day gifts URL", async () => {
-            await ourbrandstorypage.assertUrl(/discover-all/, "Assert Discover All URL")
+            await ourbrandstorypage.assertUrl(/discover-all|en_ID\/Discover-Show/, "Assert Discover All URL")
         })
     })
 

@@ -137,7 +137,7 @@ test.describe("Home Tests", () => {
         }
     });
 
-    tests(["jp", "sg"], `11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
+    test(`11. Why Shop With Us section is displayed`, async ({ basicAuthPage }) => {
         const homePage = createHomePage(basicAuthPage);
 
         await scrollToBottom(basicAuthPage);

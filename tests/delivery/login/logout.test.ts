@@ -5,7 +5,7 @@ import { createLoginPage } from "../../../src/factories/login.factory";
 import { tests } from "../../../utils/helpers/localeTest"
 
 test.describe("Logout Completion Screen", () => {
-    tests(["jp","sg"],`1. Logout success`, async ({ loggedInPage }) => {
+    test(`1. Logout success`, async ({ loggedInPage }) => {
         const myPage = new MyPage(loggedInPage);
         const loginPage = createLoginPage(loggedInPage)
 

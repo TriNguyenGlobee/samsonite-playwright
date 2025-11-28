@@ -33,7 +33,11 @@ export class NewArrivalsPage extends BasePage {
             const title = await this.page.title();
             const expectedTitle = t.newarrivalspage('title')
             const currentUrl = await this.page.url();
-            const expectedUrl = Config.baseURL + "new-arrivals/";
+            let expectedUrl = Config.baseURL + "new-arrivals/";
+
+            if(process.env.LOCALE == "id"){
+                expectedUrl = Config.baseURL + "en/new-arrivals/";
+            }
 
             await test.step("New Arrivals page data: ", async () => {
                 await attachment("Current Page Title", title, "text/plain");

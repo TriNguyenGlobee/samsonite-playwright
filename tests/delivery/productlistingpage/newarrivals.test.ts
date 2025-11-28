@@ -124,7 +124,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["sg", "my"], `
+    tests(["sg", "my", "id"], `
         5. Go to Relyon page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -352,7 +352,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["sg","jp", "my"], `
+    tests(["sg","jp", "my", "id"], `
         21. Go to Shop all new arrivals page
         22. In-stock products are displayed when clicking on in-stock checkbox
         23. User can add product to cart
@@ -638,7 +638,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["jp", "tw", "ph", "my"], `
+    tests(["jp", "tw", "ph", "my", "id"], `
         41. Go to PARALUX page
         42. In-stock products are displayed when clicking on in-stock checkbox
         43. User can add product to cart

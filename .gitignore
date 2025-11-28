@@ -13,5 +13,5 @@ blob-report/
 test-env.test.ts
 
 # Allure-report
-allure-report/
-allure-results/
+allure-report*/
+allure-results*/
