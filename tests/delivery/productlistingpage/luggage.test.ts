@@ -192,7 +192,7 @@ test.describe("Luggage Type", async () => {
         }
     })
 
-    tests(["au", "jp", "ph", "sg", "tw"], `
+    tests(["au", "jp", "ph", "sg", "tw", "id"], `
         9. Go to Aluminium Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -704,7 +704,7 @@ test.describe("Luggage Colours", async () => {
             )
         })
 
-        await step("Verity Softside type URL", async () => {
+        await step("Verity Cool color URL", async () => {
             await luggagepage.assertUrl(/luggage\/(blue_green_navy|グリーン_ネイビー_パープル_ブルー|海軍藍色_紫色_綠色_藍色)\/?$/, "Assert Cool Color page URL")
         })
 
@@ -806,7 +806,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    tests(["sg", "tw", "au", "my"], `
+    tests(["sg", "tw", "au", "my", "id"], `
         13. Go to Shop all colours page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1235,7 +1235,7 @@ test.describe("Luggage Colours", async () => {
 })
 
 test.describe("Luggage Smart feature", async () => {
-    tests(["sg", "tw", "ph", "my"], `
+    tests(["sg", "tw", "ph", "my", "id"], `
         1. Go to Double Coil Zippers page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1357,7 +1357,7 @@ test.describe("Luggage Smart feature", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp"], `
+    tests(["sg", "tw", "ph", "jp", "id"], `
         9. Go to Magnetic zippers page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -1418,7 +1418,7 @@ test.describe("Luggage Smart feature", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp", "my"], `
+    tests(["sg", "tw", "ph", "jp", "my", "id"], `
         13. Go to Suspension wheels page
         14. In-stock products are displayed when clicking on in-stock checkbox
         15. User can add product to cart
@@ -1479,7 +1479,7 @@ test.describe("Luggage Smart feature", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp", "my"], `
+    tests(["sg", "tw", "ph", "jp", "my", "id"], `
         17. Go to USB port page
         18. In-stock products are displayed when clicking on in-stock checkbox
         19. User can add product to cart
@@ -1847,7 +1847,7 @@ test.describe("Luggage Smart feature", async () => {
 })
 
 test.describe("Luggage Labels/Brand", async () => {
-    tests(["sg", "tw", "ph", "jp", "my"], `
+    tests(["sg", "tw", "ph", "jp", "my", "id"], `
         1. Go to Samsonite page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -1907,7 +1907,7 @@ test.describe("Luggage Labels/Brand", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp", "my"], `
+    tests(["sg", "tw", "ph", "jp", "my", "id"], `
         5. Go to Samsonite black page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -1968,7 +1968,7 @@ test.describe("Luggage Labels/Brand", async () => {
         }
     })
 
-    tests(["sg", "tw", "ph", "jp", "my"], `
+    tests(["sg", "tw", "ph", "jp", "my", "id"], `
         9. Go to Samsonite Red page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -2214,7 +2214,7 @@ test.describe("Luggage travel type/destination", async () => {
         }
     })
 
-    tests(["jp", "my"], `
+    tests(["jp", "my", "id"], `
         9. Go to Beach page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -2888,8 +2888,8 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["tw"], `
-        37. Go to EVOA Z page
+    tests(["tw", "id"], `
+        37. Go to EVOA Z/EVOA page
         38. In-stock products are displayed when clicking on in-stock checkbox
         39. User can add product to cart
         40. Go to the PDP
@@ -2909,7 +2909,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity EVOA Z page URL", async () => {
-            await luggagepage.assertUrl(/(collection\/ジップリックスft)|luggage-collection-evoa-z\/?$/, "Assert EVOA Z page URL")
+            await luggagepage.assertUrl(/(collection\/ジップリックスft)|luggage-collection-evoa-z|en\/luggage\/evoa\/?$/, "Assert EVOA Z page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -3193,8 +3193,8 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["au"], `
-        57. Go to NB | Samsonite page
+    tests(["au", "id"], `
+        57. Go to NB | Samsonite/Magnum Eco page
         58. In-stock products are displayed when clicking on in-stock checkbox
         59. User can add product to cart
         60. Go to the PDP
@@ -3214,7 +3214,7 @@ test.describe("Luggage Collection", async () => {
         })
 
         await step("Verity NB | Samsonite page URL", async () => {
-            await luggagepage.assertUrl(/magnum-eco-2/, "Assert NB | Samsonite page URL")
+            await luggagepage.assertUrl(/magnum-eco-2|en\/luggage-collection-magnum-eco/, "Assert NB | Samsonite page URL")
         })
 
         await step("Click In-stock checkbox", async () => {

@@ -63,7 +63,7 @@ export class PDPPage extends BasePage {
             const elementsToCheck = [
                 this.prodDetailImg,
                 this.prodInfor,
-                this.prodBrand,
+                this.prodBrand.first(),
                 this.prodCollecton,
                 this.prodName,
                 this.prodSticker,

@@ -21,7 +21,7 @@ test.describe("Samsonite Brand Landing Page", () => {
             "Go to Brand -> Samnonite")
     })
 
-    tests(["jp", "sg", "tw", "my"],
+    tests(["jp", "sg", "tw", "my", "id"],
         `1. Center Banner is displayed
         2. Navigate to correct URL when clicking on a banner
         3. Sub-menu (jp = Hardcase, softcase ||sg = Luggage, Backpacks, Bags) are displayed
@@ -49,7 +49,7 @@ test.describe("Samsonite Brand Landing Page", () => {
             await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_softcaseMenu, subMenuDataSamsonite[1])
         })
 
-        await steps(["sg", "tw", "my"], "Verify sub-mnenu (Luggage, Backpacks, Bags) are displayed", async () => {
+        await steps(["sg", "tw", "my", "id"], "Verify sub-mnenu (Luggage, Backpacks, Bags) are displayed", async () => {
             await brandlandingpage.ssn_luggageMenu.scrollIntoViewIfNeeded()
 
             await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_luggageMenu, subMenuDataSamsonite[0])
@@ -66,7 +66,7 @@ test.describe("Samsonite Brand Landing Page", () => {
             )
         })
 
-        await steps(["sg", "tw", "my"], "Verify URL when clicking on the sub-menu (Luggage, Backpacks, Bags)", async () => {
+        await steps(["sg", "tw", "my", "id"], "Verify URL when clicking on the sub-menu (Luggage, Backpacks, Bags)", async () => {
             await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_luggageMenu, subMenuDataSamsonite[0].href,
                 "Verify URL after clicking on Luggage menu"
             )
@@ -99,7 +99,7 @@ test.describe("Samsonite Brand Landing Page", () => {
         })
     });
 
-    tests(["jp", "sg", "tw", "ph", "my"],`
+    tests(["jp", "sg", "tw", "ph", "my", "id"],`
         6. Products list table is displayed
         7. User can add product to cart
         8. Go to the PDP
@@ -141,7 +141,7 @@ test.describe("Samsonite Black Brand Landing Page", () => {
         await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('label')}->${t.lv2MenuItem('brand-samsoniteBlack')}`, "Go to Brand -> Samnonite Black")
     })
 
-    tests(["jp", "tw", "my"],
+    tests(["jp", "tw", "my", "id"],
         `1. Center Banner is displayed
         2. Navigate to correct URL when clicking on a banner
         3. Sub-menu (jp = Briefcase, Luggage, Backpacks || tw = Luggage, Backpacks, Bags) are displayed
@@ -178,7 +178,7 @@ test.describe("Samsonite Black Brand Landing Page", () => {
             await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_bagsMenu, subMenuDataSamsoniteBlack[2])
         })
 
-        await steps(["jp", "my"], "Verify URL when clicking on the sub-menu", async () => {
+        await steps(["jp", "my", "id"], "Verify URL when clicking on the sub-menu", async () => {
             await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_briefcaseMenu, subMenuDataSamsoniteBlack[0].href,
                 "Verify URL after clicking on Briefcase menu"
             )
@@ -223,7 +223,7 @@ test.describe("Samsonite Black Brand Landing Page", () => {
         })
     });
 
-    tests(["jp", "sg", "tw", "ph", "my"],`
+    tests(["jp", "sg", "tw", "ph", "my", "id"],`
         6. Products list table is displayed
         7. User can add product to cart
         8. Go to the PDP
@@ -265,7 +265,7 @@ test.describe("Samsonite Red Brand Landing Page", () => {
         await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('label')}->${t.lv2MenuItem('brand-samsoniteRed')}`, "Go to Brand -> Samnonite Red")
     })
 
-    tests(["jp", "sg", "tw", "my"],
+    tests(["jp", "sg", "tw", "my", "id"],
         `1. Center Banner is displayed
         2. Navigate to correct URL when clicking on a banner
         3. Sub-menu (Luggage, Backpacks, Bags) are displayed
@@ -286,7 +286,7 @@ test.describe("Samsonite Red Brand Landing Page", () => {
             )
         })
 
-        await steps(["sg", "tw", "my"], "Verify sub-mnenu are displayed", async () => {
+        await steps(["sg", "tw", "my", "id"], "Verify sub-mnenu are displayed", async () => {
             await brandlandingpage.ssn_bl_luggageMenu.scrollIntoViewIfNeeded()
 
             await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_bl_luggageMenu, subMenuDataSamsoniteRed[0])
@@ -294,7 +294,7 @@ test.describe("Samsonite Red Brand Landing Page", () => {
             await brandlandingpage.assertLocatorInside(brandlandingpage.ssn_red_bagsMenu, subMenuDataSamsoniteRed[2])
         })
 
-        await steps(["sg", "tw", "my"], "Verify URL when clicking on the sub-menu", async () => {
+        await steps(["sg", "tw", "my", "id"], "Verify URL when clicking on the sub-menu", async () => {
             await brandlandingpage.assertNavigatedURLByClickLocator(basicAuthPage, brandlandingpage.ssn_bl_luggageMenu, subMenuDataSamsoniteRed[0].href,
                 "Verify URL after clicking on Luggage menu"
             )
@@ -327,7 +327,7 @@ test.describe("Samsonite Red Brand Landing Page", () => {
         })
     });
 
-    tests(["jp", "sg", "tw", "ph", "my"], `
+    tests(["jp", "sg", "tw", "ph", "my", "id"], `
         6. Products list table is displayed
         7. User can add product to cart
         8. Go to the PDP

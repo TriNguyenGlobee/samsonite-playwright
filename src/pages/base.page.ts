@@ -188,7 +188,6 @@ export class BasePage {
             console.log(`Selected menu item: ${menupath} - ${description}`);
         }
 
-        await PageUtils.waitForPageLoad(page);
         await PageUtils.waitForDomAvailable(page);
 
         await delay(2000)
@@ -332,6 +331,8 @@ export class BasePage {
             await PageUtils.waitForDomAvailable(page)
 
             await delay(2000)
+
+            await this.underlay.waitFor({ state: 'hidden', timeout: 20000 })
         });
     }
 
