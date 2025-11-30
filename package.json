@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx playwright test",
     "test:multi": "powershell -ExecutionPolicy Bypass -File run-multi.ps1",
+    "test:multiparallel": "powershell -ExecutionPolicy Bypass -File run-multi-parallel.ps1",
     "test:chrome": "npx playwright test --project=chromium",
     "test:firefox": "npx playwright test --project=firefox",
     "test:webkit": "npx playwright test --project=webkit",

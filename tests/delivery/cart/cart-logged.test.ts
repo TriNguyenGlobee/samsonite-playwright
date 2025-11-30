@@ -326,7 +326,7 @@ test.describe("Add products to cart after login", () => {
             await minicart.removeAllProducts()
 
             await minicart.assertHidden(minicart.minicartRender, 'Assert minicart is closed after removing all products')
-            await minicart.pause()
+
             const numberOfProd = await minicart.getNumberOfProducts()
 
             expect(numberOfProd).toBe(0)
