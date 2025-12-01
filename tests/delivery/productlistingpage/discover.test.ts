@@ -44,7 +44,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "tw", "ph", "my"], `
+    tests(["sg", "tw", "ph", "my", "nz"], `
         2. Go to Mothers day gifts page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -98,7 +98,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "ph", "my"], `
+    tests(["sg", "ph", "my", "nz"], `
         5. Go to Your Backpack Look page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -134,7 +134,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["sg", "jp", "au"], `
+    tests(["sg", "jp", "au", "nz"], `
         7. Go to The Art of Packing page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -170,7 +170,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["jp", "sg", "tw", "ph", "au", "my", "id"], `
+    tests(["jp", "sg", "tw", "ph", "au", "my", "id", "nz"], `
         9. Go to Beyond The Design page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -183,7 +183,7 @@ test.describe("Discover sub-categories", async () => {
             )
         })
 
-        await steps(["sg", "tw", "au", "my", "id"], "Go to Beyond The Design type", async () => {
+        await steps(["sg", "tw", "au", "my", "id", "nz"], "Go to Beyond The Design type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('discover')}->${t.lv2MenuItem('about')}->${t.lv2MenuItem('goingbeyonddesign')}`,
                 "Discover -> About -> Going Beyond Design"
@@ -195,7 +195,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["jp", "sg", "tw", "ph", "au", "my", "id"], `
+    tests(["jp", "sg", "tw", "ph", "au", "my", "id", "nz"], `
         10. Go to Beyond The Average Test page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -208,7 +208,7 @@ test.describe("Discover sub-categories", async () => {
             )
         })
 
-        await steps(["sg", "tw", "ph", "au", "my", "id"], "Go to Beyond The Average Test type", async () => {
+        await steps(["sg", "tw", "ph", "au", "my", "id", "nz"], "Go to Beyond The Average Test type", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
             await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('discover')}->${t.lv2MenuItem('about')}->${t.lv2MenuItem('goingbeyondtesting')}`,
                 "Discover -> About -> Going Beyond Testing"
@@ -436,7 +436,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         23. Go to Oc2lite page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -472,7 +472,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         25. Go to Samsonite VS Series page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -490,7 +490,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         26. Go to Gift Guide page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -526,7 +526,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         28. Go to Dad’s who Travel page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -544,7 +544,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         29. Go to 5 Essential Tips For Travelling Queenstown page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -580,7 +580,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         31. Go to Choosing the Right Luggage page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -634,7 +634,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         34. Go to Personalisation page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -652,7 +652,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         35. Go to Proxis Space Launch page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -670,7 +670,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au"], `
+    tests(["au", "nz"], `
         36. Go to One Tree Planted page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
