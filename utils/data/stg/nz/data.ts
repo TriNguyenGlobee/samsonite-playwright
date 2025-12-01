@@ -4,7 +4,7 @@ export const carouselItems = [
 
 export const hightlightCategoryItems = [
     { href: 'https://ssnz.stg.samsonite-asia.com/bags/', hasImage: true, aboveText: 'Bags', underText: 'Carry your Style' },
-    { href: 'https://ssnz.stg.samsonite-asia.com/suitcases/', hasImage: true, aboveText: 'SUITCASES', underText: 'Travel with Confidence' },
+    { href: 'https://ssnz.stg.samsonite-asia.com/suitcases/', hasImage: true, aboveText: 'Luggage', underText: 'Travel with Confidence' },
     { href: 'https://ssnz.stg.samsonite-asia.com/backpacks/', hasImage: true, aboveText: 'Backpacks', underText: 'Carry Functionally' },
 ];
 
@@ -38,8 +38,8 @@ export const newArrivalsItem = [
 
 // --- luggage-type ---
 export const typeItems = [
-    { text: 'Hardside', href: '/suitcases/hardside/' },
-    { text: 'Softside', href: '/suitcases/softside/' },
+    { text: 'Hardside', href: '/suitcases/hard-luggage/' },
+    { text: 'Softside', href: '/suitcases/soft-luggage/' },
     { text: 'Aluminium', href: '/suitcases/aluminium/' },
     { text: 'Shop all suitcases', href: 'https://ssnz.stg.samsonite-asia.com/suitcases/' }
 ];

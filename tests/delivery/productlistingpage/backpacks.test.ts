@@ -1211,7 +1211,7 @@ test.describe("Backpacks Smart feature", async () => {
         })
 
         await step("Verity USB port page URL", async () => {
-            await backpackspage.assertUrl(/(backpack\/(usb-port|smart-function\/usb-port))|(attribute\/usb-port-2)\/?$/, "Assert USB port page URL")
+            await backpackspage.assertUrl(/(backpack\/(usb-port|smart-function\/usb-port|))|(attribute\/usb-port-2)|backpacks\/usb-port\/?$/, "Assert USB port page URL")
         })
 
         await step("Click In-stock checkbox", async () => {

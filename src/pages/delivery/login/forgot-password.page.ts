@@ -17,7 +17,7 @@ export class ForgotPasswordPage extends BasePage {
         this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.pageTitle = page.locator(`//div[@class="title-contain"][h1[normalize-space(text())="${t.forgotpasswordpage('pageTitle')}"]]`);
         this.instructionMsg = page.locator(`//div[@class="request-password-body"][p[normalize-space(text())="${t.forgotpasswordpage('instructionMsg')}"]]`);
-        this.emailTextbox = page.locator(`//div[label[normalize-space(text())="${t.forgotpasswordpage('emailTextbox')}"]]//input`);
+        this.emailTextbox = page.locator(`//div[label[normalize-space(text())="${t.forgotpasswordpage('emailTextbox')}"]]//input[@id="reset-password-email"]`);
         this.submitButton = page.locator(`//div[@class="send-email-btn"]//button[normalize-space(text())="${t.forgotpasswordpage('submitbutton')}"]`);
     }
 

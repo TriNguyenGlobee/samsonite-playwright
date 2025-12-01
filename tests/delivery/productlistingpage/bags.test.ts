@@ -131,7 +131,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "tw", "au", "my", "id"], `
+    tests(["sg", "tw", "au", "my", "id", "nz"], `
         5. Go to Cross Body bags Type
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -192,7 +192,7 @@ test.describe("Bags Type", async () => {
         }
     })
 
-    tests(["sg", "jp", "au"], `
+    tests(["sg", "jp", "au", "nz"], `
         9. Go to Duffle Type
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart

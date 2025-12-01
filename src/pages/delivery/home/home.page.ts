@@ -35,7 +35,7 @@ export abstract class HomePage extends BasePage {
         this.journalsSection = page.locator(`//div[contains(@class,"journals-articles")]//div[@class="owl-stage"]`);
         this.journalsNextbutton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Next"]]`);
         this.journalsPreviousButton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Previous"]]`);
-        this.whyShopWithUsSection = page.locator(`//div[@class="home-why-shop-with-us"]//div[@class="content"]`);
+        this.whyShopWithUsSection = page.locator(`//div[contains(@class,"home-why-shop-with-us")]//div[@class="content"]`);
         this.withUsTitle = this.whyShopWithUsSection.locator(`xpath=.//h2[normalize-space(text())="Why shop with us?"]`);
         this.withUsOfficalSite = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('officialwebsitetitle')}"]]`);
         this.withUsSafeShopping = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('securityShoptitle')}"]]`);

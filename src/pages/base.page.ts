@@ -138,7 +138,6 @@ export class BasePage {
         await menuItemLocator.scrollIntoViewIfNeeded();
         await menuItemLocator.click();
 
-        await PageUtils.waitForPageLoad(this.page);
         await PageUtils.waitForDomAvailable(this.page);
     }
 
