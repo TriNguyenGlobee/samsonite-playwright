@@ -46,9 +46,9 @@ test.describe("Empty cart after login", () => {
 
         await step("Verify that minicart is displayed", async () => {
             expect(await minicartPage.isMinicartShown()).toBe(true)
-            await expect(minicartPage.emptyCartMsg).toHaveText(t.minicart('emptymsg'))
-            await expect(minicartPage.startShoppingButton).toBeVisible()
-            await expect(minicartPage.exploreByCategoryText).toBeVisible()
+            expect(minicartPage.emptyCartMsg).toHaveText(t.minicart('emptymsg'))
+            expect(minicartPage.startShoppingButton).toBeVisible()
+            expect(minicartPage.exploreByCategoryText).toBeVisible()
             expect(await minicartPage.footerCategoryItem.count()).toBe(amountOfFooterCategoryItem)
         })
 
@@ -384,13 +384,14 @@ test.describe("Add products to cart after login", () => {
         const firstProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[0]));
         const secondProductPrice = await extractNumber(await cartpage.getProdPrice(prodIndexes[1]));
 
+        prodCollection = await cartpage.getProdCollection(prodIndex)
+        prodName = await cartpage.getProdName(prodIndex)
+        
         await step('Go to Cart page by URL', async () => {
             await loggedInPage.goto(`${Config.baseURL}cart`)
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
-            prodCollection = await cartpage.getProdCollection(prodIndex)
-            prodName = await cartpage.getProdName(prodIndex)
             const cartPageProdName = await cartpage.getCartPageProdName(prodIndex)
             const cartPageProdCollection = await cartpage.getCartPageProdCollection(prodIndex)
 

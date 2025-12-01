@@ -17,7 +17,7 @@ import { test, expect } from '@playwright/test';
  * Wait for page load complete
  */
 async function waitForPageLoadComplete(page: Page, timeout: number = 20000): Promise<void> {
-  await page.waitForLoadState('load', { timeout });
+  await page.waitForLoadState('domcontentloaded', { timeout });
   await page.waitForLoadState('networkidle', { timeout });
 }
 

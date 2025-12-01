@@ -1,6 +1,6 @@
 {
   "homepage": {
-    "title": "Samsonite Australia | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Samsonite New Zealand | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
     "trackOder": "Track Order",
     "loginRegister": "Login/Register",
     "myaccount": "My account",
@@ -11,7 +11,7 @@
     "out-of-stock": "No results available for this filter. Click Reset All to try again."
   },
   "loginpage": {
-    "title": "Sign In To Your Account | Samsonite Australia",
+    "title": "Sign In To Your Account | Samsonite New Zealand",
     "singinTitle": "Sign in",
     "loginmsg": "Existing customer or House of Samsonite user",
     "usernamelabel": "Email / Username",
@@ -37,14 +37,14 @@
     "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
-    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Australia",
+    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite New Zealand",
     "pageTitle": "Forgot your password?",
     "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
     "emailTextbox": "Email",
     "submitbutton": "Submit"
   },
   "registerpage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Sites-MonoSamsoniteNZ-Site | Salesforce Commerce Cloud | 3.3.0",
     "pageTitle": "Create Account",
     "customerdetailslabel": "Customer details",
     "lastname": "Last Name",
@@ -60,46 +60,46 @@
     "title": ""
   },
   "newarrivalspage": {
-    "title": "New Arrivals | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssau.dev.samsonite-asia.com/new-arrivals/","https://ssau.stg.samsonite-asia.com/new-arrivals/"]
+    "title": "New Arrivals | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssnz.dev.samsonite-asia.com/new-arrivals/","https://ssnz.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
-    "title": "Suitcases - Innovative Suitcases for Sale | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssau.dev.samsonite-asia.com/luggage/", "https://ssau.stg.samsonite-asia.com/suitcases/"]
+    "title": "Luggage | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssnz.dev.samsonite-asia.com/luggage/", "https://ssnz.stg.samsonite-asia.com/suitcases/"]
   },
   "backpackspage": {
-    "title": "Backpacks - Innovative Backpacks for Sale | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssau.dev.samsonite-asia.com/backpacks/", "https://ssau.stg.samsonite-asia.com/backpacks/"]
+    "title": "Backpacks | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssnz.dev.samsonite-asia.com/backpacks/", "https://ssnz.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
-    "title": "Bags - Modern & Practical Bags for Sale | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://ssau.dev.samsonite-asia.com/bags/", "https://ssau.stg.samsonite-asia.com/bags/"]
+    "title": "Bags | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssnz.dev.samsonite-asia.com/bags/", "https://ssnz.stg.samsonite-asia.com/bags/"]
   },
   "accessories": {
-    "title": "Travel Accessories - Buy Luggage Accessories | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssau.stg.samsonite-asia.com/accessories/"
+    "title": "Travel Accessories - Buy Luggage Accessories | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssnz.stg.samsonite-asia.com/accessories/"
   },
   "brandpage": {
-    "title": "Labels | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Labels | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
     "luggage": "Luggage",
     "backpacks": "Backpacks",
     "bags": "Bags",
     "briefcase": ""
   },
   "ourbrandstorypage": {
-    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0"],
-    "url": "https://ssau.stg.samsonite-asia.com/our-brand-story/"
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://ssnz.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "Sale | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssau.stg.samsonite-asia.com/sale/"
+    "title": "Sale | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssnz.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Australia | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://ssau.stg.samsonite-asia.com/special-offers/"
+    "title": "Special Offers | Samsonite New Zealand | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssnz.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "Official Website",
@@ -116,7 +116,7 @@
     "warrantytitle": "製品保証"
   },
   "mypage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "My Account | Samsonite New Zealand",
     "pageTitle": "Your Account",
     "myOrders": "My Orders",
     "membership": "My Membership",
@@ -124,7 +124,7 @@
     "myprofile": "My profile",
     "myaddress": "My address book",
     "payment": "My payment",
-    "wishlist": "Wishlist",
+    "wishlist": "wishlist",
     "emailhelp": "Email"
   },
   "menuItem": {
@@ -233,11 +233,11 @@
     "hartmann-collection": "",
     "audrina-collection": "",
     "samsonite-red-collection": "",
-    "briefcasebags": "Briefcases",
-    "crossbodybags": "Crossbody Bags",
+    "briefcasebags": "Briefcase",
+    "crossbodybags": "Cross Body Bags",
     "dufflebags": "Duffles",
     "slingbags": "",
-    "tote": "Tote Bags",
+    "tote": "Totes",
     "2way3way": "",
     "shoulderbags": "",
     "shopallbags": "Shop all bags",
@@ -328,7 +328,7 @@
     "removecancelbutton": "Cancel"
   },
   "cartpage": {
-    "title": "Shopping Cart | Samsonite Australia",
+    "title": "Shopping Cart | Samsonite New Zealand",
     "pageTitle": "Your Cart",
     "emptymsg": "Your Shopping Cart is Empty",
     "checkoutbutton": "Checkout",
@@ -344,7 +344,7 @@
     "viewwishlistbtn": "View"
   },
   "wishlist": {
-    "title": "Sites-MonoSamsoniteAU-Site | Salesforce Commerce Cloud | 3.3.0"
+    "title": "Sites-MonoSamsoniteNZ-Site | Salesforce Commerce Cloud | 3.3.0"
   },
   "globalnavfooter": {
     "placeholder": "Your email address",
@@ -414,7 +414,7 @@
   },
   "checkoutpage": {
     "guestcheckoutbutton": "Guest Checkout",
-    "title": "Checkout | Samsonite Australia",
+    "title": "Checkout | Samsonite New Zealand",
     "newsletter": "Please add me to Samsonite's mailing list.",
     "terms": "Agree to",
     "firstname": "First Name",

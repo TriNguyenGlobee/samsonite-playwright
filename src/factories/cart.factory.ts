@@ -7,6 +7,7 @@ import { CartPagePH } from '../pages/delivery/cart/cart-ph.page';
 import { CartPageAU } from '../pages/delivery/cart/cart-au.page';
 import { CartPageMY } from '../pages/delivery/cart/cart-my.page';
 import { CartPageID } from '../pages/delivery/cart/cart-id.page';
+import { CartPageNZ } from '../pages/delivery/cart/cart-nz.page';
 
 export function createCartPage(page: Page): CartPage {
   switch (process.env.LOCALE) {
@@ -17,6 +18,7 @@ export function createCartPage(page: Page): CartPage {
     case 'au': return new CartPageAU(page);
     case 'my': return new CartPageMY(page);
     case 'id': return new CartPageID(page);
+    case 'nz': return new CartPageNZ(page);
     default:   return new CartPageJP(page);
   }
 }

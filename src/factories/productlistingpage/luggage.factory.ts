@@ -7,6 +7,7 @@ import { LuggagePagePH }  from '../../pages/delivery/productlistingpage/luggage/
 import { LuggagePageAU }  from '../../pages/delivery/productlistingpage/luggage/luggage-au.page';
 import { LuggagePageMY }  from '../../pages/delivery/productlistingpage/luggage/luggage-my.page';
 import { LuggagePageID }  from '../../pages/delivery/productlistingpage/luggage/luggage-id.page';
+import { LuggagePageNZ }  from '../../pages/delivery/productlistingpage/luggage/luggage-nz.page';
 
 export function createLuggagePage(page: Page): LuggagePage {
   switch (process.env.LOCALE) {
@@ -17,6 +18,7 @@ export function createLuggagePage(page: Page): LuggagePage {
     case 'au': return new LuggagePageAU(page);
     case 'my': return new LuggagePageMY(page);
     case 'id': return new LuggagePageID(page);
+    case 'nz': return new LuggagePageNZ(page);
     default:   return new LuggagePageJP(page);
   }
 }

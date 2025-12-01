@@ -21,7 +21,7 @@ test.describe("PDP is shown correctly", async () => {
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
 
-        await steps(["au", "jp", "ph", "sg", "tw", "id"], "Go to New Arrivals Page", async () => {
+        await steps(["au", "jp", "ph", "sg", "tw", "id", "nz"], "Go to New Arrivals Page", async () => {
             await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         })
 
@@ -143,7 +143,7 @@ test.describe("Breadcrumb", () => {
         const homepage = createHomePage(basicAuthPage)
         const newarrivalspage = new NewArrivalsPage(basicAuthPage)
 
-        await steps(["au", "jp", "ph", "sg", "tw", "id"], "Go to New Arrivals Page", async () => {
+        await steps(["au", "jp", "ph", "sg", "tw", "id", "nz"], "Go to New Arrivals Page", async () => {
             await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         })
 
@@ -180,7 +180,7 @@ test.describe("Breadcrumb", () => {
             await pdppage.assertNavigatedURLByClickLocator(basicAuthPage, breadcrumbFirstItem, breadcrumbItemURL!)
         });
 
-        await steps(["au"], "Updating the breadscrumb second item", async () => {
+        await steps(["au", "nz"], "Updating the breadscrumb second item", async () => {
             breadcrumbSecondItem = pdppage.breadcrumbItem.nth(2)
             breadcrumbProdName = (await pdppage.getText(breadcrumbSecondItem))?.trim()
         })
@@ -207,7 +207,7 @@ test.describe("PDP extra features", () => {
             await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
         })
 
-        await steps(["my"], "Go to Luggage Page", async () => {
+        await steps(["my", "nz"], "Go to Luggage Page", async () => {
             await homepage.clickMenuItem('luggage', "Go to Luggage page")
         })
         
