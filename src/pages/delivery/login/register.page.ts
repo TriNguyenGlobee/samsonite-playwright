@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t } from "../../../../utils/helpers/helpers";
+import { t, selectDropdownOption } from "../../../../utils/helpers/helpers";
 import { Config } from "../../../../config/env.config";
 import { step } from "allure-js-commons";
 
@@ -49,13 +49,56 @@ export class RegisterPage extends BasePage {
         this.termsConditionLabel = page.locator(``);
         this.termsConditionCheckboxEn = page.locator(`//label[@for="accept-terms-condition" and normalize-space(.)="Agree to Privacy Policy, User Agreement and Personal Information Collection Statement."]`);
         this.termsConditionCheckboxJp = page.locator(`//label[span[normalize-space(text())="会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"]]`);
-        this.createAccountButton = page.locator(``);
+        this.createAccountButton = page.locator(`//button[@type="submit" and normalize-space(text())="${t.registerpage('createaccountbutton')}"]`);
     }
 
     // =========================
     // 🚀 Actions
     // =========================
+    async fillRegisterForm(data: any) {
+        const {
+            gender,
+            firstname,
+            lastname,
+            phone,
+            day,
+            month,
+            year,
+            email,
+            password,
+            confirmPassword,
+            agreePolicy = true,
+        } = data;
 
+        await step('Fill register form', async () => {
+            const titleDropdown = this.page.locator(`//select[@id="registration-form-title"]`)
+            const dayDropdown = this.page.locator(`//select[@id="day"]`)
+            const monthDropdown = this.page.locator(`//select[@name="month"]`)
+            const yearDropdown = this.page.locator(`//select[@id="year"]`)
+
+            if (gender) {
+                await selectDropdownOption(this.page, titleDropdown, "Mr.")
+            }
+
+            await this.type(this.firstNameTextbox, firstname)
+            await this.type(this.lastNameTextbox, lastname)
+            await this.type(this.phoneNumberTextbox, phone)
+
+            if (day && month && year) {
+                await selectDropdownOption(this.page, dayDropdown, day)
+                await selectDropdownOption(this.page, monthDropdown, month)
+                await selectDropdownOption(this.page, yearDropdown, year)
+            }
+
+            await this.type(this.emailTexbox, email)
+            await this.type(this.passwordTextbox, password)
+            await this.type(this.confirmPasswordTextbox, confirmPassword)
+
+            if (agreePolicy) {
+                await this.clickCheckbox(this.page, t.checkoutpage('terms'))
+            }
+        })
+    }
 
     // =========================
     // 📦 Helpers

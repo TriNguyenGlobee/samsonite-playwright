@@ -54,7 +54,14 @@
     "email": "メールアドレス",
     "password": "パスワード（※パスワードは8文字以上）",
     "confirmpassword": "もう一度パスワードを入力してください",
-    "getnewsrequest": "会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"
+    "getnewsrequest": "会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります",
+    "createaccountbutton": "Create Account",
+    "fnamemsg": "Please fill out this field.",
+    "lnamemsg": "Please fill out this field.",
+    "phonemsg": "Please fill out this field.",
+    "emailmsg": "Please fill out this field.",
+    "pwmsg": "Please fill out this field.",
+    "titlemsg": "Please select an item in the list"
   },
   "membershippage": {
     "title": "エクスプローラープログラム｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"

@@ -132,10 +132,12 @@ export abstract class LoginPage extends BasePage {
     }
 
     async goToRegisterPage(): Promise<void> {
-        await Promise.all([
-            this.page.waitForURL('**/register'),
-            this.click(this.emailSignUpButton, "Click email sign up button"),
-        ]);
+        await step('Go to register page', async () => {
+            await Promise.all([
+                this.page.waitForURL('**/register'),
+                this.click(this.emailSignUpButton, "Click email sign up button"),
+            ]);
+        })
     }
 
     async goToMembershipPage(): Promise<void> {

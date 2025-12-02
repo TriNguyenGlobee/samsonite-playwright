@@ -3,6 +3,7 @@ import { step, attachment } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
 import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
+import { assert } from "console";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
@@ -655,6 +656,41 @@ export class BasePage {
                 const currentUrl = page.url();
                 await expect(currentUrl).toContain(url);
             }
+        })
+    }
+
+    // fieldName: field label, field name
+    async assertFieldFeedbackMsg(fieldName: string, msg: string, description?: string) {
+        await step(description || `Assert feedback msg for ${fieldName} field`, async () => {
+            const feedbackmsg = this.page.locator(`//label[normalize-space(text())="${fieldName}"]//parent::div//div[@class="invalid-feedback"]`)
+
+            await this.assertText(feedbackmsg, msg,
+                `Actual msg: ${await feedbackmsg.innerText()}
+                Expected msg: ${msg}`
+            )
+        })
+    }
+
+    // dropdownlabel: id, name or locator
+    async assertDropdownFeedbackMsg(dropdownlabel: string | Locator, msg: string, description?: string) {
+        await step(description || `Assert feedback msg for ${dropdownlabel} dropdown`, async () => {
+            let dropdown: Locator;
+
+            if (typeof dropdownlabel === 'string') {
+                dropdown = this.page.locator(`select[id="${dropdownlabel}"], select[name="${dropdownlabel}"]`);
+            }
+            else {
+                dropdown = dropdownlabel;
+            }
+
+            const feedback = dropdown.locator('xpath=ancestor::div[contains(@class,"form-group")]//div[contains(@class,"invalid-feedback")]');
+
+            const actual = await feedback.innerText();
+
+            await this.assertText(feedback, msg,
+                `Actual msg: ${actual}
+                Expected msg: ${msg}`
+            )
         })
     }
 }
