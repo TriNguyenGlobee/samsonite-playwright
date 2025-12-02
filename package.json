@@ -17,7 +17,8 @@
     "test:debug": "npx ts-node test-env.ts",
     "report:generate": "npx allure generate ./allure-results --clean -o ./allure-report",
     "report:open": "npx allure open ./allure-report",
-    "report:clean": "rimraf allure-results allure-report"
+    "report:clean": "rimraf allure-results allure-report",
+    "report:clean+": "rimraf allure-results* allure-report*"
   },
   "keywords": [],
   "author": "",
