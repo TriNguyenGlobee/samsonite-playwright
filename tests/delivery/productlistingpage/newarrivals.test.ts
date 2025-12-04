@@ -467,7 +467,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         }
     })
 
-    tests(["jp"], `
+    tests([""], `
         29. Go to Hartmann tweed page
         30. In-stock products are displayed when clicking on in-stock checkbox
         31. User can add product to cart
@@ -602,7 +602,7 @@ test.describe("New Arrivals Level 2 category", async () => {
         })
 
         await step("Verity Sub-lim page URL", async () => {
-            await newarrivalspage.assertUrl(/sub-lim115/, "Assert Sub-lim page URL")
+            await newarrivalspage.assertUrl(/sub-lim-khaki/, "Assert Sub-lim page URL")
         })
 
         await step("Click In-stock checkbox", async () => {

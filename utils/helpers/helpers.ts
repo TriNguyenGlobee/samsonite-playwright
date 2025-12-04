@@ -1,6 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { I18n, Translations } from "../../config/i18n.config";
 import { test, expect } from '@playwright/test';
+import { step } from "allure-js-commons";
 
 /**
  * **************************************************************************
@@ -333,19 +334,21 @@ export async function selectDropdownOption(
   optionValueOrLabel: string,
   by: "value" | "label" = "value"
 ): Promise<void> {
-  const dropdown =
-    typeof selector === "string" ? page.locator(selector) : selector;
+  await step(`Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
+    const dropdown =
+      typeof selector === "string" ? page.locator(selector) : selector;
 
-  await expect(dropdown).toBeVisible();
+    await expect(dropdown).toBeVisible();
 
-  if (by === "value") {
-    await dropdown.selectOption({ value: optionValueOrLabel });
-  } else {
-    await dropdown.selectOption({ label: optionValueOrLabel });
-  }
+    if (by === "value") {
+      await dropdown.selectOption({ value: optionValueOrLabel });
+    } else {
+      await dropdown.selectOption({ label: optionValueOrLabel });
+    }
 
-  const selectedValue = await dropdown.inputValue();
-  console.log(`Selected: ${selectedValue}`);
+    const selectedValue = await dropdown.inputValue();
+    console.log(`Selected: ${selectedValue}`);
+  })
 }
 
 /**
@@ -488,6 +491,16 @@ export async function lazyLoad(page: Page) {
   const finalTotal = parseInt(await page.locator('.total-products').innerText(), 10);
 
   await expect(finalCurrent).toBe(finalTotal);
+}
+
+export async function scrollToTop(page: Page) {
+  await page.evaluate(() => {
+    window.scrollTo(0, 0);
+  });
+}
+
+export async function reload(page: Page) {
+  await page.reload()
 }
 
 // Click a locator until another locator visible|hidden

@@ -58,7 +58,13 @@
     "email": "電子信箱",
     "password": "密碼",
     "confirmpassword": "確認密碼",
-    "getnewsrequest": "訂閱電子報，享第一手優惠情報"
+    "getnewsrequest": "訂閱電子報，享第一手優惠情報",
+    "createaccountbutton": "Create Account",
+    "fnamemsg": "Please fill out this field.",
+    "lnamemsg": "Please fill out this field.",
+    "phonemsg": "Please fill out this field.",
+    "emailmsg": "Please fill out this field.",
+    "pwmsg": "Please fill out this field."
   },
   "membershippage": {
     "title": ""

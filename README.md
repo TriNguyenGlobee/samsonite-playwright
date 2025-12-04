@@ -24,6 +24,16 @@ npm run report:open
 - Clear old result (allure-results + allure-report)
 npm run report:clean
 
+## With specific folder
+- Generate Allure report
+npx allure generate ./allure-results --clean -o ./allure-report
+
+- Open Allure report
+npx allure open ./allure-report
+
+- Clear old result (allure-results + allure-report)
+npm run report:clean+
+
 # Run test
 - Run all test:
 npm run test
@@ -36,6 +46,13 @@ CMD: run-tests.bat jp stg tests/delivery
 Powershell: .\run-tests.bat sg stg tests/delivery
 OR:
 npx cross-env ENV=stg LOCALE=jp npx playwright test --project=chromium tests/delivery
+
+## Multi test
+- Run each locale in turn
+npm run test:multi
+
+- Run multiple locales at the same time
+npm run test:multiparallel
 
 ## Chrome 
 - Run test with Chrome (ENV=dev) - default:

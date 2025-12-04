@@ -308,7 +308,7 @@ export class BasePage {
     async clickCheckbox(page: Page, labelText: string, description?: string) {
         await step(description || `Click on the checkbox label "${labelText}"`, async () => {
             const labelLocator = page.locator(
-                `xpath=(//label[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //a[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]])`
+                `xpath=(//label[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //a[normalize-space(.)="${labelText}" or .//span[normalize-space(text())="${labelText}"]] | //label[contains(., "${labelText}")])`
             );
 
             let target = labelLocator.last();
@@ -655,6 +655,41 @@ export class BasePage {
                 const currentUrl = page.url();
                 await expect(currentUrl).toContain(url);
             }
+        })
+    }
+
+    // fieldName: field label, field name
+    async assertFieldFeedbackMsg(fieldName: string, msg: string, description?: string) {
+        await step(description || `Assert feedback msg for ${fieldName} field`, async () => {
+            const feedbackmsg = this.page.locator(`//div[@class="container register-page"]//label[normalize-space(text())="${fieldName}"]//parent::div//div[@class="invalid-feedback"]`)
+
+            await this.assertText(feedbackmsg, msg,
+                `Actual msg: ${await feedbackmsg.innerText()},
+                Expected msg: ${msg}`
+            )
+        })
+    }
+
+    // dropdownlabel: id, name or locator
+    async assertDropdownFeedbackMsg(dropdownlabel: string | Locator, msg: string, description?: string) {
+        await step(description || `Assert feedback msg for ${dropdownlabel} dropdown`, async () => {
+            let dropdown: Locator;
+
+            if (typeof dropdownlabel === 'string') {
+                dropdown = this.page.locator(`select[id="${dropdownlabel}"], select[name="${dropdownlabel}"]`);
+            }
+            else {
+                dropdown = dropdownlabel;
+            }
+
+            const feedback = dropdown.locator('xpath=ancestor::div[contains(@class,"form-group")]//div[contains(@class,"invalid-feedback")]');
+
+            const actual = await feedback.innerText();
+
+            await this.assertText(feedback, msg,
+                `Actual msg: ${actual},
+                Expected msg: ${msg}`
+            )
         })
     }
 }
