@@ -424,7 +424,7 @@ test.describe("Add products to cart without login", () => {
             await cartpage.assertHidden(cartpage.removeProductModal, 'Assert remove product modal is closed')
         })
 
-        await step('Verify that all products in minicart are removed', async () => {
+        await step('Verify that all products in cart are removed', async () => {
             await cartpage.removeAllProducts()
 
             const numberOfProd = await cartpage.getNumberOfProducts()

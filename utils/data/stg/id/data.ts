@@ -373,3 +373,101 @@ export const checkoutShippingData = {
     postcode: "951111",
     address1: "65 XASSSERRR"
 }
+
+export const registerDataWithoutTitle = {
+    gender: "",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutFirstname = {
+    gender: "mr",
+    firstname: "",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutLastname = {
+    gender: "mr",
+    firstname: "Tri",
+    lastname: "",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutphonenumber = {
+    gender: "mr",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutEmail = {
+    gender: "mr",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutPassword = {
+    gender: "mr",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutConfirmPassword = {
+    gender: "mr",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "",
+    agreePolicy: true
+};

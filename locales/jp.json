@@ -54,7 +54,14 @@
     "email": "メールアドレス",
     "password": "パスワード（※パスワードは8文字以上）",
     "confirmpassword": "もう一度パスワードを入力してください",
-    "getnewsrequest": "会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります"
+    "getnewsrequest": "会員限定のメールマガジンに登録し、新商品情報やお得なクーポン、イベント情報などを受け取ります",
+    "createaccountbutton": "新規アカウント登録",
+    "fnamemsg": "この項目を入力してください。",
+    "lnamemsg": "この項目を入力してください。",
+    "phonemsg": "この項目を入力してください。",
+    "emailmsg": "この項目を入力してください。",
+    "pwmsg": "この項目を入力してください。",
+    "titlemsg": "この項目を入力してください。"
   },
   "membershippage": {
     "title": "エクスプローラープログラム｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト | Salesforce Commerce Cloud | 3.3.0"
@@ -155,7 +162,7 @@
     "espulme": "エスプルム",
     "hartmann-tweed": "ハートマンツイード",
     "richmondginza": "リッチモンド 2",
-    "sub-lim": "サブリム115周年限定モデル",
+    "sub-lim": "サブリム限定モデル",
     "type": "タイプ",
     "size": "サイズ",
     "smartfeature": "フィーチャー/特長",
@@ -413,7 +420,7 @@
     "guestcheckoutbutton": "会員登録せずに購入",
     "title": "商品購入｜スーツケース、ビジネスバッグ/サムソナイト(Samsonite)公式サイト",
     "newsletter": "新商品、クーポン、イベント情報をいち早くメールでお知らせします",
-    "terms": "プライバシーポリシー",
+    "terms": "に同意します",
     "firstname": "名",
     "lastname": "姓",
     "email": "Eメール",
