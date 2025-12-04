@@ -1,8 +1,7 @@
 export const carouselItems = [
+    { href: '/newsdetail?id=news-samsonite-jp-2025-12-01-lite-box-campaign', hasImage: true },
     { href: 'https://ssjp.stg.samsonite-asia.com/samsonite-business/sub-lim-khaki/', hasImage: true },
-    { href: 'newsdetail?id=news-samsonite-jp-2025-11-01-epid4-campaign', hasImage: true },
-    { href: 'search?q=suede&srule=predictive-search-sorting&lang=ja_JP', hasImage: true },
-    { href: 'https://ssjp.stg.samsonite-asia.com/paralux/', hasImage: true },
+    { href: 'search?q=suede&srule=predictive-search-sorting&lang=ja_JP', hasImage: true }
 ];
 
 export const hightlightCategoryItems = [
@@ -154,10 +153,6 @@ export const collectionItems = [
     {
         text: 'リッチモンド 2',
         href: 'https://ssjp.stg.samsonite-asia.com/collection/%E3%83%AA%E3%83%83%E3%83%81%E3%83%A2%E3%83%B3%E3%83%89-2/'
-    },
-    {
-        text: 'COLLECTIONS',
-        href: 'https://ssjp.stg.samsonite-asia.com/search?cid=collection'
     }
 ];
 
@@ -267,7 +262,8 @@ export const articleItems = [
     { text: 'スーツケースの選び方', href: 'https://ssjp.stg.samsonite-asia.com/first_suitcase.html' },
     { text: 'スーツケースのパッキング術', href: 'https://ssjp.stg.samsonite-asia.com/category-landing/packing/' },
     { text: '最新おすすめビジネスバッグ', href: 'https://ssjp.stg.samsonite-asia.com/category-landing/business-bags/' },
-    { text: '人生を豊かにする旅のスタイル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-unpack-your-world_mcguffin/unpack-your-world.html' }
+    { text: '人生を豊かにする旅のスタイル', href: 'https://ssjp.stg.samsonite-asia.com/samsonite-unpack-your-world_mcguffin/unpack-your-world.html' },
+    { text: '目的別 スーツケースのサイズ選び（機内持込みサイズ）', href: 'https://ssjp.stg.samsonite-asia.com/category-landing/suitcase-size/' }
 ];
 
 // --- discover-about-Samsonite ---

@@ -189,10 +189,10 @@ export abstract class CartPage extends BasePage {
                 await delay(5000)
 
                 await PageUtils.waitForDomAvailable(this.page, 20000)
-
+                /*
                 if (count - (i + 1) == 0) {
                     await this.removeProductButton.waitFor({ state: "hidden", timeout: 10000 })
-                }
+                }*/
 
                 await expect(this.removeProductButton).toHaveCount(count - (i + 1))
             })
@@ -257,6 +257,8 @@ export abstract class CartPage extends BasePage {
     }
 
     async getNumberOfProducts(): Promise<number> {
+        await PageUtils.waitForDomAvailable(this.page)
+        
         const prod = this.page.locator(`(//div[contains(@class,"cart-page")]//div[contains(@class,"card product-info")])`)
 
         return (await prod.count())

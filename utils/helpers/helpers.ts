@@ -493,6 +493,16 @@ export async function lazyLoad(page: Page) {
   await expect(finalCurrent).toBe(finalTotal);
 }
 
+export async function scrollToTop(page: Page) {
+  await page.evaluate(() => {
+    window.scrollTo(0, 0);
+  });
+}
+
+export async function reload(page: Page) {
+  await page.reload()
+}
+
 // Click a locator until another locator visible|hidden
 export async function clickUntil(
   page: Page,
