@@ -60,7 +60,8 @@
     "lnamemsg": "Please fill out this field.",
     "phonemsg": "Please fill out this field.",
     "emailmsg": "Please fill out this field.",
-    "pwmsg": "Please fill out this field."
+    "pwmsg": "Please fill out this field.",
+    "titlemsg": "Please select an item in the list."
   },
   "membershippage": {
     "title": ""

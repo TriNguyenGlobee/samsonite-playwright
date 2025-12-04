@@ -72,12 +72,15 @@ export class RegisterPage extends BasePage {
 
         await step('Fill register form', async () => {
             const titleDropdown = this.page.locator(`//select[@id="registration-form-title"]`)
+            const genderDropdown = this.page.locator(`//select[@id="gender"]`)
             const dayDropdown = this.page.locator(`//select[@id="day"]`)
             const monthDropdown = this.page.locator(`//select[@name="month"]`)
             const yearDropdown = this.page.locator(`//select[@id="year"]`)
 
-            if (gender) {
-                await selectDropdownOption(this.page, titleDropdown, "Mr.")
+            if (gender != "" && process.env.LOCALE != "jp") {
+                await selectDropdownOption(this.page, titleDropdown, gender)
+            } else if (gender != "") {
+                await selectDropdownOption(this.page, genderDropdown, gender)
             }
 
             await this.type(this.firstNameTextbox, firstname)

@@ -352,3 +352,147 @@ export const brandInfoSamsoniteRed = {
                         気がつけば、日常のあらゆるシーンに溶け込んでいる、そんなリラックスしたいつも使いたくなるバッグをサムソナイト・レッド は目指しています。`,
     href: "#product-list-campaign"
 }
+
+export const checkoutDataWithoutFirstName = {
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutLastName = {
+    firstName: "globeeFirstName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutEmail = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutDataWithoutPhone = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutFullData = {
+    firstName: "globeeFirstName",
+    lastName: "globeeLastName",
+    email: "globeetest@mailinator.com",
+    phone: "83298647",
+    newsletter: true,
+    terms: true
+};
+
+export const checkoutShippingData = {
+    postcode: "951111",
+    address1: "65 XASSSERRR"
+};
+
+export const registerDataWithoutTitle = {
+    gender: "",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutFirstname = {
+    gender: "1",
+    firstname: "",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutLastname = {
+    gender: "1",
+    firstname: "Tri",
+    lastname: "",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutphonenumber = {
+    gender: "1",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutEmail = {
+    gender: "1",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "",
+    password: "Test@123",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutPassword = {
+    gender: "1",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "",
+    confirmPassword: "Test@123",
+    agreePolicy: true
+};
+
+export const registerDataWithoutConfirmPassword = {
+    gender: "1",
+    firstname: "Tri",
+    lastname: "Nguyen",
+    phone: "89564538",
+    day: "22",
+    month: "8",
+    year: "1995",
+    email: "tri.test@example.com",
+    password: "Test@123",
+    confirmPassword: "",
+    agreePolicy: true
+};
