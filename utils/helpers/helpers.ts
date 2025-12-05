@@ -252,6 +252,62 @@ export async function getDropdownValue(
   return selectedValue
 }
 
+export async function getOptionIndexByText(page: Page, text: string, selector: string | Locator): Promise<number> {
+  const dropdown =
+    typeof selector === "string" ? page.locator(selector) : selector;
+
+  await expect(dropdown).toBeVisible();
+
+  const options = dropdown.locator("option");
+  const count = await options.count();
+
+  let foundIndex = -1;
+
+  for (let i = 0; i < count; i++) {
+    const optionText = (await options.nth(i).innerText()).trim();
+
+    if (optionText === text) {
+      foundIndex = i;
+      break;
+    }
+  }
+
+  if (foundIndex === -1) {
+    throw new Error(`Not found option with "${text}"`);
+  }
+
+  return foundIndex;
+}
+
+/**
+ * Get decical rating by star offset
+ * Return value: 2.5, 4.3, ...
+ */
+export async function getDecimalRating(page: Page) {
+  const stars = page.locator('.bv_stars_svg_no_wrap svg');
+  const count = await stars.count();
+
+  let rating = 0;
+
+  for (let i = 0; i < count; i++) {
+    const secondStop = stars
+      .nth(i)
+      .locator('defs linearGradient stop')
+      .nth(1);
+
+    const offsetValue = await secondStop.getAttribute('offset');
+    if (!offsetValue) continue;
+
+    const percent = parseFloat(offsetValue.replace('%', ''));
+
+    const filledRatio = percent / 100;
+
+    rating += filledRatio;
+  }
+
+  return Number(rating.toFixed(2));
+}
+
 /**
  * **************************************************************************
  * **************************************************************************
@@ -332,7 +388,7 @@ export async function selectDropdownOption(
   page: Page,
   selector: string | Locator,
   optionValueOrLabel: string,
-  by: "value" | "label" = "value"
+  by: "value" | "label" | "text" = "value"
 ): Promise<void> {
   await step(`Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
     const dropdown =
@@ -342,14 +398,19 @@ export async function selectDropdownOption(
 
     if (by === "value") {
       await dropdown.selectOption({ value: optionValueOrLabel });
-    } else {
+    } else if (by === "label") {
       await dropdown.selectOption({ label: optionValueOrLabel });
+    } else {
+      const optionIndex = await getOptionIndexByText(page, optionValueOrLabel, selector)
+      await dropdown.selectOption({ index: optionIndex })
     }
 
     const selectedValue = await dropdown.inputValue();
     console.log(`Selected: ${selectedValue}`);
   })
 }
+
+
 
 /**
  * Close the modal if it is present on the page.

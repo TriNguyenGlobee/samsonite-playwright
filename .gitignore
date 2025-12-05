@@ -11,7 +11,12 @@ blob-report/
 .playwright/
 .env
 test-env.test.ts
+utils/data/
 
 # Allure-report
 allure-report*/
 allure-results*/
+
+# Runable file
+run-multi-parallel.ps1
+run-multi.ps1

@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { step } from "allure-js-commons";
-import { delay, t } from "../../../../utils/helpers/helpers";
+import { delay, t, extractNumber } from "../../../../utils/helpers/helpers";
 
 export class PDPPage extends BasePage {
     readonly logoImg: Locator;
@@ -92,6 +92,22 @@ export class PDPPage extends BasePage {
                 return (await this.getText(productMsg.first(), `Get Promotion Msg of Product`))?.trim() ?? null
             } else return null
         });
+    }
+
+    async getDecialRatingPoint(description?: string): Promise<number> {
+        return await step(description || "Get decimal rating point", async () => {
+            const decimalRatingPoint = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-decimal"]`)
+            const ratingPoint = extractNumber(await decimalRatingPoint.innerText())
+            return ratingPoint
+        })
+    }
+
+    async getNumberOfReview(description?: string): Promise<number> {
+        return await step(description || "Get the number of review", async () => {
+            const ratingCount = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-count"]`)
+            const numberOfReview = extractNumber(await ratingCount.innerText())
+            return numberOfReview
+        })
     }
 
     // =========================

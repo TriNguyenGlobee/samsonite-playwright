@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { step, attachment } from "allure-js-commons";
+import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText } from "../../utils/helpers/helpers";
+import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText, getDecimalRating } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
@@ -333,6 +333,41 @@ export class BasePage {
 
             await this.underlay.waitFor({ state: 'hidden', timeout: 20000 })
         });
+    }
+
+    async selectFilter(
+        page: Page,
+        menupath: string,
+        description?: string
+    ): Promise<void> {
+        await step(description || `Select filter on product listing page`, async () => {
+            const rs: SplitResult = splitString(menupath, "->");
+            const pathArray: string[] = rs.parts;
+            const pathLength: number = rs.count;
+
+            if (pathLength != 2) {
+                throw new Error(`Invalid menupath: ${menupath}. Only supports 2 levels.`);
+            }
+
+            const menu1 = pathArray[0].trim();
+            const menu2 = pathArray[1].trim();
+            const escapedMenu1 = escapeXPathText(menu1!);
+            const escapedMenu2 = escapeXPathText(menu2!);
+
+            await delay(3000)
+
+            const menu1Locator = page.locator(`//div[contains(@class,"filter-wrapper")]//div[normalize-space(text())=${escapedMenu1}]`);
+
+            await menu1Locator.first().hover();
+            await delay(500)
+
+            const menu2Locator = page.locator(`//div[contains(@class,"filter-wrapper")]//div[normalize-space(text())=${escapedMenu1}]//following-sibling::div//ul//li//a//span[normalize-space(text())=${escapedMenu2}]`);
+            await menu2Locator.click({ position: { x: 40, y: 15 } });
+
+            await PageUtils.waitForDomAvailable(page);
+
+            await delay(2000)
+        })
     }
 
     // =========================
@@ -690,6 +725,25 @@ export class BasePage {
                 `Actual msg: ${actual},
                 Expected msg: ${msg}`
             )
+        })
+    }
+
+    /**
+     * Assert rating star equal rating point
+     * Allowable error ~0.1
+     */
+    async assertRating(page: Page, expectedRating: number, description?: string) {
+        await step(description || `Assert rating star to be: ${expectedRating}`, () => {
+            const actualRating = getDecimalRating(page);
+
+            const tolerance = 0.1;
+            const min = expectedRating - tolerance;
+            const max = expectedRating + tolerance;
+
+            expect(actualRating).toBeGreaterThanOrEqual(min);
+            expect(actualRating).toBeLessThanOrEqual(max);
+
+            console.log(`Expected: ${expectedRating}, Actual: ${actualRating}`);
         })
     }
 }
