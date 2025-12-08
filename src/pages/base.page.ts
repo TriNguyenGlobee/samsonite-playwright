@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText, getDecimalRating } from "../../utils/helpers/helpers";
+import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
@@ -725,25 +725,6 @@ export class BasePage {
                 `Actual msg: ${actual},
                 Expected msg: ${msg}`
             )
-        })
-    }
-
-    /**
-     * Assert rating star equal rating point
-     * Allowable error ~0.1
-     */
-    async assertRating(page: Page, expectedRating: number, description?: string) {
-        await step(description || `Assert rating star to be: ${expectedRating}`, () => {
-            const actualRating = getDecimalRating(page);
-
-            const tolerance = 0.1;
-            const min = expectedRating - tolerance;
-            const max = expectedRating + tolerance;
-
-            expect(actualRating).toBeGreaterThanOrEqual(min);
-            expect(actualRating).toBeLessThanOrEqual(max);
-
-            console.log(`Expected: ${expectedRating}, Actual: ${actualRating}`);
         })
     }
 }

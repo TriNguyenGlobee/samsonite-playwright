@@ -435,5 +435,16 @@
     "lastnameinvalidmsg": "Please complete this field.",
     "emailinvalidmsg": "Please complete this field.",
     "phoneinvalidmsg": "Please complete this field."
+  },
+  "bvintegration": {
+    "1stmsg": "1 out of 5 stars selected. Product is Poor.",
+    "2ndmsg": "2 out of 5 stars selected. Product is Fair.",
+    "3rdmsg": "3 out of 5 stars selected. Product is Average.",
+    "4thmsg": "4 out of 5 stars selected. Product is Good.",
+    "5thmsg": "5 out of 5 stars selected. Product is Excellent.",
+    "reviewreq": "Required: Review.",
+    "reviewtitlereq": "Required: Review Title.",
+    "nicknamereq": "Required: Nickname.",
+    "emailreq": "Required: Email."
   }
 }

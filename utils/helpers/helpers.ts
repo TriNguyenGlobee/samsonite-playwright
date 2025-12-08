@@ -70,6 +70,25 @@ export function generateReadableTimeBasedId(): string {
 }
 
 /**
+ * Generate a paragraph with specified number of chars
+ * @param length 
+ * @returns 
+ */
+export function generateSentence(length: number): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ';
+  let result = '';
+
+  for (let i = 0; i < length; i++) {
+    const char = chars.charAt(Math.floor(Math.random() * chars.length));
+    if (!(char === ' ' && result.endsWith(' '))) {
+      result += char;
+    }
+  }
+
+  return result.trim();
+}
+
+/**
  * Splits a string by a given delimiter and returns the parts and their count.
  * @param input - The string to split.
  * @param delimiter - The delimiter to split by (default is a space).
@@ -180,6 +199,7 @@ export const t = {
   wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key],
   globalnavfooter: (key: keyof Translations['globalnavfooter']) => I18n.translations.globalnavfooter[key],
   checkoutpage: (key: keyof Translations['checkoutpage']) => I18n.translations.checkoutpage[key],
+  bvintegration: (key: keyof Translations['bvintegration']) => I18n.translations.bvintegration[key],
 };
 
 /**
@@ -295,12 +315,13 @@ export async function getDecimalRating(page: Page) {
       .locator('defs linearGradient stop')
       .nth(1);
 
-    const offsetValue = await secondStop.getAttribute('offset');
-    if (!offsetValue) continue;
+    const offset = await secondStop.getAttribute('offset');
 
-    const percent = parseFloat(offsetValue.replace('%', ''));
+    if (!offset) continue;
 
-    const filledRatio = percent / 100;
+    const percent = parseFloat(offset.replace('%', ''));
+
+    const filledRatio = 1 - percent / 100;
 
     rating += filledRatio;
   }
