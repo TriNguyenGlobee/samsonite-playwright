@@ -2,9 +2,10 @@ import { expect, test } from "../../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { createHomePage } from "../../../../src/factories/home.factory";
 import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
-import { t, lazyLoad, getDecimalRating, scrollToBottom, scrollToTop, extractNumber, generateSentence, generateReadableTimeBasedId } from "../../../../utils/helpers/helpers";
+import { t, lazyLoad, getDecimalRating, scrollToBottom, scrollToTop, extractNumber, generateSentence, generateReadableTimeBasedId, delay, getRandomInt } from "../../../../utils/helpers/helpers";
 import { steps } from "../../../../utils/helpers/localeStep"
 import { NewArrivalsPage } from "../../../../src/pages/delivery/productlistingpage/newarrivals/newarrivals.page";
+import { sep } from "path";
 
 test.describe("PDP is shown correctly", async () => {
     /*test.beforeEach(async ({ basicAuthPage }) => {
@@ -39,7 +40,7 @@ test.describe("PDP is shown correctly", async () => {
         `, async ({ basicAuthPage }) => {
         const pdppage = new PDPPage(basicAuthPage)
 
-        await pdppage.goto('https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html')
+        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
         await scrollToBottom(basicAuthPage)
 
@@ -106,8 +107,6 @@ test.describe("PDP is shown correctly", async () => {
         10. User can select Overall rating stars
         11. Click on review guildelines
         12. Submit review without entering anything
-        13. Submit review after entering fully information
-        14. User can add Images/Videos
         `, async ({ basicAuthPage }) => {
         const pdppage = new PDPPage(basicAuthPage)
         const ovRatingStar1 = basicAuthPage.locator(`div#bv-ips-star-rating-1`)
@@ -116,7 +115,7 @@ test.describe("PDP is shown correctly", async () => {
         const ovRatingStar4 = basicAuthPage.locator(`div#bv-ips-star-rating-4`)
         const ovRatingStar5 = basicAuthPage.locator(`div#bv-ips-star-rating-5`)
 
-        await pdppage.goto('https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html')
+        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
         await scrollToBottom(basicAuthPage)
 
@@ -194,9 +193,189 @@ test.describe("PDP is shown correctly", async () => {
                 "Error message: Required: Email."
             )
         })
+    })
+
+    test(`
+        13. Submit review after entering fully information
+        14. User can add Images/Videos and completed Add Images/Videos step
+        15. Completed the Personal/Product Information step
+        16. Completed the Product Rating step
+        `, async ({ basicAuthPage }) => {
+        const pdppage = new PDPPage(basicAuthPage)
+        const starQuality = basicAuthPage.locator(`div#bv-ips-star-Quality-5`)
+        const starValue = basicAuthPage.locator(`div#bv-ips-star-Value-5`)
+        const starStyle = basicAuthPage.locator(`div#bv-ips-star-Style-5`)
+
+        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
+
+        await scrollToBottom(basicAuthPage)
+
+        await step("Clicking on Write A Reivew button", async () => {
+            await pdppage.click(pdppage.bvWriteReviewBtn)
+        })
 
         await step('Fill review information to field', async () => {
             await pdppage.fillReviewForm()
+        })
+
+        await step('Clicking on submit button', async () => {
+            await pdppage.click(pdppage.bvGuidelinesSubmitBtn)
+        })
+
+        await step('Your Reviews step is completed', async () => {
+            await pdppage.assertVisible(pdppage.step1completedLabel,
+                "Assert that the Your reviews completed label is displayed"
+            )
+
+            await pdppage.assertVisible(pdppage.step1EditButton,
+                "Assert that the Your reviews edit button is displayed"
+            )
+        })
+
+        await step('Upload a image', async () => {
+            await pdppage.uploadImages(basicAuthPage, ["utils/data/images/sample.jpg"],
+                "Uploading a image in to review section"
+            )
+        })
+
+        await step('Upload a video', async () => {
+            await pdppage.uploadVideos(basicAuthPage, ["utils/data/images/video.mp4"],
+                "Uploading a video in to review section"
+            )
+        })
+
+        await step('Clicking on submit button', async () => {
+            await pdppage.click(pdppage.bvGuidelinesSubmitBtn)
+        })
+
+        await step('Add Images/Videos step is completed', async () => {
+            await pdppage.assertVisible(pdppage.step2completedLabel,
+                "Assert that the Add Images/Videos completed label is displayed"
+            )
+
+            await pdppage.assertVisible(pdppage.step2EditButton,
+                "Assert that the Add Images/Videos edit button is displayed"
+            )
+        })
+
+        await step('Enter value in located textbox', async () => {
+            await pdppage.type(pdppage.locatedTextbox, "NY")
+        })
+
+        await step('Clicking on submit button', async () => {
+            await delay(1000)
+            await pdppage.click(pdppage.bvGuidelinesSubmitBtn)
+        })
+
+        await step('Personal/Product Information step is completed', async () => {
+            await pdppage.assertVisible(pdppage.step3completedLabel,
+                "Assert that the Personal/Product Information completed label is displayed"
+            )
+
+            await pdppage.assertVisible(pdppage.step3EditButton,
+                "Assert that the Personal/Product Information edit button is displayed"
+            )
+        })
+
+        await step('Selecting rating star on Product Rating section', async () => {
+            await pdppage.click(starQuality, "Select Quality: 5 stars")
+            await pdppage.click(starValue, "Select Value: 5 stars")
+            await pdppage.click(starStyle, "Select Style: 5 stars")
+        })
+
+        await step('Clicking on submit button', async () => {
+            await delay(1000)
+            await pdppage.click(pdppage.bvGuidelinesSubmitBtn)
+        })
+
+        await step('Verify the review success modal is displayed', async () => {
+            await pdppage.assertVisible(pdppage.reviewSuccessModal)
+        })
+
+        await step('Close success modal', async () => {
+            await pdppage.click(pdppage.successModalCloseButton,
+                "Clicking on close modal button"
+            )
+        })
+
+        await step('Verify that the BV review modal is close', async () => {
+            await pdppage.assertHidden(pdppage.bvReviewModal)
+        })
+    })
+
+    test(`
+        17. Customer Images and Videos section is displayed
+        18. Average Customer Rating is shown
+        19. Click view more reviews link to show more reviews
+        20. Check next and prev review button
+        21. Searching topics and reviews
+        `, async ({ basicAuthPage }) => {
+        const pdppage = new PDPPage(basicAuthPage)
+        const nextReviewButton = basicAuthPage.locator(`a.next`)
+        const prevReviewButton = basicAuthPage.locator(`a.prev`)
+        const searchNATerm = await generateReadableTimeBasedId()
+
+        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
+
+        await scrollToBottom(basicAuthPage)
+
+        const numberOfReview = await pdppage.getNumberOfReview("Get number of reviews on PDP")
+
+        await step('Scroll to Customer Images And Videos section', async () => {
+            await pdppage.imagesVideosSection.scrollIntoViewIfNeeded()
+        })
+
+        await step('Assert Images and Videos are displayed correctly', async () => {
+            await pdppage.verifyMediaTabs(basicAuthPage)
+        })
+
+        await step('Assert average customer rating shown', async () => {
+            await pdppage.assertVisible(pdppage.averageCustomerRating)
+        })
+
+        await step('Clicking view more reviews link', async () => {
+            await pdppage.click(pdppage.viewMoreReviewLink)
+        })
+
+        await step('Assert review container is displayed', async () => {
+            await pdppage.assertVisible(pdppage.reviewContainer)
+        })
+
+        await step(`Assert next and prev review button activities with ${numberOfReview} reviews`, async () => {
+            if (numberOfReview > 8) {
+                await step('Clicking on next review button', async () => {
+                    await pdppage.click(nextReviewButton)
+                })
+
+                await pdppage.assertVisible(prevReviewButton, 'Previous review button is displayed')
+                await pdppage.assertHidden(nextReviewButton, 'Next review button is hidden')
+
+                await step('Clicking on previous review button', async () => {
+                    await pdppage.click(prevReviewButton)
+                })
+
+                await pdppage.assertVisible(nextReviewButton, 'Next review button is displayed')
+                await pdppage.assertHidden(prevReviewButton, 'Previous review button is hidden')
+
+            } else test.skip(true, 'The number of reviews less than 8')
+        })
+
+        await step('Input invalid terms to search', async () => {
+            await pdppage.type(pdppage.searchReviewTextbox, searchNATerm)
+
+            await delay(2000)
+
+            await pdppage.assertHidden(pdppage.reviewItemRow,
+                "Assert no review item row shown"
+            )
+
+            await pdppage.type(pdppage.searchReviewTextbox, "Review content",
+                "Seach review with valid terms"
+            )
+
+            await delay(2000)
+
+            expect(await pdppage.reviewItemRow.count()).toBeGreaterThan(0)
         })
     })
 });

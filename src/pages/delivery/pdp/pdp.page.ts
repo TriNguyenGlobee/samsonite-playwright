@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { description, step } from "allure-js-commons";
-import { delay, t, extractNumber, getDecimalRating, generateSentence, generateReadableTimeBasedId } from "../../../../utils/helpers/helpers";
+import { delay, t, extractNumber, getDecimalRating, generateSentence, generateReadableTimeBasedId, PageUtils } from "../../../../utils/helpers/helpers";
 
 export class PDPPage extends BasePage {
     readonly logoImg: Locator;
@@ -47,6 +47,23 @@ export class PDPPage extends BasePage {
     readonly nicknameField: Locator
     readonly emailField: Locator
     readonly termCheckbox: Locator
+    readonly step1completedLabel: Locator
+    readonly step1EditButton: Locator
+    readonly step2completedLabel: Locator
+    readonly step2EditButton: Locator
+    readonly locatedTextbox: Locator
+    readonly step3completedLabel: Locator
+    readonly step3EditButton: Locator
+    readonly reviewSuccessModal: Locator
+    readonly successModalCloseButton: Locator
+    readonly imagesVideosSection: Locator
+    readonly averageCustomerRating: Locator
+    readonly viewMoreReviewLink: Locator
+    readonly reviewContainer: Locator
+    readonly reviewItemRow: Locator
+    readonly searchReviewTextbox: Locator
+    readonly rightBtn: Locator
+    readonly leftBtn: Locator
 
     constructor(page: Page) {
         super(page);
@@ -93,6 +110,23 @@ export class PDPPage extends BasePage {
         this.nicknameField = page.locator(`//input[@name="Nickname"]`)
         this.emailField = page.locator(`//input[@name="Email"]`)
         this.termCheckbox = page.locator(`div#sps-termsAndConditions-styledcheckbox`)
+        this.step1completedLabel = page.locator(`fieldset#bv-ips-step-0 span[color="#296300"]`)
+        this.step1EditButton = page.locator(`fieldset#bv-ips-step-0 button`)
+        this.step2completedLabel = page.locator(`fieldset#bv-ips-step-1 span[color="#296300"]`)
+        this.step2EditButton = page.locator(`fieldset#bv-ips-step-1 button`)
+        this.locatedTextbox = page.locator(`fieldset#bv-ips-step-2 input`)
+        this.step3completedLabel = page.locator(`fieldset#bv-ips-step-2 span[color="#296300"]`)
+        this.step3EditButton = page.locator(`fieldset#bv-ips-step-2 button`)
+        this.reviewSuccessModal = page.locator(`div[type="success"]`)
+        this.successModalCloseButton = this.reviewSuccessModal.locator(`button`)
+        this.imagesVideosSection = page.locator(`bv-tab-summary`)
+        this.averageCustomerRating = page.locator(`//div[h3[normalize-space(text())="Average Customer Ratings"]]`)
+        this.viewMoreReviewLink = page.locator(`//a[normalize-space(text())="View More Review"]`)
+        this.reviewContainer = page.locator(`section#reviews_container`)
+        this.reviewItemRow = page.locator(`section#reviews_container section`)
+        this.searchReviewTextbox = page.locator(`input#search-input`)
+        this.rightBtn = page.locator(`button.right`)
+        this.leftBtn = page.locator(`button.left`)
     }
 
     // =========================
@@ -103,21 +137,62 @@ export class PDPPage extends BasePage {
         reviewTitle?: string;
         nickname?: string;
         email?: string;
-        term: boolean;
+        sweepstakes?: boolean;
+        term?: boolean;
     }) {
-        const review = data?.review ?? `Review content ${generateSentence(150)}`;
+        const review = data?.review ?? `Review content ${generateSentence(100)}`;
         const reviewTitle = data?.reviewTitle ?? `Title ${generateSentence(15)}`;
         const nickname = data?.nickname ?? `User${generateReadableTimeBasedId()}`;
         const email = data?.email ?? `auto_${generateReadableTimeBasedId()}@yopmail.com`;
+        const sweepstakes = data?.sweepstakes ?? false;
+        const term = data?.term ?? true;
+
+        const sweepstakesYesButton = this.page.locator(`//div[@id="0_IncentivizedReview-True"]`)
+        const sweepstakesNoButton = this.page.locator(`//div[@id="0_IncentivizedReview-False"]`)
 
         await this.reviewField.fill(review);
         await this.reviewTitleField.fill(reviewTitle);
         await this.nicknameField.fill(nickname);
         await this.emailField.fill(email);
 
-        if (data?.term) {
+        if (sweepstakes) {
+            await this.hover(sweepstakesYesButton)
+            await delay(1000)
+            await this.click(sweepstakesYesButton,
+                "Clicking Yes button on sweepstakes section")
+            await delay(1000)
+        } else {
+            await this.hover(sweepstakesNoButton)
+            await delay(1000)
+            await this.click(sweepstakesNoButton,
+                "Clicking No button on sweepstakes section")
+            await delay(1000)
+        }
+
+        if (term) {
             await this.termCheckbox.click();
         }
+
+        await delay(1000)
+    }
+
+    async uploadImages(page: Page, filePaths: string[], description?: string) {
+        await step(description || "Upload image for reviewing", async () => {
+            const input = page.locator('#bv-ips-photo-upload-input');
+            //await input.waitFor();
+            await input.setInputFiles(filePaths);
+            await PageUtils.waitForPageLoadComplete(page)
+        })
+    }
+
+    async uploadVideos(page: Page, filePaths: string[], description?: string) {
+        await step(description || "Upload video for reviewing", async () => {
+            const input = page.locator('#bv-ips-uploadVideo-input');
+            //await input.waitFor();
+            await input.setInputFiles(filePaths);
+            const lastVideoIndex = filePaths.length - 1;
+            await page.locator('video').nth(lastVideoIndex).waitFor({ state: 'visible' });
+        })
     }
 
     // =========================
@@ -173,6 +248,19 @@ export class PDPPage extends BasePage {
             const numberOfReview = extractNumber(await ratingCount.innerText())
             return numberOfReview
         })
+    }
+
+    async clickThroughSlides(page: Page) {
+        while (await this.rightBtn.isVisible().catch(() => false)) {
+            await this.rightBtn.click();
+            await page.waitForTimeout(200);
+        }
+
+        while (await this.leftBtn.isVisible().catch(() => false)) {
+            await this.leftBtn.click();
+            await page.waitForTimeout(200);
+        }
+        console.log("Done clicking right → left");
     }
 
     // =========================
@@ -238,6 +326,82 @@ export class PDPPage extends BasePage {
             expect(await lineElement.nth(2).innerText()).toEqual("3 stars")
             expect(await lineElement.nth(3).innerText()).toEqual("2 stars")
             expect(await lineElement.nth(4).innerText()).toEqual("1 star")
+        })
+    }
+
+    /**
+    * Assert media when clicking tab All - Images - Videos
+    */
+    async verifyMediaTabs(page: Page) {
+        await step('Assert that Videos and Images are displayed when clicking specified tab correctly', async () => {
+            const tabAll = page.getByRole('tab', { name: 'All' });
+            const tabImages = page.getByRole('tab', { name: 'Images' });
+            const tabVideos = page.getByRole('tab', { name: 'Videos' });
+
+            const mediaItems = page.locator("ul.bxrIdA > li");
+
+            const isVideo = async (el: Locator) => {
+                return await el.locator("svg").isVisible().catch(() => false);
+            };
+
+            const isImage = async (el: Locator) => {
+                return await el.locator("img").isVisible();
+            };
+
+            // Assert all tabs
+            await tabAll.click();
+            await page.waitForLoadState("networkidle");
+            await this.clickThroughSlides(page)
+
+            let count = await mediaItems.count();
+            expect(count).toBeGreaterThan(0);
+
+            let photos = 0, videos = 0;
+            for (let i = 0; i < count; i++) {
+                console.log(`Checking item ${i}`)
+                const item = mediaItems.nth(i);
+                if (await isVideo(item)) videos++;
+                else if (await isImage(item)) photos++;
+            }
+
+            expect(photos).toBeGreaterThan(0);
+            expect(videos).toBeGreaterThan(0);
+
+            await delay(500)
+
+            // Assert images tab
+            await tabImages.click();
+            await delay(500)
+            await page.waitForLoadState("networkidle");
+            await this.clickThroughSlides(page)
+
+            count = await mediaItems.count();
+            expect(count).toBeGreaterThan(0);
+
+            for (let i = 0; i < count; i++) {
+                console.log(`Checking item ${i}`)
+                const item = mediaItems.nth(i);
+                expect(await isVideo(item)).toBeFalsy();
+                expect(await isImage(item)).toBeTruthy();
+            }
+
+            await delay(500)
+
+            // Assert videos tab
+            await tabVideos.click();
+            await delay(500)
+            await page.waitForLoadState("networkidle");
+            await this.clickThroughSlides(page)
+
+            count = await mediaItems.count();
+            expect(count).toBeGreaterThan(0);
+
+            for (let i = 0; i < count; i++) {
+                console.log(`Checking item ${i}`)
+                const item = mediaItems.nth(i);
+                expect(await isImage(item)).toBeTruthy();
+                expect(await isVideo(item)).toBeTruthy();
+            }
         })
     }
 }
