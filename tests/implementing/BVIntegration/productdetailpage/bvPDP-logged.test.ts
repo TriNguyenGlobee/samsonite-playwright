@@ -5,27 +5,6 @@ import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay} f
 
 
 test.describe("PDP is shown correctly", async () => {
-    /*test.beforeEach(async ({ basicAuthPage }) => {
-        const homepage = createHomePage(basicAuthPage)
-        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
-
-        await step("Go to New Arrivals Page", async () => {
-            await homepage.clickMenuItem('newarrivals', "Go to New Arrivals page")
-        })
-
-        await step("Click In-stock checkbox", async () => {
-            if (await homepage.productTableShow.isVisible()) {
-                await homepage.clickCheckbox(basicAuthPage, t.homepage('in-stock'),
-                    "Checking the In-stock checkbox")
-            } else {
-                test.skip(true, "Product table not visible, skipping the test.");
-            }
-        })
-
-        await lazyLoad(basicAuthPage)
-        await newarrivalspage.selectRatedProd()
-    });*/
-
     test(`
         1. Rating star is shown exactly
         2. Review count is displayed
@@ -34,18 +13,18 @@ test.describe("PDP is shown correctly", async () => {
         5. Close Bazaarvoice trustmark
         6. Rating stars groups is displayed
         7. Overall rating is shown correctly
-        `, async ({ basicAuthPage }) => {
-        const pdppage = new PDPPage(basicAuthPage)
+        `, async ({ loggedInPage }) => {
+        const pdppage = new PDPPage(loggedInPage)
 
         await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
-        await scrollToBottom(basicAuthPage)
+        await scrollToBottom(loggedInPage)
 
         let ratingPointValue = await pdppage.getDecialRatingPoint()
         let numberOfReview = await pdppage.getNumberOfReview("Get number of reviews on PDP")
 
         await step('Verify the rating star and rating point value', async () => {
-            await pdppage.assertRating(basicAuthPage, ratingPointValue)
+            await pdppage.assertRating(loggedInPage, ratingPointValue)
         })
 
         await step('Verify the review count is displayed', async () => {
@@ -79,7 +58,7 @@ test.describe("PDP is shown correctly", async () => {
                 "Assert that rating star group is displayed"
             )
 
-            await pdppage.assertRatingStarGroup(basicAuthPage,
+            await pdppage.assertRatingStarGroup(loggedInPage,
                 "Assert rating star group contains 5 lines correctly"
             )
         })
@@ -104,17 +83,17 @@ test.describe("PDP is shown correctly", async () => {
         10. User can select Overall rating stars
         11. Click on review guildelines
         12. Submit review without entering anything
-        `, async ({ basicAuthPage }) => {
-        const pdppage = new PDPPage(basicAuthPage)
-        const ovRatingStar1 = basicAuthPage.locator(`div#bv-ips-star-rating-1`)
-        const ovRatingStar2 = basicAuthPage.locator(`div#bv-ips-star-rating-2`)
-        const ovRatingStar3 = basicAuthPage.locator(`div#bv-ips-star-rating-3`)
-        const ovRatingStar4 = basicAuthPage.locator(`div#bv-ips-star-rating-4`)
-        const ovRatingStar5 = basicAuthPage.locator(`div#bv-ips-star-rating-5`)
+        `, async ({ loggedInPage }) => {
+        const pdppage = new PDPPage(loggedInPage)
+        const ovRatingStar1 = loggedInPage.locator(`div#bv-ips-star-rating-1`)
+        const ovRatingStar2 = loggedInPage.locator(`div#bv-ips-star-rating-2`)
+        const ovRatingStar3 = loggedInPage.locator(`div#bv-ips-star-rating-3`)
+        const ovRatingStar4 = loggedInPage.locator(`div#bv-ips-star-rating-4`)
+        const ovRatingStar5 = loggedInPage.locator(`div#bv-ips-star-rating-5`)
 
         await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
-        await scrollToBottom(basicAuthPage)
+        await scrollToBottom(loggedInPage)
 
         await pdppage.assertVisible(pdppage.bvWriteReviewBtn,
             "Assert the Write A Reivew button is displayed"
@@ -197,15 +176,15 @@ test.describe("PDP is shown correctly", async () => {
         14. User can add Images/Videos and completed Add Images/Videos step
         15. Completed the Personal/Product Information step
         16. Completed the Product Rating step
-        `, async ({ basicAuthPage }) => {
-        const pdppage = new PDPPage(basicAuthPage)
-        const starQuality = basicAuthPage.locator(`div#bv-ips-star-Quality-5`)
-        const starValue = basicAuthPage.locator(`div#bv-ips-star-Value-5`)
-        const starStyle = basicAuthPage.locator(`div#bv-ips-star-Style-5`)
+        `, async ({ loggedInPage }) => {
+        const pdppage = new PDPPage(loggedInPage)
+        const starQuality = loggedInPage.locator(`div#bv-ips-star-Quality-5`)
+        const starValue = loggedInPage.locator(`div#bv-ips-star-Value-5`)
+        const starStyle = loggedInPage.locator(`div#bv-ips-star-Style-5`)
 
         await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
-        await scrollToBottom(basicAuthPage)
+        await scrollToBottom(loggedInPage)
 
         await step("Clicking on Write A Reivew button", async () => {
             await pdppage.click(pdppage.bvWriteReviewBtn)
@@ -230,13 +209,13 @@ test.describe("PDP is shown correctly", async () => {
         })
 
         await step('Upload a image', async () => {
-            await pdppage.uploadImages(basicAuthPage, ["utils/data/images/sample.jpg"],
+            await pdppage.uploadImages(loggedInPage, ["utils/data/images/sample.jpg"],
                 "Uploading a image in to review section"
             )
         })
 
         await step('Upload a video', async () => {
-            await pdppage.uploadVideos(basicAuthPage, ["utils/data/images/video.mp4"],
+            await pdppage.uploadVideos(loggedInPage, ["utils/data/images/video.mp4"],
                 "Uploading a video in to review section"
             )
         })
@@ -306,15 +285,15 @@ test.describe("PDP is shown correctly", async () => {
         19. Click view more reviews link to show more reviews
         20. Check next and prev review button
         21. Searching topics and reviews
-        `, async ({ basicAuthPage }) => {
-        const pdppage = new PDPPage(basicAuthPage)
-        const nextReviewButton = basicAuthPage.locator(`a.next`)
-        const prevReviewButton = basicAuthPage.locator(`a.prev`)
+        `, async ({ loggedInPage }) => {
+        const pdppage = new PDPPage(loggedInPage)
+        const nextReviewButton = loggedInPage.locator(`a.next`)
+        const prevReviewButton = loggedInPage.locator(`a.prev`)
         const searchNATerm = await generateReadableTimeBasedId()
 
         await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
-        await scrollToBottom(basicAuthPage)
+        await scrollToBottom(loggedInPage)
 
         const numberOfReview = await pdppage.getNumberOfReview("Get number of reviews on PDP")
 
@@ -323,7 +302,7 @@ test.describe("PDP is shown correctly", async () => {
         })
 
         await step('Assert Images and Videos are displayed correctly', async () => {
-            await pdppage.verifyMediaTabs(basicAuthPage)
+            await pdppage.verifyMediaTabs(loggedInPage)
         })
 
         await step('Assert average customer rating shown', async () => {
