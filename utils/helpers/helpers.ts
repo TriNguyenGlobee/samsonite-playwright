@@ -303,30 +303,65 @@ export async function getOptionIndexByText(page: Page, text: string, selector: s
  * Get decical rating by star offset
  * Return value: 2.5, 4.3, ...
  */
-export async function getDecimalRating(page: Page) {
-  const stars = page.locator('.bv_stars_svg_no_wrap svg');
-  const count = await stars.count();
+export async function getDecimalRatingStar(page: Page) {
+  return await step('Get decimal rating star', async () => {
+    const stars = page.locator('.bv_stars_svg_no_wrap svg');
+    //const count = await stars.count();
 
-  let rating = 0;
+    let rating = 0;
 
-  for (let i = 0; i < count; i++) {
-    const secondStop = stars
-      .nth(i)
-      .locator('defs linearGradient stop')
-      .nth(1);
+    for (let i = 0; i < 5; i++) {
+      const secondStop = stars
+        .nth(i)
+        .locator('defs linearGradient stop')
+        .nth(1);
 
-    const offset = await secondStop.getAttribute('offset');
+      const offset = await secondStop.getAttribute('offset');
 
-    if (!offset) continue;
+      if (!offset) continue;
 
-    const percent = parseFloat(offset.replace('%', ''));
+      const percent = parseFloat(offset.replace('%', ''));
 
-    const filledRatio = 1 - percent / 100;
+      const filledRatio = 1 - percent / 100;
 
-    rating += filledRatio;
-  }
+      rating += filledRatio;
+    }
 
-  return Number(rating.toFixed(2));
+    return Number(rating.toFixed(2));
+  })
+}
+
+/**
+ * Get decical rating by star offset
+ * Return value: 2.5, 4.3, ...
+ */
+export async function getReviewDecimalRatingStar(page: Page, index: number) {
+  return await step('Get reivew decimal rating star', async () => {
+    const reviewRow = page.locator(`#reviews_container abbr`)
+    const stars = reviewRow.nth(index - 1).locator('svg');
+    //const count = await stars.count();
+
+    let rating = 0;
+
+    for (let i = 0; i < 5; i++) {
+      const secondStop = stars
+        .nth(i)
+        .locator('defs linearGradient stop')
+        .nth(1);
+
+      const offset = await secondStop.getAttribute('offset');
+
+      if (!offset) continue;
+
+      const percent = parseFloat(offset.replace('%', ''));
+
+      const filledRatio = 1 - percent / 100;
+
+      rating += filledRatio;
+    }
+
+    return Number(rating.toFixed(2));
+  })
 }
 
 /**

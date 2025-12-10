@@ -1,7 +1,7 @@
 import { expect, test } from "../../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
-import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay} from "../../../../utils/helpers/helpers";
+import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop } from "../../../../utils/helpers/helpers";
 
 
 test.describe("PDP is shown correctly", async () => {
@@ -284,7 +284,8 @@ test.describe("PDP is shown correctly", async () => {
         18. Average Customer Rating is shown
         19. Click view more reviews link to show more reviews
         20. Check next and prev review button
-        21. Searching topics and reviews
+        21. User can sort review by Highest to Lowest rating or vice versa
+        22. Searching topics and reviews
         `, async ({ loggedInPage }) => {
         const pdppage = new PDPPage(loggedInPage)
         const nextReviewButton = loggedInPage.locator(`a.next`)
@@ -298,11 +299,12 @@ test.describe("PDP is shown correctly", async () => {
         const numberOfReview = await pdppage.getNumberOfReview("Get number of reviews on PDP")
 
         await step('Scroll to Customer Images And Videos section', async () => {
+            await scrollToTop(loggedInPage)
             await pdppage.imagesVideosSection.scrollIntoViewIfNeeded()
         })
 
         await step('Assert Images and Videos are displayed correctly', async () => {
-            await pdppage.verifyMediaTabs(loggedInPage)
+            await pdppage.assertMediaTabs(loggedInPage)
         })
 
         await step('Assert average customer rating shown', async () => {
@@ -310,6 +312,8 @@ test.describe("PDP is shown correctly", async () => {
         })
 
         await step('Clicking view more reviews link', async () => {
+            await scrollToTop(loggedInPage)
+            await pdppage.viewMoreReviewLink.scrollIntoViewIfNeeded()
             await pdppage.click(pdppage.viewMoreReviewLink)
         })
 
@@ -320,6 +324,8 @@ test.describe("PDP is shown correctly", async () => {
         await step(`Assert next and prev review button activities with ${numberOfReview} reviews`, async () => {
             if (numberOfReview > 8) {
                 await step('Clicking on next review button', async () => {
+                    await scrollToTop(loggedInPage)
+                    await nextReviewButton.scrollIntoViewIfNeeded()
                     await pdppage.click(nextReviewButton)
                 })
 
@@ -327,6 +333,8 @@ test.describe("PDP is shown correctly", async () => {
                 await pdppage.assertHidden(nextReviewButton, 'Next review button is hidden')
 
                 await step('Clicking on previous review button', async () => {
+                    await scrollToTop(loggedInPage)
+                    await prevReviewButton.scrollIntoViewIfNeeded()
                     await pdppage.click(prevReviewButton)
                 })
 
@@ -336,8 +344,28 @@ test.describe("PDP is shown correctly", async () => {
             } else test.skip(true, 'The number of reviews less than 8')
         })
 
-        await step('Input invalid terms to search', async () => {
-            await pdppage.type(pdppage.searchReviewTextbox, searchNATerm)
+        await step('Sort review by Lowest to Highest Rating', async () => {
+            await scrollToTop(loggedInPage)
+            await pdppage.sortReview("Lowest to Highest Rating")
+        })
+
+        await step('Assert that reviews are sorted by Lowest to Highest Rating', async () => {
+            await pdppage.assertReivewSorted("asc")
+        })
+
+        await step('Sort review by Highest to Lowest Rating', async () => {
+            await scrollToTop(loggedInPage)
+            await pdppage.sortReview("Highest to Lowest Rating")
+        })
+
+        await step('Assert that reviews are sorted by Highest to Lowest Rating', async () => {
+            await pdppage.assertReivewSorted("desc")
+        })
+
+        await step('Input terms to search review', async () => {
+            await pdppage.type(pdppage.searchReviewTextbox, searchNATerm,
+                "Searching review with wrong terms"
+            )
 
             await delay(2000)
 
@@ -346,7 +374,7 @@ test.describe("PDP is shown correctly", async () => {
             )
 
             await pdppage.type(pdppage.searchReviewTextbox, "Review content",
-                "Seach review with valid terms"
+                "Searching review with correct terms"
             )
 
             await delay(2000)

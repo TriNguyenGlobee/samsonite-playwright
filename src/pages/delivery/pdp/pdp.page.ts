@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
 import { description, step } from "allure-js-commons";
-import { delay, t, extractNumber, getDecimalRating, generateSentence, generateReadableTimeBasedId, PageUtils } from "../../../../utils/helpers/helpers";
+import { delay, t, extractNumber, getDecimalRatingStar, generateSentence, generateReadableTimeBasedId, PageUtils, getReviewDecimalRatingStar, isSorted } from "../../../../utils/helpers/helpers";
 
 export class PDPPage extends BasePage {
     readonly logoImg: Locator;
@@ -94,7 +94,7 @@ export class PDPPage extends BasePage {
         this.ratingStarGroup = page.locator(`section.bv-rnr__rpifwc-0.kZapjS div.table`)
         this.overallPoint = page.locator(`section#bv-reviews-overall-ratings-container div.bv-rnr__sc-157rd1w-1.ljrlPW`)
         this.overallNumberofReview = page.locator(`div.bv-rnr__sc-157rd1w-2.krTpQg`)
-        this.bvWriteReviewBtn = page.locator(`button.bv-write-a-review`)
+        this.bvWriteReviewBtn = page.locator(`//button[normalize-space(text())="Write a review"]`)
         this.bvReviewModal = page.locator(`div.bv-ips-modal-window`)
         this.bvOverallRatingMSG = page.locator(`label#bv-label-text-undefined`)
         this.bvReivewGuidelinesBtn = page.locator(`//button[text()="Review guidelines"]`)
@@ -195,6 +195,26 @@ export class PDPPage extends BasePage {
         })
     }
 
+    /**
+     * Select sort by value to sort review
+     * @param option 
+     * @param description 
+     */
+    async sortReview(option: string, description?: string) {
+        await step(description || `Sort review by: ${option}`, async () => {
+            const sortByDropdown = this.page.locator(`//span[normalize-space(text())="Sort by"]/parent::div`)
+            const optionRow = this.page.locator(`//ul[contains(@id,"bv-reviews-sort-by")]//li[span[div[normalize-space(text())="${option}"]]]`)
+
+            await sortByDropdown.scrollIntoViewIfNeeded()
+
+            await this.hover(sortByDropdown)
+            await this.waitFor(optionRow)
+            await this.click(optionRow)
+
+            await PageUtils.waitForDomAvailable(this.page)
+        })
+    }
+
     // =========================
     // 📦 Helpers
     // =========================
@@ -237,7 +257,7 @@ export class PDPPage extends BasePage {
     async getDecialRatingPoint(description?: string): Promise<number> {
         return await step(description || "Get decimal rating point", async () => {
             const decimalRatingPoint = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-decimal"]`)
-            const ratingPoint = extractNumber(await decimalRatingPoint.innerText())
+            const ratingPoint = extractNumber(await decimalRatingPoint.first().innerText())
             return ratingPoint
         })
     }
@@ -245,7 +265,7 @@ export class PDPPage extends BasePage {
     async getNumberOfReview(description?: string): Promise<number> {
         return await step(description || "Get the number of review", async () => {
             const ratingCount = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-count"]`)
-            const numberOfReview = extractNumber(await ratingCount.innerText())
+            const numberOfReview = extractNumber(await ratingCount.first().innerText())
             return numberOfReview
         })
     }
@@ -302,7 +322,7 @@ export class PDPPage extends BasePage {
      */
     async assertRating(page: Page, expectedRating: number, description?: string) {
         await step(description || `Assert rating star to be: ${expectedRating}`, async () => {
-            const actualRating = await getDecimalRating(page);
+            const actualRating = await getDecimalRatingStar(page);
 
             const tolerance = 0.1;
             const min = expectedRating - tolerance;
@@ -332,7 +352,7 @@ export class PDPPage extends BasePage {
     /**
     * Assert media when clicking tab All - Images - Videos
     */
-    async verifyMediaTabs(page: Page) {
+    async assertMediaTabs(page: Page) {
         await step('Assert that Videos and Images are displayed when clicking specified tab correctly', async () => {
             const tabAll = page.getByRole('tab', { name: 'All' });
             const tabImages = page.getByRole('tab', { name: 'Images' });
@@ -402,6 +422,20 @@ export class PDPPage extends BasePage {
                 expect(await isImage(item)).toBeTruthy();
                 expect(await isVideo(item)).toBeTruthy();
             }
+        })
+    }
+
+    async assertReivewSorted(order: "asc" | "desc" = "asc", description?: string) {
+        await step(description || `Assert reviews are sorted: ${order}`, async () => {
+            const decimalPointArr: number[] = []
+
+            for (let index = 1; index < 9; index++) {
+                let currentRatingStar = await getReviewDecimalRatingStar(this.page, index)
+                decimalPointArr.push(currentRatingStar)
+            }
+
+            console.log(`Review point array: ${decimalPointArr.toString()}`)
+            expect(isSorted(decimalPointArr, order)).toBe(true)
         })
     }
 }

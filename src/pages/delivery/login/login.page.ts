@@ -78,15 +78,14 @@ export abstract class LoginPage extends BasePage {
         });
 
         await step(`Click login button`, async () => {
-            await this.click(this.signInButton, "Click login button");
+            await Promise.all([
+                this.click(this.signInButton, "Click login button"),
+                this.page.waitForURL(/account/),
+            ]);
         });
-
-        await this.signInButton.waitFor({ state: 'hidden', timeout: 10000 });
 
         await PageUtils.waitForDomAvailable(this.page);
         await PageUtils.waitForPageLoad(this.page);
-
-
     }
 
     async loginByGoogleAccount(googleUsername: string, googlePassword: string) {
