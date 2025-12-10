@@ -70,6 +70,25 @@ export function generateReadableTimeBasedId(): string {
 }
 
 /**
+ * Generate a paragraph with specified number of chars
+ * @param length 
+ * @returns 
+ */
+export function generateSentence(length: number): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ';
+  let result = '';
+
+  for (let i = 0; i < length; i++) {
+    const char = chars.charAt(Math.floor(Math.random() * chars.length));
+    if (!(char === ' ' && result.endsWith(' '))) {
+      result += char;
+    }
+  }
+
+  return result.trim();
+}
+
+/**
  * Splits a string by a given delimiter and returns the parts and their count.
  * @param input - The string to split.
  * @param delimiter - The delimiter to split by (default is a space).
@@ -180,6 +199,7 @@ export const t = {
   wishlist: (key: keyof Translations['wishlist']) => I18n.translations.wishlist[key],
   globalnavfooter: (key: keyof Translations['globalnavfooter']) => I18n.translations.globalnavfooter[key],
   checkoutpage: (key: keyof Translations['checkoutpage']) => I18n.translations.checkoutpage[key],
+  bvintegration: (key: keyof Translations['bvintegration']) => I18n.translations.bvintegration[key],
 };
 
 /**
@@ -250,6 +270,63 @@ export async function getDropdownValue(
   const selectedValue = await dropdown.inputValue();
 
   return selectedValue
+}
+
+export async function getOptionIndexByText(page: Page, text: string, selector: string | Locator): Promise<number> {
+  const dropdown =
+    typeof selector === "string" ? page.locator(selector) : selector;
+
+  await expect(dropdown).toBeVisible();
+
+  const options = dropdown.locator("option");
+  const count = await options.count();
+
+  let foundIndex = -1;
+
+  for (let i = 0; i < count; i++) {
+    const optionText = (await options.nth(i).innerText()).trim();
+
+    if (optionText === text) {
+      foundIndex = i;
+      break;
+    }
+  }
+
+  if (foundIndex === -1) {
+    throw new Error(`Not found option with "${text}"`);
+  }
+
+  return foundIndex;
+}
+
+/**
+ * Get decical rating by star offset
+ * Return value: 2.5, 4.3, ...
+ */
+export async function getDecimalRating(page: Page) {
+  const stars = page.locator('.bv_stars_svg_no_wrap svg');
+  const count = await stars.count();
+
+  let rating = 0;
+
+  for (let i = 0; i < count; i++) {
+    const secondStop = stars
+      .nth(i)
+      .locator('defs linearGradient stop')
+      .nth(1);
+
+    const offset = await secondStop.getAttribute('offset');
+
+    if (!offset) continue;
+
+    const percent = parseFloat(offset.replace('%', ''));
+
+    const filledRatio = 1 - percent / 100;
+
+    rating += filledRatio;
+  }
+
+  return Number(rating.toFixed(2));
 }
 
 /**
@@ -332,7 +409,7 @@ export async function selectDropdownOption(
   page: Page,
   selector: string | Locator,
   optionValueOrLabel: string,
-  by: "value" | "label" = "value"
+  by: "value" | "label" | "text" = "value"
 ): Promise<void> {
   await step(`Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
     const dropdown =
@@ -342,14 +419,19 @@ export async function selectDropdownOption(
 
     if (by === "value") {
       await dropdown.selectOption({ value: optionValueOrLabel });
-    } else {
+    } else if (by === "label") {
       await dropdown.selectOption({ label: optionValueOrLabel });
+    } else {
+      const optionIndex = await getOptionIndexByText(page, optionValueOrLabel, selector)
+      await dropdown.selectOption({ index: optionIndex })
     }
 
     const selectedValue = await dropdown.inputValue();
     console.log(`Selected: ${selectedValue}`);
   })
 }
+
+
 
 /**
  * Close the modal if it is present on the page.
