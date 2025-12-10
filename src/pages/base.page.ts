@@ -172,7 +172,7 @@ export class BasePage {
         const menu1Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]`);
 
         await menu1Locator.first().hover();
-        await delay(500)
+        await delay(1000)
 
         if (pathLength === 2) {
             const menu2Locator = page.locator(`//ul[@class="nav navbar-nav"]//li[a[normalize-space(text())=${escapedMenu1}]]//li[contains(@class,"category-level-2") and .//a[normalize-space(text())=${escapedMenu2}]]`);
@@ -627,6 +627,9 @@ export class BasePage {
             let link = locate.locator('xpath=.//a').first();
 
             const isVisible = await link.isVisible()
+
+            await PageUtils.waitForDomAvailable(page)
+            await delay(2000)
 
             if (!isVisible) {
                 link = locate

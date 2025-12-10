@@ -55,7 +55,10 @@ export class OurBrandStoryPageSG extends OurBrandStoryPage {
         // --- collections ---
         if (process.env.ENV === 'stg') { // For SSSG STG only
             console.log('Running on STG SSSG')
+
             const { aboutCollections } = this.testData;
+
+            console.log('Running on STG SSSG - step 2')
 
             await this.assertItemsListForCategoryMenu(this.baseLocator, 'dropdown-discover-collection', aboutCollections);
         }

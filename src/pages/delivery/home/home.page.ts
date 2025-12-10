@@ -37,12 +37,12 @@ export abstract class HomePage extends BasePage {
         this.journalsPreviousButton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Previous"]]`);
         this.whyShopWithUsSection = page.locator(`//div[contains(@class,"home-why-shop-with-us")]//div[@class="content"]`);
         this.withUsTitle = this.whyShopWithUsSection.locator(`xpath=.//h2[normalize-space(text())="Why shop with us?"]`);
-        this.withUsOfficalSite = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('officialwebsitetitle')}"]]`);
+        this.withUsOfficalSite = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('officialwebsitetitle')}"] or div//h6[text()="${t.whyshopwithus('officialwebsitetitle')}"]]`);
         this.withUsSafeShopping = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('securityShoptitle')}"]]`);
         this.withUsGift = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('gifttitle')}"]]`);
-        this.withUsWarranty = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('warrantytitle')}"]]`);
-        this.withUsFastDelivery = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fastdeliverytitle')}"]]`)
-        this.withUsCollection = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fullcollectiontitle')}"]]`)
+        this.withUsWarranty = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('warrantytitle')}"] or div//h6[text()="${t.whyshopwithus('warrantytitle')}"]]`);
+        this.withUsFastDelivery = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fastdeliverytitle')}"] or div//h6[text()="${t.whyshopwithus('fastdeliverytitle')}"]]`)
+        this.withUsCollection = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fullcollectiontitle')}"] or div//h6[text()="${t.whyshopwithus('fullcollectiontitle')}"]]`)
     }
 
     // =========================

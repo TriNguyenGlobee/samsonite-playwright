@@ -278,6 +278,10 @@ export abstract class CartPage extends BasePage {
 
     abstract getShippingDiscount(): Promise<any>
 
+    async getPromotionDiscount(): Promise<string> {
+        return "0"
+    }
+
     // =========================
     // ✅ Assertions
     // =========================

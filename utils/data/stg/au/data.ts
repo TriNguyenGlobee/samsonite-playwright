@@ -17,8 +17,8 @@ export const recommendedProductItems = [
 
 export const campaignData = [
     {
-        href: "https://ssau.stg.samsonite-asia.com/collection/c-lite/",
-        rightSideTitleText: "C-LITE",
+        href: "https://ssau.stg.samsonite-asia.com/collection/ecodiver/",
+        rightSideTitleText: "ECODIVER",
         hasImage: true
     }
 ]
@@ -31,7 +31,6 @@ export const newArrivalsItem = [
     { text: 'Valerie', href: 'https://ssau.stg.samsonite-asia.com/search?q=valerie' },
     { text: 'Classic Leather', href: 'https://ssau.stg.samsonite-asia.com/new-arrivals/classic-leather/' },
     { text: 'Stockton', href: 'https://ssau.stg.samsonite-asia.com/search?q=stockton' },
-    { text: 'Pro-DLX', href: 'https://ssau.stg.samsonite-asia.com/samsonite/pro-dlx-6/spinner-tote-15.6%22/ss-148138-1041.html' },
     { text: 'C-Lite', href: 'https://ssau.stg.samsonite-asia.com/c-lite/spinner-69-limited-edition/ss-141369-A021.html' },
     { text: 'Shop all new arrivals', href: 'https://ssau.stg.samsonite-asia.com/new-arrivals/' }
 ]
@@ -151,8 +150,8 @@ export const collectionItems = [
         href: 'https://ssau.stg.samsonite-asia.com/collection/c-lite/'
     },
     {
-        text: 'NB | Samsonite',
-        href: '/luggage/magnum-eco-2/'
+        text: 'Paralux',
+        href: '/suitcases/shop-by-collections/paralux/'
     },
     {
         text: 'Shop all collections',
@@ -272,7 +271,6 @@ export const articleItems = [
     { text: 'Dad’s who Travel', href: 'https://ssau.stg.samsonite-asia.com/fathers-day-gifts.html' },
     { text: '5 Essential Tips For Travelling Queenstown', href: 'https://ssau.stg.samsonite-asia.com/5-essential-tips-for-travelling-queenstown.html' },
     { text: 'Essential Accessories', href: 'https://ssau.stg.samsonite-asia.com/accessories-you-never-knew-you-needed.html' },
-    { text: 'Choosing the Right Luggage', href: 'https://ssau.stg.samsonite-asia.com/choosing-the-right-luggage.html' },
     { text: 'Backpack Styles', href: 'https://ssau.stg.samsonite-asia.com/your-backpack-look.html' },
     { text: 'Family Friendly Travels', href: 'https://ssau.stg.samsonite-asia.com/family-friendly-travels.html' },
     { text: 'Personalisation', href: 'https://www.samsonite.com.au/personalisation/' },
