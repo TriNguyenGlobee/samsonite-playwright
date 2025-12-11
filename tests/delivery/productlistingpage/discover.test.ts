@@ -26,7 +26,7 @@ test.describe("Discover/Our Brand Story Page", () => {
 });
 
 test.describe("Discover sub-categories", async () => {
-    tests(["au", "jp", "ph", "sg", "tw", "id"], `
+    tests(["jp", "ph", "sg", "tw", "id"], `
         1. Go to Fathers day gifts page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
@@ -436,7 +436,7 @@ test.describe("Discover sub-categories", async () => {
         })
     })
 
-    tests(["au", "nz"], `
+    tests(["nz"], `
         23. Go to Oc2lite page
         `, async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)

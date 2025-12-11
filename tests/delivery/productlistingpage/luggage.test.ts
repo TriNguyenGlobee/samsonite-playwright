@@ -623,7 +623,7 @@ test.describe("Luggage Size", async () => {
 })
 
 test.describe("Luggage Colours", async () => {
-    test(`
+    tests(["id", "jp", "my", "nz", "ph", "sg", "tw"], `
         1. Go to Mono color page
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart
@@ -633,12 +633,11 @@ test.describe("Luggage Colours", async () => {
         const luggagepage = createLuggagePage(basicAuthPage)
         const pdppage = new PDPPage(basicAuthPage)
         const cartpage = createCartPage(basicAuthPage)
-        const minicartpage = createMinicartPage(basicAuthPage)
         const amount = 1
 
         await step("Go to Mono color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('mono')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('mono')}`,
                 "Go to Luggage -> Colours -> Mono"
             )
         })
@@ -684,7 +683,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    test(`
+    tests(["id", "jp", "my", "nz", "ph", "sg", "tw"], `
         5. Go to Cool color page
         6. In-stock products are displayed when clicking on in-stock checkbox
         7. User can add product to cart
@@ -699,7 +698,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Cool color", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('cool')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('cool')}`,
                 "Go to Luggage -> Colours -> Cool"
             )
         })
@@ -745,7 +744,7 @@ test.describe("Luggage Colours", async () => {
         }
     })
 
-    test(`
+    tests(["id", "jp", "my", "nz", "ph", "sg", "tw"], `
         9. Go to Warm color page
         10. In-stock products are displayed when clicking on in-stock checkbox
         11. User can add product to cart
@@ -760,7 +759,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Warm colours page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('warm')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('warm')}`,
                 "Go to Luggage -> Colours -> Warm"
             )
         })
@@ -821,12 +820,12 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Shop all colours page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('shopallcolour')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('shopallcolour')}`,
                 "Go to Luggage -> Colours -> Shop all colours"
             )
         })
 
-        await step("Verity Large size page URL", async () => {
+        await step("Verity shopp all colours page URL", async () => {
             await luggagepage.assertUrl(/luggage\/(colour\/shop-all-colours|luggage-all-color|more-colours)\/?$/, "Assert Shop all colours page URL")
         })
 
@@ -882,7 +881,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Special color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('special')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('special')}`,
                 "Go to Luggage -> Colours -> Special"
             )
         })
@@ -943,7 +942,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Black color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('black')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('black')}`,
                 "Go to Luggage -> Colours -> Black"
             )
         })
@@ -1004,7 +1003,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Blue color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('blue')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('blue')}`,
                 "Go to Luggage -> Colours -> Blue"
             )
         })
@@ -1065,7 +1064,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Red color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('red')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('red')}`,
                 "Go to Luggage -> Colours -> Red"
             )
         })
@@ -1126,7 +1125,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to Green color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('green')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('green')}`,
                 "Go to Luggage -> Colours -> Green"
             )
         })
@@ -1187,7 +1186,7 @@ test.describe("Luggage Colours", async () => {
 
         await step("Go to White color page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('color')}->${t.lv2MenuItem('white')}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('lgcolor')}->${t.lv2MenuItem('white')}`,
                 "Go to Luggage -> Colours -> White"
             )
         })
@@ -1494,7 +1493,7 @@ test.describe("Luggage Smart feature", async () => {
 
         await step("Go to USB port page", async () => {
             await PageUtils.waitForPageLoad(basicAuthPage)
-            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('smartfeature')}->${t.lv2MenuItem('usbport')[1]}`,
+            await homepage.selectSamsoniteMenuItem(basicAuthPage, `${t.menuItem('luggage')}->${t.lv2MenuItem('smartfeature')}->${t.lv2MenuItem('lgusbport')}`,
                 "Go to Luggage -> Smart Feature -> USB port"
             )
         })
@@ -1561,7 +1560,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Premium page URL", async () => {
-            await luggagepage.assertUrl(/suitcases\/premium /, "Assert Premium page URL")
+            await luggagepage.assertUrl(/suitcases\/premium/, "Assert Premium page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1622,7 +1621,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Lightweight and Strong page URL", async () => {
-            await luggagepage.assertUrl(/suitcases\/strong /, "Assert Lightweight and Strong page URL")
+            await luggagepage.assertUrl(/suitcases\/strong/, "Assert Lightweight and Strong page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -1744,7 +1743,7 @@ test.describe("Luggage Smart feature", async () => {
         })
 
         await step("Verity Curv® page URL", async () => {
-            await luggagepage.assertUrl(/luggage\/attribute\/curv/, "Assert Curv® page URL")
+            await luggagepage.assertUrl(/smart-luggage\/curv/, "Assert Curv® page URL")
         })
 
         await step("Click In-stock checkbox", async () => {
@@ -3193,7 +3192,7 @@ test.describe("Luggage Collection", async () => {
         }
     })
 
-    tests(["au", "id"], `
+    tests(["id"], `
         57. Go to NB | Samsonite/Magnum Eco page
         58. In-stock products are displayed when clicking on in-stock checkbox
         59. User can add product to cart

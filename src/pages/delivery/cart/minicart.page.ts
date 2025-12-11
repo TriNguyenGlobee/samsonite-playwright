@@ -114,6 +114,10 @@ export abstract class MinicartPage extends BasePage {
 
     abstract getShippingDiscount(): Promise<string> 
 
+    async getPromotionDiscount(): Promise<string> {
+        return "0"
+    }
+
     abstract getAmountFooterCategoryItems(): Promise<number>
 
     // =========================

@@ -13,7 +13,13 @@ export class MinicartPageID extends MinicartPage {
 
     async getShippingDiscount(): Promise<string> { return "0" }
 
-    async getAmountFooterCategoryItems(): Promise<number> {return 3}
+    async getPromotionDiscount(): Promise<string> {
+        const shipping = this.page.locator(`.applied-promotion-discount`)
+
+        return (await shipping.first().innerText()).trim()
+    }
+
+    async getAmountFooterCategoryItems(): Promise<number> {return 4}
     
     // =========================
     // ✅ Assertions

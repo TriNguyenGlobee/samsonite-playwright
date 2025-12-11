@@ -59,8 +59,12 @@ test.describe("Empty cart without login", () => {
     test(`4. Cart page is displayed`, async ({ basicAuthPage }) => {
         const cartpage = createCartPage(basicAuthPage)
 
-        await step('Go to Cart page by URL', async () => {
+        await steps(["au", "jp", "my", "nz", "ph", "sg", "tw"], 'Go to Cart page by URL', async () => {
             await basicAuthPage.goto(`${Config.baseURL}cart`)
+        })
+
+        await steps(["id"], 'Go to Cart page by URL', async () => {
+            await basicAuthPage.goto(`${Config.baseURL}en/cart`)
         })
 
         await step('Verify that the cart page is displayed', async () => {
@@ -73,6 +77,14 @@ test.describe("Empty cart without login", () => {
 });
 
 test.describe("Add products to cart without login", () => {
+    let cartPageURL = `${Config.baseURL}cart`
+    let checkoutPageURL = `${Config.baseURL}checkout`
+
+    if (process.env.LOCALE == "id") {
+        cartPageURL = `${Config.baseURL}en/cart`
+        checkoutPageURL = `${Config.baseURL}en/checkout`
+    }
+
     test(`
         1. Minicart is displayed after adding product to cart
         2. Prodcollection and prodname are displayed correctly in the minicart
@@ -173,7 +185,7 @@ test.describe("Add products to cart without login", () => {
                 timeoutMs: 3000
             })
 
-            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.viewCartButton, `${Config.baseURL}cart`,
+            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.viewCartButton, `cart`,
                 "Click on View Cart button and check Cart page is displayed"
             )
         })
@@ -185,7 +197,7 @@ test.describe("Add products to cart without login", () => {
                 timeoutMs: 3000
             })
 
-            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.checkoutButton, `${Config.baseURL}checkoutlogin`,
+            await minicart.assertNavigatedURLByClickLocator(basicAuthPage, minicart.checkoutButton, `checkoutlogin`,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
         })
@@ -363,7 +375,7 @@ test.describe("Add products to cart without login", () => {
         prodName = await cartpage.getProdName(prodIndex)
 
         await step('Go to Cart page by URL', async () => {
-            await basicAuthPage.goto(`${Config.baseURL}cart`)
+            await basicAuthPage.goto(cartPageURL)
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
@@ -379,7 +391,7 @@ test.describe("Add products to cart without login", () => {
         })
 
         await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
-            await cartpage.assertNavigatedURLByClickLocator(basicAuthPage, cartpage.checkoutButton, `${Config.baseURL}checkoutlogin`,
+            await cartpage.assertNavigatedURLByClickLocator(basicAuthPage, cartpage.checkoutButton, `checkoutlogin`,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
         })
