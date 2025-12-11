@@ -15,12 +15,18 @@ test.describe("Empty cart after login", () => {
     test.beforeAll(async ({ loggedInPage }) => {
         const homepage = createHomePage(loggedInPage)
         const cartpage = createCartPage(loggedInPage)
+        let cartPageURL = `${Config.baseURL}cart`
 
         initialCartBadge = await homepage.getCartBadgeValue()
 
+        if (process.env.LOCALE == "id") {
+            cartPageURL = `${Config.baseURL}en/cart`
+        }
+
         if (initialCartBadge > 0) {
             await step('Verify that all products in minicart are removed', async () => {
-                await loggedInPage.goto(`${Config.baseURL}cart`)
+
+                await loggedInPage.goto(cartPageURL)
 
                 await cartpage.removeAllProducts()
 
@@ -76,8 +82,12 @@ test.describe("Empty cart after login", () => {
     test(`4. Cart page is displayed`, async ({ loggedInPage }) => {
         const cartpage = createCartPage(loggedInPage)
 
-        await step('Go to Cart page by URL', async () => {
+        await steps(["au", "jp", "my", "nz", "ph", "sg", "tw"], 'Go to Cart page by URL', async () => {
             await loggedInPage.goto(`${Config.baseURL}cart`)
+        })
+
+        await steps(["id"], 'Go to Cart page by URL', async () => {
+            await loggedInPage.goto(`${Config.baseURL}en/cart`)
         })
 
         await step('Verify that the cart page is displayed', async () => {
@@ -91,6 +101,8 @@ test.describe("Empty cart after login", () => {
 
 test.describe("Add products to cart after login", () => {
     let initialCartBadge = 0
+    let cartPageURL = `${Config.baseURL}cart`
+    let checkoutPageURL = `${Config.baseURL}checkout`
 
     test.beforeEach(async ({ loggedInPage }) => {
         const homepage = createHomePage(loggedInPage)
@@ -98,9 +110,14 @@ test.describe("Add products to cart after login", () => {
 
         initialCartBadge = await homepage.getCartBadgeValue()
 
+        if (process.env.LOCALE == "id") {
+            cartPageURL = `${Config.baseURL}en/cart`
+            checkoutPageURL = `${Config.baseURL}en/checkout`
+        }
+
         if (initialCartBadge > 0) {
             await step('Verify that all products in minicart are removed', async () => {
-                await loggedInPage.goto(`${Config.baseURL}cart`)
+                await loggedInPage.goto(cartPageURL)
 
                 await cartpage.removeAllProducts()
 
@@ -190,7 +207,7 @@ test.describe("Add products to cart after login", () => {
                 timeoutMs: 3000
             })
 
-            await minicart.assertNavigatedURLByClickLocator(loggedInPage, minicart.viewCartButton, `${Config.baseURL}cart`,
+            await minicart.assertNavigatedURLByClickLocator(loggedInPage, minicart.viewCartButton, cartPageURL,
                 "Click on View Cart button and check Cart page is displayed"
             )
         })
@@ -202,7 +219,7 @@ test.describe("Add products to cart after login", () => {
                 timeoutMs: 3000
             })
 
-            await minicart.assertNavigatedURLByClickLocator(loggedInPage, minicart.checkoutButton, `${Config.baseURL}checkout`,
+            await minicart.assertNavigatedURLByClickLocator(loggedInPage, minicart.checkoutButton, checkoutPageURL,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
         })
@@ -276,6 +293,7 @@ test.describe("Add products to cart after login", () => {
         const secondMinicartProductPrice = await extractNumber(await minicart.getMinicartProdPrice(prodIndexes[1]));
         const shippingCost = await extractNumber(await minicart.getShippingCost());
         const shippingDiscount = await extractNumber(await minicart.getShippingDiscount())
+        const promotionDiscount = await extractNumber(await minicart.getPromotionDiscount())
         const totalPrice = await extractNumber(await minicart.getTotalPrice());
 
         console.log(`Datatest: firstProductPrice: ${firstProductPrice}, secondProductPrice: ${secondProductPrice}, firstMinicartProductPrice: ${firstMinicartProductPrice}, secondMinicartProductPrice: ${secondMinicartProductPrice}`)
@@ -284,7 +302,7 @@ test.describe("Add products to cart after login", () => {
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount)
+            expect(totalPrice).toBeCloseTo(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount - promotionDiscount, 2)
         })
 
         await step('Verify remove product modal is displayed when removing a product in the minicart', async () => {
@@ -390,7 +408,7 @@ test.describe("Add products to cart after login", () => {
         
         await step('Go to Cart page by URL', async () => {
             await delay(500)
-            await loggedInPage.goto(`${Config.baseURL}cart`)
+            await loggedInPage.goto(cartPageURL)
         })
 
         await step('Verify prodcollection and prodname are displayed in the the minicart correctly', async () => {
@@ -406,7 +424,7 @@ test.describe("Add products to cart after login", () => {
         })
 
         await step('Verify the checkout login page is displayed when clicking on checkout button', async () => {
-            await cartpage.assertNavigatedURLByClickLocator(loggedInPage, cartpage.checkoutButton, `${Config.baseURL}checkout`,
+            await cartpage.assertNavigatedURLByClickLocator(loggedInPage, cartpage.checkoutButton, checkoutPageURL,
                 "Click on Checkout button and check Checkout Login page is displayed"
             )
         })
@@ -425,12 +443,13 @@ test.describe("Add products to cart after login", () => {
         const secondMinicartProductPrice = await extractNumber(await cartpage.getCartPageProdPrice(prodIndexes[1]));
         const shippingCost = await extractNumber(await cartpage.getShippingCost());
         const shippingDiscount = await extractNumber(await cartpage.getShippingDiscount())
+        const promotionDiscount = await extractNumber(await cartpage.getPromotionDiscount()) 
         const totalPrice = await extractNumber(await cartpage.getTotalPrice());
 
         await step('Verify total amount payable is correct', async () => {
             expect(firstProductPrice).toBe(firstMinicartProductPrice)
             expect(secondProductPrice).toBe(secondMinicartProductPrice)
-            expect(totalPrice).toBe(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount)
+            expect(totalPrice).toBeCloseTo(firstProductPrice + secondProductPrice + shippingCost - shippingDiscount - promotionDiscount, 2)
         })
 
         await step('Verify remove product modal is displayed when removing a product in Cart page', async () => {

@@ -17,7 +17,7 @@ test.describe("Offers Page", () => {
         await homepage.clickMenuItem('offers', "Go to Offers page")
     })
 
-    test(`
+    tests(["sg"], `
         1. Assert that the Offers/Sale page is displayed
         2. In-stock products are displayed when clicking on in-stock checkbox
         3. User can add product to cart

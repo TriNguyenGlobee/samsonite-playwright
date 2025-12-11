@@ -23,7 +23,7 @@ export class MinicartPageAU extends MinicartPage {
         return (shippingDiscount_1_num).toString()
     }
 
-    async getAmountFooterCategoryItems(): Promise<number> {return 3}
+    async getAmountFooterCategoryItems(): Promise<number> {return 4}
     
     // =========================
     // ✅ Assertions

@@ -119,25 +119,25 @@ export class HomePageAU extends HomePage {
 
     async assertWhyShopWithUsContent(): Promise<void> {
         await test.step("why shop with us section data: ", async () => {
-            await attachment("Official website", t.whyshopwithus('officialwebsite'), "text/plain");
-            await attachment("Security shopping", t.whyshopwithus('securityShop'), "text/plain");
-            await attachment("Gift", t.whyshopwithus('fastdelivery'), "text/plain");
-            await attachment("Warranty", t.whyshopwithus('fullcollection'), "text/plain");
+            await attachment("Stringent Quality Tests and a Truly Global Warranty", t.whyshopwithus('warranty'), "text/plain");
+            await attachment("Fast, Secure Payment and Delivery", t.whyshopwithus('fastdelivery'), "text/plain");
+            await attachment("115 Years of Innovation", t.whyshopwithus('officialwebsite'), "text/plain");
+            await attachment("A World of Choice", t.whyshopwithus('fullcollection'), "text/plain");
         });
 
-        await this.assertLocatorInside(this.withUsOfficalSite, {
+        await this.assertLocatorInside(this.withUsWarranty, {
             hasImage: true,
-            text: `${t.whyshopwithus('officialwebsite')}`
-        })
-
-        await this.assertLocatorInside(this.withUsSafeShopping, {
-            hasImage: true,
-            text: `${t.whyshopwithus('securityShop')}`
+            text: `${t.whyshopwithus('warranty')}`
         })
 
         await this.assertLocatorInside(this.withUsFastDelivery, {
             hasImage: true,
             text: `${t.whyshopwithus('fastdelivery')}`
+        })
+
+        await this.assertLocatorInside(this.withUsOfficalSite, {
+            hasImage: true,
+            text: `${t.whyshopwithus('officialwebsite')}`
         })
 
         await this.assertLocatorInside(this.withUsCollection, {

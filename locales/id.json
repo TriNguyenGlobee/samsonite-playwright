@@ -169,6 +169,7 @@
     "labels": "Labels",
     "colour": "Colour",
     "color": "Colour",
+    "lgcolor": "Colour",
     "traveltype": "Travel Type",
     "collection": "Collection",
     "hardside": "Hardside",

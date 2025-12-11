@@ -12,6 +12,12 @@ export class CartPageID extends CartPage {
     // =========================
     async getShippingDiscount(): Promise<string> { return "0" }
 
+    async getPromotionDiscount(): Promise<string> {
+        const shipping = this.page.locator(`.applied-promotion-discount`)
+
+        return (await shipping.first().innerText()).trim()
+    }
+
     // =========================
     // ✅ Assertions
     // =========================

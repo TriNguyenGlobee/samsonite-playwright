@@ -44,7 +44,7 @@
     "submitbutton": "Submit"
   },
   "registerpage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Sites-MonoSamsoniteAU-Site | Salesforce Commerce Cloud | 3.3.0",
     "pageTitle": "Create Account",
     "customerdetailslabel": "Customer details",
     "lastname": "Last Name",
@@ -108,21 +108,21 @@
     "url": "https://ssau.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
-    "officialwebsitetitle": "Official Website",
-    "officialwebsite": "The largest online selection of official Samsonite products including luggage, backpacks, bags and travel accessories.",
+    "officialwebsitetitle": "115 Years of Innovation",
+    "officialwebsite": "Travel with confidence, backed by 115 years of market-leading design and innovation.",
     "securityShop": "Secure Socket Layer (SSL) encryption makes every transaction safe and reliable.",
     "securityShoptitle": "Secure payment",
-    "fastdelivery": "Online orders are delivered within 5 working days using a premium courier service.",
-    "fastdeliverytitle": "Fast Delivery",
-    "fullcollection": "One-stop shop for exploring the complete Samsonite collection online.",
-    "fullcollectiontitle": "Full Collection",
+    "fastdelivery": "Secure encryption and premium courier services accommodating standard, express, next or even same business day delivery options throughout Australia.",
+    "fastdeliverytitle": "Fast, Secure Payment and Delivery",
+    "fullcollection": "One-stop shop for exploring the largest online selection of official Samsonite products including luggage, backpacks, bags and travel accessories.",
+    "fullcollectiontitle": "A World of Choice",
     "gift": "公式サイトでは大切な方への贈り物にギフトラッピングを承っています。",
     "gifttitle": "ギフト",
-    "warranty": "公式サイトからお求めいただいた製品には、サムソナイトの保証規定が適用されます。",
-    "warrantytitle": "製品保証"
+    "warranty": "We deliver the quality, you conduct the test. With a global warranty on all our products in over 100 countries, you're covered wherever your travels take you.",
+    "warrantytitle": "Stringent Quality Tests and a Truly Global Warranty"
   },
   "mypage": {
-    "title": "Sites-MonoSamsoniteSG-Site | Salesforce Commerce Cloud | 3.3.0",
+    "title": "My Account | Samsonite Australia",
     "pageTitle": "Your Account",
     "myOrders": "My Orders",
     "membership": "My Membership",
@@ -168,6 +168,7 @@
     "labels": "Labels",
     "colour": "Shop by Colour",
     "color": "Shop by Colour",
+    "lgcolor": "Shop by Colour",
     "traveltype": "Travel Type",
     "collection": "Shop By Collections",
     "hardside": "Hardside",
@@ -192,6 +193,7 @@
     "magnetic": "Magnetic Zippers",
     "suspensionwheels": "Suspension Wheels",
     "usbport": ["USB port", "USB Port"],
+    "lgusbport": "USB Port",
     "samsonite": ["Samsonite", "Samsonite", "Samsonite"],
     "samsoniteblack": ["Samsonite Black", "Samsonite Black", "Samsonite Black"],
     "samsonitered": ["Samsonite Red", "Samsonite Red", "Samsonite Red"],
