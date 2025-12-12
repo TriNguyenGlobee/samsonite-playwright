@@ -403,4 +403,103 @@ test.describe("PDP is shown correctly", async () => {
             expect(await pdppage.reviewItemRow.count()).toBeGreaterThan(0)
         })
     })
+
+    test(`
+        23. Q&A section is displayed correctly
+        24. Submit new question displayed when entering into question textbox
+        25. Clear question textbox
+        26. Clicking on Submit new question button
+        27. Clicking Submit button without entering any information
+        28. Submit question after entering fully information
+        29. Close question submitted success popup
+        `, async ({ basicAuthPage }) => {
+        const pdppage = new PDPPage(basicAuthPage)
+        const questionText = `Auto question ${await generateReadableTimeBasedId()}`
+        const nickname = `Auto Nickname ${await generateReadableTimeBasedId()}`
+        const email = `autoemail+${await generateReadableTimeBasedId()}@mailinator.com`
+        const location = "NY"
+
+        await pdppage.goto("https://ssau.dev.samsonite-asia.com/upscape/spinner-55-exp/ss-143108-1041.html")
+
+        await scrollToBottom(basicAuthPage)
+
+        await pdppage.selectTab("Q&A", "Select Q&A tab")
+
+        await step('Assert Q&A section is displayed correctly', async () => {
+            await pdppage.assertVisible(pdppage.qaQuestionTextbox)
+            await pdppage.assertVisible(pdppage.qaSortQuestionDropdown)
+            await pdppage.assertVisible(pdppage.questionContainer)
+        })
+
+        await step('Input question into question textbox', async () => {
+            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+        })
+
+        await step('Assert Submit New Question button is displayed', async () => {
+            await pdppage.assertVisible(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Clear question textbox', async () => {
+            await pdppage.click(pdppage.clearSearchQuestionButton,
+                "Clicking on clear search question button"
+            )
+            expect(await pdppage.qaQuestionTextbox.inputValue()).toBe("")
+
+            await pdppage.assertHidden(pdppage.submitNewQuestionButton,
+                "Assert Submit New Question button is hidden"
+            )
+        })
+
+        await step('Input question into question textbox', async () => {
+            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+        })
+
+        await step('Clicking on Submit New Question button', async () => {
+            await pdppage.click(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Assert information form is displayed', async () => {
+            await pdppage.assertVisible(pdppage.nicknameTextbox)
+            await pdppage.assertVisible(pdppage.emailTextbox)
+            await pdppage.assertVisible(pdppage.locationTextbox)
+            await pdppage.assertVisible(pdppage.submitQuestionButton)
+        })
+
+        await step('Clicking on Submit button without entering any information', async () => {
+            await pdppage.click(pdppage.submitQuestionButton)
+        })
+
+        await step('Assert required error messages are displayed', async () => {
+            await pdppage.assertVisible(pdppage.nicknameReqErrorMsg,
+                "Assert Nickname required error message is displayed"
+            )
+            await pdppage.assertVisible(pdppage.emailReqErrorMsg,
+                "Assert Email required error message is displayed"
+            )
+        })
+
+        await step('Fill information form', async () => {
+            await pdppage.type(pdppage.nicknameTextbox, nickname)
+            await pdppage.type(pdppage.emailTextbox, email)
+            await pdppage.type(pdppage.locationTextbox, location)
+        })
+
+        await step('Clicking on Submit button', async () => {
+            await pdppage.click(pdppage.submitQuestionButton)
+        })
+
+        await step('Assert question submitted success popup is displayed', async () => {
+            await pdppage.assertVisible(pdppage.submitQuestionSuccessPopup)
+        })
+
+        await step('Close question submitted success popup', async () => {
+            await pdppage.click(pdppage.successPopupCloseButton,
+                "Clicking on close button"
+            )
+        })
+
+        await step('Assert question submitted success popup is closed', async () => {
+            await pdppage.assertHidden(pdppage.submitQuestionSuccessPopup)
+        })
+    })
 });
