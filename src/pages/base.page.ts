@@ -111,6 +111,22 @@ export class BasePage {
         });
     }
 
+    async typeByManual(
+        locator: Locator,
+        value: string,
+        description?: string
+    ) {
+        await step(description || `Type text: ${value}`, async () => {
+            await locator.click();
+            await locator.press(
+                process.platform === 'darwin' ? 'Meta+A' : 'Control+A'
+            );
+            await locator.press('Backspace');
+            await locator.pressSequentially(value, { delay: 30 });
+        });
+        await locator.press('Tab');
+    }
+
     async hover(locator: Locator, description?: string) {
         await step(description || "Hover on locator", async () => {
             await locator.hover();
@@ -310,6 +326,13 @@ export class BasePage {
         await step(description || `Click on rated product`, async () => {
             await PageUtils.waitForDomAvailable(this.page)
             await this.click(this.ratedProd.first())
+        })
+    }
+
+    async selectBvRatedProd(description?: string): Promise<void> {
+        await step(description || `Click on BV Rated product`, async () => {
+            await PageUtils.waitForDomAvailable(this.page)
+            await this.click(this.bvRatedProd.first())
         })
     }
 
@@ -636,6 +659,7 @@ export class BasePage {
         }
 
         await step('Assert number of visible level 2 menu items', async () => {
+            console.log("Counted Locator: " + lis)
             await delay(2000)
             const count = await lis.count();
 
@@ -803,7 +827,7 @@ export class BasePage {
     async assertPLPProductSortedByRatingPoint(order: "asc" | "desc" = "asc", description?: string) {
         await step(description || `Assert PLP product sorted by rating point: ${order}`, async () => {
             const decimalPointArr: number[] = []
-            const totalProds = await this.bvRatedProd.count(); 
+            const totalProds = await this.bvRatedProd.count();
 
             for (let index = 1; index <= totalProds; index++) {
                 let currentRating = await this.getPLPDecimalRatingPoint(index)

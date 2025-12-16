@@ -313,16 +313,15 @@ export async function getDecimalRatingStar(page: Page) {
     for (let i = 0; i < 5; i++) {
       const secondStop = stars
         .nth(i)
-        .locator('defs linearGradient stop')
-        .nth(1);
+        .locator('defs linearGradient')
 
-      const offset = await secondStop.getAttribute('offset');
+      const x1 = await secondStop.getAttribute('x1');
 
-      if (!offset) continue;
+      if (!x1) continue;
 
-      const percent = parseFloat(offset.replace('%', ''));
+      const percent = parseFloat(x1.replace('%', ''));
 
-      const filledRatio = 1 - percent / 100;
+      const filledRatio = percent / 100;
 
       rating += filledRatio;
     }
@@ -466,8 +465,6 @@ export async function selectDropdownOption(
   })
 }
 
-
-
 /**
  * Close the modal if it is present on the page.
  * @param page 
@@ -481,7 +478,8 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
     { name: 'Intent Cart Modal', sel: '//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]' },
     { name: 'Popup Container', sel: '//div[@class="popup-container"]//button[@class="close-btn"]' },
     { name: 'Back Drop Label', sel: '//div[@id="staticBackdrop"]//button[@aria-label="Close"]' },
-    { name: 'MCP Banner', sel: '//button[@class="mcp-close"]' }
+    { name: 'MCP Banner', sel: '//button[@class="mcp-close"]' },
+    { name: 'Amazone pay popup', sel: '(//div[@class="window-element"]//div)[1]'}
   ];
 
   for (const modal of selectors) {

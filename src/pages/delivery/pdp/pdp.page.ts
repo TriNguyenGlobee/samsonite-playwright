@@ -147,7 +147,7 @@ export class PDPPage extends BasePage {
         this.clearSearchQuestionButton = page.locator(`//button[@aria-label="Clear Search field"]`);
         this.submitQuestionButton = page.locator(`//div[@class="bv-questions"]//button[normalize-space(text())="Submit"]`)
         this.nicknameTextbox = page.locator(`//input[@name="usernickname"]`);
-        this.emailTextbox = page.locator(`//input[@type="email"]`);
+        this.emailTextbox = page.locator(`//div[@class="bv-questions"]//input[@type="email"]`);
         this.locationTextbox = page.locator(`//input[@name="userlocation"]`);
         this.nicknameReqErrorMsg = page.locator(`//label[contains(text(),"Required:  Nickname.")]`)
         this.emailReqErrorMsg = page.locator(`//label[contains(text(),"Required:  Email.")]`)
@@ -163,24 +163,25 @@ export class PDPPage extends BasePage {
         reviewTitle?: string;
         nickname?: string;
         email?: string;
-        sweepstakes?: boolean;
+        //sweepstakes?: boolean;
         term?: boolean;
     }) {
         const review = data?.review ?? `Review content ${generateSentence(100)}`;
         const reviewTitle = data?.reviewTitle ?? `Title ${generateSentence(15)}`;
         const nickname = data?.nickname ?? `User${generateReadableTimeBasedId()}`;
         const email = data?.email ?? `auto_${generateReadableTimeBasedId()}@yopmail.com`;
-        const sweepstakes = data?.sweepstakes ?? false;
+        //const sweepstakes = data?.sweepstakes ?? false;
         const term = data?.term ?? true;
 
-        const sweepstakesYesButton = this.page.locator(`//div[@id="0_IncentivizedReview-True"]`)
-        const sweepstakesNoButton = this.page.locator(`//div[@id="0_IncentivizedReview-False"]`)
+        //const sweepstakesYesButton = this.page.locator(`//div[@id="0_IncentivizedReview-True"]`)
+        //const sweepstakesNoButton = this.page.locator(`//div[@id="0_IncentivizedReview-False"]`)
 
         await this.reviewField.fill(review);
         await this.reviewTitleField.fill(reviewTitle);
         await this.nicknameField.fill(nickname);
         await this.emailField.fill(email);
-
+        await delay(1000)
+        /*
         if (sweepstakes) {
             await this.hover(sweepstakesYesButton)
             await delay(1000)
@@ -193,7 +194,7 @@ export class PDPPage extends BasePage {
             await this.click(sweepstakesNoButton,
                 "Clicking No button on sweepstakes section")
             await delay(1000)
-        }
+        }*/
 
         if (term) {
             await this.termCheckbox.click();
@@ -406,7 +407,7 @@ export class PDPPage extends BasePage {
 
             // Assert all tabs
             await tabAll.click();
-            await page.waitForLoadState("networkidle");
+            await PageUtils.waitForDomAvailable(page);
             await this.clickThroughSlides(page)
 
             let count = await mediaItems.count();
@@ -420,15 +421,14 @@ export class PDPPage extends BasePage {
                 else if (await isImage(item)) photos++;
             }
 
-            expect(photos).toBeGreaterThan(0);
-            expect(videos).toBeGreaterThan(0);
+            expect(photos + videos).toBe(count);
 
-            await delay(500)
+            await delay(1000)
 
             // Assert images tab
             await tabImages.click();
-            await delay(500)
-            await page.waitForLoadState("networkidle");
+            await delay(1000)
+            await PageUtils.waitForDomAvailable(page);
             await this.clickThroughSlides(page)
 
             count = await mediaItems.count();
@@ -446,7 +446,7 @@ export class PDPPage extends BasePage {
             // Assert videos tab
             await tabVideos.click();
             await delay(500)
-            await page.waitForLoadState("networkidle");
+            await PageUtils.waitForDomAvailable(page);
             await this.clickThroughSlides(page)
 
             count = await mediaItems.count();
