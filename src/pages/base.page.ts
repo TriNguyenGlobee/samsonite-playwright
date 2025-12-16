@@ -593,6 +593,7 @@ export class BasePage {
         }
 
         await step('Assert number of visible level 2 menu items', async () => {
+            console.log("Counted Locator: " + lis)
             await delay(2000)
             const count = await lis.count();
 
