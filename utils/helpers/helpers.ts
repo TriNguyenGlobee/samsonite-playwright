@@ -313,16 +313,15 @@ export async function getDecimalRatingStar(page: Page) {
     for (let i = 0; i < 5; i++) {
       const secondStop = stars
         .nth(i)
-        .locator('defs linearGradient stop')
-        .nth(1);
+        .locator('defs linearGradient')
 
-      const offset = await secondStop.getAttribute('offset');
+      const x1 = await secondStop.getAttribute('x1');
 
-      if (!offset) continue;
+      if (!x1) continue;
 
-      const percent = parseFloat(offset.replace('%', ''));
+      const percent = parseFloat(x1.replace('%', ''));
 
-      const filledRatio = 1 - percent / 100;
+      const filledRatio = percent / 100;
 
       rating += filledRatio;
     }
@@ -465,8 +464,6 @@ export async function selectDropdownOption(
     console.log(`Selected: ${selectedValue}`);
   })
 }
-
-
 
 /**
  * Close the modal if it is present on the page.

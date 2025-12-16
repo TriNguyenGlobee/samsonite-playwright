@@ -21,7 +21,7 @@ export class LoginMY extends LoginPage {
         await step(`Click login button`, async () => {
             await Promise.all([
                 this.click(this.signInButton, "Click login button"),
-                this.signInButton.waitFor({state: "hidden"})
+                this.signInButton.waitFor({ state: "hidden" })
             ]);
         });
 

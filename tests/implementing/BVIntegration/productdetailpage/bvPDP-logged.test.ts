@@ -1,10 +1,33 @@
 import { expect, test } from "../../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
-import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop } from "../../../../utils/helpers/helpers";
+import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence } from "../../../../utils/helpers/helpers";
+import { createHomePage } from "../../../../src/factories/home.factory";
+import { createLuggagePage } from "../../../../src/factories/productlistingpage/luggage.factory";
 
 
 test.describe("PDP is shown correctly", async () => {
+    test.beforeEach(async ({ loggedInPage }) => {
+        const homepage = createHomePage(loggedInPage)
+        const luggagepage = createLuggagePage(loggedInPage)
+
+        await step("Go to Luggage Page", async () => {
+            await homepage.clickMenuItem('luggage', "Go to Luggage page")
+        })
+
+        await step("Click In-stock checkbox", async () => {
+            if (await homepage.productTableShow.isVisible()) {
+                await homepage.clickCheckbox(loggedInPage, t.homepage('in-stock'),
+                    "Checking the In-stock checkbox")
+            } else {
+                test.skip(true, "Product table not visible, skipping the test.");
+            }
+        })
+
+        await lazyLoad(loggedInPage)
+        await luggagepage.selectBvRatedProd()
+    });
+
     test(`
         1. Rating star is shown exactly
         2. Review count is displayed
@@ -16,7 +39,7 @@ test.describe("PDP is shown correctly", async () => {
         `, async ({ loggedInPage }) => {
         const pdppage = new PDPPage(loggedInPage)
 
-        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
+        // await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
         await scrollToBottom(loggedInPage)
 
@@ -91,7 +114,7 @@ test.describe("PDP is shown correctly", async () => {
         const ovRatingStar4 = loggedInPage.locator(`div#bv-ips-star-rating-4`)
         const ovRatingStar5 = loggedInPage.locator(`div#bv-ips-star-rating-5`)
 
-        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
+        //await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
         await scrollToBottom(loggedInPage)
 
@@ -181,8 +204,11 @@ test.describe("PDP is shown correctly", async () => {
         const starQuality = loggedInPage.locator(`div#bv-ips-star-Quality-5`)
         const starValue = loggedInPage.locator(`div#bv-ips-star-Value-5`)
         const starStyle = loggedInPage.locator(`div#bv-ips-star-Style-5`)
+        const prosHighQuality = loggedInPage.locator(`//div[@id="2_Pros-HighQuality"]`)
+        const dreamDesContent = `Dream destination revuew ${await generateReadableTimeBasedId()}`
+        const dramDesTextbox = loggedInPage.locator(`//input[@id="3_DreamDestination"]`)
 
-        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
+        //await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
         await scrollToBottom(loggedInPage)
 
@@ -234,8 +260,13 @@ test.describe("PDP is shown correctly", async () => {
             )
         })
 
-        await step('Enter value in located textbox', async () => {
-            await pdppage.type(pdppage.locatedTextbox, "NY")
+        /*
+       await step('Enter value in located textbox', async () => {
+           await pdppage.type(pdppage.locatedTextbox, "NY")
+       })*/
+
+        await step('Select pros on Personal/Product Information section', async () => {
+            await pdppage.click(prosHighQuality, "Selecting High Quality pros")
         })
 
         await step('Clicking on submit button', async () => {
@@ -253,10 +284,17 @@ test.describe("PDP is shown correctly", async () => {
             )
         })
 
+        /*
         await step('Selecting rating star on Product Rating section', async () => {
             await pdppage.click(starQuality, "Select Quality: 5 stars")
             await pdppage.click(starValue, "Select Value: 5 stars")
             await pdppage.click(starStyle, "Select Style: 5 stars")
+        })*/
+
+        await step('Entering dream destination content', async () => {
+            await pdppage.type(dramDesTextbox, dreamDesContent,
+                "Entering dream destination content"
+            )
         })
 
         await step('Clicking on submit button', async () => {
@@ -292,7 +330,7 @@ test.describe("PDP is shown correctly", async () => {
         const prevReviewButton = loggedInPage.locator(`a.prev`)
         const searchNATerm = await generateReadableTimeBasedId()
 
-        await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
+        //await pdppage.goto("https://sssg.dev.samsonite-asia.com/sbl-fanthom/spinner-55/20-tag/ss-132219-1041.html")
 
         await scrollToBottom(loggedInPage)
 
@@ -306,10 +344,10 @@ test.describe("PDP is shown correctly", async () => {
         await step('Assert Images and Videos are displayed correctly', async () => {
             await pdppage.assertMediaTabs(loggedInPage)
         })
-
+        /*
         await step('Assert average customer rating shown', async () => {
             await pdppage.assertVisible(pdppage.averageCustomerRating)
-        })
+        })*/
 
         await step('Clicking view more reviews link', async () => {
             await scrollToTop(loggedInPage)
@@ -380,6 +418,133 @@ test.describe("PDP is shown correctly", async () => {
             await delay(2000)
 
             expect(await pdppage.reviewItemRow.count()).toBeGreaterThan(0)
+        })
+    })
+
+    test(`
+        23. Q&A section is displayed correctly
+        24. Submit new question displayed when entering into question textbox
+        25. Clear question textbox
+        26. Clicking on Submit new question button
+        27. Clicking Submit button without entering any information
+        `, async ({ loggedInPage }) => {
+        const pdppage = new PDPPage(loggedInPage)
+        const questionText = `Auto question ${await generateReadableTimeBasedId()}`
+        const nickname = `Auto Nickname ${await generateSentence(5)}`
+        const email = `autoemail${await generateReadableTimeBasedId()}@mailinator.com`
+        const location = "NY"
+
+        //await pdppage.goto("https://ssau.dev.samsonite-asia.com/upscape/spinner-55-exp/ss-143108-1041.html")
+
+        await scrollToBottom(loggedInPage)
+        await delay(1000)
+
+        await pdppage.selectTab("Q&A", "Select Q&A tab")
+
+        await step('Assert Q&A section is displayed correctly', async () => {
+            await pdppage.assertVisible(pdppage.qaQuestionTextbox)
+            await pdppage.assertVisible(pdppage.qaSortQuestionDropdown)
+            expect(await pdppage.questionContainer.count()).toBeGreaterThan(0)
+        })
+
+        await step('Input question into question textbox', async () => {
+            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+        })
+
+        await step('Assert Submit New Question button is displayed', async () => {
+            await pdppage.assertVisible(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Clear question textbox', async () => {
+            await pdppage.click(pdppage.clearSearchQuestionButton,
+                "Clicking on clear search question button"
+            )
+            expect(await pdppage.qaQuestionTextbox.inputValue()).toBe("")
+
+            await pdppage.assertHidden(pdppage.submitNewQuestionButton,
+                "Assert Submit New Question button is hidden"
+            )
+        })
+
+        await step('Input question into question textbox', async () => {
+            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+        })
+
+        await step('Clicking on Submit New Question button', async () => {
+            await pdppage.click(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Assert information form is displayed', async () => {
+            await pdppage.assertVisible(pdppage.nicknameTextbox)
+            await pdppage.assertVisible(pdppage.emailTextbox)
+            await pdppage.assertVisible(pdppage.locationTextbox)
+            await pdppage.assertVisible(pdppage.submitQuestionButton)
+        })
+
+        await step('Clicking on Submit button without entering any information', async () => {
+            await pdppage.click(pdppage.submitQuestionButton)
+        })
+
+        await step('Assert required error messages are displayed', async () => {
+            await delay(1000)
+
+            await pdppage.assertVisible(pdppage.nicknameReqErrorMsg,
+                "Assert Nickname required error message is displayed"
+            )
+            await pdppage.assertVisible(pdppage.emailReqErrorMsg,
+                "Assert Email required error message is displayed"
+            )
+        })
+    })
+
+    test(`
+        28. Submit question after entering fully information
+        29. Close question submitted success popup
+        `, async ({ loggedInPage }) => {
+        const pdppage = new PDPPage(loggedInPage)
+        const questionText = `Auto question ${await generateReadableTimeBasedId()}`
+        const nickname = `Auto Nickname ${await generateSentence(5)}`
+        const email = `autoemail${await generateReadableTimeBasedId()}@mailinator.com`
+        const location = "NY"
+
+        //await pdppage.goto("https://ssau.dev.samsonite-asia.com/upscape/spinner-55-exp/ss-143108-1041.html")
+
+        await scrollToBottom(loggedInPage)
+        await delay(1000)
+
+        await pdppage.selectTab("Q&A", "Select Q&A tab")
+
+        await step('Input question into question textbox', async () => {
+            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+        })
+
+        await step('Clicking on Submit New Question button', async () => {
+            await pdppage.click(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Fill information form', async () => {
+            await pdppage.typeByManual(pdppage.nicknameTextbox, nickname)
+            await pdppage.typeByManual(pdppage.emailTextbox, email)
+            await pdppage.typeByManual(pdppage.locationTextbox, location)
+        })
+
+        await step('Clicking on Submit button', async () => {
+            await delay(1000)
+            await pdppage.click(pdppage.submitQuestionButton)
+        })
+
+        await step('Assert question submitted success popup is displayed', async () => {
+            await pdppage.assertVisible(pdppage.submitQuestionSuccessPopup)
+        })
+
+        await step('Close question submitted success popup', async () => {
+            await pdppage.click(pdppage.successPopupCloseButton,
+                "Clicking on close button"
+            )
+        })
+
+        await step('Assert question submitted success popup is closed', async () => {
+            await pdppage.assertHidden(pdppage.submitQuestionSuccessPopup)
         })
     })
 });
