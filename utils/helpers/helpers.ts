@@ -481,7 +481,8 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
     { name: 'Intent Cart Modal', sel: '//div[@id="mcp-exit-intent-cart"]//button[@class="close-btn"]' },
     { name: 'Popup Container', sel: '//div[@class="popup-container"]//button[@class="close-btn"]' },
     { name: 'Back Drop Label', sel: '//div[@id="staticBackdrop"]//button[@aria-label="Close"]' },
-    { name: 'MCP Banner', sel: '//button[@class="mcp-close"]' }
+    { name: 'MCP Banner', sel: '//button[@class="mcp-close"]' },
+    { name: 'Amazone pay popup', sel: '(//div[@class="window-element"]//div)[1]'}
   ];
 
   for (const modal of selectors) {
