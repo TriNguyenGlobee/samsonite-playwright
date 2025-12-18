@@ -443,9 +443,10 @@ export async function selectDropdownOption(
   page: Page,
   selector: string | Locator,
   optionValueOrLabel: string,
-  by: "value" | "label" | "text" = "value"
+  by: "value" | "label" | "text" = "value",
+  description?: string
 ): Promise<void> {
-  await step(`Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
+  await step(description || `Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
     const dropdown =
       typeof selector === "string" ? page.locator(selector) : selector;
 
@@ -479,7 +480,7 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
     { name: 'Popup Container', sel: '//div[@class="popup-container"]//button[@class="close-btn"]' },
     { name: 'Back Drop Label', sel: '//div[@id="staticBackdrop"]//button[@aria-label="Close"]' },
     { name: 'MCP Banner', sel: '//button[@class="mcp-close"]' },
-    { name: 'Amazone pay popup', sel: '(//div[@class="window-element"]//div)[1]'}
+    { name: 'Amazone pay popup', sel: '(//div[@class="window-element"]//div)[1]' }
   ];
 
   for (const modal of selectors) {
@@ -575,6 +576,21 @@ export async function scrollToTop(page: Page) {
   await page.evaluate(() => {
     window.scrollTo(0, 0);
   });
+}
+
+export async function scrollDownUntilVisible(
+  page: Page,
+  locator: Locator,
+  maxScroll = 15
+) {
+  for (let i = 0; i < maxScroll; i++) {
+    if (await locator.isVisible()) return;
+
+    await page.mouse.wheel(0, 800);
+    await page.waitForTimeout(300);
+  }
+
+  throw new Error('Element not visible after scrolling');
 }
 
 /**

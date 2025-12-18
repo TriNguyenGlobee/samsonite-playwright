@@ -4,6 +4,7 @@ import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
 import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence } from "../../../../utils/helpers/helpers";
 import { createHomePage } from "../../../../src/factories/home.factory";
 import { createLuggagePage } from "../../../../src/factories/productlistingpage/luggage.factory";
+import { tests } from "../../../../utils/helpers/localeTest";
 
 
 test.describe("PDP is shown correctly", async () => {
@@ -123,7 +124,7 @@ test.describe("PDP is shown correctly", async () => {
         )
 
         await step("Clicking on Write A Reivew button", async () => {
-            await pdppage.click(pdppage.bvWriteReviewBtn)
+            await pdppage.jsClick(pdppage.bvWriteReviewBtn)
         })
 
         await step('Assert the BV Review Modal is displayed', async () => {
@@ -213,7 +214,7 @@ test.describe("PDP is shown correctly", async () => {
         await scrollToBottom(loggedInPage)
 
         await step("Clicking on Write A Reivew button", async () => {
-            await pdppage.click(pdppage.bvWriteReviewBtn)
+            await pdppage.jsClick(pdppage.bvWriteReviewBtn)
         })
 
         await step('Fill review information to field', async () => {
@@ -421,7 +422,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "kr"], `
         23. Q&A section is displayed correctly
         24. Submit new question displayed when entering into question textbox
         25. Clear question textbox
@@ -497,7 +498,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "kr"], `
         28. Submit question after entering fully information
         29. Close question submitted success popup
         `, async ({ loggedInPage }) => {

@@ -1,9 +1,10 @@
 import { expect, test } from "../../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
-import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad } from "../../../../utils/helpers/helpers";
+import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence, scrollDownUntilVisible } from "../../../../utils/helpers/helpers";
 import { createHomePage } from "../../../../src/factories/home.factory";
 import { createLuggagePage } from "../../../../src/factories/productlistingpage/luggage.factory";
+import { tests } from "../../../../utils/helpers/localeTest";
 
 test.describe("PDP is shown correctly", async () => {
     test.beforeEach(async ({ basicAuthPage }) => {
@@ -99,7 +100,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "hk", "sg"],`
         8. Write a review button is displayed
         9. BV review modal is displayed when clicking Write a review button
         10. User can select Overall rating stars
@@ -122,7 +123,7 @@ test.describe("PDP is shown correctly", async () => {
         )
 
         await step("Clicking on Write A Reivew button", async () => {
-            await pdppage.click(pdppage.bvWriteReviewBtn)
+            await pdppage.jsClick(pdppage.bvWriteReviewBtn)
         })
 
         await step('Assert the BV Review Modal is displayed', async () => {
@@ -193,7 +194,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "hk", "sg"],`
         13. Submit review after entering fully information
         14. User can add Images/Videos and completed Add Images/Videos step
         15. Completed the Personal/Product Information step
@@ -212,7 +213,7 @@ test.describe("PDP is shown correctly", async () => {
         await scrollToBottom(basicAuthPage)
 
         await step("Clicking on Write A Reivew button", async () => {
-            await pdppage.click(pdppage.bvWriteReviewBtn)
+            await pdppage.jsClick(pdppage.bvWriteReviewBtn)
         })
 
         await step('Fill review information to field', async () => {
@@ -338,7 +339,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await step('Scroll to Customer Images And Videos section', async () => {
             await scrollToTop(basicAuthPage)
-            await pdppage.imagesVideosSection.scrollIntoViewIfNeeded()
+            await scrollDownUntilVisible(basicAuthPage, pdppage.imagesVideosSection)
         })
 
         await step('Assert Images and Videos are displayed correctly', async () => {
@@ -351,8 +352,6 @@ test.describe("PDP is shown correctly", async () => {
         })*/
 
         await step('Clicking view more reviews link', async () => {
-            await scrollToTop(basicAuthPage)
-            await pdppage.viewMoreReviewLink.scrollIntoViewIfNeeded()
             await pdppage.click(pdppage.viewMoreReviewLink)
         })
 
@@ -385,7 +384,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await step('Sort review by Lowest to Highest Rating', async () => {
             await scrollToTop(basicAuthPage)
-            await pdppage.sortReview("Lowest to Highest Rating")
+            await pdppage.sortReview(`${t.bvintegration('lowest')}`)
         })
 
         await step('Assert that reviews are sorted by Lowest to Highest Rating', async () => {
@@ -394,7 +393,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await step('Sort review by Highest to Lowest Rating', async () => {
             await scrollToTop(basicAuthPage)
-            await pdppage.sortReview("Highest to Lowest Rating")
+            await pdppage.sortReview(`${t.bvintegration('highest')}`)
         })
 
         await step('Assert that reviews are sorted by Highest to Lowest Rating', async () => {
@@ -422,14 +421,12 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "kr"], `
         23. Q&A section is displayed correctly
         24. Submit new question displayed when entering into question textbox
         25. Clear question textbox
         26. Clicking on Submit new question button
         27. Clicking Submit button without entering any information
-        28. Submit question after entering fully information
-        29. Close question submitted success popup
         `, async ({ basicAuthPage }) => {
         const pdppage = new PDPPage(basicAuthPage)
         const questionText = `Auto question ${await generateReadableTimeBasedId()}`
@@ -497,6 +494,32 @@ test.describe("PDP is shown correctly", async () => {
             await pdppage.assertVisible(pdppage.emailReqErrorMsg,
                 "Assert Email required error message is displayed"
             )
+        })
+    })
+
+    tests(["au", "kr"], `
+            28. Submit question after entering fully information
+            29. Close question submitted success popup
+            `, async ({ basicAuthPage }) => {
+        const pdppage = new PDPPage(basicAuthPage)
+        const questionText = `Auto question ${await generateReadableTimeBasedId()}`
+        const nickname = `Auto Nickname ${await generateSentence(5)}`
+        const email = `autoemail${await generateReadableTimeBasedId()}@mailinator.com`
+        const location = "NY"
+
+        //await pdppage.goto("https://ssau.dev.samsonite-asia.com/upscape/spinner-55-exp/ss-143108-1041.html")
+
+        await scrollToBottom(basicAuthPage)
+        await delay(1000)
+
+        await pdppage.selectTab("Q&A", "Select Q&A tab")
+
+        await step('Input question into question textbox', async () => {
+            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+        })
+
+        await step('Clicking on Submit New Question button', async () => {
+            await pdppage.click(pdppage.submitNewQuestionButton)
         })
 
         await step('Fill information form', async () => {

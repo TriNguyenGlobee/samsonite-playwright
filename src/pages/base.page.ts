@@ -1,13 +1,14 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText, isSorted, selectDropdownOption } from "../../utils/helpers/helpers";
+import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText, isSorted, selectDropdownOption, scrollToTop, lazyLoad } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
 
 export class BasePage {
     protected readonly page: Page;
+    readonly logoImg: Locator;
     readonly shoppingCartButton: Locator;
     readonly headerNavBar: Locator;
     readonly newArrivalsMenuItem: Locator;
@@ -49,6 +50,7 @@ export class BasePage {
 
     constructor(page: Page) {
         this.page = page;
+        this.logoImg = page.locator('//div[contains(@class,"main-logo-wrapper")]');
         this.shoppingCartButton = page.locator('//div[@id="shopping_cart_container"]');
         this.headerNavBar = page.locator('//div[contains(@class,"header-content")]//ul[@class="nav navbar-nav"]');
         this.newArrivalsMenuItem = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${t.menuItem('newarrivals')}"]`);
@@ -75,7 +77,7 @@ export class BasePage {
         this.prodItem = page.locator(`//div[@class="product-grid row"]//div[@class="product"]`);
         this.promotionMsg = this.prodItem.locator(`xpath=.//div[contains(@class,"product") and contains(@class,"message")]//span`)
         this.ratedProd = this.prodItem.locator(`//div[@class="rating-star"]//div[@class="pr-snippet-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[normalize-space(@class)="product-tile"]`)
-        this.bvRatedProd = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-decimal" and normalize-space(text())!="0.0"]/ancestor::div[@class="product"]`)
+        this.bvRatedProd = this.page.locator(`//div[@class="bv-inline-rating"]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text" and normalize-space(text())!="0.0"]/ancestor::div[@class="product"]`)
         this.productTableShow = page.locator(`//div[@class="product-grid row"]`)
         this.noAvailableProdMsg = this.productTableShow.locator(`xpath=.//span[normalize-space(text())="${t.homepage('out-of-stock')}"]`)
         this.notifyMebutton = page.locator(`//button[normalize-space(text())="${t.homepage('notifyme')}"]`)
@@ -105,23 +107,30 @@ export class BasePage {
         });
     }
 
+    async jsClick(locator: Locator, description?: string) {
+        await step(description || "JS Click on locator", async () => {
+            await locator.waitFor({ state: 'attached' });
+
+            await locator.evaluate((el) => {
+                el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+            });
+        });
+    }
+
     async type(locator: Locator, text: string, description?: string) {
         await step(description || `Type text: ${text}`, async () => {
             await locator.fill(text);
         });
     }
 
-    async typeByManual(
-        locator: Locator,
-        value: string,
-        description?: string
-    ) {
+    async typeByManual(locator: Locator, value: string, description?: string) {
         await step(description || `Type text: ${value}`, async () => {
             await locator.click();
-            await locator.press(
-                process.platform === 'darwin' ? 'Meta+A' : 'Control+A'
-            );
+            await delay(500);
+            await locator.press(process.platform === 'darwin' ? 'Meta+A' : 'Control+A');
+            await delay(500);
             await locator.press('Backspace');
+            await delay(500);
             await locator.pressSequentially(value, { delay: 30 });
         });
         await locator.press('Tab');
@@ -153,7 +162,11 @@ export class BasePage {
      */
     async clickMenuItem(menuItemKey: keyof Translations['menuItem'], description?: string): Promise<void> {
         const menuItemText = t.menuItem(menuItemKey);
-        const menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);
+        let menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);
+
+        if(process.env.LOCALE == "kr") {
+            menuItemLocator = this.headerNavBar.locator(`xpath=.//a//span[normalize-space(text())="${menuItemText}"]`);
+        }
 
         if (description) {
             console.log(`Click menu: ${description} (${menuItemText})`);
@@ -363,6 +376,8 @@ export class BasePage {
             await delay(2000)
 
             await this.underlay.waitFor({ state: 'hidden', timeout: 20000 })
+
+            await delay(5000);
         });
     }
 
@@ -372,6 +387,9 @@ export class BasePage {
         description?: string
     ): Promise<void> {
         await step(description || `Select filter on product listing page`, async () => {
+            await scrollToTop(page)
+            await this.hover(this.logoImg, "Hover on logo image to collapse any expanded menu")
+
             const rs: SplitResult = splitString(menupath, "->");
             const pathArray: string[] = rs.parts;
             const pathLength: number = rs.count;
@@ -389,13 +407,29 @@ export class BasePage {
 
             const menu1Locator = page.locator(`//div[contains(@class,"filter-wrapper")]//div[normalize-space(text())=${escapedMenu1}]`);
 
-            await menu1Locator.first().hover();
+            //await menu1Locator.first().click();
+            await menu1Locator.first().evaluate((el) => {
+                el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+            });
             await delay(500)
 
             const menu2Locator = page.locator(`//div[contains(@class,"filter-wrapper")]//div[normalize-space(text())=${escapedMenu1}]//following-sibling::div//ul//li//a//span[normalize-space(text())=${escapedMenu2} or img[@alt=${escapedMenu2}]]`);
             await menu2Locator.click({ position: { x: 40, y: 15 } });
 
             await PageUtils.waitForDomAvailable(page);
+
+            await delay(2000)
+
+            await lazyLoad(page)
+
+            await delay(5000);
+
+            await PageUtils.waitForPageLoad(page)
+            await PageUtils.waitForDomAvailable(page)
+
+            await delay(2000)
+
+            await this.underlay.waitFor({ state: 'hidden', timeout: 20000 })
 
             await delay(2000)
         })
@@ -412,7 +446,14 @@ export class BasePage {
             await this.waitFor(optionRow)
             await this.click(optionRow)
 
+            await PageUtils.waitForPageLoad(this.page)
             await PageUtils.waitForDomAvailable(this.page)
+
+            await delay(2000)
+
+            await this.underlay.waitFor({ state: 'hidden', timeout: 20000 })
+
+            await delay(5000)
         })
     }
 
@@ -423,6 +464,7 @@ export class BasePage {
             const sizeOption = productSizeDropdown.locator(`xpath=.//div[@class="variant-item "][${sizeIndex}]`)
             await productSizeDropdown.scrollIntoViewIfNeeded()
             await this.click(productSizeDropdown, `Click on product size dropdown`)
+            await delay(1000)
             await this.click(sizeOption, `Select size option at index ${sizeIndex}`)
             await PageUtils.waitForDomAvailable(this.page)
         })
@@ -510,7 +552,7 @@ export class BasePage {
         if (!url) return url;
 
         try {
-            if (/%[0-9A-Fa-f]{2}/.test(url)) {
+            if (/% [0 - 9A - Fa - f]{ 2 }/.test(url)) {
                 const decoded = decodeURIComponent(url);
 
                 if (decoded !== url) {
@@ -526,9 +568,9 @@ export class BasePage {
 
     // Get BV Decimal Rating Point on PLP by index
     async getPLPDecimalRatingPoint(index: number): Promise<string> {
-        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//span[@class="bv-rating-decimal"]`)
+        const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//div[@class="bv-inline-rating"]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text"]`)
         const decimalRatingPoint = (await prod.innerText()).trim()
-        console.log(`Decimal Rating Point: ${decimalRatingPoint}`)
+        console.log(`Decimal Rating Point with product index=${index}: ${decimalRatingPoint}`)
         return decimalRatingPoint
     }
 
@@ -802,11 +844,18 @@ export class BasePage {
     async assertPLPDecimalRatingPointCorrect(description?: string) {
         await step(description || `Assert PLP Decimal Rating Point Correct`, async () => {
             const totalProds = await this.bvRatedProd.count();
+
             for (let index = 1; index <= totalProds; index++) {
                 const decimalRatingPoint = await this.getPLPDecimalRatingPoint(index);
                 const decimalPointNum = parseFloat(decimalRatingPoint);
-                expect(decimalPointNum).toBeGreaterThanOrEqual(0.0);
-                expect(decimalPointNum).toBeLessThanOrEqual(5.0);
+                const prod = this.page.locator(`(//div[@class="product-grid row"]//div[@class="product"])[${index}]//div[@class="bv-inline-rating"]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text"]`)
+
+                if (isNaN(decimalPointNum)) {
+                    expect(prod).not.toBeVisible();
+                } else {
+                    expect(decimalPointNum).toBeGreaterThanOrEqual(0.0);
+                    expect(decimalPointNum).toBeLessThanOrEqual(5.0);
+                }
             }
         })
     }

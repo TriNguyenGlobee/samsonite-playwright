@@ -24,16 +24,18 @@ export const test = base.extend<MyFixtures>({
   },
 
   basicAuthPage: async ({ browser }, use) => {
-    const context = await browser.newContext(
-      Config.basicAuthUser && Config.basicAuthPass
+    const context = await browser.newContext({
+      ...(Config.basicAuthUser && Config.basicAuthPass
         ? {
           httpCredentials: {
             username: Config.basicAuthUser,
             password: Config.basicAuthPass,
           },
         }
-        : {}
-    );
+        : {}),
+
+      permissions: [],
+    });
 
     const page = await context.newPage();
     const stopWatchdog = await startModalWatchdog(page);
@@ -50,16 +52,18 @@ export const test = base.extend<MyFixtures>({
   },
 
   loggedInPage: async ({ browser, user }, use) => {
-    const context = await browser.newContext(
-      Config.basicAuthUser && Config.basicAuthPass
+    const context = await browser.newContext({
+      ...(Config.basicAuthUser && Config.basicAuthPass
         ? {
           httpCredentials: {
             username: Config.basicAuthUser,
             password: Config.basicAuthPass,
           },
         }
-        : {}
-    );
+        : {}),
+
+      permissions: [],
+    });
 
     const page = await context.newPage();
     const loginPage = createLoginPage(page);
