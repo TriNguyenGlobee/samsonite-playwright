@@ -112,7 +112,9 @@ export function splitString(input: string, delimiter: string = " "): SplitResult
  * Pause execution for a given amount of time (ms).
  */
 export async function delay(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  await step(`Delay for ${ms} ms`, async () => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  })
 }
 
 /**
@@ -573,8 +575,10 @@ export async function scrollToBottom(page: Page, distance: number = 100, delay: 
 }
 
 export async function scrollToTop(page: Page) {
-  await page.evaluate(() => {
-    window.scrollTo(0, 0);
+  await step('Scroll to top of the page', async () => {
+    await page.evaluate(() => {
+      window.scrollTo(0, 0);
+    });
   });
 }
 

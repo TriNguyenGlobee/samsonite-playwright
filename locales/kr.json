@@ -458,6 +458,10 @@
     "lowest": "낮은 평점 순",
     "highest": "높은 평점 순",
     "sortby": "정렬 기준",
-    "clearsearch": "검색 필드 지우기"
+    "clearsearch": "검색 필드 지우기",
+    "qasubmitsuccessmsg": "질문이 제출되었습니다",
+    "submitsuccessclosepopup": "닫기",
+    "rating": "평점",
+    "ratinghightoLow": "평점 높은 순"
   }
 }

@@ -1,13 +1,13 @@
 import { expect, test } from "../../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
-import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence } from "../../../../utils/helpers/helpers";
+import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence, scrollDownUntilVisible } from "../../../../utils/helpers/helpers";
 import { createHomePage } from "../../../../src/factories/home.factory";
 import { createLuggagePage } from "../../../../src/factories/productlistingpage/luggage.factory";
 import { tests } from "../../../../utils/helpers/localeTest";
 
 
-test.describe("PDP is shown correctly", async () => {
+test.describe("PDP is shown correctly - [Logged]", async () => {
     test.beforeEach(async ({ loggedInPage }) => {
         const homepage = createHomePage(loggedInPage)
         const luggagepage = createLuggagePage(loggedInPage)
@@ -101,7 +101,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "hk", "sg"],`
         8. Write a review button is displayed
         9. BV review modal is displayed when clicking Write a review button
         10. User can select Overall rating stars
@@ -195,7 +195,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "hk", "sg"],`
         13. Submit review after entering fully information
         14. User can add Images/Videos and completed Add Images/Videos step
         15. Completed the Personal/Product Information step
@@ -339,7 +339,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await step('Scroll to Customer Images And Videos section', async () => {
             await scrollToTop(loggedInPage)
-            await pdppage.imagesVideosSection.scrollIntoViewIfNeeded()
+            await scrollDownUntilVisible(loggedInPage, pdppage.imagesVideosSection)
         })
 
         await step('Assert Images and Videos are displayed correctly', async () => {

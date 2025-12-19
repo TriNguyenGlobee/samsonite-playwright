@@ -152,8 +152,8 @@ export class PDPPage extends BasePage {
         this.locationTextbox = page.locator(`//input[@name="userlocation"]`);
         this.nicknameReqErrorMsg = page.locator(`//label[contains(text(),"${t.bvintegration('nicknamereq')}")]`)
         this.emailReqErrorMsg = page.locator(`//label[contains(text(),"${t.bvintegration('emailreq')}")]`)
-        this.submitQuestionSuccessPopup = page.locator(`//label[contains(text(),"Your question was submitted")]/ancestor::div[@type="popup"]`);
-        this.successPopupCloseButton = this.submitQuestionSuccessPopup.locator(`xpath=.//button[normalize-space(text())="Close"]`);
+        this.submitQuestionSuccessPopup = page.locator(`//label[contains(text(),"${t.bvintegration('qasubmitsuccessmsg')}")]/ancestor::div[@type="popup"]`);
+        this.successPopupCloseButton = this.submitQuestionSuccessPopup.locator(`xpath=.//button[normalize-space(text())="${t.bvintegration('submitsuccessclosepopup')}"]`);
         this.noVideosAvalableMsg = page.locator(`//div[normalize-space(text())="${t.bvintegration('novidesmsg')}"]`)
     }
 

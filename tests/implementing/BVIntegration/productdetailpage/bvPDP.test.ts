@@ -6,7 +6,7 @@ import { createHomePage } from "../../../../src/factories/home.factory";
 import { createLuggagePage } from "../../../../src/factories/productlistingpage/luggage.factory";
 import { tests } from "../../../../utils/helpers/localeTest";
 
-test.describe("PDP is shown correctly", async () => {
+test.describe("PDP is shown correctly - [Guest]", async () => {
     test.beforeEach(async ({ basicAuthPage }) => {
         const homepage = createHomePage(basicAuthPage)
         const luggagepage = createLuggagePage(basicAuthPage)

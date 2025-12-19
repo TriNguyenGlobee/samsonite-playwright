@@ -36,7 +36,7 @@ test.describe("Product Listing Page", () => {
         })
 
         await step("Sort By Rating High to Low", async () => {
-            await luggagepage.sortPLPProduct('Rating High To Low')
+            await luggagepage.sortPLPProduct(`${t.bvintegration('ratinghightoLow')}`)
             await lazyLoad(basicAuthPage)
         })
 
@@ -75,7 +75,7 @@ test.describe("Product Listing Page", () => {
         })
 
         await step("Filter 5 stars products", async () => {
-            await luggagepage.selectPLPFilter(basicAuthPage, "Rating->5.0" )
+            await luggagepage.selectPLPFilter(basicAuthPage, `${t.bvintegration('rating')}->5.0` )
         })
 
         await step("Assert all products have rating 5 stars", async () => {
@@ -83,7 +83,7 @@ test.describe("Product Listing Page", () => {
         })
 
         await step("Filter 4 stars products", async () => {
-            await luggagepage.selectPLPFilter(basicAuthPage, "Rating->4.0" )
+            await luggagepage.selectPLPFilter(basicAuthPage, `${t.bvintegration('rating')}->4.0` )
         })
 
         await step("Assert all products have rating 4 stars", async () => {

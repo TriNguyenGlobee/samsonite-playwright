@@ -142,6 +142,36 @@ export class BasePage {
         });
     }
 
+    async jsHover(locator: Locator, description?: string) {
+        await step(description || 'JS Hover on locator', async () => {
+            await locator.waitFor({ state: 'attached' });
+
+            await locator.evaluate((el) => {
+                el.dispatchEvent(
+                    new MouseEvent('mouseover', { bubbles: true, cancelable: true })
+                );
+                el.dispatchEvent(
+                    new MouseEvent('mouseenter', { bubbles: true, cancelable: true })
+                );
+                el.dispatchEvent(
+                    new MouseEvent('mousemove', { bubbles: true, cancelable: true })
+                );
+            });
+        });
+    }
+
+    async hoverByMouse(locator: Locator, description?: string) {
+        await step(description || "Hover by mouse on locator", async () => {
+            const box = await locator.boundingBox();
+            if (!box) throw new Error('Cannot get bounding box');
+
+            await this.page.mouse.move(
+                box.x + box.width / 2,
+                box.y + box.height / 2
+            );
+        });
+    }
+
     async goBack(pageName: string) {
         await step(`Goback to ${pageName} page`, async () => {
             await delay(500)
@@ -164,7 +194,7 @@ export class BasePage {
         const menuItemText = t.menuItem(menuItemKey);
         let menuItemLocator = this.headerNavBar.locator(`xpath=.//a[normalize-space(text())="${menuItemText}"]`);
 
-        if(process.env.LOCALE == "kr") {
+        if (process.env.LOCALE == "kr") {
             menuItemLocator = this.headerNavBar.locator(`xpath=.//a//span[normalize-space(text())="${menuItemText}"]`);
         }
 
@@ -387,9 +417,6 @@ export class BasePage {
         description?: string
     ): Promise<void> {
         await step(description || `Select filter on product listing page`, async () => {
-            await scrollToTop(page)
-            await this.hover(this.logoImg, "Hover on logo image to collapse any expanded menu")
-
             const rs: SplitResult = splitString(menupath, "->");
             const pathArray: string[] = rs.parts;
             const pathLength: number = rs.count;
@@ -403,15 +430,15 @@ export class BasePage {
             const escapedMenu1 = escapeXPathText(menu1!);
             const escapedMenu2 = escapeXPathText(menu2!);
 
-            await delay(3000)
-
             const menu1Locator = page.locator(`//div[contains(@class,"filter-wrapper")]//div[normalize-space(text())=${escapedMenu1}]`);
-
-            //await menu1Locator.first().click();
+            /*
             await menu1Locator.first().evaluate((el) => {
                 el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-            });
-            await delay(500)
+            });*/
+
+            await this.hoverByMouse(menu1Locator.first(), `Hover on filter menu: ${menu1}`)
+
+            await delay(1000)
 
             const menu2Locator = page.locator(`//div[contains(@class,"filter-wrapper")]//div[normalize-space(text())=${escapedMenu1}]//following-sibling::div//ul//li//a//span[normalize-space(text())=${escapedMenu2} or img[@alt=${escapedMenu2}]]`);
             await menu2Locator.click({ position: { x: 40, y: 15 } });
@@ -437,7 +464,7 @@ export class BasePage {
 
     async sortPLPProduct(option: string, description?: string) {
         await step(description || `Sort PLP Product by: ${option}`, async () => {
-            const sortByDropdown = this.page.locator(`//div[@class="search-result-content"]//label[normalize-space(text())="Sort by"]/parent::div`)
+            const sortByDropdown = this.page.locator(`//div[@class="search-result-content"]//label[normalize-space(text())="${t.bvintegration('sortby')}"]/parent::div`)
             const optionRow = sortByDropdown.locator(`xpath=.//span[normalize-space(text())="${option}"]`)
 
             await sortByDropdown.scrollIntoViewIfNeeded()

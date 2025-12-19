@@ -456,6 +456,10 @@
     "lowest": "Lowest to Highest Rating",
     "highest": "Highest to Lowest Rating",
     "sortby": "Sort by",
-    "clearsearch": "Clear Search field"
+    "clearsearch": "Clear Search field",
+    "qasubmitsuccessmsg": "Your question was submitted",
+    "submitsuccessclosepopup": "Close",
+    "rating": "Rating",
+    "ratinghightoLow": "Rating High To Low"
   }
 }
