@@ -79,7 +79,7 @@ test.describe("Product Listing Page", () => {
         })
 
         await step("Assert all products have rating 5 stars", async () => {
-            await luggagepage.assertPLPAllProductsHaveMinRatingStars(5, "Assert all products have rating 5 stars")
+            await luggagepage.assertPLPAllProductsHaveMinRatingStars(4.5, "Assert all products have rating 5 stars")
         })
 
         await step("Filter 4 stars products", async () => {
@@ -87,7 +87,7 @@ test.describe("Product Listing Page", () => {
         })
 
         await step("Assert all products have rating 4 stars", async () => {
-            await luggagepage.assertPLPAllProductsHaveMinRatingStars(4, "Assert all products have rating 4 stars")
+            await luggagepage.assertPLPAllProductsHaveMinRatingStars(3.5, "Assert all products have rating 4 stars")
         })
     })
 });

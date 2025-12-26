@@ -65,7 +65,7 @@ test.describe("Guest checkout - Step 1", () => {
         })
     })
 
-    test("2. Click Step 1 Continue button without firstname", async ({ basicAuthPage }) => {
+    test("3. Click Step 1 Continue button without firstname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutFirstName } = loadTestData();
 
@@ -80,7 +80,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("3. Click Step 1 Continue button without lastname", async ({ basicAuthPage }) => {
+    test("4. Click Step 1 Continue button without lastname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutLastName } = loadTestData();
 
@@ -95,7 +95,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("4. Click Step 1 Continue button without email", async ({ basicAuthPage }) => {
+    test("5. Click Step 1 Continue button without email", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutEmail } = loadTestData();
 
@@ -110,7 +110,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("5. Click Step 1 Continue button without phonenumber", async ({ basicAuthPage }) => {
+    test("6. Click Step 1 Continue button without phonenumber", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutPhone } = loadTestData();
 
@@ -125,7 +125,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("6. Click Step 1 Continue button with full data", async ({ basicAuthPage }) => {
+    test("7. Click Step 1 Continue button with full data", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutFullData } = loadTestData();
 

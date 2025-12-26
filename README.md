@@ -77,3 +77,23 @@ npm run test:stg-webkit
 
 ## Run test-env.ts
 - npx ts-node test-env.ts
+
+## Saninty check
+| Locale | Environment | Status | Notes |
+|------|------------|--------|------|
+| AU | dev / stg | Active | Full sanity |
+| ID | dev / stg | Active | Full sanity |
+| JP | dev / stg | Active | Full sanity |
+| MY | dev / stg | Active | Full sanity |
+| PH | dev / stg | Active | Full sanity |
+| SG | dev / stg | Active | Full sanity |
+| TW | dev / stg | Active | Full sanity |
+
+## BV Integration
+| Locale | Environment | Status |
+|------|------------|--------|
+| AU | dev | Active |
+| JP | dev | Active |
+| KR | dev | Active | 
+| PH | dev | Active |
+| SG | dev | Active |

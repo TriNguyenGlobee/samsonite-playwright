@@ -462,6 +462,12 @@
     "qasubmitsuccessmsg": "질문이 제출되었습니다",
     "submitsuccessclosepopup": "닫기",
     "rating": "평점",
-    "ratinghightoLow": "평점 높은 순"
+    "ratinghightoLow": "평점 높은 순",
+    "writeareview": "Write a review",
+    "reviewguidelines": "Review guidelines",
+    "reviewfield": "Review",
+    "reviewtitle": "Review Title",
+    "nickname": "Nickname",
+    "email": "Email"
   }
 }

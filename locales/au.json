@@ -462,6 +462,12 @@
     "qasubmitsuccessmsg": "Your question was submitted",
     "submitsuccessclosepopup": "Close",
     "rating": "Rating",
-    "ratinghightoLow": "Rating High To Low"
+    "ratinghightoLow": "Rating High To Low",
+    "writeareview": "Write a review",
+    "reviewguidelines": "Review guidelines",
+    "reviewfield": "Review",
+    "reviewtitle": "Review Title",
+    "nickname": "Nickname",
+    "email": "Email"
   }
 }

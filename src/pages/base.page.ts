@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { step } from "allure-js-commons";
 import { Translations } from "../../config/i18n.config";
-import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText, isSorted, selectDropdownOption, scrollToTop, lazyLoad } from "../../utils/helpers/helpers";
+import { t, extractNumber, PageUtils, delay, splitString, escapeXPathText, isSorted, selectDropdownOption, scrollToTop, lazyLoad, scrollDownUntilVisible } from "../../utils/helpers/helpers";
 import { loadTestData } from "../../utils/data";
 
 type RightNavbarItem = 'search' | 'wishlist' | 'login' | 'location' | 'cart' | 'news';
@@ -134,6 +134,15 @@ export class BasePage {
             await locator.pressSequentially(value, { delay: 30 });
         });
         await locator.press('Tab');
+    }
+
+    async typeIfVisible(locator: Locator, text: string, description?: string, timeout: number = 3000): Promise<void> {
+        await step(description || `Type text if locator is visible`, async () => {
+            try {
+                await locator.waitFor({ state: 'visible', timeout })
+                await this.type(locator, text)
+            } catch {}
+        })
     }
 
     async hover(locator: Locator, description?: string) {
@@ -467,9 +476,12 @@ export class BasePage {
             const sortByDropdown = this.page.locator(`//div[@class="search-result-content"]//label[normalize-space(text())="${t.bvintegration('sortby')}"]/parent::div`)
             const optionRow = sortByDropdown.locator(`xpath=.//span[normalize-space(text())="${option}"]`)
 
-            await sortByDropdown.scrollIntoViewIfNeeded()
+            //await sortByDropdown.scrollIntoViewIfNeeded()
+            await scrollDownUntilVisible(this.page, sortByDropdown)
+            await delay(1000)
 
             await this.hover(sortByDropdown)
+            await delay(1000)
             await this.waitFor(optionRow)
             await this.click(optionRow)
 

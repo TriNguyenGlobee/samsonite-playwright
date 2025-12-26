@@ -65,6 +65,7 @@ export class PDPPage extends BasePage {
     readonly rightBtn: Locator
     readonly leftBtn: Locator
     readonly qaQuestionTextbox: Locator;
+    readonly qaQuestionTextArea: Locator;
     readonly qaSortQuestionDropdown: Locator;
     readonly questionContainer: Locator;
     readonly submitNewQuestionButton: Locator;
@@ -108,10 +109,10 @@ export class PDPPage extends BasePage {
         this.ratingStarGroup = page.locator(`section.bv-rnr__rpifwc-0.kZapjS div.table`)
         this.overallPoint = page.locator(`section#bv-reviews-overall-ratings-container div.bv-rnr__sc-157rd1w-1.ljrlPW`)
         this.overallNumberofReview = page.locator(`div.bv-rnr__sc-157rd1w-2.krTpQg`)
-        this.bvWriteReviewBtn = page.locator(`//button[normalize-space(text())="Write a review"]`)
+        this.bvWriteReviewBtn = page.locator(`//button[normalize-space(text())="${t.bvintegration('writeareview')}"]`)
         this.bvReviewModal = page.locator(`div.bv-ips-modal-window`)
         this.bvOverallRatingMSG = page.locator(`label#bv-label-text-undefined`)
-        this.bvReivewGuidelinesBtn = page.locator(`//button[text()="Review guidelines"]`)
+        this.bvReivewGuidelinesBtn = page.locator(`//button[text()="${t.bvintegration('reviewguidelines')}"]`)
         this.bvGuidelinesPopup = page.locator(`div[type="popup"] div.bv-ips-modal-window`)
         this.bvGuidelinesPopupCloseBtn = page.locator(`div[type="popup"] div.bv-ips-modal-window button#bv-ips-undefined`)
         this.bvGuidelinesSubmitBtn = page.locator(`button#bv-ips-submit`)
@@ -119,10 +120,10 @@ export class PDPPage extends BasePage {
         this.bvReviewTitleReq = page.locator(`//label[@type="error"]//span[text()="${t.bvintegration('reviewtitlereq')}"]`)
         this.bvNicknameReq = page.locator(`//label[@type="error"]//span[text()="${t.bvintegration('nicknamereq')}"]`)
         this.bvEmailReq = page.locator(`//label[@type="error"]//span[text()="${t.bvintegration('emailreq')}"]`)
-        this.reviewField = page.locator(`//textarea[@name="Review"]`)
-        this.reviewTitleField = page.locator(`//input[@name="Review Title"]`)
-        this.nicknameField = page.locator(`//input[@name="Nickname"]`)
-        this.emailField = page.locator(`//input[@name="Email"]`)
+        this.reviewField = page.locator(`//textarea[@name="${t.bvintegration('reviewfield')}"]`)
+        this.reviewTitleField = page.locator(`//input[@name="${t.bvintegration('reviewtitle')}"]`)
+        this.nicknameField = page.locator(`//input[@name="${t.bvintegration('nickname')}"]`)
+        this.emailField = page.locator(`//input[@name="${t.bvintegration('email')}"]`)
         this.termCheckbox = page.locator(`div#sps-termsAndConditions-styledcheckbox`)
         this.step1completedLabel = page.locator(`fieldset#bv-ips-step-0 span[color="#296300"]`)
         this.step1EditButton = page.locator(`fieldset#bv-ips-step-0 button`)
@@ -142,6 +143,7 @@ export class PDPPage extends BasePage {
         this.rightBtn = page.locator(`button.right`)
         this.leftBtn = page.locator(`button.left`)
         this.qaQuestionTextbox = page.locator(`//input[@id="${t.bvintegration('qatextbox')}"]`);
+        this.qaQuestionTextArea = page.locator(`//textarea[contains(@id,"bv-questions")]`);
         this.qaSortQuestionDropdown = page.locator(`span#bv-dropdown-select-sort`);
         this.questionContainer = page.locator(`//div[contains(@id,"bv-question-container")]`)
         this.submitNewQuestionButton = page.locator(`button#bv-question-btn`);
@@ -197,10 +199,9 @@ export class PDPPage extends BasePage {
                 "Clicking No button on sweepstakes section")
             await delay(1000)
         }*/
-
         if (
             term &&
-            ['au', 'hk'].includes(process.env.LOCALE ?? '')
+            ['au', 'hk', "th", "tw", "sg", "ph", "nz", "my", "jp", "in", "id"].includes(process.env.LOCALE ?? '')
         ) {
             await this.termCheckbox.click();
         }
@@ -214,7 +215,7 @@ export class PDPPage extends BasePage {
             const input = page.locator('#bv-ips-photo-upload-input');
             //await input.waitFor();
             await input.setInputFiles(filePaths);
-            await PageUtils.waitForPageLoadComplete(page)
+            await PageUtils.waitForDomAvailable(page)
         })
     }
 
@@ -296,7 +297,7 @@ export class PDPPage extends BasePage {
         });
     }
 
-    async getDecialRatingPoint(description?: string): Promise<number> {
+    async getDecimalRatingPoint(description?: string): Promise<number> {
         return await step(description || "Get decimal rating point", async () => {
             const decimalRatingPoint = this.page.locator(`//div[@class="bv-inline-rating"]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text"]`)
             const ratingPoint = extractNumber(await decimalRatingPoint.first().innerText())
@@ -417,7 +418,7 @@ export class PDPPage extends BasePage {
             };
 
             // Assert all tabs
-            await tabAll.click();
+            await this.jsClick(tabAll)
             await PageUtils.waitForDomAvailable(page);
             await this.clickThroughSlides(page)
 
@@ -448,7 +449,7 @@ export class PDPPage extends BasePage {
 
             // Assert images tab
             if (photos > 0) {
-                await tabImages.click();
+                await this.jsClick(tabImages)
                 await delay(1000)
                 await PageUtils.waitForDomAvailable(page);
                 await this.clickThroughSlides(page)
@@ -485,7 +486,7 @@ export class PDPPage extends BasePage {
 
             // Assert videos tab
             if (videos > 0) {
-                await tabVideos.click();
+                await this.jsClick(tabVideos)
                 await delay(500)
                 await PageUtils.waitForDomAvailable(page);
                 await this.clickThroughSlides(page)

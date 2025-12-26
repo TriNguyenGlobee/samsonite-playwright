@@ -9,7 +9,6 @@ test.describe("Product Review Section", () => {
         1. Click swiper button to navigate review
         2. Navigate to correct URL when clicking on product
         `, async ({ basicAuthPage }) => {
-        test.skip((process.env.LOCALE === "jp" || process.env.LOCALE === "sg") && process.env.ENV === "dev", "Hidden on JP-DEV | SG-DEV")
 
         const homePage = createHomePage(basicAuthPage);
         const prodRoot = basicAuthPage.locator(`//div[contains(@class,"AddProductReviews")]//div[contains(@class,"swiper-slide-active")]`)

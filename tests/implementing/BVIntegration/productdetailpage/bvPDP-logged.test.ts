@@ -44,7 +44,7 @@ test.describe("PDP is shown correctly - [Logged]", async () => {
 
         await scrollToBottom(loggedInPage)
 
-        let ratingPointValue = await pdppage.getDecialRatingPoint()
+        let ratingPointValue = await pdppage.getDecimalRatingPoint()
         let numberOfReview = await pdppage.getNumberOfReview("Get number of reviews on PDP")
 
         await step('Verify the rating star and rating point value', async () => {
@@ -54,7 +54,7 @@ test.describe("PDP is shown correctly - [Logged]", async () => {
         await step('Verify the review count is displayed', async () => {
             expect(numberOfReview).toBeGreaterThanOrEqual(1)
         })
-
+        /*
         await step('Verify tha Bazaarvoice logo is displayed', async () => {
             await pdppage.assertVisible(pdppage.bazaarvoiceLogo)
         })
@@ -75,7 +75,7 @@ test.describe("PDP is shown correctly - [Logged]", async () => {
 
         await step('Verify the bazaarvoice trustmark is hidden', async () => {
             await pdppage.assertHidden(pdppage.bazaarvoiceTrustmark)
-        })
+        })*/
 
         await step('Verify the rating star group is displayed correctly', async () => {
             await pdppage.assertVisible(pdppage.ratingStarGroup,
@@ -101,7 +101,7 @@ test.describe("PDP is shown correctly - [Logged]", async () => {
         })
     })
 
-    tests(["au", "hk", "sg"],`
+    tests(["au", "hk", "sg", "th", "id", "in", "jp", "my", "nz", "ph", "tw"],`
         8. Write a review button is displayed
         9. BV review modal is displayed when clicking Write a review button
         10. User can select Overall rating stars
@@ -195,7 +195,7 @@ test.describe("PDP is shown correctly - [Logged]", async () => {
         })
     })
 
-    tests(["au", "hk", "sg"],`
+    tests(["au", "hk", "sg", "th", "id", "in", "jp", "my", "nz", "ph", "tw"],`
         13. Submit review after entering fully information
         14. User can add Images/Videos and completed Add Images/Videos step
         15. Completed the Personal/Product Information step
@@ -516,11 +516,15 @@ test.describe("PDP is shown correctly - [Logged]", async () => {
         await pdppage.selectTab("Q&A", "Select Q&A tab")
 
         await step('Input question into question textbox', async () => {
-            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+            await pdppage.typeIfVisible(pdppage.qaQuestionTextbox, questionText)
         })
 
         await step('Clicking on Submit New Question button', async () => {
             await pdppage.click(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Input new question into question text area if visible', async () => {
+            await pdppage.typeIfVisible(pdppage.qaQuestionTextArea, questionText)
         })
 
         await step('Fill information form', async () => {

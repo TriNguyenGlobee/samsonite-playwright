@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t, PageUtils, getRandomInt } from "../../../../utils/helpers/helpers";
-import { step } from "allure-js-commons";
+import { t, PageUtils, getRandomInt, extractNumber } from "../../../../utils/helpers/helpers";
+import { description, step } from "allure-js-commons";
 import { Config } from "../../../../config/env.config";
 import { test } from "../../../fixtures/test-fixture";
 
@@ -23,6 +23,10 @@ export abstract class HomePage extends BasePage {
     readonly withUsWarranty: Locator;
     readonly withUsFastDelivery: Locator;
     readonly withUsCollection: Locator;
+    readonly bvRecommendedCategoryButtons01: Locator;
+    readonly bvRecommendedCategoryButtons02: Locator;
+    readonly bvRecommendedCategoryButtons03: Locator;
+    readonly bvRecommendedCategoryButtons04: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -31,7 +35,7 @@ export abstract class HomePage extends BasePage {
         this.highlightSection = page.locator('//div[contains(@class,"category-highlight")]');
         this.recommendedSection = page.locator('//div[contains(@class,"category-product initialized-component")]');
         this.campaignUnderwaysection = page.locator('//div[contains(@class,"magazine-carousel-column-desktop")]');
-        this.productReviewSection = page.locator(`//div[contains(@class,"AddProductReviews")]`);
+        this.productReviewSection = page.locator(`//div[contains(@class,"AddProductReviews") or contains(@class,"productReviews")]`);
         this.journalsSection = page.locator(`//div[contains(@class,"journals-articles")]//div[@class="owl-stage"]`);
         this.journalsNextbutton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Next"]]`);
         this.journalsPreviousButton = page.locator(`//div[contains(@class,"journals-articles")]//button[span[@aria-label="Previous"]]`);
@@ -43,12 +47,24 @@ export abstract class HomePage extends BasePage {
         this.withUsWarranty = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('warrantytitle')}"] or div//h6[text()="${t.whyshopwithus('warrantytitle')}"]]`);
         this.withUsFastDelivery = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fastdeliverytitle')}"] or div//h6[text()="${t.whyshopwithus('fastdeliverytitle')}"]]`)
         this.withUsCollection = this.whyShopWithUsSection.locator(`xpath=.//li[h6[text()="${t.whyshopwithus('fullcollectiontitle')}"] or div//h6[text()="${t.whyshopwithus('fullcollectiontitle')}"]]`)
+        this.bvRecommendedCategoryButtons01 = page.locator(`//button[@id="product-pills-tab-1"]`);
+        this.bvRecommendedCategoryButtons02 = page.locator(`//button[@id="product-pills-tab-2"]`);
+        this.bvRecommendedCategoryButtons03 = page.locator(`//button[@id="product-pills-tab-3"]`);
+        this.bvRecommendedCategoryButtons04 = page.locator(`//button[@id="product-pills-tab-4"]`);
     }
 
     // =========================
     // 🚀 Actions
     // =========================
-
+    async clickRatedRecommendedProductItemByIndex(categoryIndex: number, productIndex: number, description?: string) {
+        await step(description || `Click recommended product item at category index ${categoryIndex} and rated product index ${productIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page);
+            const recommendedRatedItems = this.page.locator(`//div[contains(@class,"tab-pane fade product-pills-${categoryIndex}")]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text" and normalize-space(text())!="0.0"]/ancestor::div[@class="product"]`);
+            const targetProduct = recommendedRatedItems.nth(productIndex - 1);
+            await targetProduct.click({ button: 'middle' })
+            //await this.click(targetProduct, `Click recommended rated product at category index ${categoryIndex} and product rated index ${productIndex}`);
+        });
+    }
 
     // =========================
     // 📦 Helpers
@@ -150,6 +166,79 @@ export abstract class HomePage extends BasePage {
             }
         }
         return activeIndexes;
+    }
+
+    async bvGetRecommendedProductItemsCount(categoryIndex: number, description?: string): Promise<number> {
+        return await step(description || `Get recommended products count of category index ${categoryIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page);
+
+            const recommendedItems = this.page.locator(`//div[contains(@class,"tab-pane fade product-pills-${categoryIndex}")]//div[@class="product"]`);
+            return await recommendedItems.count();
+        });
+    }
+
+    async bvGetRatedRecommendedProductItemsCount(categoryIndex: number, description?: string): Promise<number> {
+        return await step(description || `Get Rated recommended products count of category index ${categoryIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page);
+
+            const recommendedItems = this.page.locator(`//div[contains(@class,"tab-pane fade product-pills-${categoryIndex}")]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text" and normalize-space(text())!="0.0"]/ancestor::div[@class="product"]`);
+            return await recommendedItems.count();
+        });
+    }
+
+    async bvGetRecommendedDecimalReviewPoint(categoryIndex: number, prodIndex: number, description?: string): Promise<number> {
+        return await step(description || `Get decimal review point of product index ${prodIndex} at category index ${categoryIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page);
+
+            const recommendedItems = this.page.locator(`//div[contains(@class,"tab-pane fade product-pills-${categoryIndex}")]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text" and normalize-space(text())!="0.0"]/ancestor::div[@class="product"]`);
+            const targetProduct = recommendedItems.nth(prodIndex - 1);
+            const reviewPointText = await targetProduct.locator(`xpath=.//div[@class="bv_averageRating_component_container"]//div[@class="bv_text"]`).innerText();
+            return parseFloat(reviewPointText);
+        }
+        );
+    }
+
+    async bvGetRecommendedNumberOfReviews(categoryIndex: number, prodIndex: number, description?: string): Promise<number> {
+        return await step(description || `Get number of reviews of product index ${prodIndex} at category index ${categoryIndex}`, async () => {
+            await PageUtils.waitForDomAvailable(this.page);
+
+            const recommendedItems = this.page.locator(`//div[contains(@class,"tab-pane fade product-pills-${categoryIndex}")]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text" and normalize-space(text())!="0.0"]/ancestor::div[@class="product"]`);
+            const targetProduct = recommendedItems.nth(prodIndex - 1);
+            const numberofreviews = await targetProduct.locator(`xpath=.//div[@class="bv_numReviews_component_container"]//div[@class="bv_text"]`).innerText();
+            return extractNumber(numberofreviews);
+        }
+        );
+    }
+
+    async bvGetReviewDecicalRatingStar(reviewIndex: number, description?: string): Promise<number> {
+        return await step(description || `Get decimal rating star at index ${reviewIndex}`, async () => {
+            const ratingContainer = this.page.locator('.pr-rating-stars');
+            const stars = ratingContainer.nth(reviewIndex - 1).locator('.pr-star-v4');
+            const count = await stars.count();
+
+            let rating = 0;
+
+            for (let i = 0; i < count; i++) {
+                const className = await stars.nth(i).getAttribute('class');
+
+                if (!className) continue;
+
+                if (className.includes('pr-star-v4-100-filled')) {
+                    rating += 1;
+                } else if (className.includes('pr-star-v4-50-filled')) {
+                    rating += 0.5;
+                }
+            }
+            return Number(rating.toFixed(1));
+        })
+    }
+
+    async bvGetReviewNumberOfReviews(reviewIndex: number, description?: string): Promise<number> {
+        return await step(description || `Get number of reviews at index ${reviewIndex}`, async () => {
+            const reviewAmount = this.page.locator('.review-amount');
+            const reviewAmountText = await reviewAmount.nth(reviewIndex - 1).innerText()
+            return extractNumber(reviewAmountText)
+        })
     }
 
     // =========================
@@ -423,7 +512,13 @@ export abstract class HomePage extends BasePage {
 
         const prevButton = this.productReviewSection.locator('xpath=.//div[@role="button" and contains(@class,"swiper-button-prev")]');
         const nextButton = this.productReviewSection.locator('xpath=.//div[@role="button" and contains(@class,"swiper-button-next")]');
+        const reviewItem = this.productReviewSection.locator('xpath=.//div[contains(@class,"swiper-slide")]');
         const getActiveItem = () => this.productReviewSection.locator('xpath=.//div[contains(@class,"swiper-slide") and contains(@class,"slide-active")]');
+
+        const itemAmount = await reviewItem.count()
+
+        await expect(itemAmount).toBeGreaterThan(0)
+        await expect(itemAmount).toBeLessThanOrEqual(10)
 
         await expect(prevButton).toHaveClass(/swiper-button-disabled/);
         await expect(nextButton).not.toHaveClass(/swiper-button-disabled/);
@@ -439,9 +534,9 @@ export abstract class HomePage extends BasePage {
         }
         const currentActive = getActiveItem();
         const currentLabel = await currentActive.getAttribute('aria-label');
-        expect(currentLabel).not.toBe('1 / 10');
+        expect(currentLabel).not.toBe(`1 / ${itemAmount}`);
 
-        const item1 = page.locator('//div[contains(@class,"AddProductReviews")]//div[contains(@class,"swiper-slide") and @aria-label="1 / 10"]');
+        const item1 = page.locator(`//div[contains(@class,"AddProductReviews")]//div[contains(@class,"swiper-slide") and @aria-label="1 / ${itemAmount}"]`);
         await expect(item1).not.toHaveClass(/slide-active/);
 
         while (true) {
@@ -452,11 +547,12 @@ export abstract class HomePage extends BasePage {
             if (prevClass?.includes('swiper-button-disabled')) {
                 const activeItem = getActiveItem();
                 const ariaLabel = await activeItem.getAttribute('aria-label');
-                expect(ariaLabel).toBe('1 / 10');
+                expect(ariaLabel).toBe(`1 / ${itemAmount}`);
                 break;
             }
         }
     }
+
     abstract assertWhyShopWithUsContent(page: Page): Promise<void>;
 }
 
