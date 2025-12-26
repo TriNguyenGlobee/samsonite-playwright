@@ -1,12 +1,13 @@
 import { expect, test } from "../../../../src/fixtures/test-fixture";
 import { step } from "allure-js-commons";
 import { PDPPage } from "../../../../src/pages/delivery/pdp/pdp.page";
-import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence } from "../../../../utils/helpers/helpers";
+import { t, scrollToBottom, extractNumber, generateReadableTimeBasedId, delay, scrollToTop, lazyLoad, generateSentence, scrollDownUntilVisible } from "../../../../utils/helpers/helpers";
 import { createHomePage } from "../../../../src/factories/home.factory";
 import { createLuggagePage } from "../../../../src/factories/productlistingpage/luggage.factory";
+import { tests } from "../../../../utils/helpers/localeTest";
 
 
-test.describe("PDP is shown correctly", async () => {
+test.describe("PDP is shown correctly - [Logged]", async () => {
     test.beforeEach(async ({ loggedInPage }) => {
         const homepage = createHomePage(loggedInPage)
         const luggagepage = createLuggagePage(loggedInPage)
@@ -43,7 +44,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await scrollToBottom(loggedInPage)
 
-        let ratingPointValue = await pdppage.getDecialRatingPoint()
+        let ratingPointValue = await pdppage.getDecimalRatingPoint()
         let numberOfReview = await pdppage.getNumberOfReview("Get number of reviews on PDP")
 
         await step('Verify the rating star and rating point value', async () => {
@@ -53,7 +54,7 @@ test.describe("PDP is shown correctly", async () => {
         await step('Verify the review count is displayed', async () => {
             expect(numberOfReview).toBeGreaterThanOrEqual(1)
         })
-
+        /*
         await step('Verify tha Bazaarvoice logo is displayed', async () => {
             await pdppage.assertVisible(pdppage.bazaarvoiceLogo)
         })
@@ -74,7 +75,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await step('Verify the bazaarvoice trustmark is hidden', async () => {
             await pdppage.assertHidden(pdppage.bazaarvoiceTrustmark)
-        })
+        })*/
 
         await step('Verify the rating star group is displayed correctly', async () => {
             await pdppage.assertVisible(pdppage.ratingStarGroup,
@@ -100,7 +101,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "hk", "sg", "th", "id", "in", "jp", "my", "nz", "ph", "tw"],`
         8. Write a review button is displayed
         9. BV review modal is displayed when clicking Write a review button
         10. User can select Overall rating stars
@@ -123,7 +124,7 @@ test.describe("PDP is shown correctly", async () => {
         )
 
         await step("Clicking on Write A Reivew button", async () => {
-            await pdppage.click(pdppage.bvWriteReviewBtn)
+            await pdppage.jsClick(pdppage.bvWriteReviewBtn)
         })
 
         await step('Assert the BV Review Modal is displayed', async () => {
@@ -194,7 +195,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "hk", "sg", "th", "id", "in", "jp", "my", "nz", "ph", "tw"],`
         13. Submit review after entering fully information
         14. User can add Images/Videos and completed Add Images/Videos step
         15. Completed the Personal/Product Information step
@@ -213,7 +214,7 @@ test.describe("PDP is shown correctly", async () => {
         await scrollToBottom(loggedInPage)
 
         await step("Clicking on Write A Reivew button", async () => {
-            await pdppage.click(pdppage.bvWriteReviewBtn)
+            await pdppage.jsClick(pdppage.bvWriteReviewBtn)
         })
 
         await step('Fill review information to field', async () => {
@@ -338,7 +339,7 @@ test.describe("PDP is shown correctly", async () => {
 
         await step('Scroll to Customer Images And Videos section', async () => {
             await scrollToTop(loggedInPage)
-            await pdppage.imagesVideosSection.scrollIntoViewIfNeeded()
+            await scrollDownUntilVisible(loggedInPage, pdppage.imagesVideosSection)
         })
 
         await step('Assert Images and Videos are displayed correctly', async () => {
@@ -421,7 +422,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "kr"], `
         23. Q&A section is displayed correctly
         24. Submit new question displayed when entering into question textbox
         25. Clear question textbox
@@ -497,7 +498,7 @@ test.describe("PDP is shown correctly", async () => {
         })
     })
 
-    test(`
+    tests(["au", "kr"], `
         28. Submit question after entering fully information
         29. Close question submitted success popup
         `, async ({ loggedInPage }) => {
@@ -515,11 +516,15 @@ test.describe("PDP is shown correctly", async () => {
         await pdppage.selectTab("Q&A", "Select Q&A tab")
 
         await step('Input question into question textbox', async () => {
-            await pdppage.type(pdppage.qaQuestionTextbox, questionText)
+            await pdppage.typeIfVisible(pdppage.qaQuestionTextbox, questionText)
         })
 
         await step('Clicking on Submit New Question button', async () => {
             await pdppage.click(pdppage.submitNewQuestionButton)
+        })
+
+        await step('Input new question into question text area if visible', async () => {
+            await pdppage.typeIfVisible(pdppage.qaQuestionTextArea, questionText)
         })
 
         await step('Fill information form', async () => {

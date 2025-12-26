@@ -38,7 +38,7 @@ export abstract class LoginPage extends BasePage {
         super(page);
         this.signinTitle = page.locator(`//div[@class="title-contain"]//h2[normalize-space(text())="${t.loginpage('singinTitle')}"]`);
         this.loginmsg = page.locator(`//div[@class="login-msg" and text()="${t.loginpage('loginmsg')}"]`);
-        this.emailTextbox = page.locator(`//div[label[normalize-space(.)="${t.loginpage('usernamelabel')}"]]//input[@id="login-form-email"]`);
+        this.emailTextbox = page.locator(`//div[label[normalize-space(.)="${t.loginpage('usernamelabel')}"]]//input[@id="login-form-email" or @id="login-form-loginName"]`);
         this.passwordTextbox = page.locator(`//div[label[normalize-space(.)="${t.loginpage('pwlabel')}"]]//input[@id="login-form-password"]`);
         this.signInButton = page.locator(`//button[@type="submit" and normalize-space(text())="${t.loginpage('signinbtn')}"]`);
         this.forgotPWLink = page.locator(`//a[@title="${t.loginpage('forgotPW')}"]`);

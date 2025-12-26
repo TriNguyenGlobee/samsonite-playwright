@@ -65,6 +65,7 @@ export class PDPPage extends BasePage {
     readonly rightBtn: Locator
     readonly leftBtn: Locator
     readonly qaQuestionTextbox: Locator;
+    readonly qaQuestionTextArea: Locator;
     readonly qaSortQuestionDropdown: Locator;
     readonly questionContainer: Locator;
     readonly submitNewQuestionButton: Locator;
@@ -77,6 +78,7 @@ export class PDPPage extends BasePage {
     readonly emailReqErrorMsg: Locator;
     readonly submitQuestionSuccessPopup: Locator;
     readonly successPopupCloseButton: Locator;
+    readonly noVideosAvalableMsg: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -107,10 +109,10 @@ export class PDPPage extends BasePage {
         this.ratingStarGroup = page.locator(`section.bv-rnr__rpifwc-0.kZapjS div.table`)
         this.overallPoint = page.locator(`section#bv-reviews-overall-ratings-container div.bv-rnr__sc-157rd1w-1.ljrlPW`)
         this.overallNumberofReview = page.locator(`div.bv-rnr__sc-157rd1w-2.krTpQg`)
-        this.bvWriteReviewBtn = page.locator(`//button[normalize-space(text())="Write a review"]`)
+        this.bvWriteReviewBtn = page.locator(`//button[normalize-space(text())="${t.bvintegration('writeareview')}"]`)
         this.bvReviewModal = page.locator(`div.bv-ips-modal-window`)
         this.bvOverallRatingMSG = page.locator(`label#bv-label-text-undefined`)
-        this.bvReivewGuidelinesBtn = page.locator(`//button[text()="Review guidelines"]`)
+        this.bvReivewGuidelinesBtn = page.locator(`//button[text()="${t.bvintegration('reviewguidelines')}"]`)
         this.bvGuidelinesPopup = page.locator(`div[type="popup"] div.bv-ips-modal-window`)
         this.bvGuidelinesPopupCloseBtn = page.locator(`div[type="popup"] div.bv-ips-modal-window button#bv-ips-undefined`)
         this.bvGuidelinesSubmitBtn = page.locator(`button#bv-ips-submit`)
@@ -118,10 +120,10 @@ export class PDPPage extends BasePage {
         this.bvReviewTitleReq = page.locator(`//label[@type="error"]//span[text()="${t.bvintegration('reviewtitlereq')}"]`)
         this.bvNicknameReq = page.locator(`//label[@type="error"]//span[text()="${t.bvintegration('nicknamereq')}"]`)
         this.bvEmailReq = page.locator(`//label[@type="error"]//span[text()="${t.bvintegration('emailreq')}"]`)
-        this.reviewField = page.locator(`//textarea[@name="Review"]`)
-        this.reviewTitleField = page.locator(`//input[@name="Review Title"]`)
-        this.nicknameField = page.locator(`//input[@name="Nickname"]`)
-        this.emailField = page.locator(`//input[@name="Email"]`)
+        this.reviewField = page.locator(`//textarea[@name="${t.bvintegration('reviewfield')}"]`)
+        this.reviewTitleField = page.locator(`//input[@name="${t.bvintegration('reviewtitle')}"]`)
+        this.nicknameField = page.locator(`//input[@name="${t.bvintegration('nickname')}"]`)
+        this.emailField = page.locator(`//input[@name="${t.bvintegration('email')}"]`)
         this.termCheckbox = page.locator(`div#sps-termsAndConditions-styledcheckbox`)
         this.step1completedLabel = page.locator(`fieldset#bv-ips-step-0 span[color="#296300"]`)
         this.step1EditButton = page.locator(`fieldset#bv-ips-step-0 button`)
@@ -134,25 +136,27 @@ export class PDPPage extends BasePage {
         this.successModalCloseButton = this.reviewSuccessModal.locator(`button`)
         this.imagesVideosSection = page.locator(`bv-tab-summary`)
         this.averageCustomerRating = page.locator(`//div[h3[normalize-space(text())="Average Customer Ratings"]]`)
-        this.viewMoreReviewLink = page.locator(`//a[normalize-space(text())="View More Review"]`)
+        this.viewMoreReviewLink = page.locator(`//a[normalize-space(text())="${t.bvintegration('moreviews')}"]`)
         this.reviewContainer = page.locator(`section#reviews_container`)
         this.reviewItemRow = page.locator(`section#reviews_container section`)
         this.searchReviewTextbox = page.locator(`input#search-input`)
         this.rightBtn = page.locator(`button.right`)
         this.leftBtn = page.locator(`button.left`)
-        this.qaQuestionTextbox = page.locator(`//input[@id="Have a question? Ask people who own it."]`);
+        this.qaQuestionTextbox = page.locator(`//input[@id="${t.bvintegration('qatextbox')}"]`);
+        this.qaQuestionTextArea = page.locator(`//textarea[contains(@id,"bv-questions")]`);
         this.qaSortQuestionDropdown = page.locator(`span#bv-dropdown-select-sort`);
         this.questionContainer = page.locator(`//div[contains(@id,"bv-question-container")]`)
         this.submitNewQuestionButton = page.locator(`button#bv-question-btn`);
-        this.clearSearchQuestionButton = page.locator(`//button[@aria-label="Clear Search field"]`);
-        this.submitQuestionButton = page.locator(`//div[@class="bv-questions"]//button[normalize-space(text())="Submit"]`)
+        this.clearSearchQuestionButton = page.locator(`//button[@aria-label="${t.bvintegration('clearsearch')}"]`);
+        this.submitQuestionButton = page.locator(`//div[@class="bv-questions"]//button[normalize-space(text())="${t.bvintegration('submitbutton')}"]`)
         this.nicknameTextbox = page.locator(`//input[@name="usernickname"]`);
         this.emailTextbox = page.locator(`//div[@class="bv-questions"]//input[@type="email"]`);
         this.locationTextbox = page.locator(`//input[@name="userlocation"]`);
-        this.nicknameReqErrorMsg = page.locator(`//label[contains(text(),"Required:  Nickname.")]`)
-        this.emailReqErrorMsg = page.locator(`//label[contains(text(),"Required:  Email.")]`)
-        this.submitQuestionSuccessPopup = page.locator(`//label[contains(text(),"Your question was submitted")]/ancestor::div[@type="popup"]`);
-        this.successPopupCloseButton = this.submitQuestionSuccessPopup.locator(`xpath=.//button[normalize-space(text())="Close"]`);
+        this.nicknameReqErrorMsg = page.locator(`//label[contains(text(),"${t.bvintegration('nicknamereq')}")]`)
+        this.emailReqErrorMsg = page.locator(`//label[contains(text(),"${t.bvintegration('emailreq')}")]`)
+        this.submitQuestionSuccessPopup = page.locator(`//label[contains(text(),"${t.bvintegration('qasubmitsuccessmsg')}")]/ancestor::div[@type="popup"]`);
+        this.successPopupCloseButton = this.submitQuestionSuccessPopup.locator(`xpath=.//button[normalize-space(text())="${t.bvintegration('submitsuccessclosepopup')}"]`);
+        this.noVideosAvalableMsg = page.locator(`//div[normalize-space(text())="${t.bvintegration('novidesmsg')}"]`)
     }
 
     // =========================
@@ -195,8 +199,10 @@ export class PDPPage extends BasePage {
                 "Clicking No button on sweepstakes section")
             await delay(1000)
         }*/
-
-        if (term) {
+        if (
+            term &&
+            ['au', 'hk', "th", "tw", "sg", "ph", "nz", "my", "jp", "in", "id"].includes(process.env.LOCALE ?? '')
+        ) {
             await this.termCheckbox.click();
         }
 
@@ -209,7 +215,7 @@ export class PDPPage extends BasePage {
             const input = page.locator('#bv-ips-photo-upload-input');
             //await input.waitFor();
             await input.setInputFiles(filePaths);
-            await PageUtils.waitForPageLoadComplete(page)
+            await PageUtils.waitForDomAvailable(page)
         })
     }
 
@@ -239,12 +245,12 @@ export class PDPPage extends BasePage {
      */
     async sortReview(option: string, description?: string) {
         await step(description || `Sort review by: ${option}`, async () => {
-            const sortByDropdown = this.page.locator(`//span[normalize-space(text())="Sort by"]/parent::div`)
+            const sortByDropdown = this.page.locator(`//span[normalize-space(text())="${t.bvintegration('sortby')}"]/parent::div`)
             const optionRow = this.page.locator(`//ul[contains(@id,"bv-reviews-sort-by")]//li[span[div[normalize-space(text())="${option}"]]]`)
 
             await sortByDropdown.scrollIntoViewIfNeeded()
 
-            await this.hover(sortByDropdown)
+            await this.hover(sortByDropdown.first())
             await this.waitFor(optionRow)
             await this.click(optionRow)
 
@@ -291,9 +297,9 @@ export class PDPPage extends BasePage {
         });
     }
 
-    async getDecialRatingPoint(description?: string): Promise<number> {
+    async getDecimalRatingPoint(description?: string): Promise<number> {
         return await step(description || "Get decimal rating point", async () => {
-            const decimalRatingPoint = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-decimal"]`)
+            const decimalRatingPoint = this.page.locator(`//div[@class="bv-inline-rating"]//div[@class="bv_averageRating_component_container"]//div[@class="bv_text"]`)
             const ratingPoint = extractNumber(await decimalRatingPoint.first().innerText())
             return ratingPoint
         })
@@ -301,7 +307,7 @@ export class PDPPage extends BasePage {
 
     async getNumberOfReview(description?: string): Promise<number> {
         return await step(description || "Get the number of review", async () => {
-            const ratingCount = this.page.locator(`//div[@class="bv-inline-rating"]//span[@class="bv-rating-count"]`)
+            const ratingCount = this.page.locator(`//div[@class="bv-inline-rating"]//div[@class="bv_numReviews_component_container"]//div[@class="bv_text"]`)
             const numberOfReview = extractNumber(await ratingCount.first().innerText())
             return numberOfReview
         })
@@ -376,13 +382,19 @@ export class PDPPage extends BasePage {
         await step(description || "Assert rating group displayed correctly", async () => {
             const lineElement = page.locator(`//section[@class="bv-rnr__rpifwc-0 kZapjS"]//div[@class="table"]//div[@role="button"]//p//span[@aria-hidden="true"]`)
 
+            const fiveStarLabel = `${t.bvintegration('fiveStarLabel')}`
+            const fourStarLabel = `${t.bvintegration('fourStarLabel')}`
+            const threeStarLabel = `${t.bvintegration('threeStarLabel')}`
+            const twoStarLabel = `${t.bvintegration('twoStarLabel')}`
+            const oneStarLabel = `${t.bvintegration('oneStarLabel')}`
+
             expect(await lineElement.count()).toBe(5)
 
-            expect(await lineElement.nth(0).innerText()).toEqual("5 stars")
-            expect(await lineElement.nth(1).innerText()).toEqual("4 stars")
-            expect(await lineElement.nth(2).innerText()).toEqual("3 stars")
-            expect(await lineElement.nth(3).innerText()).toEqual("2 stars")
-            expect(await lineElement.nth(4).innerText()).toEqual("1 star")
+            expect(await lineElement.nth(0).innerText()).toEqual(fiveStarLabel)
+            expect(await lineElement.nth(1).innerText()).toEqual(fourStarLabel)
+            expect(await lineElement.nth(2).innerText()).toEqual(threeStarLabel)
+            expect(await lineElement.nth(3).innerText()).toEqual(twoStarLabel)
+            expect(await lineElement.nth(4).innerText()).toEqual(oneStarLabel)
         })
     }
 
@@ -392,10 +404,10 @@ export class PDPPage extends BasePage {
     async assertMediaTabs(page: Page) {
         await step('Assert that Videos and Images are displayed when clicking specified tab correctly', async () => {
             const tabAll = page.getByRole('tab', { name: 'All' });
-            const tabImages = page.getByRole('tab', { name: 'Images' });
-            const tabVideos = page.getByRole('tab', { name: 'Videos' });
+            const tabImages = page.getByRole('tab', { name: `${t.bvintegration('images')}` });
+            const tabVideos = page.getByRole('tab', { name: `${t.bvintegration('videos')}` });
 
-            const mediaItems = page.locator("ul.bxrIdA > li");
+            const mediaItems = page.locator("ul.bv-rnr__sc-11cxkec-4 > li");
 
             const isVideo = async (el: Locator) => {
                 return await el.locator("svg").isVisible().catch(() => false);
@@ -406,19 +418,29 @@ export class PDPPage extends BasePage {
             };
 
             // Assert all tabs
-            await tabAll.click();
+            await this.jsClick(tabAll)
             await PageUtils.waitForDomAvailable(page);
             await this.clickThroughSlides(page)
 
             let count = await mediaItems.count();
             expect(count).toBeGreaterThan(0);
+            await delay(1000)
 
             let photos = 0, videos = 0;
             for (let i = 0; i < count; i++) {
                 console.log(`Checking item ${i}`)
+                await delay(500)
+
+                if (!await isImage(mediaItems.nth(i))) {
+                    await this.rightBtn.click();
+                    await page.waitForTimeout(200)
+                }
+
                 const item = mediaItems.nth(i);
                 if (await isVideo(item)) videos++;
                 else if (await isImage(item)) photos++;
+
+                await delay(500)
             }
 
             expect(photos + videos).toBe(count);
@@ -426,37 +448,73 @@ export class PDPPage extends BasePage {
             await delay(1000)
 
             // Assert images tab
-            await tabImages.click();
-            await delay(1000)
-            await PageUtils.waitForDomAvailable(page);
-            await this.clickThroughSlides(page)
+            if (photos > 0) {
+                await this.jsClick(tabImages)
+                await delay(1000)
+                await PageUtils.waitForDomAvailable(page);
+                await this.clickThroughSlides(page)
+                await delay(1000)
 
-            count = await mediaItems.count();
-            expect(count).toBeGreaterThan(0);
+                count = await mediaItems.count();
+                expect(count).toBeGreaterThan(0);
 
-            for (let i = 0; i < count; i++) {
-                console.log(`Checking item ${i}`)
-                const item = mediaItems.nth(i);
-                expect(await isVideo(item)).toBeFalsy();
-                expect(await isImage(item)).toBeTruthy();
+                for (let i = 0; i < count; i++) {
+                    console.log(`Checking item ${i}`)
+                    await delay(500)
+
+                    if (!await isImage(mediaItems.nth(i))) {
+                        await this.rightBtn.click();
+                        await page.waitForTimeout(200)
+                    }
+
+                    await delay(1000)
+
+                    const item = mediaItems.nth(i);
+                    expect(await isVideo(item)).toBeFalsy();
+                    expect(await isImage(item)).toBeTruthy();
+                }
+            } else {
+                await tabImages.click();
+                await delay(1000)
+                await PageUtils.waitForDomAvailable(page);
+                count = await mediaItems.count();
+                expect(count).toBe(0);
+                console.log("No images to assert in Images tab")
             }
 
             await delay(500)
 
             // Assert videos tab
-            await tabVideos.click();
-            await delay(500)
-            await PageUtils.waitForDomAvailable(page);
-            await this.clickThroughSlides(page)
+            if (videos > 0) {
+                await this.jsClick(tabVideos)
+                await delay(500)
+                await PageUtils.waitForDomAvailable(page);
+                await this.clickThroughSlides(page)
+                await delay(1000)
 
-            count = await mediaItems.count();
-            expect(count).toBeGreaterThan(0);
+                count = await mediaItems.count();
+                expect(count).toBeGreaterThan(0);
 
-            for (let i = 0; i < count; i++) {
-                console.log(`Checking item ${i}`)
-                const item = mediaItems.nth(i);
-                expect(await isImage(item)).toBeTruthy();
-                expect(await isVideo(item)).toBeTruthy();
+                for (let i = 0; i < count; i++) {
+                    console.log(`Checking item ${i}`)
+                    await delay(500)
+
+                    if (!await isImage(mediaItems.nth(i))) {
+                        await this.rightBtn.click();
+                        await page.waitForTimeout(200)
+                    }
+
+                    await delay(1000)
+
+                    const item = mediaItems.nth(i);
+                    expect(await isImage(item)).toBeTruthy();
+                    expect(await isVideo(item)).toBeTruthy();
+                }
+            } else {
+                await tabVideos.click();
+                await delay(1000)
+                await PageUtils.waitForDomAvailable(page);
+                await this.assertVisible(this.noVideosAvalableMsg, `No Videos available message is displayed`)
             }
         })
     }

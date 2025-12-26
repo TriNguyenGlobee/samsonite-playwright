@@ -112,7 +112,9 @@ export function splitString(input: string, delimiter: string = " "): SplitResult
  * Pause execution for a given amount of time (ms).
  */
 export async function delay(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  await step(`Delay for ${ms} ms`, async () => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  })
 }
 
 /**
@@ -443,9 +445,10 @@ export async function selectDropdownOption(
   page: Page,
   selector: string | Locator,
   optionValueOrLabel: string,
-  by: "value" | "label" | "text" = "value"
+  by: "value" | "label" | "text" = "value",
+  description?: string
 ): Promise<void> {
-  await step(`Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
+  await step(description || `Select ${optionValueOrLabel} from ${await selector.toString()}`, async () => {
     const dropdown =
       typeof selector === "string" ? page.locator(selector) : selector;
 
@@ -479,7 +482,9 @@ export async function closeModalIfPresent(page: Page): Promise<void> {
     { name: 'Popup Container', sel: '//div[@class="popup-container"]//button[@class="close-btn"]' },
     { name: 'Back Drop Label', sel: '//div[@id="staticBackdrop"]//button[@aria-label="Close"]' },
     { name: 'MCP Banner', sel: '//button[@class="mcp-close"]' },
-    { name: 'Amazone pay popup', sel: '(//div[@class="window-element"]//div)[1]'}
+    { name: 'Amazone pay popup', sel: '(//div[@class="window-element"]//div)[1]' },
+    { name: 'Header Banner Slide up', sel: '//div[@class="header-banner slide-up"]//button[@class="close"]' },
+    { name: 'pwp popup', sel: '//button[@class="close pull-right"]' }
   ];
 
   for (const modal of selectors) {
@@ -572,8 +577,28 @@ export async function scrollToBottom(page: Page, distance: number = 100, delay: 
 }
 
 export async function scrollToTop(page: Page) {
-  await page.evaluate(() => {
-    window.scrollTo(0, 0);
+  await step('Scroll to top of the page', async () => {
+    await page.evaluate(() => {
+      window.scrollTo(0, 0);
+    });
+    await delay(500)
+  });
+}
+
+export async function scrollDownUntilVisible(
+  page: Page,
+  locator: Locator,
+  maxScroll = 15
+) {
+  await step('Scroll down until locator visible', async () => {
+    for (let i = 0; i < maxScroll; i++) {
+      if (await locator.isVisible()) return;
+
+      await page.mouse.wheel(0, 800);
+      await page.waitForTimeout(300);
+    }
+
+    throw new Error('Element not visible after scrolling');
   });
 }
 
@@ -656,6 +681,16 @@ export async function clickUntil(
   throw new Error(
     `Condition '${condition}' was not met after ${maxTries} clicks and timeout of ${timeoutMs}ms.`
   );
+}
+
+export async function openNewTab(page: Page, action: () => Promise<void>): Promise<Page> {
+  const [newPage] = await Promise.all([
+    page.context().waitForEvent('page'),
+    action(),
+  ])
+
+  await newPage.waitForLoadState('domcontentloaded')
+  return newPage
 }
 
 type WaitCondition = 'visible' | 'hidden';

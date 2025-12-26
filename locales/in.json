@@ -1,6 +1,6 @@
 {
   "homepage": {
-    "title": "Samsonite Singapore | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Samsonite India | Luggage, Suitcases, Backpacks | Salesforce Commerce Cloud | 3.3.0",
     "trackOder": "Track Order",
     "loginRegister": "Login/Register",
     "myaccount": "My account",
@@ -11,10 +11,10 @@
     "out-of-stock": "No results available for this filter. Click Reset All to try again."
   },
   "loginpage": {
-    "title": "Sign In To Your Account | Samsonite Singapore",
+    "title": "Sign In To Your Account | Samsonite India",
     "singinTitle": "Sign in",
     "loginmsg": "Existing customer or House of Samsonite user",
-    "usernamelabel": "Email / Username",
+    "usernamelabel": "Email / Phone number",
     "pwlabel": "Password",
     "signinbtn": "Sign in",
     "forgotPW": "forgot password?",
@@ -37,7 +37,7 @@
     "popupSentEmailContent": "A login link has been sent to your email."
   },
   "forgotpasswordpage": {
-    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite Singapore",
+    "title": "Luggage, Suitcases, Bags, Backpacks | Samsonite India",
     "pageTitle": "Forgot your password?",
     "instructionMsg": "Please enter your email address below. We will send you a reset password email. You will then be prompted to reset your password for security.",
     "emailTextbox": "Email",
@@ -67,46 +67,46 @@
     "title": ""
   },
   "newarrivalspage": {
-    "title": "New Arrivals | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/new-arrivals/","https://sssg.stg.samsonite-asia.com/new-arrivals/"]
+    "title": "New Arrivals | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssin.dev.samsonite-asia.com/new-arrivals/","https://ssin.stg.samsonite-asia.com/new-arrivals/"]
   },
   "luggagepage": {
-    "title": "Luggage | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/luggage/", "https://sssg.stg.samsonite-asia.com/luggage/"]
+    "title": "Luggage | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssin.dev.samsonite-asia.com/luggage/", "https://ssin.stg.samsonite-asia.com/luggage/"]
   },
   "backpackspage": {
-    "title": "Backpacks | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/backpacks/", "https://sssg.stg.samsonite-asia.com/backpacks/"]
+    "title": "Backpacks | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssin.dev.samsonite-asia.com/backpacks/", "https://ssin.stg.samsonite-asia.com/backpacks/"]
   },
   "bagspage": {
-    "title": "Bags | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": ["https://sssg.dev.samsonite-asia.com/bags/", "https://sssg.stg.samsonite-asia.com/bags/"]
+    "title": "Bags | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
+    "url": ["https://ssin.dev.samsonite-asia.com/bags/", "https://ssin.stg.samsonite-asia.com/bags/"]
   },
   "accessories": {
     "title": "所有配件 | Samsonite Taiwan | Salesforce Commerce Cloud | 3.3.0",
     "url": "https://sstw.stg.samsonite-asia.com/accessories/"
   },
   "brandpage": {
-    "title": "Labels | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
+    "title": "Labels | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
     "luggage": "Luggage",
     "backpacks": "Backpacks",
     "bags": "Bags",
     "briefcase": ""
   },
   "ourbrandstorypage": {
-    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0"],
-    "url": "https://sssg.stg.samsonite-asia.com/our-brand-story/"
+    "title": ["Brand Story | Salesforce Commerce Cloud | 3.3.0", "Brand Story | Samsonite India | Salesforce Commerce Cloud | 3.3.0"],
+    "url": "https://ssin.stg.samsonite-asia.com/our-brand-story/"
   },
   "ginzaflagshipstore": {
     "title": "サムソナイト銀座 旗艦店 | Samsonite Japan | Salesforce Commerce Cloud | 3.3.0"
   },
   "sale": {
-    "title": "Sale | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.stg.samsonite-asia.com/sale/"
+    "title": "Sale | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssin.stg.samsonite-asia.com/sale/"
   },
   "offers": {
-    "title": "Special Offers | Samsonite Singapore | Salesforce Commerce Cloud | 3.3.0",
-    "url": "https://sssg.stg.samsonite-asia.com/special-offers/"
+    "title": "Special Offers | Samsonite India | Salesforce Commerce Cloud | 3.3.0",
+    "url": "https://ssin.stg.samsonite-asia.com/special-offers/"
   },
   "whyshopwithus": {
     "officialwebsitetitle": "Official Website",
@@ -123,7 +123,7 @@
     "warrantytitle": "製品保証"
   },
   "mypage": {
-    "title": "My Account | Samsonite Singapore",
+    "title": "My Account | Samsonite India",
     "pageTitle": "Your Account",
     "myOrders": "My Orders",
     "membership": "My Membership",
@@ -340,7 +340,7 @@
     "removecancelbutton": "Cancel"
   },
   "cartpage": {
-    "title": "Shopping Cart | Samsonite Singapore",
+    "title": "Shopping Cart | Samsonite India",
     "pageTitle": "Your Cart",
     "emptymsg": "Your Shopping Cart is Empty",
     "checkoutbutton": "Checkout",
@@ -426,7 +426,7 @@
   },
   "checkoutpage": {
     "guestcheckoutbutton": "Guest Checkout",
-    "title": "Checkout | Samsonite Singapore",
+    "title": "Checkout | Samsonite India",
     "newsletter": "Please add me to Samsonite's mailing list.",
     "terms": "Agree to",
     "firstname": "First Name",

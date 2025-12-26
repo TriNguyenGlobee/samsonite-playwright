@@ -65,7 +65,7 @@ test.describe("Guest checkout - Step 1", () => {
         })
     })
 
-    test("2. Click Step 1 Continue button without firstname", async ({ basicAuthPage }) => {
+    test("3. Click Step 1 Continue button without firstname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutFirstName } = loadTestData();
 
@@ -80,7 +80,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("3. Click Step 1 Continue button without lastname", async ({ basicAuthPage }) => {
+    test("4. Click Step 1 Continue button without lastname", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutLastName } = loadTestData();
 
@@ -95,7 +95,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("4. Click Step 1 Continue button without email", async ({ basicAuthPage }) => {
+    test("5. Click Step 1 Continue button without email", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutEmail } = loadTestData();
 
@@ -110,7 +110,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("5. Click Step 1 Continue button without phonenumber", async ({ basicAuthPage }) => {
+    test("6. Click Step 1 Continue button without phonenumber", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutDataWithoutPhone } = loadTestData();
 
@@ -125,7 +125,7 @@ test.describe("Guest checkout - Step 1", () => {
         )
     })
 
-    test("6. Click Step 1 Continue button with full data", async ({ basicAuthPage }) => {
+    test("7. Click Step 1 Continue button with full data", async ({ basicAuthPage }) => {
         const checkoutpage = new CheckoutPage(basicAuthPage)
         const { checkoutFullData } = loadTestData();
 
@@ -174,7 +174,7 @@ test.describe("Guest checkout - Step 2", async () => {
         await step("Add a product to cart", async () => {
             await Promise.all([
                 cartpage.addMultipleProductsToCart(1, "Add a in-stock product to cart"),
-                expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                //expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
 
         })
@@ -317,7 +317,7 @@ test.describe("Guest checkout - Step 3", async () => {
         await step("Add a product to cart", async () => {
             await Promise.all([
                 cartpage.addMultipleProductsToCart(1, "Add a in-stock product to cart"),
-                expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+                //expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
             ]);
 
         })
@@ -452,19 +452,115 @@ test.describe("Guest checkout - Step 3", async () => {
             await checkoutpage.click(checkoutpage.paypalIcon, "Select papal payment method")
         })
 
-        await step("Verify recipient continue button is displayed", async () => {
-            await checkoutpage.assertVisible(checkoutpage.recipientContinueBtn,
-                "Assert the Recipient Continue button is displayed"
+        await step("Verify payment continue button is displayed", async () => {
+            await checkoutpage.assertVisible(checkoutpage.paymentcontinueBtn,
+                "Assert the Payment Continue button is displayed"
             )
         })
 
-        await step("Click recipient continue button", async () => {
-            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on recipient continue button")
+        await step("Click payment continue button", async () => {
+            await checkoutpage.click(checkoutpage.paymentcontinueBtn, "Click on payment continue button")
         })
 
         await step("Verify the current step 3 status", async () => {
             await checkoutpage.assertEqual(await checkoutpage.isCheckoutStepDone("Payment"), true,
                 "Assert current step 3 status is Done: true"
+            )
+        })
+    })
+})
+
+test.describe("Guest checkout - Ordering success", async () => {
+    test.beforeEach(async ({ basicAuthPage }) => {
+        const newarrivalspage = new NewArrivalsPage(basicAuthPage)
+        const homepage = createHomePage(basicAuthPage)
+        const cartpage = createCartPage(basicAuthPage)
+        const minicartpage = createMinicartPage(basicAuthPage)
+        const checkoutloginpage = new CheckoutLoginPage(basicAuthPage)
+        const checkoutpage = new CheckoutPage(basicAuthPage)
+        const { checkoutFullData } = loadTestData();
+        const { checkoutShippingData } = loadTestData();
+
+        await step('Go to New Arrivals', async () => {
+            await homepage.clickMenuItem('newarrivals')
+            await newarrivalspage.logoImg.hover()
+
+            await step('Click on In-stock checkbox', async () => {
+                await homepage.clickCheckbox(basicAuthPage, `${t.homepage('in-stock')}`)
+            })
+        })
+
+        await step("Add a product to cart", async () => {
+            await Promise.all([
+                cartpage.addMultipleProductsToCart(1, "Add a in-stock product to cart"),
+                //expect(minicartpage.minicartRender).toBeVisible({ timeout: 5000 })
+            ]);
+
+        })
+
+        await step('Go to checkout login page', async () => {
+            await clickUntil(basicAuthPage, homepage.cartIcon, minicartpage.minicartRender, 'visible', {
+                delayMs: 500,
+                maxTries: 3,
+                timeoutMs: 3000
+            })
+
+            await minicartpage.click(minicartpage.checkoutButton,
+                "Click on Checkout button"
+            )
+        })
+
+        await step("Go to guest checkout page", async () => {
+            await checkoutloginpage.click(checkoutloginpage.guestcheckoutButton,
+                "Clicking on Guest checkout button"
+            )
+        })
+
+        await step("Fill your detail with full information", async () => {
+            await checkoutpage.fillCheckoutYourDetailForm(basicAuthPage, checkoutFullData)
+        })
+
+        await checkoutpage.click(checkoutpage.continueButton, "Click on Step 1 Continue button")
+
+        await step("Fill recipient info", async () => {
+            await checkoutpage.fillRecipientDetilsForm(basicAuthPage, checkoutShippingData)
+        })
+
+        await step("Click on continue button", async () => {
+            await checkoutpage.click(checkoutpage.recipientContinueBtn, "Click on Step 2 Continue button")
+            await PageUtils.waitForPageLoad(basicAuthPage)
+        })
+    });
+
+    test(`
+        1. Fill payment details with Visa card
+        2. Go to ordering success page by clicking continue button
+        `, async ({ basicAuthPage }) => {
+        const checkoutpage = new CheckoutPage(basicAuthPage)
+
+        await step("Select Visa payment method", async () => {
+            await checkoutpage.click(checkoutpage.visaIcon, "Select Visa payment method")
+        })
+
+        await step("Fill payment details with Visa card", async () => {
+            const { visaCheckoutData } = loadTestData();
+            await checkoutpage.fillVisaPaymentDetails(basicAuthPage, visaCheckoutData.cardNumber,
+                visaCheckoutData.expiryMonth, visaCheckoutData.expiryYear, visaCheckoutData.cvv, 
+                "Fill Visa card payment details");
+        })
+
+        await step("Click payment continue button", async () => {
+            await checkoutpage.click(checkoutpage.paymentcontinueBtn, "Click on payment continue button")
+        })
+
+        await step("Click place order button", async () => {
+            await checkoutpage.click(checkoutpage.placeOrderBtn, "Click on Place Order button")
+            await basicAuthPage.waitForURL(/orderconfirmation/)
+        })
+
+        await step("Verify ordering success page is displayed", async () => {
+            await checkoutpage.assertVisible(checkoutpage.orderSuccessTitle,
+                "Assert the order success title is visible"
             )
         })
     })

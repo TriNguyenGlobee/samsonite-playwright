@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "../../base.page";
-import { t, PageUtils } from "../../../../utils/helpers/helpers";
+import { t, PageUtils, selectDropdownOption } from "../../../../utils/helpers/helpers";
 import { Config } from "../../../../config/env.config";
 import { step, attachment } from "allure-js-commons";
 import { test } from "@playwright/test";
@@ -25,11 +25,14 @@ export class CheckoutPage extends BasePage {
     readonly recipientLastName: Locator;
     readonly recipientPhone: Locator;
     readonly recipientContinueBtn: Locator;
+    readonly paymentcontinueBtn: Locator;
     readonly visaIcon: Locator;
     readonly masterIcon: Locator;
     readonly paypalIcon: Locator;
     readonly atomeIcon: Locator;
     readonly googlepayIcon: Locator;
+    readonly placeOrderBtn: Locator;
+    readonly orderSuccessTitle: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -52,11 +55,14 @@ export class CheckoutPage extends BasePage {
         this.recipientLastName = this.recipientSection.locator(`xpath=.//input[@id="shippingLastName"]`)
         this.recipientPhone = this.recipientSection.locator(`xpath=.//input[@id="shippingPhoneNumber"]`)
         this.recipientContinueBtn = this.recipientSection.locator(`xpath=.//button[@type="submit"]`)
+        this.paymentcontinueBtn = page.locator(`//div[@class="card payment-form"]//button[@type="submit"]`)
         this.visaIcon = page.locator(`//li[@data-method-id="CREDIT_CARD" and @data-card-type="Visa"]//a`)
         this.masterIcon = page.locator(`//li[@data-method-id="CREDIT_CARD" and @data-card-type="MasterCard"]//a`)
         this.paypalIcon = page.locator(`//li[@data-method-id="PayPal"]//a`)
         this.atomeIcon = page.locator(`//li[@data-method-id="ATOME_PAYMENT"]//a`)
         this.googlepayIcon = page.locator(`//li[@data-method-id="DW_GOOGLE_PAY"]//a`)
+        this.placeOrderBtn = page.locator('//div[contains(@class,"page-checkout")]//div[contains(@class,"mini-order-summary")]//button[@value="place-order"]');
+        this.orderSuccessTitle = this.page.locator('//h2[@class="order-thank-you-msg"]');
     }
 
     // =========================
@@ -122,6 +128,24 @@ export class CheckoutPage extends BasePage {
                 )
             }
 
+        })
+    }
+
+    async fillVisaPaymentDetails(page: Page, cardNumber: string, cardMonth: string, cardYear: string, cvv: string, description?: string): Promise<void> {
+        await step(description || "Fill visa payment details", async () => {
+            const cardNumberIframe = this.page.locator('input#cardNumber');
+            const cvvIframe = this.page.locator('input#securityCode');
+
+            await this.type(cardNumberIframe, cardNumber, `Fill card number: ${cardNumber}`);
+            await this.type(cvvIframe, cvv, `Fill card number: ${cvv}`);
+
+            await selectDropdownOption(page, "select#expirationMonth", cardMonth, "value",
+                `Select card expiration month: ${cardMonth}`
+            );
+
+            await selectDropdownOption(page, "select#expirationYear", cardYear, "value",
+                `Select card expiration year: ${cardYear}`
+            );
         })
     }
 
